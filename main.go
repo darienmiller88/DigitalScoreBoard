@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"html/template"
 	"os"
 
 	"github.com/go-chi/chi/v5"
@@ -12,9 +13,13 @@ import (
 func main(){
 	godotenv.Load()
 	router := chi.NewRouter()
+	tmpl := template.Must(template.ParseGlob("templates/*"))
+	fs := http.FileServer(http.Dir("./static"))
 
+    router.Handle("/static/*", http.StripPrefix("/static/", fs))
+	
 	router.Get("/", func(response http.ResponseWriter, request *http.Request) {
-		response.Write([]byte(`Hello world`))
+		tmpl.ExecuteTemplate(response, "scoreboard.html", nil)
 	})
 
 	fmt.Println("listening on port:", os.Getenv("PORT"))

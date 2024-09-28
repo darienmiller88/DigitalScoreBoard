@@ -1,0 +1,32 @@
+.title{
+    text-align: center;
+    font-size: 50px;
+}
+
+.click-me-wrapper{
+    text-align: center;
+    margin-top: 20px;
+    /* width: fit-content; */
+    /* border: 2px solid black; */
+}
+
+.click-me-wrapper button{
+    background-color: aliceblue;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 15px 25px;
+    font: 20px;
+    font-weight: 700;
+
+    transition: 0.5s;
+}
+
+.click-me-wrapper button:active{
+    cursor: pointer;
+}
+
+.click-me-wrapper button:hover{
+    cursor: pointer;
+    background-color: rgb(220, 228, 250);
+
+}
