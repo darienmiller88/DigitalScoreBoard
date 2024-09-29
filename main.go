@@ -12,12 +12,13 @@ import (
 
 func main(){
 	godotenv.Load()
+
 	router := chi.NewRouter()
-	tmpl := template.Must(template.ParseGlob("templates/*"))
 	fs := http.FileServer(http.Dir("./static"))
+	tmpl := template.Must(template.ParseGlob("./templates/*"))
 
     router.Handle("/static/*", http.StripPrefix("/static/", fs))
-	
+
 	router.Get("/", func(response http.ResponseWriter, request *http.Request) {
 		tmpl.ExecuteTemplate(response, "scoreboard.html", nil)
 	})
