@@ -4,21 +4,30 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Score Board</title>
-        <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+        <!-- <script src="https://unpkg.com/htmx.org@2.0.2"></script> -->
         <link rel="stylesheet" href="../static/css/scoreboard.css">
         <link rel="shortcut icon" href="../static/img/sb.png" type="image/x-icon">
     </head>
     <body>
         <div class="title">Jeopardy Score Board!</div>
-        <div class="click-me-wrapper">
-            <button hx-post="/clicked" hx-swap="outerHTML">
-                Click Me
+   
+        <form hx-post="/" hx-target="#users-list" hx-swap="beforeend" hx-on::after-request="this.reset()">
+            <!-- <div class="add-user-wrapper">
+            </div> -->
+            <input class="form-element" id="add-user" type="text" name="addUser" placeholder="Add user" required><br>
+            <button class="form-element" type="submit">
+                Add User To List
             </button>
-        </div>
-        <ul>
+            <!-- <div class="click-me-wrapper">
+            </div> -->
+        </form>
+        <ul id="users-list">
             {{ range .Users }}
-            <li>{{ . }}</li>
+                {{ block "user-element" .}}
+                    <li>{{ . }}</li>
+                {{end}}
             {{end}}
         </ul>
+        <script src="../static/js/htmx.min.js"></script>
     </body>
 </html>

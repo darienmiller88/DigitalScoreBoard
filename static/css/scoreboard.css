@@ -1,6 +1,27 @@
+body{
+    margin: 0;
+}
+
 .title{
     text-align: center;
     font-size: 50px;
+}
+
+form{
+    text-align: center;
+    margin-top: 20px;
+    /* border: 2px solid black; */
+}
+
+form .form-element{
+    width: 200px;
+}
+
+.add-user-wrapper{
+    text-align: left;
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
 }
 
 .click-me-wrapper{
