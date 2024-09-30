@@ -19,8 +19,14 @@ func main(){
 
     router.Handle("/static/*", http.StripPrefix("/static/", fs))
 
-	router.Get("/", func(response http.ResponseWriter, request *http.Request) {
-		tmpl.ExecuteTemplate(response, "scoreboard.html", nil)
+	router.Get("/hello", func(res http.ResponseWriter, req *http.Request) {
+		res.Write([]byte(`Hello world`))
+	})
+
+	router.Get("/", func(res http.ResponseWriter, req *http.Request) {
+		tmpl.ExecuteTemplate(res, "scoreboard.html", map[string][]string{
+			"Users": {"Darien", "Vicky", "Richard", "Kash"},
+		})
 	})
 
 	fmt.Println("listening on port:", os.Getenv("PORT"))

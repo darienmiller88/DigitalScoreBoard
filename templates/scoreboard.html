@@ -15,5 +15,10 @@
                 Click Me
             </button>
         </div>
+        <ul>
+            {{ range .Users }}
+            <li>{{ . }}</li>
+            {{end}}
+        </ul>
     </body>
 </html>
