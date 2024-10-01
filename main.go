@@ -16,7 +16,7 @@ func main(){
 
 	router := chi.NewRouter()
 	fs := http.FileServer(http.Dir("./static"))
-	tmpl := template.Must(template.ParseGlob("./templates/*"))
+	tmpl := template.Must(template.ParseGlob("templates/*"))
 	users := []string{"Darien", "Vicky", "Richard", "Kash"}
 
 	router.Use(middleware.Logger, middleware.RealIP, middleware.Recoverer)
