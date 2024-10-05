@@ -1,10 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:wght@700&family=Kanit:wght@300&family=Martian+Mono&family=Merriweather:wght@300&family=Open+Sans:wght@300&family=Oswald:wght@300;400&family=Rubik:ital,wght@0,500;1,900&display=swap');
+
+
+:root {
+    --main-bg-color: #00050f;
+    --main-text-color: #61dafb;
+    --primary-color: #ffffff;
+}
+
 body{
     margin: 0;
+    background-color: var(--main-bg-color);
+
+    font-family: 'Gentium Book Plus', serif;
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Martian Mono', monospace;
+    font-family: 'Merriweather', serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Rubik', sans-serif;
 }
 
 .title{
+    color: var(--main-text-color);
     text-align: center;
-    font-size: 50px;
+    font-size: 60px;
+    margin: 10px 0px;
 }
 
 form{
@@ -14,15 +34,107 @@ form{
 }
 
 form .form-element{
-    width: 200px;
+    width: 70vw;
 }
 
 .add-user-wrapper{
+    color: var(--main-text-color);
     text-align: left;
     width: fit-content;
+
+    margin: auto;
+}
+
+.add-user-wrapper label {
+    margin: 0;
+    font-size: 30px;
+}
+
+.add-user-wrapper input{
+    padding: 10px;
+}
+
+.user-cards{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    
+
+    border: 2px solid black;
+    width: fit-content;
+    max-width: 80vw;
     margin: auto;
     margin-top: 20px;
 }
+
+.user-card{
+    border: 2px solid var(--main-text-color);
+    border-radius: 10px;
+    width: fit-content;
+
+    text-align: center;
+}
+
+.user-card .score-wrapper{
+   display: flex;
+   width: 20%
+}
+
+.user-card .score-wrapper button{
+    padding: 10px 30px;
+    border-radius: 15px;
+    border: none;
+}
+
+.user-card .score-wrapper .minus-points{
+    margin-right: 15px;
+}
+
+.user-card .score-wrapper .add-points{
+    margin-left: 15px;
+}
+
+.save-wrapper{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.save-wrapper button{
+
+}
+
+.footer{
+
+}
+
+@media only screen and (min-width: 768px){
+    .user-cards{
+        /* display: flex; */
+        /* grid-template-columns: repeat(5, 1fr); */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .click-me-wrapper{
     text-align: center;
