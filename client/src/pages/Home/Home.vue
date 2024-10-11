@@ -3,19 +3,7 @@
     import { Card } from "../../types/types"
     import { ref } from 'vue';
 
-    const cards = ref<Card[]>([
-        {
-            username: "Darien",
-            score: 100
-        }, 
-        {
-            username: "Vicky",
-            score: 500
-        },
-        
-      
-    ])
-
+    const cards = ref<Card[]>([])
     const username = ref<string>("")
 
     const addPoints = (index: number, amountToAdd: number) => {
@@ -33,6 +21,7 @@
         }
 
         cards.value = [...cards.value, newCard]
+        username.value = ""
     }
 </script>
 
