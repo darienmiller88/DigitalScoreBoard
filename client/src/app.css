@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:wght@700&family=Kanit:wght@300&family=Martian+Mono&family=Merriweather:wght@300&family=Open+Sans:wght@300&family=Oswald:wght@300;400&family=Rubik:ital,wght@0,500;1,900&display=swap');
+
+:root {
+    --main-bg-color: #00050f;
+    --main-text-color: #61dafb;
+    --main-text-color-dark-transparent: #61dafbe1;
+    --main-text-color-transparent: #61dafb82;
+    --primary-color: #ffffff;
+}
+
+body{
+    margin: 0;
+    background-color: var(--main-bg-color);
+
+    font-family: 'Gentium Book Plus', serif;
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Martian Mono', monospace;
+    font-family: 'Merriweather', serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Rubik', sans-serif;
+}
