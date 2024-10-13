@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for scoreboardapi on 2024-10-11T20:02:33Z
+# fly.toml app configuration file generated for scoreboardapi on 2024-10-12T22:15:56-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -7,8 +7,6 @@ app = 'scoreboardapi'
 primary_region = 'ewr'
 
 [build]
-  [build.args]
-    GO_VERSION = '1.23.1'
 
 [env]
   PORT = '8080'
