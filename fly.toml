@@ -7,7 +7,7 @@ app = 'scoreboardapi'
 primary_region = 'ewr'
 
 [build]
-  dockerfile = "Dockerfile.test"
+  dockerfile = "Dockerfile"
 
 [env]
   PORT = '8080'
