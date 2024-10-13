@@ -5,12 +5,13 @@
     --main-text-color: #61dafb;
     --main-text-color-dark-transparent: #61dafbe1;
     --main-text-color-transparent: #61dafb82;
-    --primary-color: #ffffff;
+    --primary-color: rgb(211, 211, 211);
 }
 
 body{
     margin: 0;
     background-color: var(--main-bg-color);
+    transition: 0.5s;
 
     font-family: 'Gentium Book Plus', serif;
     font-family: 'Kanit', sans-serif;
@@ -19,6 +20,10 @@ body{
     font-family: 'Open Sans', sans-serif;
     font-family: 'Oswald', sans-serif;
     font-family: 'Rubik', sans-serif;
+}
+
+body.light{
+    background-color: var(--primary-color);
 }
 
 /* 

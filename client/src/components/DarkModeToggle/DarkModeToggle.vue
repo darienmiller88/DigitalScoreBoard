@@ -1,15 +1,35 @@
 <script setup lang="ts">
     import { darkModeStore } from "../../stores/darkModeStore"
     import { storeToRefs } from 'pinia';
+    import { onMounted } from "vue";
 
     const store = darkModeStore()
     const { toggleDarkMode } = store
     const { isDarkMode } = storeToRefs(store)
+
+    const addOrRemoveDarkModeClass = () => {
+        toggleDarkMode()
+
+        if (isDarkMode.value) {
+            document.body.classList.remove("light")
+        } else {
+            document.body.classList.add("light")
+        }        
+    }
+
+     // Run on page load to set the initial class based on the dark mode state
+     onMounted(() => {
+        if (isDarkMode.value) {
+            document.body.classList.remove("light");
+        } else {
+            document.body.classList.add("light");
+        }
+    });
 </script>
 
 <template>
     <div>
-        <button :class="`mode-toggle ${isDarkMode ? '' : 'toggle-right'}`" @click="toggleDarkMode">
+        <button :class="`mode-toggle ${isDarkMode ? '' : 'toggle-right'}`" @click="addOrRemoveDarkModeClass">
             <div class="slider"></div>
         </button>
     </div>

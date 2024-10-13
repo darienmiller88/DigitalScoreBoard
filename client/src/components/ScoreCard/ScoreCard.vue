@@ -1,33 +1,55 @@
 <script setup lang="ts">
+    import { darkModeStore } from '../../stores/darkModeStore';
+    import { storeToRefs } from 'pinia';
 
-defineProps<{ 
-    cardIndex: number
-    pointValue: number
-    score: number
-    username: string 
-    addPoints: (index: number, pointsToAdd: number) => void
-    minusPoints: (index: number, pointsToSubtract: number) => void
-    removeUser: (index: number) => void
-}>()
+    const { isDarkMode } = storeToRefs(darkModeStore())
+
+    defineProps<{ 
+        cardIndex: number
+        pointValue: number
+        score: number
+        username: string 
+        addPoints: (index: number, pointsToAdd: number) => void
+        minusPoints: (index: number, pointsToSubtract: number) => void
+        removeUser: (index: number) => void
+    }>()
 
 </script>
 
 <template>
      <div class="user-card">
-        <div class="username">{{ username }}</div>
+        <div :class="`username ${isDarkMode ? 'dark-mode' : 'light-mode'}`">{{ username }}</div>
         <div class="divider"></div>
-        <div class="remove">
-            <button @click="() => removeUser(cardIndex)">Remove</button>
-        </div>
+        <button :class="`remove ${isDarkMode ? 'dark-mode-button' : 'light-mode-button'}`"  @click="() => removeUser(cardIndex)">Remove</button>
         <div class="score-wrapper">
             <button class="minus-points" @click="() => minusPoints(cardIndex, pointValue)">-</button>
-            <div class="score">{{ score }}</div>
+            <div :class="`score ${isDarkMode ? 'dark-mode' : 'light-mode'}`">{{ score }}</div>
             <button class="add-points" @click="() => addPoints(cardIndex, pointValue)">+</button>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
+    .dark-mode{
+        transition: 0.5s;
+        color: var(--main-text-color);
+    }
+
+    .light-mode{
+        transition: 0.5s;
+        color: var(--main-text-color);
+    }
+
+    .dark-mode-button{
+        color: var(--main-text-color);
+        border: 2px solid var(--primary-color);
+    }
+
+    .light-mode-button{
+        color: var(--main-text-color);
+        border: 2px solid var(--main-text-color);
+    }
+
     .user-card{
         border: 2px solid var(--main-text-color);
         border-radius: 10px;
@@ -42,13 +64,12 @@ defineProps<{
             margin-bottom: 20px;
         }
 
-        .remove button{
-            border: 2px var(--primary-color) solid;
+        .remove{
             border-radius: 10px;
 
             padding: 10px 20px;
             color: var(--main-text-color);
-            background-color: var(--main-bg-color);
+            background-color: transparent;
 
             transition: 0.5s;
             font-size: 15px;
@@ -70,7 +91,6 @@ defineProps<{
                 align-items: center;
                 justify-content: center;
 
-                color: var(--primary-color);
                 font-size: 20px;
                 padding: 0px 20px;
             }
@@ -101,9 +121,7 @@ defineProps<{
         }
 
         .username{
-            font-size: 35px;
-            color: var(--primary-color);
-            
+            font-size: 35px;            
             margin: 0px 10px;
         } 
     }

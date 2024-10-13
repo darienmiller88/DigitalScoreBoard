@@ -1,12 +1,15 @@
 <script setup lang="ts">
     import { useWindowSize } from "@vueuse/core"
+    import { darkModeStore } from "../../stores/darkModeStore";
     import DarkModeToggle from "../DarkModeToggle/DarkModeToggle.vue";
+    import { storeToRefs } from "pinia";
 
     const { width } = useWindowSize();
+    const { isDarkMode } = storeToRefs(darkModeStore())
 </script>
 
 <template>
-    <nav>
+    <nav :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
         <RouterLink to="/" class="logo">
             <img src="../../assets/sb.png" alt="logo">
             <div class="logo-item">
@@ -23,11 +26,18 @@
 </template>
 
 <style scoped lang="scss">
+    .dark-mode{
+        border: 3px solid var(--primary-color);
+    }
+
+    .light-mode{
+        border: 3px solid var(--main-bg-color);
+    }
+
     nav{
         display: flex;
         justify-content: space-between;
         background-color: var(--main-text-color-dark-transparent);
-        border: 3px solid var(--primary-color);
 
         position: sticky;
         top: 0;

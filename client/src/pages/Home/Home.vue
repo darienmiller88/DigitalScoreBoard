@@ -2,9 +2,12 @@
     import ScoreCard from '../../components/ScoreCard/ScoreCard.vue';
     import { Card } from "../../types/types"
     import { ref } from 'vue';
+    import { darkModeStore } from "../../stores/darkModeStore"
+    import { storeToRefs } from 'pinia';
 
     const cards = ref<Card[]>([])
     const username = ref<string>("")
+    const { isDarkMode } = storeToRefs(darkModeStore())
 
     const addPoints = (index: number, amountToAdd: number) => {
         cards.value[index].score += amountToAdd
@@ -46,7 +49,7 @@
             <label for="add-user">Name</label><br>
             <input class="form-element" id="add-user" v-model="username" minlength="1" maxlength="12" type="text" name="addUser" placeholder="Add user to game" required>
         </div>
-        <button class="form-element" type="submit">
+        <button :class="`form-element ${isDarkMode ? 'dark-mode' : 'light-mode'}`" type="submit">
             Add User To List
         </button>
     </form>
@@ -66,13 +69,25 @@
     </div>
 
     <div class="save-wrapper">
-        <button type="button" data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
             Save Game
         </button>
     </div>
 </template>
 
 <style scoped lang="scss">
+    .dark-mode{
+        border: 2px var(--primary-color) solid;
+        color: var(--main-text-color);
+        background-color: transparent;
+    }
+
+    .light-mode{
+        // border: 2px solid var(--main-text-color);
+        color: var(--primary-color);
+        background-color: var(--main-text-color)
+    }
+
     .title{
         color: var(--main-text-color);
         text-align: center;
@@ -129,7 +144,7 @@
             border: 2px solid var(--main-text-color);
             border-radius: 5px;
 
-            background-color: var(--main-bg-color);
+            background-color: transparent;
             color: var(--primary-color);
         }
     }
@@ -140,12 +155,9 @@
     }
 
     .save-wrapper button, form button{
-        border: 2px var(--primary-color) solid;
         border-radius: 10px;
 
         padding: 15px 35px;
-        color: var(--main-text-color);
-        background-color: var(--main-bg-color);
 
         transition: 0.5s;
         font-size: 25px;
