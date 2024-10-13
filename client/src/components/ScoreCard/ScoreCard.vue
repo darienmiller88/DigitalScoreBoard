@@ -7,6 +7,7 @@ defineProps<{
     username: string 
     addPoints: (index: number, pointsToAdd: number) => void
     minusPoints: (index: number, pointsToSubtract: number) => void
+    removeUser: (index: number) => void
 }>()
 
 </script>
@@ -15,6 +16,9 @@ defineProps<{
      <div class="user-card">
         <div class="username">{{ username }}</div>
         <div class="divider"></div>
+        <div class="remove">
+            <button @click="() => removeUser(cardIndex)">Remove</button>
+        </div>
         <div class="score-wrapper">
             <button class="minus-points" @click="() => minusPoints(cardIndex, pointValue)">-</button>
             <div class="score">{{ score }}</div>
@@ -22,7 +26,6 @@ defineProps<{
         </div>
     </div>
 </template>
-
 
 <style scoped lang="scss">
     .user-card{
@@ -39,22 +42,45 @@ defineProps<{
             margin-bottom: 20px;
         }
 
+        .remove button{
+            border: 2px var(--primary-color) solid;
+            border-radius: 10px;
+
+            padding: 10px 20px;
+            color: var(--main-text-color);
+            background-color: var(--main-bg-color);
+
+            transition: 0.5s;
+            font-size: 15px;
+
+            &:hover{
+                cursor: pointer;
+                background-color: var(--main-text-color-transparent);
+            }
+        }
+
         .score-wrapper{
-            display: flex;
-            align-items: center;
+            display: grid;
+            grid-template-columns: auto 100px auto;
         
             margin-top: 20px;
 
             .score{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
                 color: var(--primary-color);
                 font-size: 20px;
-                margin: 0px 10px;
+                padding: 0px 20px;
             }
 
             button{
-                padding: 10px 30px;
                 border-radius: 15px;
                 border: 2px solid var(--main-bg-color);
+                
+                font-size: 20px;
+                padding: 10px 30px;
 
                 transition: 0.5s;
 
@@ -66,23 +92,19 @@ defineProps<{
             }
 
             .minus-points{
-                margin-right: 15px;
                 background-color: red;
             }
 
             .add-points{
-                margin-left: 15px;
                 background-color: var(--main-text-color);
             }
         }
-
 
         .username{
             font-size: 35px;
             color: var(--primary-color);
             
             margin: 0px 10px;
-            /* border: 2px solid wheat; */
         } 
     }
 </style>

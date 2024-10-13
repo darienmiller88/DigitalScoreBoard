@@ -8,10 +8,18 @@
 
     const addPoints = (index: number, amountToAdd: number) => {
         cards.value[index].score += amountToAdd
+
+        if (cards.value[index].score > 9999) {
+            cards.value[index].score = 9999
+        }
     }
 
     const minusPoints = (index: number, amountToAdd: number) => {
         cards.value[index].score -= amountToAdd
+
+        if (cards.value[index].score < 0) {
+            cards.value[index].score = 0
+        }
     }
 
     const addUser = () => {
@@ -22,6 +30,12 @@
 
         cards.value = [...cards.value, newCard]
         username.value = ""
+    }
+
+    const removeUser = (indexToRemove: number) => {
+        cards.value = cards.value.filter((_, cardIndex) => {
+            return cardIndex != indexToRemove
+        })
     }
 </script>
 
@@ -47,6 +61,7 @@
             :score="card.score" 
             :add-points="addPoints"
             :minus-points="minusPoints"
+            :remove-user="removeUser"
         />
     </div>
 
@@ -94,7 +109,6 @@
             gap: 30px;
         }
     }
-
 
     .add-user-wrapper{
         color: var(--main-text-color);
