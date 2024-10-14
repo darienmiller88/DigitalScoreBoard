@@ -7,9 +7,9 @@ app = 'digitalscoreboard'
 primary_region = 'ewr'
 
 [build]
-  [build.args]
-    GO_VERSION = '1.23.1'
-
+  builder = "paketobuildpacks/builder:base"
+  buildpacks = ["gcr.io/paketo-buildpacks/go"]
+  
 [env]
   PORT = '8080'
 
