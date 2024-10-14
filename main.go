@@ -18,7 +18,7 @@ func main(){
 	router.Use(middleware.Logger, middleware.RealIP, middleware.Recoverer)
 
 	router.Get("/", func(res http.ResponseWriter, req *http.Request) {
-		res.Write([]byte(`Hello world!`))
+		res.Write([]byte(`Hello world blah!`))
 	})
    
 	fmt.Println("listening on port:", os.Getenv("PORT"))
