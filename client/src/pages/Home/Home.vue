@@ -3,25 +3,27 @@
     import { Card } from "../../types/types"
     import { ref } from 'vue';
     import { darkModeStore } from "../../stores/darkModeStore"
+    import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { storeToRefs } from 'pinia';
 
-    const cards = ref<Card[]>([])
     const username = ref<string>("")
+    const { addScoreCard, removeCard } = scoreCardsStore()
     const { isDarkMode } = storeToRefs(darkModeStore())
+    const { scoreCards } = storeToRefs(scoreCardsStore())
 
     const addPoints = (index: number, amountToAdd: number) => {
-        cards.value[index].score += amountToAdd
+        scoreCards.value[index].score += amountToAdd
 
-        if (cards.value[index].score > 9999) {
-            cards.value[index].score = 9999
+        if (scoreCards.value[index].score > 9999) {
+            scoreCards.value[index].score = 9999
         }
     }
 
     const minusPoints = (index: number, amountToAdd: number) => {
-        cards.value[index].score -= amountToAdd
+        scoreCards.value[index].score -= amountToAdd
 
-        if (cards.value[index].score < 0) {
-            cards.value[index].score = 0
+        if (scoreCards.value[index].score < 0) {
+            scoreCards.value[index].score = 0
         }
     }
 
@@ -31,14 +33,12 @@
             score: 0
         }
 
-        cards.value = [...cards.value, newCard]
+        addScoreCard(newCard)
         username.value = ""
     }
 
     const removeUser = (indexToRemove: number) => {
-        cards.value = cards.value.filter((_, cardIndex) => {
-            return cardIndex != indexToRemove
-        })
+        removeCard(indexToRemove)
     }
 </script>
 
@@ -56,7 +56,7 @@
 
     <div id="user-cards-id" class="user-cards">
         <ScoreCard 
-            v-for="(card, index) in cards" 
+            v-for="(card, index) in scoreCards" 
             :key="card.username" 
             :username="card.username" 
             :card-index="index"
