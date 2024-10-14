@@ -1,10 +1,11 @@
 <script setup lang="ts">
-    import { useWindowSize } from "@vueuse/core"
+    // import { useWindowSize } from "@vueuse/core"
     import { darkModeStore } from "../../stores/darkModeStore";
-    import DarkModeToggle from "../DarkModeToggle/DarkModeToggle.vue";
     import { storeToRefs } from "pinia";
+    // import { CoHamburgerMenu } from "oh-vue-icons/icons";
+    import DarkModeToggle from "../DarkModeToggle/DarkModeToggle.vue";
 
-    const { width } = useWindowSize();
+    // const { width } = useWindowSize();
     const { isDarkMode } = storeToRefs(darkModeStore())
 </script>
 
