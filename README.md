@@ -13,7 +13,7 @@ score of everyone participating!
 <img width="959" alt="project-screenshot" src="https://github.com/user-attachments/assets/f12d1f05-8dc5-43ac-a59e-88cb9b68330d">
 
 ## View api here:
-https://scoreboardapi.fly.dev/
+https://digitalscoreboard.fly.dev
 
 
 ### Requirements:
