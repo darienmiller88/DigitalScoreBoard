@@ -25,8 +25,9 @@
             </div>
         </RouterLink>
         
-        <div v-if="width < 768" class="icon-wrapper" @click="menuClick">
-            <Icon icon="mdi-light:menu" color="#f8f9fa" width="50" />
+        <div v-if="width < 768" class="icon-wrapper">
+            <DarkModeToggle />
+            <Icon icon="mdi-light:menu" color="#f8f9fa" width="50" @click="menuClick"/>
         </div>
         <div class="links" v-else>
             <DarkModeToggle />
