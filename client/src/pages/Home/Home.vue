@@ -14,8 +14,8 @@
     const addPoints = (index: number, amountToAdd: number) => {
         scoreCards.value[index].score += amountToAdd
 
-        if (scoreCards.value[index].score > 9999) {
-            scoreCards.value[index].score = 9999
+        if (scoreCards.value[index].score > 99999) {
+            scoreCards.value[index].score = 99999
         }
     }
 
@@ -67,12 +67,11 @@
             :remove-user="removeUser"
         />
     </div>
-    <!-- fly tokens create deploy -x 999999h -->
-    <div class="save-wrapper">
+    <!-- <div class="save-wrapper">
         <button type="button" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
             Save Game
         </button>
-    </div>
+    </div> -->
 </template>
 
 <style scoped lang="scss">

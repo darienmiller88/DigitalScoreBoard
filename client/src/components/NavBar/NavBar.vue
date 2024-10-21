@@ -1,12 +1,19 @@
 <script setup lang="ts">
-    // import { useWindowSize } from "@vueuse/core"
+    import { useWindowSize } from "@vueuse/core"
     import { darkModeStore } from "../../stores/darkModeStore";
     import { storeToRefs } from "pinia";
-    // import { CoHamburgerMenu } from "oh-vue-icons/icons";
+    import { Icon } from "@iconify/vue"
+    import { ref } from "vue";
+    import PhoneNavMenu from "../PhoneNavMenu/PhoneNavMenu.vue";
     import DarkModeToggle from "../DarkModeToggle/DarkModeToggle.vue";
 
-    // const { width } = useWindowSize();
+    const { width } = useWindowSize();
     const { isDarkMode } = storeToRefs(darkModeStore())
+    const isPhoneMenuActive = ref<boolean>(false)
+
+    const menuClick = () => {
+        isPhoneMenuActive.value = !isPhoneMenuActive.value
+    }
 </script>
 
 <template>
@@ -17,13 +24,18 @@
                 Scoreboard
             </div>
         </RouterLink>
-        <div class="links">
+        
+        <div v-if="width < 768" class="icon-wrapper" @click="menuClick">
+            <Icon icon="mdi-light:menu" color="#f8f9fa" width="50" />
+        </div>
+        <div class="links" v-else>
             <DarkModeToggle />
             <RouterLink to="/" class="link-item">Home</RouterLink>
             <RouterLink to="/register" class="link-item">Register</RouterLink>
             <RouterLink to="/generate-questions" class="link-item">Generate Questions</RouterLink>
         </div>
     </nav>
+    <PhoneNavMenu :isPhoneMenuActive="isPhoneMenuActive" :menuClick="menuClick"/>
 </template>
 
 <style scoped lang="scss">
@@ -42,7 +54,20 @@
 
         position: sticky;
         top: 0;
-        z-index: 1000; 
+        // z-index: -1000; 
+    }
+
+    .icon-wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 10px;
+        // border: 2px solid red;
+
+        &:active{
+            background-color: black;
+        }
     }
 
     .logo{
