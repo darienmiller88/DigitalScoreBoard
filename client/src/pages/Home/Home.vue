@@ -160,9 +160,13 @@
 
         // border: 2px solid white; 
         width: fit-content; 
-        max-width: 85vw;
+        max-width: 90vw;
+        max-height: 50vh;
+        overflow-y: scroll;
+
         margin: auto;
         margin-top: 20px;
+        padding: 0px 10px;
 
         @media only screen and (min-width: 768px){
             display: grid;

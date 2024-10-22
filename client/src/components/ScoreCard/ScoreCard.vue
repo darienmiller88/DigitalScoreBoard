@@ -56,6 +56,13 @@
         box-shadow: 8px 8px 5px rgba(173, 216, 230, 0.548);
         transition: 0.3s;
         text-align: center;
+        margin: 20px 0px; 
+
+        @media screen and (min-width: 768px) {
+            // margin-bottom/: 0px;
+            margin: 20px 0px; 
+
+        }
 
         &:hover{
             box-shadow: 10px 10px 15px var(--main-text-color);
@@ -103,10 +110,15 @@
                 border-radius: 15px;
                 border: 2px solid var(--main-bg-color);
                 
-                font-size: 20px;
-                padding: 10px 30px;
+                font-size: 40px;
+                padding: 15px 45px;
 
                 transition: 0.5s;
+
+                @media screen and (min-width: 768px) {
+                    padding: 10px 30px;
+                    font-size: 20px;
+                }
 
                 &:hover{
                     cursor: pointer;
