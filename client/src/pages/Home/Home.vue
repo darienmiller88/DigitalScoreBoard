@@ -6,9 +6,7 @@
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { storeToRefs } from 'pinia';
 
-
     const username = ref<string>("")
-    const currentLocation = ref<string>("Pelham")
     const options = ref<string[]>([
         "Pelham", 
         "Lawerence", 
