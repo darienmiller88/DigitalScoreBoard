@@ -9,7 +9,15 @@
 
     const username = ref<string>("")
     const currentLocation = ref<string>("Pelham")
-    const options = ref<string[]>(["Pelham", "Lawerence", "Elmwood"])
+    const options = ref<string[]>([
+        "Pelham", 
+        "Lawerence", 
+        "Elmwood", 
+        "Flushing", 
+        "Grand Concourse", 
+        "Wilkinson", 
+        "Port Richmond"
+    ])
     const { addScoreCard } = scoreCardsStore()
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
@@ -29,11 +37,9 @@
 <template>
     <div class="title">Digital Score Board</div>
     <!-- <div :class="`location`">Current Location: <span class="underline">{{ currentLocation }}</span> </div> -->
-    <div :class="`location`">Current Location: 
-        <select name="locations" id="locations">
-            <option value="pelham">Pelham</option>
-            <option value="lawerence">Lawerence</option>
-            <option value="elmwood">Elmwood</option>
+    <div :class="`location ${isDarkMode ? 'dark-mode-location' : 'light-mode-location'}`">Current Location: 
+        <select name="locations" id="locations" :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`">
+            <option v-for="(option, index) in options" :value="option" :key="index">{{ option }}</option>
         </select>    
     </div>
 
@@ -77,6 +83,14 @@
         background-color: var(--main-text-color)
     }
 
+    .dark-mode-location{
+        color: var(--primary-color);
+    }
+
+    .light-mode-location{
+        color: var(--main-bg-color);
+    }
+
     .title{
         color: var(--main-text-color);
         text-align: center;
@@ -90,9 +104,9 @@
     }
 
     .location{
-        color: var(--primary-color);
         text-align: center;
         font-size: 30px;
+        transition: 0.5s;
 
         .underline{
             text-decoration: underline;
@@ -102,10 +116,23 @@
     select {
         font-size: 18px;
         padding: 2px 5px;
+        transition: 0.5s;
 
         @media screen and (min-width: 768px) {
             font-size: 28px;
         }
+    }
+
+    .dark-mode-select{
+        background-color: var(--main-bg-color);
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+    }
+
+    .light-mode-select{
+        background-color: var(--primary-color);
+        color: var(--main-bg-color);
+        border: 2px solid var(--main-bg-color);
     }
 
 
