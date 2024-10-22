@@ -33,6 +33,11 @@
         addScoreCard(newCard)
         username.value = ""
     }
+
+    const optionClicked = () => {
+        console.log("option clicked");
+        
+    }
 </script>
 
 <template>
@@ -40,7 +45,9 @@
     <!-- <div :class="`location`">Current Location: <span class="underline">{{ currentLocation }}</span> </div> -->
     <div :class="`location ${isDarkMode ? 'dark-mode-location' : 'light-mode-location'}`">Current Location: 
         <select name="locations" id="locations" :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`">
-            <option v-for="(option, index) in options" :value="option" :key="index">{{ option }}</option>
+            <option v-for="(option, index) in options" :value="option" :key="index" @click="optionClicked">
+                {{ option }}
+            </option>
         </select>    
     </div>
 

@@ -110,8 +110,8 @@
                 border-radius: 15px;
                 border: 2px solid var(--main-bg-color);
                 
-                font-size: 40px;
-                padding: 15px 45px;
+                font-size: 30px;
+                padding: 12px 45px;
 
                 transition: 0.5s;
 
