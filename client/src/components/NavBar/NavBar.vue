@@ -66,9 +66,9 @@
         padding: 10px;
         // border: 2px solid red;
 
-        &:active{
-            background-color: black;
-        }
+        // &:active{
+        //     background-color: black;
+        // }
     }
 
     .logo{

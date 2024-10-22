@@ -1,17 +1,16 @@
 <script setup lang="ts">
     import { darkModeStore } from '../../stores/darkModeStore';
     import { storeToRefs } from 'pinia';
+    import { scoreCardsStore } from "../../stores/scoreCardsStore"
 
     const { isDarkMode } = storeToRefs(darkModeStore())
+    const { removeCard, addPoints, minusPoints } = scoreCardsStore()
 
     defineProps<{ 
         cardIndex: number
         pointValue: number
         score: number
         username: string 
-        addPoints: (index: number, pointsToAdd: number) => void
-        minusPoints: (index: number, pointsToSubtract: number) => void
-        removeUser: (index: number) => void
     }>()
 
 </script>
@@ -20,7 +19,7 @@
      <div class="user-card">
         <div :class="`username ${isDarkMode ? 'dark-mode' : 'light-mode'}`">{{ username }}</div>
         <div class="divider"></div>
-        <button :class="`remove ${isDarkMode ? 'dark-mode-button' : 'light-mode-button'}`"  @click="() => removeUser(cardIndex)">Remove</button>
+        <button :class="`remove ${isDarkMode ? 'dark-mode-button' : 'light-mode-button'}`"  @click="() => removeCard(cardIndex)">Remove</button>
         <div class="score-wrapper">
             <button class="minus-points" @click="() => minusPoints(cardIndex, pointValue)">-</button>
             <div :class="`score ${isDarkMode ? 'dark-mode' : 'light-mode'}`">{{ score }}</div>

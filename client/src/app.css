@@ -2,6 +2,7 @@
 
 :root {
     --main-bg-color: #00050f;
+    --main-bg-color-transparent: #00050fe9;
     --main-text-color: #61dafb;
     --main-text-color-dark-transparent: #61dafbe1;
     --main-text-color-transparent: #61dafb82;

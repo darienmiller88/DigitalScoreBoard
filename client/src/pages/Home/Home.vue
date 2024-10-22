@@ -6,26 +6,13 @@
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { storeToRefs } from 'pinia';
 
+
     const username = ref<string>("")
-    const { addScoreCard, removeCard } = scoreCardsStore()
+    const currentLocation = ref<string>("Pelham")
+    const { addScoreCard } = scoreCardsStore()
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
 
-    const addPoints = (index: number, amountToAdd: number) => {
-        scoreCards.value[index].score += amountToAdd
-
-        if (scoreCards.value[index].score > 99999) {
-            scoreCards.value[index].score = 99999
-        }
-    }
-
-    const minusPoints = (index: number, amountToAdd: number) => {
-        scoreCards.value[index].score -= amountToAdd
-
-        if (scoreCards.value[index].score < 0) {
-            scoreCards.value[index].score = 0
-        }
-    }
 
     const addUser = () => {
         const newCard: Card = {
@@ -36,14 +23,12 @@
         addScoreCard(newCard)
         username.value = ""
     }
-
-    const removeUser = (indexToRemove: number) => {
-        removeCard(indexToRemove)
-    }
 </script>
 
 <template>
     <div class="title">Digital Score Board</div>
+    <div :class="`location`">Current Location: <span class="underline">{{ currentLocation }}</span> </div>
+
     <form @submit.prevent="addUser">
         <div class="add-user-wrapper">
             <label for="add-user">Name</label><br>
@@ -61,10 +46,7 @@
             :username="card.username" 
             :card-index="index"
             :point-value="100"
-            :score="card.score" 
-            :add-points="addPoints"
-            :minus-points="minusPoints"
-            :remove-user="removeUser"
+            :score="card.score"
         />
     </div>
     <!-- <div class="save-wrapper">
@@ -90,8 +72,23 @@
     .title{
         color: var(--main-text-color);
         text-align: center;
-        font-size: 60px;
-        margin: 10px 0px;
+        font-size: 40px;
+        margin: 40px 0px;
+
+        @media screen and (min-width: 768px) {
+            font-size: 60px;
+            margin: 10px 0px;
+        }
+    }
+
+    .location{
+        color: var(--primary-color);
+        text-align: center;
+        font-size: 30px;
+
+        .underline{
+            text-decoration: underline;
+        }
     }
 
     form{
@@ -99,7 +96,11 @@
         margin-top: 20px;
 
         .form-element{
-            width: 60vw;
+            width: 85vw;
+
+            @media screen and (min-width: 768px) {
+                width: 60vw;
+            }
         }
 
         button{

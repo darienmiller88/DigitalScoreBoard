@@ -25,7 +25,7 @@
         display: grid;
         grid-template-rows: 10% auto;
 
-        background-color: rgba(128, 128, 128, 0.966);
+        background-color: rgba(78, 78, 78, 0.932);
         width: 100vw;
         height: 100vh;
         z-index: 1000;
@@ -55,10 +55,6 @@
                 font-size: 35px;
                 padding: 30px;
                 transition: 0.2s;
-
-                &:active{
-
-                }
             }
         }
     }
