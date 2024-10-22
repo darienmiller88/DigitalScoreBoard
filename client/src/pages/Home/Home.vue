@@ -14,7 +14,10 @@
         "Flushing", 
         "Grand Concourse", 
         "Wilkinson", 
-        "Port Richmond"
+        "Port Richmond",
+        "W 154th St",
+        "West End",
+        ""
     ])
     const { addScoreCard } = scoreCardsStore()
     const { isDarkMode } = storeToRefs(darkModeStore())

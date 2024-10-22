@@ -53,8 +53,13 @@
         border: 2px solid var(--main-text-color);
         border-radius: 10px;
         width: fit-content;
-
+        box-shadow: 8px 8px 5px rgba(173, 216, 230, 0.548);
+        transition: 0.3s;
         text-align: center;
+
+        &:hover{
+            box-shadow: 10px 10px 15px var(--main-text-color);
+        }
         
         .divider{
             width: 99%;
