@@ -9,6 +9,7 @@
 
     const username = ref<string>("")
     const currentLocation = ref<string>("Pelham")
+    const options = ref<string[]>(["Pelham", "Lawerence", "Elmwood"])
     const { addScoreCard } = scoreCardsStore()
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
@@ -27,7 +28,14 @@
 
 <template>
     <div class="title">Digital Score Board</div>
-    <div :class="`location`">Current Location: <span class="underline">{{ currentLocation }}</span> </div>
+    <!-- <div :class="`location`">Current Location: <span class="underline">{{ currentLocation }}</span> </div> -->
+    <div :class="`location`">Current Location: 
+        <select name="locations" id="locations">
+            <option value="pelham">Pelham</option>
+            <option value="lawerence">Lawerence</option>
+            <option value="elmwood">Elmwood</option>
+        </select>    
+    </div>
 
     <form @submit.prevent="addUser">
         <div class="add-user-wrapper">
@@ -90,6 +98,16 @@
             text-decoration: underline;
         }
     }
+
+    select {
+        font-size: 18px;
+        padding: 2px 5px;
+
+        @media screen and (min-width: 768px) {
+            font-size: 28px;
+        }
+    }
+
 
     form{
         text-align: center;
