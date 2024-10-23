@@ -52,7 +52,7 @@
 <template>
     <div class="title">Digital Score Board</div>
     <!-- <div :class="`location`">Current Location: <span class="underline">{{ currentLocation }}</span> </div> -->
-    <div :class="`location ${isDarkMode ? 'dark-mode-location' : 'light-mode-location'}`">Current Location: 
+    <div :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">Current Location: 
         <select 
             v-model="selectedLocation"
             name="locations" 
@@ -69,7 +69,7 @@
     <form @submit.prevent="addUser">
         <div class="add-user-wrapper">
             <label for="add-user">Name</label><br>
-            <input class="form-element" id="add-user" v-model="username" minlength="1" maxlength="12" type="text" name="addUser" placeholder="Add user to game" required>
+            <input :class="`form-element ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`" id="add-user" v-model="username" minlength="1" maxlength="12" type="text" name="addUser" placeholder="Add user to game" required>
         </div>
         <button :class="`form-element ${isDarkMode ? 'dark-mode' : 'light-mode'}`" type="submit">
             Add User To List
@@ -106,11 +106,11 @@
         background-color: var(--main-text-color)
     }
 
-    .dark-mode-location{
+    .dark-mode-text{
         color: var(--primary-color);
     }
 
-    .light-mode-location{
+    .light-mode-text{
         color: var(--main-bg-color);
     }
 
@@ -217,7 +217,6 @@
             border-radius: 5px;
 
             background-color: transparent;
-            color: var(--primary-color);
         }
     }
 
