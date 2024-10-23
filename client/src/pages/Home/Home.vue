@@ -1,28 +1,28 @@
 <script setup lang="ts">
     import ScoreCard from '../../components/ScoreCard/ScoreCard.vue';
     import { Card } from "../../types/types"
-    import { ref } from 'vue';
+    import { onMounted, ref } from 'vue';
     import { darkModeStore } from "../../stores/darkModeStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
+    import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { storeToRefs } from 'pinia';
 
     const username = ref<string>("")
     const options = ref<string[]>([
         "Pelham", 
-        "Lawerence", 
+        "Lawrence", 
         "Elmwood", 
         "Flushing", 
         "Grand Concourse", 
-        "Wilkinson", 
         "Port Richmond",
         "W 154th St",
         "West End",
-        ""
     ])
     const { addScoreCard } = scoreCardsStore()
+    const { setSelectedLocation } = selectedLocationStore()
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
-
+    const { selectedLocation } = storeToRefs(selectedLocationStore())
 
     const addUser = () => {
         const newCard: Card = {
@@ -36,16 +36,20 @@
 
     const optionClicked = () => {
         console.log("option clicked");
-        
+
     }
+
+    onMounted(() => {
+        selectedLocation.value = selectedLocation.value == "" ? options.value[0] : selectedLocation.value
+    })
 </script>
 
 <template>
     <div class="title">Digital Score Board</div>
     <!-- <div :class="`location`">Current Location: <span class="underline">{{ currentLocation }}</span> </div> -->
     <div :class="`location ${isDarkMode ? 'dark-mode-location' : 'light-mode-location'}`">Current Location: 
-        <select name="locations" id="locations" :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`">
-            <option v-for="(option, index) in options" :value="option" :key="index" @click="optionClicked">
+        <select v-model="selectedLocation" name="locations" id="locations" :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`" @change="optionClicked">
+            <option v-for="(option, index) in options" :value="option" :key="index">
                 {{ option }}
             </option>
         </select>    

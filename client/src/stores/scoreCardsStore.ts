@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { Card } from "../types/types"
 
-export const scoreCardsStore = defineStore("scoreCardsStore", () => {
+export const scoreCardsStore = defineStore("scoreCards", () => {
     const scoreCards = ref<Card[]>([])
 
     const addScoreCard = (card: Card) => {
