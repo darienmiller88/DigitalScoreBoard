@@ -28,14 +28,25 @@
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation } = storeToRefs(selectedLocationStore())
 
+    const duplicateErrorMessage = ref<string>("")
+
     const addUser = () => {
         const newCard: Card = {
             username: username.value,
             score: 0
         }
 
-        addScoreCard(newCard)
-        username.value = ""
+        if (scoreCards.value.some(card => card.username == newCard.username)) {
+            duplicateErrorMessage.value = `${newCard.username} already exists! Please select another username.`
+            console.log("duplicate user:", duplicateErrorMessage);
+            
+            setTimeout(() => {
+                duplicateErrorMessage.value = ""
+            }, 3000);
+        }else{
+            addScoreCard(newCard)
+            username.value = ""
+        }
     }
 
     const optionClicked = (event: Event) => {
@@ -69,7 +80,18 @@
     <form @submit.prevent="addUser">
         <div class="add-user-wrapper">
             <label for="add-user">Name</label><br>
-            <input :class="`form-element ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`" id="add-user" v-model="username" minlength="1" maxlength="12" type="text" name="addUser" placeholder="Add user to game" required>
+            <input 
+                :class="`form-element ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`"
+                id="add-user" 
+                v-model="username" 
+                minlength="1"
+                maxlength="16" 
+                type="text" 
+                name="addUser" 
+                placeholder="Add user to game" 
+                required
+            >
+            <div class="error">{{ duplicateErrorMessage }}</div>
         </div>
         <button :class="`form-element ${isDarkMode ? 'dark-mode' : 'light-mode'}`" type="submit">
             Add User To List
@@ -174,6 +196,13 @@
         button{
             margin-top: 10px;
         }
+    }
+
+    .error{
+        text-align: center;
+        color: red;
+        font-size: 25px;
+        // margin: 15px 0px;
     }
 
     .user-cards{
