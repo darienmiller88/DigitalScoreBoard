@@ -18,8 +18,12 @@
         "W 154th St",
         "West End",
     ])
+
+    //Stateful methods
     const { addScoreCard } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
+
+    //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation } = storeToRefs(selectedLocationStore())
@@ -34,9 +38,10 @@
         username.value = ""
     }
 
-    const optionClicked = () => {
-        console.log("option clicked");
+    const optionClicked = (event: Event) => {
+        const selectedValue = (event.target as HTMLSelectElement).value;
 
+        setSelectedLocation(selectedValue)
     }
 
     onMounted(() => {
@@ -48,7 +53,13 @@
     <div class="title">Digital Score Board</div>
     <!-- <div :class="`location`">Current Location: <span class="underline">{{ currentLocation }}</span> </div> -->
     <div :class="`location ${isDarkMode ? 'dark-mode-location' : 'light-mode-location'}`">Current Location: 
-        <select v-model="selectedLocation" name="locations" id="locations" :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`" @change="optionClicked">
+        <select 
+            v-model="selectedLocation"
+            name="locations" 
+            id="locations" 
+            :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`" 
+            @change="optionClicked"
+        >
             <option v-for="(option, index) in options" :value="option" :key="index">
                 {{ option }}
             </option>

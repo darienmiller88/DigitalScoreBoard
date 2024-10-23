@@ -45,8 +45,6 @@
         .links{
             display: flex;
             flex-direction: column;
-            // border: 2px solid yellow;
-           
 
             .link-item{
                 // border: 2px solid red;
