@@ -1,7 +1,7 @@
 # Score board for Jeopardy
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1715535d-5c1e-46d4-80e2-fba5816cf2ca/deploy-status)](https://app.netlify.com/sites/messengerv2/deploys)
 
-I am volunteering to assist a co worker in designing them a score board to more efficiently keep track of the 
+I am volunteering to assist a co-worker in designing them a score board to more efficiently keep track of the 
 score of everyone participating!
 
 ### Built With:
@@ -9,12 +9,14 @@ score of everyone participating!
 * [Go](https://github.com/go-chi/chi)
 * [MongoDB-Atlas](https://www.mongodb.com/cloud/atlas)
 
-## Home Page
-<img width="959" alt="project-screenshot" src="https://github.com/user-attachments/assets/f12d1f05-8dc5-43ac-a59e-88cb9b68330d">
+## Home Page Dark Mode
+<img width="956" alt="project-screenshot2" src="https://github.com/user-attachments/assets/4dfa7374-5ba7-423b-96ee-f863f3ffa668">
+
+## Home Page Light Mode
+<img width="959" alt="project-screenshot3" src="https://github.com/user-attachments/assets/43ded8ed-78e6-44e3-9a13-9a192209423d">
 
 ## View api here:
 https://digitalscoreboard.fly.dev
-
 
 ### Requirements:
 

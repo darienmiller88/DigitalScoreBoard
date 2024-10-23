@@ -62,7 +62,6 @@
 
 <template>
     <div class="title">Digital Score Board</div>
-    <!-- <div :class="`location`">Current Location: <span class="underline">{{ currentLocation }}</span> </div> -->
     <div :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">Current Location: 
         <select 
             v-model="selectedLocation"
