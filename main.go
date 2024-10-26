@@ -28,7 +28,7 @@ func main(){
 	router.Get("/", func(res http.ResponseWriter, req *http.Request) {
 		res.Write([]byte(`Hello world!`))
 	})
-   
+
 	fmt.Println("listening on port:", os.Getenv("PORT"))
 	http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), router)
 }

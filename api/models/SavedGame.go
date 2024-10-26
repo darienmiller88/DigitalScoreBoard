@@ -2,15 +2,19 @@ package models
 
 import (
 	"fmt"
+	"time"
+	"slices"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"github.com/go-ozzo/ozzo-validation"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type SavedGame struct {
-	ID       primitive.ObjectID `bson:"_id,omitempty"` // The MongoDB document ID
-	Location Location           `bson:"location,inline" json:"location"`
-	Winner   string             `bson:"winner"          json:"winner"`
+	ID        primitive.ObjectID `bson:"_id,omitempty"` // The MongoDB document ID
+	CreatedAt time.Time          `bson:"created_at"`
+	UpdatedAt time.Time          `bson:"updated_at"`
+	Location  Location           `bson:"location,inline" json:"location"`
+	Winner    string             `bson:"winner"          json:"winner"`
 }
 
 func (s *SavedGame) Validate() error{
@@ -20,14 +24,16 @@ func (s *SavedGame) Validate() error{
 	)
 }
 
-func ( *SavedGame) findWinner(s interface{}) error{
-	winner, ok := s.(string)
+func (s *SavedGame) findWinner(field interface{}) error{
+	winner, ok := field.(UserCard)
 
 	if !ok{
-		return fmt.Errorf("could not parse %s into string", s)
+		return fmt.Errorf("could not parse %T into object", field)
 	}
 
-	fmt.Println(winner)
+	if !slices.Contains(s.Location.Users, winner){
+		return fmt.Errorf("could not find winner %s in list of players", winner.Name)
+	}
 
 	return nil
 }

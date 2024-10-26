@@ -13,7 +13,8 @@ import (
 var client *mongo.Client
 
 func Init() {
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("MONGO_URI")))
+	var err error
+	client, err = mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("MONGO_URI")))
 	
 	if err != nil {
 		panic(err)
@@ -21,7 +22,7 @@ func Init() {
 
 	defer client.Disconnect(context.TODO())
 
-	if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{"ping", 1}}).Err(); err != nil {
+	if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{Key: "ping", Value: 1}}).Err(); err != nil {
 		panic(err)
 	}
 	
