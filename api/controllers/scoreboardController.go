@@ -1,5 +1,5 @@
 package controllers
 
-type scoreBoardController struct{
+type ScoreBoardController struct{
 
 }

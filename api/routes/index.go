@@ -6,7 +6,7 @@ import(
 
 type Index struct{
 	Router *chi.Mux
-	sbRoutes scoreBoardRoutes
+	sbRoutes ScoreBoardRoutes
 }
 
 func (i *Index) Init(){
