@@ -11,6 +11,7 @@ import (
 )
 
 var client *mongo.Client
+var DatabaseName string = "AdaptDB"
 
 func Init() {
 	var err error

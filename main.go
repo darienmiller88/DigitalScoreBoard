@@ -15,18 +15,17 @@ import (
 func main(){
 	godotenv.Load()
 
-	index := routes.Index{}
 	router := chi.NewRouter()
+	index := routes.Index{}
 
 	//Initialize both the subrouter, as well as the mongoDB database instance.
 	index.Init()
 	database.Init()
 
 	router.Use(middleware.Logger, middleware.RealIP, middleware.Recoverer)
-	
-	router.Mount("/", index.Router)
+	router.Mount("/api/v1", index.Router)
 	router.Get("/", func(res http.ResponseWriter, req *http.Request) {
-		res.Write([]byte(`Hello world!`))
+		res.Write([]byte(`Welcome to my Adapt scoreboard API!`))
 	})
 
 	fmt.Println("listening on port:", os.Getenv("PORT"))
