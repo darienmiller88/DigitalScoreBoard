@@ -11,7 +11,11 @@ import (
 )
 
 var client *mongo.Client
-var DatabaseName string = "AdaptDB"
+const (
+	DatabaseName string = "AdaptDB"
+	LocationsCollection string = "locations"
+	SavedGamesCollection string = "saved_games"
+)
 
 func Init() {
 	var err error
@@ -21,7 +25,7 @@ func Init() {
 		panic(err)
 	}
 
-	defer client.Disconnect(context.TODO())
+	// defer client.Disconnect(context.TODO())
 
 	if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{Key: "ping", Value: 1}}).Err(); err != nil {
 		panic(err)
@@ -32,4 +36,8 @@ func Init() {
 
 func GetDB() *mongo.Client{
 	return client
+}
+
+func DisconnectClient(){
+	client.Disconnect(context.TODO())
 }

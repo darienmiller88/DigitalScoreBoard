@@ -15,7 +15,7 @@ type SavedGame struct {
 	UpdatedAt     time.Time          `bson:"updated_at"`
 	Location      Location           `bson:"location,inline" json:"location"`
 	TotalPoints   int 			     `bson:"total_points"    json:"total_points"`
-	AveragePoints int                `bson:"average_points"  json:"average_points"`
+	AveragePoints float64            `bson:"average_points"  json:"average_points"`
 	Winner        UserCard           `bson:"winner"          json:"winner"`
 }
 
@@ -38,4 +38,18 @@ func (s *SavedGame) findWinner(field interface{}) error{
 	}
 
 	return nil
+}
+
+func (s *SavedGame) CalcAveragePoints(){
+	if s.TotalPoints == 0 {
+		s.CalcTotalPoints()
+	}
+
+	s.AveragePoints = float64(s.TotalPoints) / float64(len(s.Location.Users))
+}
+
+func (s *SavedGame) CalcTotalPoints(){
+	for _, user := range s.Location.Users {
+		s.TotalPoints += user.Score
+	}
 }

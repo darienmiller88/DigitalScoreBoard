@@ -22,6 +22,8 @@ func main(){
 	index.Init()
 	database.Init()
 
+	defer database.DisconnectClient()
+
 	router.Use(middleware.Logger, middleware.RealIP, middleware.Recoverer)
 	router.Mount("/api/v1", index.Router)
 	router.Get("/", func(res http.ResponseWriter, req *http.Request) {
