@@ -7,12 +7,20 @@ import (
 )
 
 type ScoreBoardRoutes struct{
-	Router     *chi.Mux
-	Controller controllers.ScoreBoardController
+	Router *chi.Mux
 }
 
 
 func (s *ScoreBoardRoutes) Init(){
 	s.Router = chi.NewRouter()
-	
+
+	s.Router.Get("/get-location/{location-name}", controllers.GetLocation)
+	s.Router.Get("/get-all-locations", controllers.GetAllLocations)
+	s.Router.Get("/get-all-users/{location-name}", controllers.GetAllUsersByLocation)
+	s.Router.Get("/get-all-users", controllers.GetAllUsers)
+	s.Router.Get("/get-saved-games", controllers.GetAllSavedGames)
+	s.Router.Get("/get-saved-games/{location-name}", controllers.GetAllSavedGames)
+	s.Router.Post("/save-game", controllers.SaveGame)
+	s.Router.Post("/add-user-to-location", controllers.AddUserToLocation)
+	s.Router.Delete("/remove-user-from-location", controllers.RemoveUserFromLocation)
 }
