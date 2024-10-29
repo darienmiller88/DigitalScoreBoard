@@ -1,4 +1,2 @@
 # DigitalScoreBoard/api/controllers
-api\controllers\ScoreBoardController.go:27:36: not enough arguments in call to utilities.SendJSON
-	have (number, http.ResponseWriter)
-	want (int, http.ResponseWriter, T)
+api\controllers\ScoreBoardController.go:98:41: undefined: locations
