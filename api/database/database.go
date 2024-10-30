@@ -25,8 +25,6 @@ func Init() {
 		panic(err)
 	}
 
-	// defer client.Disconnect(context.TODO())
-
 	if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{Key: "ping", Value: 1}}).Err(); err != nil {
 		panic(err)
 	}
@@ -34,8 +32,8 @@ func Init() {
 	fmt.Println("Pinged your deployment. You successfully connected to MongoDB!")
 }
 
-func GetDB() *mongo.Client{
-	return client
+func GetDB() *mongo.Database{
+	return client.Database(DatabaseName)
 }
 
 func DisconnectClient(){

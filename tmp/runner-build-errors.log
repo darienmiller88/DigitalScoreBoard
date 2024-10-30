@@ -1,4 +1,0 @@
-# DigitalScoreBoard/api/controllers
-api\controllers\ScoreBoardController.go:22:19: not enough arguments in call to http.Error
-	have (http.ResponseWriter, string)
-	want (http.ResponseWriter, string, int)
