@@ -35,8 +35,8 @@ func Init() {
 	fmt.Println("Pinged your deployment. You successfully connected to MongoDB!")
 }
 
-func GetDB() *mongo.Database{
-	return client.Database(DatabaseName)
+func GetDB() *mongo.Client{
+	return client
 }
 
 func DisconnectClient(){
