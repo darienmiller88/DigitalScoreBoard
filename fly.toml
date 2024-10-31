@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for adaptscoreboardapi on 2024-10-28T19:11:40-04:00
+# fly.toml app configuration file generated for adaptscoreboardapi on 2024-10-31T16:07:46-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -7,8 +7,8 @@ app = 'adaptscoreboardapi'
 primary_region = 'ewr'
 
 [build]
-  builder = "paketobuildpacks/builder:base"
-  buildpacks = ["gcr.io/paketo-buildpacks/go"]
+    builder = "paketobuildpacks/builder:base"
+    buildpacks = ["gcr.io/paketo-buildpacks/go"]
 
 [env]
   PORT = '8080'

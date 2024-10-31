@@ -17,6 +17,9 @@ const (
 	SavedGamesCollection string = "saved_games"
 )
 
+// builder = "paketobuildpacks/builder:base"
+//   buildpacks = ["gcr.io/paketo-buildpacks/go"]
+
 func Init() {
 	var err error
 	client, err = mongo.Connect(context.TODO(), options.Client().ApplyURI(os.Getenv("MONGO_URI")))
