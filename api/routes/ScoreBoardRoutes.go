@@ -13,12 +13,12 @@ type ScoreBoardRoutes struct{
 func (s *ScoreBoardRoutes) Init(){
 	s.Router = chi.NewRouter()
 
-	s.Router.Get("/get-location/{location-name}", controllers.GetLocation)
-	s.Router.Get("/get-saved-games/{location-name}", controllers.GetAllSavedGames)
-	s.Router.Get("/get-all-users/{location-name}", controllers.GetAllUsersByLocation)
+	s.Router.Get("/get-all-location/{location-name}", controllers.GetLocation)
 	s.Router.Get("/get-all-locations", controllers.GetAllLocations)
+	s.Router.Get("/get-all-users/{location-name}", controllers.GetAllUsersByLocation)
+	s.Router.Get("/get-saved-games/{location-name}", controllers.GetAllSavedGames)
 	s.Router.Get("/get-saved-games", controllers.GetAllSavedGames)
-	// 
+	 
 	// s.Router.Get("/get-all-users", controllers.GetAllUsers)
 	// s.Router.Post("/add-location", controllers.AddLocation)
 	s.Router.Post("/save-game", controllers.SaveGame)
