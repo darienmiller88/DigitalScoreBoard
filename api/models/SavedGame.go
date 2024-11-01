@@ -45,6 +45,10 @@ func (s *SavedGame) CalcAveragePoints(){
 		s.CalcTotalPoints()
 	}
 
+	if len(s.Location.Users) == 0 {
+		return
+	}
+
 	s.AveragePoints = float64(s.TotalPoints) / float64(len(s.Location.Users))
 }
 
