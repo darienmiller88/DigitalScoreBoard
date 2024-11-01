@@ -21,6 +21,7 @@ type locationResult struct{
 	err        error
 }
 
+// iumo
 //Retrieve one location from the list of Adapt locations.
 func GetLocation(res http.ResponseWriter, req *http.Request){
 	locationName := chi.URLParam(req, "location-name")
@@ -31,6 +32,8 @@ func GetLocation(res http.ResponseWriter, req *http.Request){
 		return
 	}
 	
+	//  
+	// 
 	utilities.SendJSON(http.StatusOK, res, result.location)
 }
 
