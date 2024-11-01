@@ -8,4 +8,5 @@ type UserRoutes struct {
 
 func (u *UserRoutes) Init(){
 	u.Router = chi.NewRouter()
+	// 
 }
