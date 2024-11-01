@@ -18,8 +18,8 @@ func (s *ScoreBoardRoutes) Init(){
 	s.Router.Get("/get-all-users/{location-name}", controllers.GetAllUsersByLocation)
 	s.Router.Get("/get-saved-games/{location-name}", controllers.GetAllSavedGames)
 	s.Router.Get("/get-saved-games", controllers.GetAllSavedGames)
-	 
-	// s.Router.Get("/get-all-users", controllers.GetAllUsers)
+	s.Router.Get("/get-all-users", controllers.GetAllUsers)
+	
 	// s.Router.Post("/add-location", controllers.AddLocation)
 	s.Router.Post("/save-game", controllers.SaveGame)
 	s.Router.Post("/add-user-to-location/{location-name}", controllers.AddUserToLocation)

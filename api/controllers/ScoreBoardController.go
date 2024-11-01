@@ -48,17 +48,9 @@ func GetAllUsersByLocation(res http.ResponseWriter, req *http.Request){
 
 //Get all of the Adapt locations.
 func GetAllLocations(res http.ResponseWriter, req *http.Request){
-	locationsCollection := database.GetDB().Database(database.DatabaseName).Collection(database.LocationsCollection)
-	result, err := locationsCollection.Find(req.Context(), bson.D{})
+	locations, err := getAllLocations(req)
 
-	if err != nil {
-		utilities.SendJSON(http.StatusInternalServerError, res, err.Error())
-		return
-	}
-
-	locations := []models.Location{}
-
-	if err := result.All(req.Context(), &locations); err != nil{
+	if err != nil{
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -67,7 +59,20 @@ func GetAllLocations(res http.ResponseWriter, req *http.Request){
 }
 
 func GetAllUsers(res http.ResponseWriter, req *http.Request) {
-	
+	locations, err := getAllLocations(req)
+
+	if err != nil{
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	users := []models.UserCard{}
+
+	for _, location := range locations {
+		users = append(users, location.Users...)
+	}
+
+	utilities.SendJSON(http.StatusOK, res, users)
 }
 
 func GetAllSavedGames(res http.ResponseWriter, req *http.Request){
@@ -190,6 +195,24 @@ func updateUsersForLocation(req *http.Request, mongoUpdateOperator string, locat
 	return result, nil
 }
  
+//Utility function to get all location from database.
+func getAllLocations(req *http.Request) ([]models.Location, error){
+	locationsCollection := database.GetDB().Database(database.DatabaseName).Collection(database.LocationsCollection)
+	result, err := locationsCollection.Find(req.Context(), bson.D{})
+
+	if err != nil {
+		return []models.Location{}, err
+	}
+
+	locations := []models.Location{}
+
+	if err := result.All(req.Context(), &locations); err != nil{
+		return []models.Location{}, err
+	}
+
+	return locations, nil
+}
+
 //Utility function to retrieve location from MongoDB.
 func getLocation(req *http.Request, locationName string) locationResult{
 	locationsCollection := database.GetDB().Database(database.DatabaseName).Collection(database.LocationsCollection)
