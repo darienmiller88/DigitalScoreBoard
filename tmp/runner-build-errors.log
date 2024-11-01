@@ -1,2 +1,0 @@
-# DigitalScoreBoard/api/controllers
-api\controllers\ScoreBoardController.go:194:42: database.GetDB().Collection undefined (type *mongo.Client has no field or method Collection)
