@@ -8,47 +8,41 @@ import (
 	"DigitalScoreBoard/api/database"
 	"DigitalScoreBoard/api/models"
 	"DigitalScoreBoard/api/utilities"
+	"DigitalScoreBoard/api/services"
 
 	"github.com/go-chi/chi/v5"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"go.mongodb.org/mongo-driver/mongo"
 )
-
-type locationResult struct{
-	statusCode int
-	location   models.Location
-	err        error
-}
 
 //Retrieve one location from the list of Adapt locations.
 func GetLocation(res http.ResponseWriter, req *http.Request){
 	locationName := chi.URLParam(req, "location-name")
-	result := getLocation(req, locationName)
+	result := services.GetLocation(req, locationName)
 
-	if result.err != nil{
-		http.Error(res, result.err.Error(), result.statusCode)
+	if result.Err != nil{
+		http.Error(res, result.Err.Error(), result.StatusCode)
 		return
 	}
 	
-	utilities.SendJSON(http.StatusOK, res, result.location)
+	utilities.SendJSON(http.StatusOK, res, result.Location)
 }
 
 func GetAllUsersByLocation(res http.ResponseWriter, req *http.Request){
 	locationName := chi.URLParam(req, "location-name")
-	result := getLocation(req, locationName)
+	result := services.GetLocation(req, locationName)
 
-	if result.err != nil {
-		http.Error(res, result.err.Error(), result.statusCode)
+	if result.Err != nil {
+		http.Error(res, result.Err.Error(), result.StatusCode)
 		return
 	}
 
-	utilities.SendJSON(http.StatusOK, res, result.location.Users)
+	utilities.SendJSON(http.StatusOK, res, result.Location.Users)
 }
 
 //Get all of the Adapt locations.
 func GetAllLocations(res http.ResponseWriter, req *http.Request){
-	locations, err := getAllLocations(req)
+	locations, err := services.GetAllLocations(req)
 
 	if err != nil{
 		http.Error(res, err.Error(), http.StatusInternalServerError)
@@ -59,7 +53,7 @@ func GetAllLocations(res http.ResponseWriter, req *http.Request){
 }
 
 func GetAllUsers(res http.ResponseWriter, req *http.Request) {
-	locations, err := getAllLocations(req)
+	locations, err := services.GetAllLocations(req)
 
 	if err != nil{
 		http.Error(res, err.Error(), http.StatusInternalServerError)
@@ -140,7 +134,7 @@ func AddUserToLocation(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
-	result, err := updateUsersForLocation(req, "$push", location, username.Username)
+	result, err := services.UpdateUsersForLocation(req, "$push", location, username.Username)
 
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
@@ -161,7 +155,7 @@ func AddUserToLocation(res http.ResponseWriter, req *http.Request){
 func RemoveUserFromLocation(res http.ResponseWriter, req *http.Request){
 	location := chi.URLParam(req, "location-name")
 	username := chi.URLParam(req, "username")
-	result, err := updateUsersForLocation(req, "$pull", location, username)
+	result, err := services.UpdateUsersForLocation(req, "$pull", location, username)
 
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusBadRequest)
@@ -177,63 +171,4 @@ func RemoveUserFromLocation(res http.ResponseWriter, req *http.Request){
 		"message": fmt.Sprintf("%s was removed from location %s", username, location),
 		"result": result,
 	})
-}
-
-//Utility function to allow adding a user to an Adapt location, and removing 
-func updateUsersForLocation(req *http.Request, mongoUpdateOperator string, locationName string, username string) (*mongo.UpdateResult, error){
-	filter := bson.M{"location_name": locationName}
-	update := bson.M{mongoUpdateOperator: bson.M{"users": bson.M{"name": username}}}
-
- 	result, err := database.GetDB().
-					Database(database.DatabaseName).
-					Collection(database.LocationsCollection).UpdateOne(req.Context(), filter, update)
-
-	if err != nil{
-		return nil, err
-	}
-
-	return result, nil
-}
- 
-//Utility function to get all location from database.
-func getAllLocations(req *http.Request) ([]models.Location, error){
-	locationsCollection := database.GetDB().Database(database.DatabaseName).Collection(database.LocationsCollection)
-	result, err := locationsCollection.Find(req.Context(), bson.D{})
-
-	if err != nil {
-		return []models.Location{}, err
-	}
-
-	locations := []models.Location{}
-
-	if err := result.All(req.Context(), &locations); err != nil{
-		return []models.Location{}, err
-	}
-
-	return locations, nil
-}
-
-//Utility function to retrieve location from MongoDB.
-func getLocation(req *http.Request, locationName string) locationResult{
-	locationsCollection := database.GetDB().Database(database.DatabaseName).Collection(database.LocationsCollection)
-	location := &models.Location{}
-	result := locationResult{}
-
-	err := locationsCollection.FindOne(req.Context(), bson.D{{Key: "location_name", Value: locationName}}).Decode(&location)
-
-	if err != nil {
-		if err == mongo.ErrNoDocuments {
-			result.statusCode = http.StatusNotFound
-		} else {
-			result.statusCode = http.StatusInternalServerError
-		}
-
-		result.err = err
-		return result
-	}
-
-	result.location = *location
-	result.statusCode = http.StatusOK
-
-	return result
 }

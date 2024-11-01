@@ -36,6 +36,14 @@ func GetDB() *mongo.Client{
 	return client
 }
 
+func GetLocationsCollection() *mongo.Collection {
+	return client.Database(DatabaseName).Collection(LocationsCollection)
+}
+
+func GetSavedGamesCollections() *mongo.Collection {
+	return client.Database(DatabaseName).Collection(SavedGamesCollection)
+}
+
 func DisconnectClient(){
 	client.Disconnect(context.TODO())
 }
