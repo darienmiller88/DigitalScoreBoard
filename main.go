@@ -6,8 +6,10 @@ import (
 	"os"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
 	"github.com/go-chi/chi/v5/middleware"
+
 	"DigitalScoreBoard/api/database"
 	"DigitalScoreBoard/api/routes"
 )
@@ -17,6 +19,11 @@ func main(){
 
 	router := chi.NewRouter()
 	index := routes.Index{}
+	newCors := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:5173", "http://127.0.0.1:5173", "https://adaptscoreboard.netlify.app/"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowCredentials: true,
+	})
 
 	//Initialize both the subrouter, as well as the mongoDB database instance.
 	index.Init()
@@ -24,7 +31,7 @@ func main(){
 
 	defer database.DisconnectClient()
 
-	router.Use(middleware.Logger, middleware.RealIP, middleware.Recoverer)
+	router.Use(middleware.Logger, middleware.RealIP, middleware.Recoverer, newCors.Handler)
 	router.Mount("/api/v1", index.Router)
 	router.Get("/", func(res http.ResponseWriter, req *http.Request) {
 		res.Write([]byte(`Welcome to my Adapt scoreboard API!`))

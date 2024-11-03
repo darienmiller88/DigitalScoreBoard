@@ -4,7 +4,7 @@ const userApiURL = window.location.hostname === "localhost"
 ? 
 "http://localhost:8080/api/v1/users" 
 :
-"https://messengerv2.fly.dev/api/v1/users"
+"https://adaptscoreboardapi.fly.dev/api/v1/users"
 
 const scoreBoardApiUrl = window.location.hostname === "localhost" 
 ?
@@ -17,7 +17,7 @@ export const userApi = axios.create({
     withCredentials: true,
 })
 
-const scoreBoardApi = axios.create({
+export const scoreBoardApi = axios.create({
     baseURL: scoreBoardApiUrl,
     withCredentials: true
 })

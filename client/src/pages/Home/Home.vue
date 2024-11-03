@@ -6,18 +6,11 @@
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { storeToRefs } from 'pinia';
+    import { scoreBoardApi } from "../../api/api"
+    import { Location } from "../../types/types"
 
     const username = ref<string>("")
-    const options = ref<string[]>([
-        "Pelham", 
-        "Lawrence", 
-        "Elmwood", 
-        "Flushing", 
-        "Grand Concourse", 
-        "Port Richmond",
-        "W 154th St",
-        "West End",
-    ])
+    const options = ref<string[]>([])
 
     //Stateful methods
     const { addScoreCard } = scoreCardsStore()
@@ -55,8 +48,12 @@
         setSelectedLocation(selectedValue)
     }
 
-    onMounted(() => {
-        selectedLocation.value = selectedLocation.value == "" ? options.value[0] : selectedLocation.value
+    onMounted(async () => {
+        const locations = await scoreBoardApi.get<Location[]>("/get-all-locations")
+
+        options.value = locations.data.map(location => {
+            return location.location_name
+        })        
     })
 </script>
 
@@ -93,7 +90,7 @@
             <div class="error">{{ duplicateErrorMessage }}</div>
         </div>
         <button :class="`form-element ${isDarkMode ? 'dark-mode' : 'light-mode'}`" type="submit">
-            Add User To List
+            Add User To Location
         </button>
     </form>
 
