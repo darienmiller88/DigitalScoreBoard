@@ -31,7 +31,11 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         }
     }
 
-    return { scoreCards, addScoreCard, removeCard, addPoints, minusPoints }
+    const resetPoints = (index: number) => {
+        scoreCards.value[index].score = 0
+    }
+
+    return { scoreCards, addScoreCard, removeCard, addPoints, minusPoints, resetPoints }
 }, {
     persist: true
 })

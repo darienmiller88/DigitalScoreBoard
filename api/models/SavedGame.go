@@ -41,12 +41,12 @@ func (s *SavedGame) findWinner(field interface{}) error{
 }
 
 func (s *SavedGame) CalcAveragePoints(){
-	if s.TotalPoints == 0 {
-		s.CalcTotalPoints()
-	}
-
 	if len(s.Location.Users) == 0 {
 		return
+	}
+
+	if s.TotalPoints == 0 {
+		s.CalcTotalPoints()
 	}
 
 	s.AveragePoints = float64(s.TotalPoints) / float64(len(s.Location.Users))

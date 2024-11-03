@@ -52,6 +52,7 @@ func GetAllLocations(res http.ResponseWriter, req *http.Request){
 	utilities.SendJSON(http.StatusOK, res, locations)
 }
 
+//Get all users for ALL locations.
 func GetAllUsers(res http.ResponseWriter, req *http.Request) {
 	locations, err := services.GetAllLocations(req)
 
@@ -84,7 +85,6 @@ func GetAllSavedGames(res http.ResponseWriter, req *http.Request){
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
 
 	utilities.SendJSON(http.StatusOK, res, savedGames)
 }

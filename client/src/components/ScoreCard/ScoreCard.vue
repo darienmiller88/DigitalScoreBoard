@@ -4,7 +4,7 @@
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
 
     const { isDarkMode } = storeToRefs(darkModeStore())
-    const { removeCard, addPoints, minusPoints } = scoreCardsStore()
+    const { removeCard, addPoints, minusPoints, resetPoints } = scoreCardsStore()
 
     defineProps<{ 
         cardIndex: number
@@ -19,7 +19,14 @@
      <div class="user-card">
         <div :class="`username ${isDarkMode ? 'dark-mode' : 'light-mode'}`">{{ username }}</div>
         <div class="divider"></div>
-        <button :class="`remove ${isDarkMode ? 'dark-mode-button' : 'light-mode-button'}`"  @click="() => removeCard(cardIndex)">Remove</button>
+        <button 
+            :class="`remove ${isDarkMode ? 'dark-mode-button' : 'light-mode-button'}`" 
+            @click="() => removeCard(cardIndex)"
+        >Remove User</button>
+        <br>
+        <button class="reset" @click="() => resetPoints(cardIndex)" >
+            Reset points
+        </button>
         <div class="score-wrapper">
             <button class="minus-points" @click="() => minusPoints(cardIndex, pointValue)">-</button>
             <div :class="`score ${isDarkMode ? 'dark-mode' : 'light-mode'}`">{{ score }}</div>
@@ -92,11 +99,28 @@
             }
         }
 
+        .reset{
+            margin: 10px 0px;
+            padding: 5px 10px;
+
+            background-color: var(--main-text-color);
+            color: var(--primary-color);
+            font-weight: bold;
+
+            border-radius: 50px;
+            border: none;
+            transition: 0.3s; 
+
+            &:hover{
+                cursor: pointer;
+                background-color: var(--main-text-color-transparent);
+            }
+        }
+
         .score-wrapper{
             display: grid;
             grid-template-columns: auto 100px auto;
-        
-            margin-top: 20px;
+            // margin-top: 20px;
 
             .score{
                 display: flex;
