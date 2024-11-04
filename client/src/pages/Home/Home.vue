@@ -8,9 +8,11 @@
     import { storeToRefs } from 'pinia';
     import { scoreBoardApi } from "../../api/api"
     import { Location } from "../../types/types"
+    import { Icon } from "@iconify/vue"
 
     const username = ref<string>("")
     const options = ref<string[]>([])
+    const isLoading = ref<boolean>(true)
 
     //Stateful methods
     const { addScoreCard } = scoreCardsStore()
@@ -49,18 +51,27 @@
     }
 
     onMounted(async () => {
-        const locations = await scoreBoardApi.get<Location[]>("/get-all-locations")
+        try {
+            const locations = await scoreBoardApi.get<Location[]>("/get-all-locations")
+    
+            options.value = locations.data.map(location => {
+                return location.location_name
+            })        
+            
+        } catch (error) {
+            console.log("err:", error);
+        }
 
-        options.value = locations.data.map(location => {
-            return location.location_name
-        })        
+        isLoading.value = false
     })
 </script>
 
 <template>
     <div class="title">Digital Score Board</div>
     <div :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">Current Location: 
+        <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
         <select 
+            v-else
             v-model="selectedLocation"
             name="locations" 
             id="locations" 
