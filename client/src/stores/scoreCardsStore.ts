@@ -5,6 +5,13 @@ import { Card } from "../types/types"
 export const scoreCardsStore = defineStore("scoreCards", () => {
     const scoreCards = ref<Card[]>([])
 
+    const setCards = (cards: Card[]) => {
+        scoreCards.value = cards
+        // scoreCards.value.forEach((card, i) => {
+        //     card.username = cards[i].username
+        // })
+    }
+
     const addScoreCard = (card: Card) => {
         scoreCards.value = [...scoreCards.value, card]
     }
@@ -35,7 +42,7 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         scoreCards.value[index].score = 0
     }
 
-    return { scoreCards, addScoreCard, removeCard, addPoints, minusPoints, resetPoints }
+    return { scoreCards, addScoreCard, removeCard, addPoints, minusPoints, resetPoints, setCards }
 }, {
     persist: true
 })

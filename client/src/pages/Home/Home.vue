@@ -13,9 +13,10 @@
     const username = ref<string>("")
     const options = ref<string[]>([])
     const isLoading = ref<boolean>(true)
+    let locations: Location[] = []
 
     //Stateful methods
-    const { addScoreCard } = scoreCardsStore()
+    const { addScoreCard, setCards } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
 
     //Stateful variables
@@ -25,7 +26,7 @@
 
     const duplicateErrorMessage = ref<string>("")
 
-    const addUser = () => {
+    const addUser = async () => {
         const newCard: Card = {
             username: username.value,
             score: 0
@@ -40,6 +41,8 @@
             }, 3000);
         }else{
             addScoreCard(newCard)
+
+            // scoreBoardApi.post()
             username.value = ""
         }
     }
@@ -47,21 +50,40 @@
     const optionClicked = (event: Event) => {
         const selectedValue = (event.target as HTMLSelectElement).value;
 
+        locations.forEach(location => {
+            if(location.location_name === selectedValue  ){
+                setCards(location.users)                    
+            }
+        })
+        if (locations) {            
+            
+            console.log(locations)
+        }
+
         setSelectedLocation(selectedValue)
     }
 
     onMounted(async () => {
         try {
-            const locations = await scoreBoardApi.get<Location[]>("/get-all-locations")
+            const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
     
-            options.value = locations.data.map(location => {
+            locations = locationsResponse.data
+            options.value = locationsResponse.data.map(location => {
                 return location.location_name
-            })        
-            
+            })     
+
+            //If there are no current score cards set in local storage, retrieve them from the database
+            if (!scoreCards) {
+                locationsResponse.data.forEach((location, i) => {
+                    if (location.location_name === selectedLocation.value) {
+                        setCards(locationsResponse.data[i].users)
+                    }
+                })
+            }         
         } catch (error) {
             console.log("err:", error);
         }
-
+        
         isLoading.value = false
     })
 </script>
