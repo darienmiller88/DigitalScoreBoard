@@ -7,9 +7,6 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
 
     const setCards = (cards: Card[]) => {
         scoreCards.value = cards
-        // scoreCards.value.forEach((card, i) => {
-        //     card.username = cards[i].username
-        // })
     }
 
     const addScoreCard = (card: Card) => {

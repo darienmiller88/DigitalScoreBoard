@@ -23,5 +23,5 @@ func (s *ScoreBoardRoutes) Init(){
 	// s.Router.Post("/add-location", controllers.AddLocation)
 	s.Router.Post("/save-game", controllers.SaveGame)
 	s.Router.Post("/add-user-to-location/{location-name}", controllers.AddUserToLocation)
-	s.Router.Delete("/remove-user-from-location/{location-name}/{username}", controllers.RemoveUserFromLocation)
+	s.Router.Delete("/remove-user-from-location/{location-name}", controllers.RemoveUserFromLocation)
 }

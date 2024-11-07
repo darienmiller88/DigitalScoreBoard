@@ -154,8 +154,16 @@ func AddUserToLocation(res http.ResponseWriter, req *http.Request){
 
 func RemoveUserFromLocation(res http.ResponseWriter, req *http.Request){
 	location := chi.URLParam(req, "location-name")
-	username := chi.URLParam(req, "username")
-	result, err := services.UpdateUsersForLocation(req, "$pull", location, username)
+	username := struct{
+		Username string `json:"username"`
+	}{}
+
+	if err := json.NewDecoder(req.Body).Decode(&username); err != nil{
+		http.Error(res, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	result, err := services.UpdateUsersForLocation(req, "$pull", location, username.Username)
 
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusBadRequest)

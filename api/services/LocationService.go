@@ -54,6 +54,10 @@ func GetLocation(req *http.Request, locationName string) models.LocationResult{
 
 //Service function to allow adding a user to an Adapt location, and removing.
 func UpdateUsersForLocation(req *http.Request, mongoUpdateOperator string, locationName string, username string) (*mongo.UpdateResult, error){
+	// if mongoUpdateOperator != "$pull"  ||{
+		
+	// }
+	
 	filter := bson.M{"location_name": locationName}
 	update := bson.M{mongoUpdateOperator: bson.M{"users": bson.M{"name": username}}}
 

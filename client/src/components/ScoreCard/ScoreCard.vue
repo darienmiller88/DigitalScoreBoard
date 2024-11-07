@@ -2,16 +2,28 @@
     import { darkModeStore } from '../../stores/darkModeStore';
     import { storeToRefs } from 'pinia';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
+    import { selectedLocationStore } from '../../stores/selectedLocationStore';
+    import { scoreBoardApi } from '../../api/api';
 
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { removeCard, addPoints, minusPoints, resetPoints } = scoreCardsStore()
-
-    defineProps<{ 
+    const { selectedLocation } = storeToRefs(selectedLocationStore())
+    const props = defineProps<{ 
         cardIndex: number
         pointValue: number
         score: number
         username: string 
     }>()
+
+    const removeCardFromLocation = async () => {
+        removeCard(props.cardIndex)
+
+        try {
+            await scoreBoardApi.delete(`/remove-user-from-location/${selectedLocation.value}`, {data: {username: props.username}})
+        } catch (error) {
+            console.log("err:", error);
+        }
+    }
 
 </script>
 
@@ -21,7 +33,7 @@
         <div class="divider"></div>
         <button 
             :class="`remove ${isDarkMode ? 'dark-mode-button' : 'light-mode-button'}`" 
-            @click="() => removeCard(cardIndex)"
+            @click="removeCardFromLocation()"
         >Remove User</button>
         <br>
         <button class="reset" @click="() => resetPoints(cardIndex)" >
