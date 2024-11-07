@@ -42,7 +42,15 @@
         }else{
             addScoreCard(newCard)
 
-            // scoreBoardApi.post()
+            try {
+                const res = await scoreBoardApi.post(`/add-user-to-location/${selectedLocation.value}`, {"username": username.value})
+                
+                console.log("res", res.data);
+                
+            } catch (error) {
+                console.log("err:", error)
+            }
+
             username.value = ""
         }
     }
