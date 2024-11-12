@@ -32,7 +32,7 @@
         <div class="links" v-else>
             <DarkModeToggle />
             <RouterLink to="/" class="link-item">Home</RouterLink>
-            <RouterLink to="/register" class="link-item">Register</RouterLink>
+            <RouterLink to="/view-games" class="link-item">View Games</RouterLink>
             <RouterLink to="/generate-questions" class="link-item">Generate Questions</RouterLink>
         </div>
     </nav>

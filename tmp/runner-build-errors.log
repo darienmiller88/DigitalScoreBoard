@@ -1,4 +1,0 @@
-# DigitalScoreBoard/api/services
-api\services\LocationService.go:57:39: syntax error: unexpected {, expected expression
-api\services\LocationService.go:59:2: syntax error: unexpected }, expected {
-api\services\LocationService.go:61:34: syntax error: unexpected : at end of statement

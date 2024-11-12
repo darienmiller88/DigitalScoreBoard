@@ -3,6 +3,7 @@ package services
 import (
 	"DigitalScoreBoard/api/database"
 	"DigitalScoreBoard/api/models"
+	"fmt"
 	"net/http"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -33,7 +34,10 @@ func GetLocation(req *http.Request, locationName string) models.LocationResult{
 	location := &models.Location{}
 	result := models.LocationResult{}
 
-	err := locationsCollection.FindOne(req.Context(), bson.D{{Key: "location_name", Value: locationName}}).Decode(&location)
+	err := locationsCollection.FindOne(
+		req.Context(), 
+		bson.D{{Key: "location_name", Value: locationName}},
+	).Decode(&location)
 
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -52,11 +56,11 @@ func GetLocation(req *http.Request, locationName string) models.LocationResult{
 	return result
 }
 
-//Service function to allow adding a user to an Adapt location, and removing.
+//Service function to allow adding or removing a user to or from an Adapt location.
 func UpdateUsersForLocation(req *http.Request, mongoUpdateOperator string, locationName string, username string) (*mongo.UpdateResult, error){
-	// if mongoUpdateOperator != "$pull"  ||{
-		
-	// }
+	if !(mongoUpdateOperator == "$pull" || mongoUpdateOperator == "$push"){
+		return nil, fmt.Errorf("mongo operator %s not valid. Must be either $pull or $push", mongoUpdateOperator)
+	}
 	
 	filter := bson.M{"location_name": locationName}
 	update := bson.M{mongoUpdateOperator: bson.M{"users": bson.M{"name": username}}}
