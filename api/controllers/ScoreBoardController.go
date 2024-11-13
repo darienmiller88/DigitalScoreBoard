@@ -163,7 +163,7 @@ func RemoveUserFromLocation(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
-	result, err := services.UpdateUsersForLocation(req, "$pull", location, username.Username)
+	result, err := services.UpdateUsersForLocation(req, "$pull", location, username.Username )
 
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusBadRequest)
