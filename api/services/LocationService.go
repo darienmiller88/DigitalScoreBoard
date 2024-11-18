@@ -29,10 +29,10 @@ func GetAllLocations(req *http.Request) ([]models.Location, error) {
 }
 
 //Retrieve one location from MongoDB.
-func GetLocation(req *http.Request, locationName string) models.LocationResult{
+func GetLocation(req *http.Request, locationName string) models.Result[models.Location]{
 	locationsCollection := database.GetLocationsCollection()
 	location := &models.Location{}
-	result := models.LocationResult{}
+	result := models.Result[models.Location]{}
 
 	err := locationsCollection.FindOne(
 		req.Context(), 
@@ -50,7 +50,7 @@ func GetLocation(req *http.Request, locationName string) models.LocationResult{
 		return result
 	}
 
-	result.Location = *location
+	result.ResultData = *location
 	result.StatusCode = http.StatusOK
 
 	return result

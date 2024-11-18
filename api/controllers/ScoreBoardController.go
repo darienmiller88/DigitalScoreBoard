@@ -25,7 +25,7 @@ func GetLocation(res http.ResponseWriter, req *http.Request){
 		return
 	}
 	
-	utilities.SendJSON(http.StatusOK, res, result.Location)
+	utilities.SendJSON(http.StatusOK, res, result.ResultData)
 }
 
 func GetAllUsersByLocation(res http.ResponseWriter, req *http.Request){
@@ -37,7 +37,7 @@ func GetAllUsersByLocation(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
-	utilities.SendJSON(http.StatusOK, res, result.Location.Users)
+	utilities.SendJSON(http.StatusOK, res, result.ResultData.Users)
 }
 
 //Get all of the Adapt locations.
@@ -52,7 +52,7 @@ func GetAllLocations(res http.ResponseWriter, req *http.Request){
 	utilities.SendJSON(http.StatusOK, res, locations)
 }
 
-//Get all users for ALL locations.
+//Get ALL users for ALL locations.
 func GetAllUsers(res http.ResponseWriter, req *http.Request) {
 	locations, err := services.GetAllLocations(req)
 
@@ -70,8 +70,25 @@ func GetAllUsers(res http.ResponseWriter, req *http.Request) {
 	utilities.SendJSON(http.StatusOK, res, users)
 }
 
+//Retrieve all saved game from ONE location.
+func GetAllSavedGamesFromLocation(res http.ResponseWriter, req *http.Request){
+	locationName := chi.URLParam(req, "location-name")
+	// savedGamesCollection := database.GetSavedGamesCollections()
+	 
+	location := services.GetLocation(req, locationName)
+
+	if location.Err != nil {
+		http.Error(res, location.Err.Error(), location.StatusCode)
+		return
+	}
+
+	// fmt.Println()
+
+}
+
+//Retrieve all saved game for ALL locations.
 func GetAllSavedGames(res http.ResponseWriter, req *http.Request){
-	savedGamesCollection := database.GetDB().Database(database.DatabaseName).Collection(database.SavedGamesCollection)
+	savedGamesCollection := database.GetSavedGamesCollections()
 	result, err := savedGamesCollection.Find(req.Context(), bson.D{})
 
 	if err != nil {
@@ -112,7 +129,7 @@ func AddLocation(res http.ResponseWriter, req *http.Request){
 	}
 
 	location.InitCreatedAtAndUpdatedAt()
-	result, err := database.GetDB().Database(database.DatabaseName).Collection(database.LocationsCollection).InsertOne(req.Context(), location)
+	result, err := database.GetLocationsCollection().InsertOne(req.Context(), location)
 
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
