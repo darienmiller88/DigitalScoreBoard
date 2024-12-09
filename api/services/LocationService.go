@@ -31,10 +31,9 @@ func GetAllLocations(req *http.Request) ([]models.Location, error) {
 //Retrieve one location from MongoDB.
 func GetLocation(req *http.Request, locationName string) models.Result[models.Location]{
 	locationsCollection := database.GetLocationsCollection()
-	location := &models.Location{}
-	result := models.Result[models.Location]{}
-
-	err := locationsCollection.FindOne(
+	location            := &models.Location{}
+	result              := models.Result[models.Location]{}
+	err                 := locationsCollection.FindOne(
 		req.Context(), 
 		bson.D{{Key: "location_name", Value: locationName}},
 	).Decode(&location)
@@ -57,19 +56,36 @@ func GetLocation(req *http.Request, locationName string) models.Result[models.Lo
 }
 
 //Service function to allow adding or removing a user to or from an Adapt location.
-func UpdateUsersForLocation(req *http.Request, mongoUpdateOperator string, locationName string, username string) (*mongo.UpdateResult, error){
+func UpdateUsersForLocation(req *http.Request, mongoUpdateOperator string, locationName string, username string) models.Result[*mongo.UpdateResult] {
+	updateUserResult := models.Result[*mongo.UpdateResult]{
+		StatusCode: http.StatusInternalServerError,
+	}
+	
 	if !(mongoUpdateOperator == "$pull" || mongoUpdateOperator == "$push"){
-		return nil, fmt.Errorf("mongo operator %s not valid. Must be either $pull or $push", mongoUpdateOperator)
+		updateUserResult.Err = fmt.Errorf("mongo operator %s not valid. Must be either $pull or $push", mongoUpdateOperator)
+
+		return updateUserResult
 	}
 	
 	filter := bson.M{"location_name": locationName}
 	update := bson.M{mongoUpdateOperator: bson.M{"users": bson.M{"name": username}}}
-
- 	result, err := database.GetLocationsCollection().UpdateOne(req.Context(), filter, update)
+ 	updateOneResult, err := database.GetLocationsCollection().UpdateOne(req.Context(), filter, update)
 
 	if err != nil{
-		return nil, err
+		updateUserResult.Err = err
+		
+		return updateUserResult
 	}
 
-	return result, nil
+	if updateOneResult.ModifiedCount == 0 {
+		updateUserResult.Err = fmt.Errorf("no location \"%s\" found", locationName)
+		updateUserResult.StatusCode = http.StatusNotFound
+
+		return updateUserResult
+	}
+
+	updateUserResult.ResultData = updateOneResult
+	updateUserResult.StatusCode = http.StatusOK
+
+	return updateUserResult
 }

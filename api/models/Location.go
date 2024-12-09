@@ -5,6 +5,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"github.com/go-ozzo/ozzo-validation"
+
 )
 
 type Location struct {

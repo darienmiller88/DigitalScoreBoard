@@ -14,9 +14,9 @@ func (s *ScoreBoardRoutes) Init(){
 	s.Router = chi.NewRouter()
 
 	s.Router.Get("/get-all-location/{location-name}", controllers.GetLocation)
-	s.Router.Get("/get-all-locations", controllers.GetAllLocations)
 	s.Router.Get("/get-all-users/{location-name}", controllers.GetAllUsersByLocation)
 	s.Router.Get("/get-saved-games/{location-name}", controllers.GetAllSavedGamesFromLocation)
+	s.Router.Get("/get-all-locations", controllers.GetAllLocations)
 	s.Router.Get("/get-saved-games", controllers.GetAllSavedGames)
 	s.Router.Get("/get-all-users", controllers.GetAllUsers)
 	

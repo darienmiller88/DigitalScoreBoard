@@ -11,8 +11,12 @@ import (
 	"DigitalScoreBoard/api/services"
 
 	"github.com/go-chi/chi/v5"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+)
+
+const(
+	PULL = "$pull"
+	PUSH = "$push"
 )
 
 //Retrieve one location from the list of Adapt locations.
@@ -73,46 +77,47 @@ func GetAllUsers(res http.ResponseWriter, req *http.Request) {
 //Retrieve all saved game from ONE location.
 func GetAllSavedGamesFromLocation(res http.ResponseWriter, req *http.Request){
 	locationName := chi.URLParam(req, "location-name")
-	// savedGamesCollection := database.GetSavedGamesCollections()
 	 
-	location := services.GetLocation(req, locationName)
+	//Retrieve games from service.
+	savedGamesResult := services.GetAllSavedGamesFromLocation(req, locationName)
 
-	if location.Err != nil {
-		http.Error(res, location.Err.Error(), location.StatusCode)
+	if savedGamesResult.Err != nil {
+		http.Error(res, savedGamesResult.Err.Error(), savedGamesResult.StatusCode)
 		return
 	}
 
-	// fmt.Println()
-
+	utilities.SendJSON(savedGamesResult.StatusCode, res, savedGamesResult.ResultData)
 }
 
 //Retrieve all saved game for ALL locations.
 func GetAllSavedGames(res http.ResponseWriter, req *http.Request){
-	savedGamesCollection := database.GetSavedGamesCollections()
-	result, err := savedGamesCollection.Find(req.Context(), bson.D{})
+	savedGamesResult := services.GetAllSavedGames(req)
 
-	if err != nil {
-		http.Error(res, err.Error(), http.StatusInternalServerError)
+	if savedGamesResult.Err != nil {
+		http.Error(res, savedGamesResult.Err.Error(), savedGamesResult.StatusCode)
 		return
 	}
 
-	savedGames := []models.SavedGame{}
-
-	if err := result.All(req.Context(), &savedGames); err != nil{
-		http.Error(res, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	utilities.SendJSON(http.StatusOK, res, savedGames)
+	utilities.SendJSON(http.StatusOK, res, savedGamesResult.ResultData)
 }
 
+//Save a game to the database.
 func SaveGame(res http.ResponseWriter, req *http.Request){
-	data := make(map[string]interface{})
-	
-	json.NewDecoder(req.Body).Decode(&data)
-	fmt.Println(data)
+	savedGame := models.SavedGame{}
 
-	utilities.SendJSON(http.StatusOK, res, data)
+	if err := json.NewDecoder(req.Body).Decode(&savedGame); err != nil {
+		http.Error(res, err.Error(), http.StatusBadRequest)
+		return
+	}
+	
+	result := services.AddSavedGame(req, savedGame)
+
+	if result.Err != nil {
+		http.Error(res, result.Err.Error(), result.StatusCode)
+		return
+	}
+
+	utilities.SendJSON(result.StatusCode, res, result.ResultData)
 }
 
 func AddLocation(res http.ResponseWriter, req *http.Request){
@@ -141,59 +146,39 @@ func AddLocation(res http.ResponseWriter, req *http.Request){
 }
 
 func AddUserToLocation(res http.ResponseWriter, req *http.Request){
-	location := chi.URLParam(req, "location-name")
-	username := struct{
-		Username string `json:"username"`
-	}{}
-
-	if err := json.NewDecoder(req.Body).Decode(&username); err != nil{
-		http.Error(res, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	result, err := services.UpdateUsersForLocation(req, "$push", location, username.Username)
-
-	if err != nil {
-		http.Error(res, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	if result.ModifiedCount == 0 {
-		http.Error(res, fmt.Sprintf("No location \"%s\" found", location), http.StatusNotFound)
-		return
-	}
-
-	utilities.SendJSON(http.StatusOK, res, map[string]interface{}{
-		"message": fmt.Sprintf("%s was added to location %s", username.Username, location),
-		"result": result,
-	})
+	modifyUserInLocation(res, req, PUSH)
 }
 
 func RemoveUserFromLocation(res http.ResponseWriter, req *http.Request){
+	modifyUserInLocation(res, req, PULL)
+}
+
+func modifyUserInLocation(res http.ResponseWriter, req *http.Request, operation string){
 	location := chi.URLParam(req, "location-name")
 	username := struct{
 		Username string `json:"username"`
 	}{}
 
+	// Decode the username from request body
 	if err := json.NewDecoder(req.Body).Decode(&username); err != nil{
 		http.Error(res, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	result, err := services.UpdateUsersForLocation(req, "$pull", location, username.Username )
+	result := services.UpdateUsersForLocation(req, operation, location, username.Username)
 
-	if err != nil {
-		http.Error(res, err.Error(), http.StatusBadRequest)
+	if result.Err != nil {
+		http.Error(res, result.Err.Error(), result.StatusCode)
 		return
 	}
-	
-	if result.ModifiedCount == 0 {
-		http.Error(res, fmt.Sprintf("No user \"%s\" or location %s found", username, location), http.StatusNotFound)
-		return
+
+	message := "added to"
+	if operation == PULL {
+		message = "removed from"
 	}
 
 	utilities.SendJSON(http.StatusOK, res, map[string]interface{}{
-		"message": fmt.Sprintf("%s was removed from location %s", username, location),
+		"message": fmt.Sprintf("%s was %s location: %s", username, message, location),
 		"result": result,
 	})
 }
