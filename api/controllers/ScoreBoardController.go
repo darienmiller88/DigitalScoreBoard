@@ -15,8 +15,8 @@ import (
 )
 
 const(
-	PULL = "$pull"
-	PUSH = "$push"
+	PULL string = "$pull"
+	PUSH string = "$push"
 )
 
 //Retrieve one location from the list of Adapt locations.

@@ -1,43 +1,92 @@
 <script setup lang="ts">
     import Game from '../../components/Game/Game.vue';
     import { SavedGame } from "../../types/types"
+    import { onMounted, ref } from 'vue';
 
-    const game1: SavedGame = {
-        id: "1",
-        created_at: new Date().toLocaleString(),
-        average_points: 90,
-        total_points: 5000,
-        winner: {
-            username: "darien",
-            score: 100
-        },
-        location: {
+    const games: SavedGame[] = [
+        {
             id: "1",
-            users: [
-                {
-                    username: "Reina",
-                    score: 300
-                },
-                {
-                    username: "Marth",
-                    score: 400
-                },
-            ],
-            location_name: "Pelham"
+            created_at: new Date().toLocaleString(),
+            average_points: 90,
+            total_points: 5000,
+            winner: {
+                username: "darien",
+                score: 100
+            },
+            location: {
+                id: "1",
+                users: [
+                    {
+                        username: "Reina",
+                        score: 300
+                    },
+                    {
+                        username: "Marth",
+                        score: 400
+                    },
+                ],
+                location_name: "Pelham"
+            }
+        },
+        {
+            id: "3",
+            created_at: new Date().toLocaleString(),
+            average_points: 90,
+            total_points: 5000,
+            winner: {
+                username: "Michelle",
+                score: 400
+            },
+            location: {
+                id: "3",
+                users: [
+                    {
+                        username: "Nijmah",
+                        score: 300
+                    },
+                    {
+                        username: "Michelle",
+                        score: 400
+                    },
+                ],
+                location_name: "Lawrence"
+            }
         }
-    }
+    ]
 </script>
 
 <template>
+    <div class="title">Saved Games</div>
     <div class="games">
        <Game 
-          v-bind="game1"
+          v-for="(game, index) in games"
+          v-bind="game"
+          :key="index"
        />
     </div>
 </template>
 
 <style scoped>
+    .title{
+        font-size: 50px;
+        text-align: center;
+        color: var(--main-text-color);
+        margin: 15px;
+    }
+
     .games{
-        border: 3px dotted red;
+        /* border: 1px solid var(--main-text-color); */
+        overflow-y: scroll;
+
+        height: 70vh;
+        width: fit-content;
+        padding: 0px 30px;
+        margin: auto;
+        transition: 0.3s;
+
+        &:hover{
+            box-shadow: 0 4px 10px var(--main-text-color);
+        }
+
     }
 </style>

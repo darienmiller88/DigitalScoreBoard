@@ -59,14 +59,10 @@
         const selectedValue = (event.target as HTMLSelectElement).value;
 
         locations.forEach(location => {
-            if(location.location_name === selectedValue  ){
+            if(location.location_name === selectedValue){
                 setCards(location.users)                    
             }
         })
-        if (locations) {            
-            
-            console.log(locations)
-        }
 
         setSelectedLocation(selectedValue)
     }
@@ -145,11 +141,11 @@
             :score="card.score"
         />
     </div>
-    <!-- <div class="save-wrapper">
+    <div class="save-wrapper">
         <button type="button" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
             Save Game
         </button>
-    </div> -->
+    </div>
 </template>
 
 <style scoped lang="scss">
@@ -288,7 +284,7 @@
 
     .save-wrapper{
         text-align: center;
-        margin-top: 20px;
+        margin: 40px;
     }
 
     .save-wrapper button, form button{
