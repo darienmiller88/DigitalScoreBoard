@@ -67,6 +67,10 @@
         setSelectedLocation(selectedValue)
     }
 
+    // const addSavedGame = () => {
+        
+    // }
+
     onMounted(async () => {
         try {
             const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")

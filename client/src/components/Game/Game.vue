@@ -1,6 +1,5 @@
 <script setup lang="ts">
     import { SavedGame } from '../../types/types';
-    import { darkModeStore } from '../../stores/darkModeStore';
     import star from "../../assets/star.png"
 
     const props = defineProps<SavedGame>()
@@ -17,7 +16,11 @@
 
         <!--  -->
         <div class="location-date-wrapper">
-            <div class="location">Location: {{ props.location.location_name }}</div>
+            <div class="location">Location: 
+                <span>
+                    {{ props.location.location_name }}
+                </span>
+            </div>
             <div class="date-played">Date played: {{ props.created_at }}</div>
         </div>
 

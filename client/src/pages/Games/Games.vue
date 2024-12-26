@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import Game from '../../components/Game/Game.vue';
     import { SavedGame } from "../../types/types"
-    import { onMounted, ref } from 'vue';
+    // import { onMounted, ref } from 'vue';
 
     const games: SavedGame[] = [
         {
