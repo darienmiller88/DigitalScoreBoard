@@ -66,12 +66,16 @@
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
     .title{
-        font-size: 50px;
+        font-size: 40px;
         text-align: center;
         color: var(--main-text-color);
         margin: 15px;
+
+        @media screen and (min-width: 768px) {
+            font-size: 50px;
+        }
     }
 
     .games{
@@ -80,9 +84,12 @@
 
         height: 70vh;
         width: fit-content;
-        padding: 0px 30px;
         margin: auto;
         transition: 0.3s;
+
+        @media screen and (min-width: 768px) {
+            padding: 0px 30px;
+        }
 
         &:hover{
             box-shadow: 0 4px 10px var(--main-text-color);

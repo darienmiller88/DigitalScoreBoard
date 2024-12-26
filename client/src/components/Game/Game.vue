@@ -47,7 +47,7 @@
         box-shadow: 8px 8px 5px rgba(173, 216, 230, 0.548);
         transition: 0.3s;
 
-        width: fit-content;
+        width: 70vw;
         text-align: center;
         font-size: 19px;
 
@@ -55,6 +55,10 @@
         margin-top: 30px;
         margin-bottom: 30px;
         padding: 30px;
+
+        @media screen and (min-width: 768px) {
+            width: fit-content;
+        }
 
         &:hover{
             box-shadow: 10px 10px 15px var(--main-text-color);
@@ -64,7 +68,7 @@
         .winner{
             display: flex;
             align-items: center;
-            font-size: 40px;
+            font-size: 30px;
             font-style: italic;
             // border: 2px solid var(--main-text-color);
 
