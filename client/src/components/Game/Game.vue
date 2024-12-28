@@ -1,8 +1,10 @@
 <script setup lang="ts">
     import { SavedGame } from '../../types/types';
+    import { useWindowSize } from "@vueuse/core"
     import star from "../../assets/star.png"
 
     const props = defineProps<SavedGame>()
+    const { width } = useWindowSize();
 </script>
 
 <template>
@@ -32,7 +34,8 @@
             </div>
             <div class="average-points">
                 <span>{{ props.average_points }}</span><br>
-                Average Points
+                <span v-if="width < 768">Avg. Points</span>
+                <span v-else>Avgerage Points</span>
             </div>
         </div>
     </div>
@@ -47,17 +50,18 @@
         box-shadow: 8px 8px 5px rgba(173, 216, 230, 0.548);
         transition: 0.3s;
 
-        width: 70vw;
+        width: 80vw;
         text-align: center;
         font-size: 19px;
 
         margin: auto;
         margin-top: 30px;
         margin-bottom: 30px;
-        padding: 30px;
+        padding: 10px;
 
         @media screen and (min-width: 768px) {
             width: fit-content;
+            padding: 30px;
         }
 
         &:hover{
@@ -73,9 +77,13 @@
             // border: 2px solid var(--main-text-color);
 
             img{
-                height: 60px;
+                height: 45px;
                 width: auto;
                 margin: 0px 10px;
+
+                @media screen and (min-width: 768px) {
+                    height: 60px;
+                }
             }
         }
 

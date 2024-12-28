@@ -67,9 +67,9 @@
         setSelectedLocation(selectedValue)
     }
 
-    // const addSavedGame = () => {
+    const addSavedGame = () => {
         
-    // }
+    }
 
     onMounted(async () => {
         try {
@@ -146,7 +146,7 @@
         />
     </div>
     <div class="save-wrapper">
-        <button type="button" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
+        <button type="button" @click="addSavedGame" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
             Save Game
         </button>
     </div>
