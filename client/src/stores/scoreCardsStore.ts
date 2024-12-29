@@ -39,7 +39,22 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         scoreCards.value[index].score = 0
     }
 
-    return { scoreCards, addScoreCard, removeCard, addPoints, minusPoints, resetPoints, setCards }
+    const resetAllPoints = () => {
+        scoreCards.value.forEach(card => {
+            card.score = 0
+        })
+    }
+
+    return { 
+        scoreCards, 
+        addScoreCard, 
+        removeCard, 
+        addPoints, 
+        minusPoints, 
+        resetPoints, 
+        resetAllPoints, 
+        setCards 
+    }
 }, {
     persist: true
 })

@@ -7,7 +7,7 @@
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { storeToRefs } from 'pinia';
     import { scoreBoardApi } from "../../api/api"
-    import { Location } from "../../types/types"
+    import { Location, SavedGame } from "../../types/types"
     import { Icon } from "@iconify/vue"
 
     const username = ref<string>("")
@@ -16,7 +16,7 @@
     let locations: Location[] = []
 
     //Stateful methods
-    const { addScoreCard, setCards } = scoreCardsStore()
+    const { addScoreCard, setCards, resetAllPoints } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
 
     //Stateful variables
@@ -67,8 +67,17 @@
         setSelectedLocation(selectedValue)
     }
 
-    const addSavedGame = () => {
-        
+    const addSavedGame = async () => {
+        try {
+            const savedGame: SavedGame = {
+                id: "",
+                
+            }
+
+            const res = await scoreBoardApi.post("save-game", )
+        } catch (error) {
+            
+        }
     }
 
     onMounted(async () => {
@@ -134,6 +143,12 @@
             Add User To Location
         </button>
     </form>
+
+    <div class="reset-all-points-wrapper">
+        <button type="button" @click="resetAllPoints" >
+            Reset All Points
+        </button>
+    </div>
 
     <div id="user-cards-id" class="user-cards">
         <ScoreCard 
@@ -217,7 +232,6 @@
         border: 2px solid var(--main-bg-color);
     }
 
-
     form{
         text-align: center;
         margin-top: 20px;
@@ -239,7 +253,33 @@
         text-align: center;
         color: red;
         font-size: 25px;
-        // margin: 15px 0px;
+    }
+
+    .reset-all-points-wrapper{
+        text-align: center;
+        margin: 15px;
+
+        button{
+            border-radius: 10px;
+            border: none;
+
+            padding: 10px 18px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: 0.3s;
+            
+            background-color: red;
+            color: aliceblue;
+
+            &:hover{
+                cursor: pointer;
+                background-color: rgba($color: #e30909, $alpha: .8);
+            }
+            
+            &:active{
+                transform: translateY(-5px);
+            }
+        }
     }
 
     .user-cards{
@@ -253,7 +293,6 @@
         overflow-y: scroll;
 
         margin: auto;
-        margin-top: 20px;
         padding: 0px 10px;
 
         @media only screen and (min-width: 768px){
@@ -267,7 +306,6 @@
         color: var(--main-text-color);
         text-align: left;
         width: fit-content;
-
         margin: auto;
 
         label {
@@ -293,7 +331,6 @@
 
     .save-wrapper button, form button{
         border-radius: 10px;
-
         padding: 15px 35px;
 
         transition: 0.5s;
@@ -305,7 +342,7 @@
         background-color: var(--main-text-color-transparent);
     }
 
-    .save-wrapper button:active, form button:active{
+    .save-wrapper button:active, form button:active {
         transform: translateY(-5px);
     }
 </style>

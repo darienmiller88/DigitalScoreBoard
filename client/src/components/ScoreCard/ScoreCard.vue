@@ -24,7 +24,6 @@
             console.log("err:", error);
         }
     }
-
 </script>
 
 <template>

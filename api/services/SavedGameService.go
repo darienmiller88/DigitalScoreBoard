@@ -76,7 +76,7 @@ func AddSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[m
 	savedGamesCollection := database.GetSavedGamesCollections()
 	result, err          := savedGamesCollection.InsertOne(req.Context(), savedGame)
 
-	if err != nil{
+	if err != nil{ 
 		savedGamesResult.Err = err
 		savedGamesResult.StatusCode = http.StatusInternalServerError
 
