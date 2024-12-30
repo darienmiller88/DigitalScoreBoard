@@ -19,7 +19,7 @@
     //Stateful methods
     const { addScoreCard, setCards, resetAllPoints, getWinner } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
-    const { getLocations, addLocation } = locationsStore()
+    const { addLocation } = locationsStore()
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
@@ -89,7 +89,6 @@
             console.log("res: ", res.data)
         } catch (error) {
             console.log("err:", error);
-               
         }
     }
 
@@ -197,7 +196,6 @@
     }
 
     .light-mode{
-        // border: 2px solid var(--main-text-color);
         color: var(--primary-color);
         background-color: var(--main-text-color)
     }
