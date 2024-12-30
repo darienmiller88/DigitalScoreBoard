@@ -2,7 +2,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1715535d-5c1e-46d4-80e2-fba5816cf2ca/deploy-status)](https://app.netlify.com/sites/messengerv2/deploys)
 
 I am volunteering to assist a co-worker in designing them a score board to more efficiently keep track of the 
-score of everyone participating!
+score of everyone participating! So far, the app is able to add users to a preset list of locations, save each game, and view each saved game. I would like to add team functionality sooner or later though.
 
 ### Built With:
 * [Vue](https://vuejs.org/)
