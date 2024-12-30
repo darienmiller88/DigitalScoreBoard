@@ -83,6 +83,16 @@ func AddSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[m
 		return savedGamesResult
 	}
 
+	//Get the id of the location here the game took place.
+	locationId := GetLocation(req, savedGame.Location.LocationName).ResultData.ID
+
+	//Calculate both the total amount of points earned, as well as the average.
+	savedGame.CalcTotalPoints()
+	savedGame.CalcAveragePoints()
+
+	//Finally, attach the id of the location to saved game's location, and the id of the newly created 
+	//saved game.
+	savedGame.Location.ID = locationId
 	savedGame.ID = result.InsertedID.(primitive.ObjectID)
 	savedGamesResult.ResultData = savedGame
 	savedGamesResult.StatusCode = http.StatusOK

@@ -16,7 +16,7 @@
     let locations: Location[] = []
 
     //Stateful methods
-    const { addScoreCard, setCards, resetAllPoints } = scoreCardsStore()
+    const { addScoreCard, setCards, resetAllPoints, getWinner } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
 
     //Stateful variables
@@ -45,8 +45,7 @@
             try {
                 const res = await scoreBoardApi.post(`/add-user-to-location/${selectedLocation.value}`, {"username": username.value})
                 
-                console.log("res", res.data);
-                
+                console.log("res", res.data)
             } catch (error) {
                 console.log("err:", error)
             }
@@ -71,10 +70,20 @@
         try {
             const savedGame: SavedGame = {
                 id: "",
-                
+                winner: getWinner(),
+                location: {
+                    id: "",
+                    location_name: selectedLocation.value,
+                    users: scoreCards.value
+                },
+                total_points: 0,
+                average_points: 0.0,
+                created_at: new Date().toLocaleDateString()
             }
 
-            const res = await scoreBoardApi.post("save-game", )
+            const res = await scoreBoardApi.post("save-game", savedGame)
+
+            console.log("res: ", res.data)
         } catch (error) {
             
         }

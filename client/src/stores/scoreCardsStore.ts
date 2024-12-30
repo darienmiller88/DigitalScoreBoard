@@ -39,6 +39,18 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         scoreCards.value[index].score = 0
     }
 
+    const getWinner = (): Card => { 
+        let highestScore: Card = scoreCards.value[0]
+
+        for (let i = 1; i < scoreCards.value.length; i++) {
+            if (scoreCards.value[i].score > highestScore.score) {
+                highestScore = scoreCards.value[i];
+            }
+        }
+
+        return highestScore
+    }
+
     const resetAllPoints = () => {
         scoreCards.value.forEach(card => {
             card.score = 0
@@ -53,7 +65,8 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         minusPoints, 
         resetPoints, 
         resetAllPoints, 
-        setCards 
+        setCards ,
+        getWinner
     }
 }, {
     persist: true

@@ -26,6 +26,13 @@ func (s *SavedGame) Validate() error{
 	)
 }
 
+func (s *SavedGame) InitCreatedAtAndUpdatedAt(){
+	s.CreatedAt = time.Now()
+	s.UpdatedAt = time.Now()
+
+	s.Location.InitCreatedAtAndUpdatedAt()
+}
+
 func (s *SavedGame) findWinner(field interface{}) error{
 	winner, ok := field.(UserCard)
 
