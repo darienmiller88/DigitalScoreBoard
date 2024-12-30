@@ -10,11 +10,13 @@ score of everyone participating! So far, the app is able to add users to a prese
 * [MongoDB-Atlas](https://www.mongodb.com/cloud/atlas)
 
 ## Home Page Dark Mode
-<img width="956" alt="project-screenshot2" src="https://github.com/user-attachments/assets/4dfa7374-5ba7-423b-96ee-f863f3ffa668">
-![alt text](image.png)
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/f861030a-55f2-4d4a-a763-3ac84d9857ae" />
 
 ## Home Page Light Mode
-<img width="959" alt="project-screenshot3" src="https://github.com/user-attachments/assets/43ded8ed-78e6-44e3-9a13-9a192209423d">
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/6d2d1208-439c-4248-93e5-ad80ebb7d10b" />
+
+## Saved games
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/f28c5dae-dcfb-493c-befd-532216690329" />
 
 ## View api here:
 https://adaptscoreboardapi.fly.dev
