@@ -5,6 +5,7 @@
     import { darkModeStore } from "../../stores/darkModeStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
+    import { locationsStore } from "../../stores/locationsStore"
     import { storeToRefs } from 'pinia';
     import { scoreBoardApi } from "../../api/api"
     import { Location, SavedGame } from "../../types/types"
@@ -18,11 +19,13 @@
     //Stateful methods
     const { addScoreCard, setCards, resetAllPoints, getWinner } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
+    const { getLocations, addLocation } = locationsStore()
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation } = storeToRefs(selectedLocationStore())
+    const { locationsFromLocalStorage } = storeToRefs(locationsStore())
 
     const duplicateErrorMessage = ref<string>("")
 
@@ -85,29 +88,39 @@
 
             console.log("res: ", res.data)
         } catch (error) {
-            
+            console.log("err:", error);
+               
         }
     }
 
     onMounted(async () => {
-        try {
-            const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
-    
-            locations = locationsResponse.data
-            options.value = locationsResponse.data.map(location => {
+        if (locationsFromLocalStorage.value.length) {
+            locations = locationsFromLocalStorage.value
+            options.value = locations.map(location => {
                 return location.location_name
-            })     
-
-            //If there are no current score cards set in local storage, retrieve them from the database
-            if (!scoreCards) {
-                locationsResponse.data.forEach((location, i) => {
-                    if (location.location_name === selectedLocation.value) {
-                        setCards(locationsResponse.data[i].users)
-                    }
-                })
-            }         
-        } catch (error) {
-            console.log("err:", error);
+            })   
+        } else {
+            try {
+                const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
+        
+                locations = locationsResponse.data
+                options.value = locationsResponse.data.map(location => {
+                    //Cache the locations by adding them to local storage.
+                    addLocation(location)
+                    return location.location_name
+                })     
+    
+                //If there are no current score cards set in local storage, retrieve them from the database
+                if (!scoreCards) {
+                    locationsResponse.data.forEach((location, i) => {
+                        if (location.location_name === selectedLocation.value) {
+                            setCards(locationsResponse.data[i].users)
+                        }
+                    })
+                }         
+            } catch (error) {
+                console.log("err:", error);
+            }
         }
         
         isLoading.value = false

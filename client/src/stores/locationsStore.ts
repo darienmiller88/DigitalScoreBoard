@@ -3,13 +3,17 @@ import { ref } from 'vue';
 import { Location } from "../types/types"
 
 export const locationsStore = defineStore("locationsStore", () => {
-    const locations = ref<Location[]>([])
+    const locationsFromLocalStorage = ref<Location[]>([])
 
     const getLocations = (): Location[] =>{
-        return locations.value
+        return locationsFromLocalStorage.value
+    }
+
+    const addLocation = (location: Location) => {
+        locationsFromLocalStorage.value.push(location)
     }
    
-    return { getLocations }
+    return { locationsFromLocalStorage, getLocations, addLocation }
 }, {
     persist: true
 })
