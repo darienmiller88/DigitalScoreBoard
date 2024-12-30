@@ -11,6 +11,7 @@ score of everyone participating! So far, the app is able to add users to a prese
 
 ## Home Page Dark Mode
 <img width="956" alt="project-screenshot2" src="https://github.com/user-attachments/assets/4dfa7374-5ba7-423b-96ee-f863f3ffa668">
+![alt text](image.png)
 
 ## Home Page Light Mode
 <img width="959" alt="project-screenshot3" src="https://github.com/user-attachments/assets/43ded8ed-78e6-44e3-9a13-9a192209423d">
