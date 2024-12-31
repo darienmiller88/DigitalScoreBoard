@@ -1,12 +1,12 @@
 import axios from "axios"
 
-const userApiURL = window.location.hostname === "localhost" 
+const userApiURL = window.location.hostname === "localhost" || "127.0.0.1"
 ? 
 "http://localhost:8080/api/v1/users" 
 :
 "https://adaptscoreboardapi.fly.dev/api/v1/users"
 
-const scoreBoardApiUrl = window.location.hostname === "localhost" 
+const scoreBoardApiUrl = window.location.hostname === "localhost" || "127.0.0.1"
 ?
 "http://localhost:9080/api/v1/scoreboard"
 :

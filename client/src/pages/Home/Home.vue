@@ -84,7 +84,7 @@
                 created_at: new Date().toLocaleDateString()
             }
 
-            const res = await scoreBoardApi.post("save-game", savedGame)
+            const res = await scoreBoardApi.post("/save-game", savedGame)
 
             console.log("res: ", res.data)
         } catch (error) {

@@ -106,18 +106,21 @@ func SaveGame(res http.ResponseWriter, req *http.Request){
 	savedGame := models.SavedGame{}
 
 	if err := json.NewDecoder(req.Body).Decode(&savedGame); err != nil {
+		fmt.Println("err:", err)
 		http.Error(res, err.Error(), http.StatusBadRequest)
 		return
 	}
-	
-	result := services.AddSavedGame(req, savedGame)
 
-	if result.Err != nil {
-		http.Error(res, result.Err.Error(), result.StatusCode)
-		return
-	}
+	fmt.Println("savedGame:", savedGame)
+	// result := services.AddSavedGame(req, savedGame)
 
-	utilities.SendJSON(result.StatusCode, res, result.ResultData)
+
+	// if result.Err != nil {
+	// 	http.Error(res, result.Err.Error(), result.StatusCode)
+	// 	return
+	// }
+
+	// utilities.SendJSON(result.StatusCode, res, result.ResultData)
 }
 
 func AddLocation(res http.ResponseWriter, req *http.Request){
