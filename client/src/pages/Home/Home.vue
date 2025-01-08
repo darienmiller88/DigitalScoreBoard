@@ -122,6 +122,8 @@
             }
         }
         
+        console.log("locations:", locations, "option:", options);
+        
         isLoading.value = false
     })
 </script>

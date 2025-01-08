@@ -23,6 +23,7 @@ func (s *SavedGame) Validate() error{
 	return validation.ValidateStruct(
 		s,
 		validation.Field(s.Winner, validation.By(s.findWinner)),
+		validation.Field(s.Location, validation.By(s.validateLocation)),
 	)
 }
 
@@ -31,6 +32,10 @@ func (s *SavedGame) InitCreatedAtAndUpdatedAt(){
 	s.UpdatedAt = time.Now()
 
 	s.Location.InitCreatedAtAndUpdatedAt()
+}
+
+func (s *SavedGame) validateLocation(field interface{}) error{
+	return s.Location.Validate()
 }
 
 func (s *SavedGame) findWinner(field interface{}) error{
