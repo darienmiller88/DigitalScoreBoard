@@ -19,7 +19,7 @@
     //Stateful methods
     const { addScoreCard, setCards, resetAllPoints, getWinner } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
-    // const { addLocation } = locationsStore()
+    const { addLocation } = locationsStore()
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
@@ -94,10 +94,10 @@
 
     onMounted(async () => {
         if (locationsFromLocalStorage.value.length) {
-            // locations = locationsFromLocalStorage.value
-            // options.value = locations.map(location => {
-            //     return location.location_name
-            // })   
+            locations = locationsFromLocalStorage.value
+            options.value = locations.map(location => {
+                return location.location_name
+            })   
         } else {
             try {
                 const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
@@ -105,7 +105,7 @@
                 locations = locationsResponse.data
                 options.value = locations.map(location => {
                     //Cache the locations by adding them to local storage.
-                    // addLocation(location)
+                    addLocation(location)
                     return location.location_name
                 })     
     
