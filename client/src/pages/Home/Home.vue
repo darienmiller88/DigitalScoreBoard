@@ -123,7 +123,7 @@
         }
         
         console.log("locations:", locations, "option:", options, "host:", window.location.hostname);
-        console.log("api:", scoreBoardApi.getUri);
+        console.log("api:", scoreBoardApi.getUri());
         
         isLoading.value = false
     })
