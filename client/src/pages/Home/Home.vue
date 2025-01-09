@@ -122,7 +122,7 @@
             }
         }
         
-        console.log("locations:", locations, "option:", options);
+        console.log("locations:", locations, "option:", options, "host:", window.location.hostname);
         
         isLoading.value = false
     })
