@@ -1,58 +1,71 @@
 <script setup lang="ts">
     import Game from '../../components/Game/Game.vue';
     import { SavedGame } from "../../types/types"
-    // import { onMounted, ref } from 'vue';
+    import { onMounted } from 'vue';
+    import { scoreBoardApi } from "../../api/api"
+    import { Icon } from "@iconify/vue"
 
-    const games: SavedGame[] = [
-        {
-            id: "1",
-            created_at: new Date().toLocaleString(),
-            average_points: 90,
-            total_points: 5000,
-            winner: {
-                username: "darien",
-                score: 100
-            },
-            location: {
-                id: "1",
-                users: [
-                    {
-                        username: "Reina",
-                        score: 300
-                    },
-                    {
-                        username: "Marth",
-                        score: 400
-                    },
-                ],
-                location_name: "Pelham"
-            }
-        },
-        {
-            id: "3",
-            created_at: new Date().toLocaleString(),
-            average_points: 90,
-            total_points: 5000,
-            winner: {
-                username: "Michelle",
-                score: 400
-            },
-            location: {
-                id: "3",
-                users: [
-                    {
-                        username: "Nijmah",
-                        score: 300
-                    },
-                    {
-                        username: "Michelle",
-                        score: 400
-                    },
-                ],
-                location_name: "Lawrence"
-            }
-        }
+    let games: SavedGame[] = [
+        // {
+        //     id: "1",
+        //     created_at: new Date().toLocaleString(),
+        //     average_points: 90,
+        //     total_points: 5000,
+        //     winner: {
+        //         username: "darien",
+        //         score: 100
+        //     },
+        //     location: {
+        //         id: "1",
+        //         users: [
+        //             {
+        //                 username: "Reina",
+        //                 score: 300
+        //             },
+        //             {
+        //                 username: "Marth",
+        //                 score: 400
+        //             },
+        //         ],
+        //         location_name: "Pelham"
+        //     }
+        // },
+        // {
+        //     id: "3",
+        //     created_at: new Date().toLocaleString(),
+        //     average_points: 90,
+        //     total_points: 5000,
+        //     winner: {
+        //         username: "Michelle",
+        //         score: 400
+        //     },
+        //     location: {
+        //         id: "3",
+        //         users: [
+        //             {
+        //                 username: "Nijmah",
+        //                 score: 300
+        //             },
+        //             {
+        //                 username: "Michelle",
+        //                 score: 400
+        //             },
+        //         ],
+        //         location_name: "Lawrence"
+        //     }
+        // }
     ]
+
+    onMounted(async () => {
+        try {
+            const savedGameResult = await scoreBoardApi.get<SavedGame[]>("/get-saved-games")
+            games = savedGameResult.data
+            
+            console.log("games:", games);
+        } catch (error) {
+            console.log("error:", error);
+        }
+    })
 </script>
 
 <template>
