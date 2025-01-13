@@ -110,6 +110,10 @@
                 return location.location_name
             })     
 
+            if (!selectedLocation.value) {
+                setSelectedLocation(options.value[0])
+            }
+
             //If there are no current score cards set in local storage, retrieve them from the database
             // locationsResponse.data.forEach((location, i) => {
             //     if (location.location_name === selectedLocation.value) {
