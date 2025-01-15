@@ -16,6 +16,12 @@
         </div>
         <div class="score">Score: {{ props.winner.score }}</div>
 
+        <div class="view-players-wrapper">
+            <button>
+                View players
+            </button>
+        </div>
+
         <!--  -->
         <div class="location-date-wrapper">
             <div class="location">Location: 
@@ -91,6 +97,10 @@
             color: rgb(37, 199, 130);
             font-size: 35px;
         }        
+
+        .view-players-wrapper{
+            margin-top: 18px;
+        }
 
         .location-date-wrapper{
             margin-top: 15px;
