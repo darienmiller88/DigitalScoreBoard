@@ -99,11 +99,28 @@
         }        
 
         .view-players-wrapper{
-            margin-top: 18px;
+            margin: 15px;
+            // margin-top: 18px;
+            button{
+                padding: 10px 28px;
+                
+                background-color: var(--main-text-color);
+                color: aliceblue;
+                font-size: 18px;
+
+                border: none;
+                border-radius: 8px;
+                transition: 0.3s;
+
+                &:hover{
+                    cursor: pointer;
+                    padding: 10px 40px;
+                }
+            }
         }
 
         .location-date-wrapper{
-            margin-top: 15px;
+            // margin-top: 15px;
             color: grey;
         }
 

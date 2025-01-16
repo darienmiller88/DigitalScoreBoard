@@ -76,8 +76,7 @@
     <div class="loading-wrapper" v-if="isLoading">
         <Icon icon="line-md:loading-twotone-loop" color="#61dafb" height="60" width="60"/>
     </div>
-    <Icon icon="mdi-light:home" v-else />
-    <div  class="games">
+    <div class="games" v-else>
        <Game 
           v-for="(game, index) in games"
           v-bind="game"
