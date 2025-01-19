@@ -156,7 +156,7 @@
 
     <div class="button-group">
         <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`" >Create new game</button>
-        <span :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`"></span>
+        <span :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
         <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`">Add new user</button>
     </div>
 
@@ -245,8 +245,15 @@
 
         span{
             margin: 0px 15px;
-            border: 1px solid aliceblue;
             transition: 0.3s;
+        }
+
+        .dark-mode-span{
+            border: 1px solid aliceblue;
+        }
+
+        .light-mode-span{
+            border: 1px solid black;
         }
 
         .dark-mode-button-group{
