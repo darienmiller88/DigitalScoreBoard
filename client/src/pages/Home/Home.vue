@@ -10,6 +10,9 @@
     import { scoreBoardApi } from "../../api/api"
     import { Location, SavedGame } from "../../types/types"
     import { Icon } from "@iconify/vue"
+    import { useWindowSize } from "@vueuse/core"
+
+    const { width } = useWindowSize();
 
     const username = ref<string>("")
     const options = ref<string[]>([])
@@ -153,14 +156,14 @@
             </option>
         </select>    
     </div>
-
     <div class="button-group">
         <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`" >Create new game</button>
-        <span :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
+        <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
         <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`">Add new user</button>
-        <span :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
+        <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
         <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`">Create new team game</button>
     </div>
+
 
     <form @submit.prevent="addUser">
         <div class="add-user-wrapper">
@@ -240,10 +243,16 @@
 
     .button-group{
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: stretch;
-
+        
+        padding: 0px 15px;
         margin-top: 30px;
+
+        @media screen and (min-width: 768px) {
+            flex-direction: row;
+        }
 
         span{
             margin: 0px 15px;
@@ -258,16 +267,6 @@
             border: 1px solid black;
         }
 
-        // .dark-mode-button-group{
-        //     color: aliceblue;
-        //     border: 3px solid aliceblue;
-        // }
-
-        // .light-mode-button-group{
-        //     color: black;
-        //     border: 3px solid black;
-        // }        
-
         .active{
             background-color: dodgerblue;
         }
@@ -279,6 +278,8 @@
             border-radius: 8px;
 
             padding: 15px 28px;
+            margin-bottom: 18px;
+
             font-size: 20px;
             transition: 0.3s;
 
@@ -287,10 +288,15 @@
                 4px 0px 8px rgba(100, 100, 100, 0.25), /* Right shadow */
                 -4px 0px 8px rgba(100, 100, 100, 0.25);
 
-            &:hover{
-                cursor: pointer;
-                padding: 15px 38px;
-                font-size: 28px;
+            @media screen and (min-width: 768px) {
+                margin-bottom: 0px;
+
+                &:hover{
+                    cursor: pointer;
+                    padding: 15px 38px;
+                    font-size: 28px;
+                    background-color: rgba(30, 144, 255, 0.7);
+                }
             }
         }
     }
