@@ -158,6 +158,8 @@
         <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`" >Create new game</button>
         <span :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
         <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`">Add new user</button>
+        <span :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
+        <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`">Create new team game</button>
     </div>
 
     <form @submit.prevent="addUser">
@@ -256,26 +258,39 @@
             border: 1px solid black;
         }
 
-        .dark-mode-button-group{
-            color: aliceblue;
-            border: 3px solid aliceblue;
+        // .dark-mode-button-group{
+        //     color: aliceblue;
+        //     border: 3px solid aliceblue;
+        // }
+
+        // .light-mode-button-group{
+        //     color: black;
+        //     border: 3px solid black;
+        // }        
+
+        .active{
+            background-color: dodgerblue;
         }
 
-        .light-mode-button-group{
-            color: black;
-            border: 3px solid black;
-        }        
-
         button{
-            background-color: transparent;
+            background-color: black;
+            color: aliceblue;
+            border: none;
             border-radius: 8px;
 
             padding: 15px 28px;
             font-size: 20px;
             transition: 0.3s;
 
+            box-shadow: 0px 4px 8px rgba(100, 100, 100, 0.25), /* Bottom shadow */
+                0px -4px 8px rgba(100, 100, 100, 0.25), /* Top shadow */
+                4px 0px 8px rgba(100, 100, 100, 0.25), /* Right shadow */
+                -4px 0px 8px rgba(100, 100, 100, 0.25);
+
             &:hover{
                 cursor: pointer;
+                padding: 15px 38px;
+                font-size: 28px;
             }
         }
     }
@@ -300,13 +315,13 @@
         }
     }
 
-    .dark-mode-select, .dark-mode-button-group{
+    .dark-mode-select{
         background-color: var(--main-bg-color);
         color: var(--primary-color);
         border: 2px solid var(--primary-color);
     }
 
-    .light-mode-select, .light-mode-button-group{
+    .light-mode-select{
         background-color: var(--primary-color);
         color: var(--main-bg-color);
         border: 2px solid var(--main-bg-color);
