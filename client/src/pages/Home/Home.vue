@@ -154,6 +154,12 @@
         </select>    
     </div>
 
+    <div class="button-group">
+        <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`" >Create new game</button>
+        <span :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`"></span>
+        <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`">Add new user</button>
+    </div>
+
     <form @submit.prevent="addUser">
         <div class="add-user-wrapper">
             <label for="add-user">Name</label><br>
@@ -230,6 +236,43 @@
         }
     }
 
+    .button-group{
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+
+        margin-top: 30px;
+
+        span{
+            margin: 0px 15px;
+            border: 1px solid aliceblue;
+            transition: 0.3s;
+        }
+
+        .dark-mode-button-group{
+            color: aliceblue;
+            border: 3px solid aliceblue;
+        }
+
+        .light-mode-button-group{
+            color: black;
+            border: 3px solid black;
+        }        
+
+        button{
+            background-color: transparent;
+            border-radius: 8px;
+
+            padding: 15px 28px;
+            font-size: 20px;
+            transition: 0.3s;
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+
     .location{
         text-align: center;
         font-size: 30px;
@@ -250,13 +293,13 @@
         }
     }
 
-    .dark-mode-select{
+    .dark-mode-select, .dark-mode-button-group{
         background-color: var(--main-bg-color);
         color: var(--primary-color);
         border: 2px solid var(--primary-color);
     }
 
-    .light-mode-select{
+    .light-mode-select, .light-mode-button-group{
         background-color: var(--primary-color);
         color: var(--main-bg-color);
         border: 2px solid var(--main-bg-color);
@@ -329,6 +372,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
+            max-height: 75vh;
         }
     }
 
