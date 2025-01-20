@@ -5,6 +5,7 @@
     import { darkModeStore } from "../../stores/darkModeStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
+    import { buttonActiveStore } from '../../stores/buttonActiveStore';
     // import { locationsStore } from "../../stores/locationsStore"
     import { storeToRefs } from 'pinia';
     import { scoreBoardApi } from "../../api/api"
@@ -22,13 +23,14 @@
     //Stateful methods
     const { addScoreCard, setCards, resetAllPoints, getWinner } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
+    const { setButtonActive } = buttonActiveStore()
     // const { addLocation } = locationsStore()
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation } = storeToRefs(selectedLocationStore())
-    // const { locationsFromLocalStorage } = storeToRefs(locationsStore())
+    const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
 
     const duplicateErrorMessage = ref<string>("")
 
@@ -157,11 +159,29 @@
         </select>    
     </div>
     <div class="button-group">
-        <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`" >Create new game</button>
+        <button 
+            :class="`
+                    ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
+                    ${currentButtonGroupState[0] ? 'active' : ''}
+                `" 
+            @click="setButtonActive(0)"
+        >Create new game</button>
         <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
-        <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`">Add new user</button>
+        <button 
+            :class="`
+                ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
+                ${currentButtonGroupState[1] ? 'active' : ''}
+            `"
+            @click="setButtonActive(1)"
+        >Add new user</button>
         <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
-        <button :class="`${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}`">Create new team game</button>
+        <button 
+            :class="`
+                ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
+                ${currentButtonGroupState[2] ? 'active' : ''}
+            `"
+            @click="setButtonActive(2)"
+        >Create new team game</button>
     </div>
 
 
@@ -252,6 +272,7 @@
 
         @media screen and (min-width: 768px) {
             flex-direction: row;
+            padding: 0px;
         }
 
         span{
