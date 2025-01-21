@@ -1,18 +1,20 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
+export enum ButtonState {
+    CREATE_NEW_GAME = 0,
+    ADD_NEW_USER = 1,
+    CREATE_NEW_TEAM_GAME = 2,
+}
+
 export const buttonActiveStore = defineStore("button-active", () => {
-    const currentButtonGroupState = ref<boolean[]>([false, true, false])
+    const currentButtonGroupState = ref<ButtonState>()
 
-    const setButtonActive = (index: number) => {
-        for (let i = 0; i < currentButtonGroupState.value.length; i++) {
-            currentButtonGroupState.value[i] = false
-        }
-
-        currentButtonGroupState.value[index] = true
+    const setButtonActive = (state: ButtonState) => {
+        currentButtonGroupState.value = state
     }
 
-    return { currentButtonGroupState, setButtonActive }
+    return { setButtonActive, currentButtonGroupState  }
 }, {
     persist: true
 })

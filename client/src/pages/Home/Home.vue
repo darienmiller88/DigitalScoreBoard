@@ -5,7 +5,7 @@
     import { darkModeStore } from "../../stores/darkModeStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
-    import { buttonActiveStore } from '../../stores/buttonActiveStore';
+    import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
     // import { locationsStore } from "../../stores/locationsStore"
     import { storeToRefs } from 'pinia';
     import { scoreBoardApi } from "../../api/api"
@@ -161,26 +161,26 @@
     <div class="button-group">
         <button 
             :class="`
-                    ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
-                    ${currentButtonGroupState[0] ? 'active' : ''}
-                `" 
-            @click="setButtonActive(0)"
+                ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
+                ${currentButtonGroupState == ButtonState.CREATE_NEW_GAME ? 'active' : ''}
+            `" 
+            @click="setButtonActive(ButtonState.CREATE_NEW_GAME)"
         >Create new game</button>
         <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
         <button 
             :class="`
                 ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
-                ${currentButtonGroupState[1] ? 'active' : ''}
+                ${currentButtonGroupState == ButtonState.ADD_NEW_USER ? 'active' : ''}
             `"
-            @click="setButtonActive(1)"
+            @click="setButtonActive(ButtonState.ADD_NEW_USER)"
         >Add new user</button>
         <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
         <button 
             :class="`
                 ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
-                ${currentButtonGroupState[2] ? 'active' : ''}
+                ${currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME ? 'active' : ''}
             `"
-            @click="setButtonActive(2)"
+            @click="setButtonActive(ButtonState.CREATE_NEW_TEAM_GAME)"
         >Create new team game</button>
     </div>
 
@@ -211,7 +211,11 @@
         </button>
     </div>
 
-    <div id="user-cards-id" class="user-cards">
+    <!-- Shows Create new game form when "Create new game" button is clicked  -->
+
+
+    <!-- Shows all users when "Add new users" is clicked -->
+    <div id="user-cards-id" class="user-cards" >
         <ScoreCard 
             v-for="(card, index) in scoreCards" 
             :key="card.username" 
@@ -221,6 +225,9 @@
             :score="card.score"
         />
     </div>
+
+    <!-- Shows Create new Team game form when "Create new team game" button is clicked  --> 
+
     <div class="save-wrapper">
         <button type="button" @click="addSavedGame" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
             Save Game
