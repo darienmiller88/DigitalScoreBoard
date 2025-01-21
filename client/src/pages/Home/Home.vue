@@ -322,8 +322,12 @@
                     cursor: pointer;
                     padding: 15px 38px;
                     font-size: 28px;
-                    background-color: rgba(30, 144, 255, 0.3);
+                    // background-color: rgba(30, 144, 255, 0.3);
                 }
+            }
+
+            &:active{
+                transform: translateY(-5px);
             }
         }
     }
