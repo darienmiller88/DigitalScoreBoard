@@ -64,9 +64,11 @@
         }
     }
 
-    const optionClicked = (event: Event) => {
+    const optionClicked = async (event: Event) => {
         const selectedValue = (event.target as HTMLSelectElement).value;
-
+        const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
+        
+        locations = locationsResponse.data
         locations.forEach(location => {
             if(location.location_name === selectedValue){
                 setCards(location.users)                    
