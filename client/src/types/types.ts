@@ -3,6 +3,12 @@ export type Card = {
     score: number
 }
 
+export type Team = {
+    team_name: string
+    players: string[]
+    score: number
+}
+
 export type Location = {
     id:            string
     users:         Card[]

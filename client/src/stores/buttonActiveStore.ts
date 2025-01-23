@@ -8,13 +8,13 @@ export enum ButtonState {
 }
 
 export const buttonActiveStore = defineStore("button-active", () => {
-    const currentButtonGroupState = ref<ButtonState>()
+    const currentButtonGroupState = ref<ButtonState>(ButtonState.ADD_NEW_USER)
 
     const setButtonActive = (state: ButtonState) => {
         currentButtonGroupState.value = state
     }
 
-    return { setButtonActive, currentButtonGroupState  }
+    return { setButtonActive, currentButtonGroupState }
 }, {
     persist: true
 })

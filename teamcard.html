@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="team-scorecard">
+            <!-- Team Name -->
+            <h2>L.R.D.D.V</h2>
+        
+            <!-- Team Actions -->
+            <div class="team-actions">
+              <button @click="">Reset Points</button>
+              <button @click="">Clear Team</button>
+            </div>
+        
+            <!-- Team Points -->
+            <div class="points-control">
+              <button @click="">-</button>
+              <span>0</span>
+              <button @click="">+</button>
+            </div>
+        
+            <!-- Players List -->
+            <div class="players-section">
+              <h3>Players</h3>
+              <ul>
+                <li>
+                  Darien
+                  <button @click="">Remove</button>
+                </li>
+              </ul>
+        
+              <!-- Add Player -->
+              <div class="add-player">
+                <input
+                  placeholder="Enter player name"
+                />
+                <button @click="">Add Player</button>
+              </div>
+            </div>
+          </div>
+    </body>
+</html>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import ScoreCard from '../../components/ScoreCard/ScoreCard.vue';
-    import { Card } from "../../types/types"
+    import TeamCard from '../../components/TeamCard/TeamCard.vue';
+    import { Card, Team } from "../../types/types"
     import { onMounted, ref } from 'vue';
     import { darkModeStore } from "../../stores/darkModeStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
@@ -33,6 +34,28 @@
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
 
     const duplicateErrorMessage = ref<string>("")
+    const teams: Team[] = [
+        {
+            team_name: "L.L.R.D",
+            score: 0,
+            players: []
+        },
+        {
+            team_name: "Vought",
+            score: 0,
+            players: []
+        },
+        {
+            team_name: "Landshark",
+            score: 0,
+            players: []
+        },
+        {
+            team_name: "Trainheads",
+            score: 0,
+            players: []
+        }
+    ]
 
     const addUser = async () => {
         const newCard: Card = {
@@ -212,10 +235,19 @@
     </div>
 
     <!-- Shows Create new game form when "Create new game" button is clicked  -->
+    <div 
+        class="create-new-game"
+        v-if="currentButtonGroupState == ButtonState.CREATE_NEW_GAME"
+    >
 
+    </div>
 
     <!-- Shows all users when "Add new users" is clicked -->
-    <div id="user-cards-id" class="user-cards" >
+    <div 
+        id="user-cards-id" 
+        class="user-cards" 
+        v-if="currentButtonGroupState == ButtonState.ADD_NEW_USER"
+    >
         <ScoreCard 
             v-for="(card, index) in scoreCards" 
             :key="card.username" 
@@ -227,6 +259,16 @@
     </div>
 
     <!-- Shows Create new Team game form when "Create new team game" button is clicked  --> 
+    <div class="team-cards">
+        <TeamCard
+            v-if="currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME"
+            v-for="(team, index) in teams" 
+            :key="index"
+            :team_name="team.team_name"
+            :players="team.players"
+            :score="team.score"
+        />
+    </div>
 
     <div class="save-wrapper">
         <button type="button" @click="addSavedGame" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
@@ -322,7 +364,6 @@
                     cursor: pointer;
                     padding: 15px 38px;
                     font-size: 28px;
-                    // background-color: rgba(30, 144, 255, 0.3);
                 }
             }
 
@@ -411,6 +452,25 @@
             &:active{
                 transform: translateY(-5px);
             }
+        }
+    }
+
+    .team-cards{
+        display: grid;
+        grid-template-columns: 1fr;    
+        margin: auto;
+
+        border: 2px solid white; 
+        width: fit-content; 
+        max-width: 90vw;
+        max-height: 50vh;
+        overflow-y: scroll;
+
+        @media only screen and (min-width: 768px){
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-height: 75vh;
         }
     }
 
