@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import ScoreCard from '../../components/ScoreCard/ScoreCard.vue';
-    import TeamCard from '../../components/TeamCard/TeamCard.vue';
-    import { Card, Team } from "../../types/types"
+    import TeamCards from '../../components/TeamCards/TeamCards.vue';
+    import { Card } from "../../types/types"
     import { onMounted, ref } from 'vue';
     import { darkModeStore } from "../../stores/darkModeStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
@@ -34,28 +34,7 @@
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
 
     const duplicateErrorMessage = ref<string>("")
-    const teams: Team[] = [
-        {
-            team_name: "L.L.R.D",
-            score: 0,
-            players: []
-        },
-        {
-            team_name: "Vought",
-            score: 0,
-            players: []
-        },
-        {
-            team_name: "Landshark",
-            score: 0,
-            players: []
-        },
-        {
-            team_name: "Trainheads",
-            score: 0,
-            players: []
-        }
-    ]
+
 
     const addUser = async () => {
         const newCard: Card = {
@@ -133,8 +112,8 @@
     
             locations = locationsResponse.data
             options.value = locations.map(location => {
-                //Cache the locations by adding them to local storage.
-                // addLocation(location)
+                setCards(location.users)
+
                 return location.location_name
             })     
 
@@ -259,7 +238,8 @@
     </div>
 
     <!-- Shows Create new Team game form when "Create new team game" button is clicked  --> 
-    <div class="team-cards">
+    <TeamCards />
+    <!-- <div class="team-cards">
         <TeamCard
             v-if="currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME"
             v-for="(team, index) in teams" 
@@ -268,7 +248,7 @@
             :players="team.players"
             :score="team.score"
         />
-    </div>
+    </div> -->
 
     <div class="save-wrapper">
         <button type="button" @click="addSavedGame" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
@@ -459,8 +439,9 @@
         display: grid;
         grid-template-columns: 1fr;    
         margin: auto;
+        padding: 10px 10px;
 
-        border: 2px solid white; 
+        // border: 2px solid white; 
         width: fit-content; 
         max-width: 90vw;
         max-height: 50vh;
