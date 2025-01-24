@@ -21,7 +21,7 @@
     let locations: Location[] = []
 
     //Stateful methods
-    const { addScoreCard, setCards, resetAllPoints, getWinner } = scoreCardsStore()
+    const { addScoreCard, setCards, resetAllPoints, getWinner, totalPoints } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
     const { setButtonActive } = buttonActiveStore()
 
@@ -168,7 +168,7 @@
 
 <template>
     <div class="title">Digital Score Board</div>
-    <div :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">Current Location: 
+    <div v-if="currentButtonGroupState !== ButtonState.CREATE_NEW_TEAM_GAME" :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">Current Location: 
         <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
         <select 
             v-else
@@ -236,6 +236,8 @@
         </button>
     </div>
 
+    <div class="total-points">Total Points: {{ totalPoints() }} </div>
+
     <!-- Shows Create new game form when "Create new game" button is clicked  -->
     <div 
         class="create-new-game"
@@ -245,20 +247,6 @@
     </div>
 
     <!-- Shows all users when "Add new users" is clicked -->
-    <!-- <div 
-        id="user-cards-id" 
-        class="user-cards" 
-        v-if="currentButtonGroupState == ButtonState.ADD_NEW_USER"
-    >
-        <ScoreCard 
-            v-for="(card, index) in scoreCards" 
-            :key="card.username" 
-            :username="card.username" 
-            :card-index="index"
-            :point-value="100"
-            :score="card.score"
-        />
-    </div> -->
     <ScoreCards 
         v-if="currentButtonGroupState === ButtonState.ADD_NEW_USER"
     />
@@ -267,17 +255,7 @@
     <TeamCards
         v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME"
     />
-    <!-- <div class="team-cards">
-        <TeamCard
-            v-if="currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME"
-            v-for="(team, index) in teams" 
-            :key="index"
-            :team_name="team.team_name"
-            :players="team.players"
-            :score="team.score"
-        />
-    </div> -->
-
+ 
     <div class="save-wrapper">
         <button type="button" @click="addSavedGame" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
             Save Game
@@ -461,6 +439,12 @@
                 transform: translateY(-5px);
             }
         }
+    }
+
+    .total-points{
+        text-align: center;
+        font-size: 30px;
+        color: var(--main-text-color);
     }
 
     .add-user-wrapper{

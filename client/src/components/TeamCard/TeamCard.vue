@@ -1,7 +1,15 @@
 <script setup lang="ts">
     import { Team } from "../../types/types"
+    // import Modal from "../Modal/Modal.vue";
+    // import AddNewPlayer from "../AddNewPlayer/AddNewPlayer.vue";
     
     const props = defineProps<Team>()
+    // let show = true
+
+    // const handleHideModal = () => {
+    //   console.log('Modal is being hidden!');
+    //   show = false
+    // };
 </script>
 
 <template>
@@ -23,22 +31,29 @@
   
       <!-- Players List -->
       <div class="players-section">
-        <ul>
+        <!-- <ul>
           <li>
             Darien
             <button @click="">Remove</button>
           </li>
-        </ul>
+        </ul> -->
   
         <!-- Add Player -->
         <div class="add-player">
-          <input
+          <!-- <input
             placeholder="Enter player name"
-          />
-          <button @click="">Add Player</button>
+          /> -->
+          <button @click="">Add Player To Team</button>
         </div>
       </div>
     </div>
+
+    <!-- <Modal 
+      :modal-header="'add team member'"
+      :show="show"
+      :modal-content="AddNewPlayer"
+      :onHide="handleHideModal"
+    /> -->
 </template>
   
 <style scoped lang="scss">
@@ -49,7 +64,7 @@
     color: var(--main-text-color);
     
     text-align: center; 
-    // padding: 20px;
+    padding: 10px 10px;
     transition: 0.3s;
 
     border: var(--main-text-color) 2px solid;
@@ -66,16 +81,23 @@
     }
 
     .team-actions{ 
+      margin: 5px 0px;
+
       .clear{
         // border: var(--main-text-color) solid 2px;
-        background-color: rgb(154, 154, 154);
+        background-color: rgb(154, 154, 154);  
         
-        // background-color: #ff0000;
+        &:hover{
+          background-color: rgba(154, 154, 154, 0.7);  
+        }
       }
 
       .reset{
         background-color: rgb(16, 103, 15);
 
+        &:hover{
+          background-color:  rgba(16, 103, 15, 0.8) 
+        }
       }
 
       button{
@@ -86,6 +108,11 @@
 
         padding: 10px 15px;
         margin: 0px 5px;
+        transition: 0.3s;
+
+        &:hover{
+          cursor: pointer;
+        }
       }
     }
 
@@ -94,14 +121,14 @@
       justify-content: center;
       align-items: center;
       gap: 10px;
-      margin: 15px 0;
+      margin: 25px 0;
 
       .minus{
         background-color: #ff0000;
       }
 
       span{
-        color: aliceblue;
+        color: var(--main-text-color);
         font-size: 20px;
       }
 
@@ -110,9 +137,9 @@
       }
     
       button {
-        color: white;
+        color: black;
         border: none;
-        padding: 10px 30px;
+        padding: 10px 25px;
         border-radius: 5px;
         cursor: pointer;
       }
@@ -123,15 +150,6 @@
   
   .players-section {
     margin-top: 20px;
-  }
-  
-  .players-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .players-section li {
-    margin: 5px 0;
   }
   
   .add-player {
@@ -151,6 +169,7 @@
     color: white;
     border: none;
     border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
   }
 </style>

@@ -53,6 +53,10 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         scoreCards.value[index].score = 0
     }
 
+    const totalPoints = (): number => {
+        return scoreCards.value.reduce((accumulator, currentValue) => accumulator + currentValue.score, 0)
+    }
+
     const getWinner = (): Card => { 
         let highestScore: Card = scoreCards.value[0]
 
@@ -80,7 +84,8 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         resetPoints, 
         resetAllPoints, 
         setCards ,
-        getWinner
+        getWinner, 
+        totalPoints
     }
 }, {
     persist: true

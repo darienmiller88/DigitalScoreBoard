@@ -2,16 +2,16 @@
     const props = defineProps<{ 
         modalHeader: string
         show: boolean
-        onHide: () => {}
+        onHide: () => void
         modalContent: any
     }>()
 
     const closeModal = (e: Event) => {
         console.log(e);
         
-        // if(e.target == modalRef){
-        //    props.onHide()
-        // }
+        if(e.target == props.modalContent){
+           props.onHide()
+        }
     }
 </script>
 
