@@ -6,6 +6,20 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
     const scoreCards = ref<Card[]>([])
 
     const setCards = (cards: Card[]) => {
+        // scoreCards.value.forEach(card => {
+        //     if (card.score > 0) {
+                
+        //     }
+        // })
+        // scoreCards.value = [...new Set<Card>([...scoreCards.value, ...cards])]
+       
+
+        // for (let i = 0; i < scoreCards.value.length; i++) {
+        //     if (scoreCards.value[i].score === 0) {
+        //         scoreCards.value[i] = cards[i]
+        //     } 
+            
+        // }
         scoreCards.value = cards
     }
 

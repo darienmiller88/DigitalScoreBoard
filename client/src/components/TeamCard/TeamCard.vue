@@ -10,20 +10,19 @@
   
       <!-- Team Actions -->
       <div class="team-actions">
-        <button @click="">Reset Points</button>
-        <button @click="">Clear Team</button>
+        <button class="reset" @click="">Reset Points</button>
+        <button class="clear" @click="">Clear Team</button>
       </div>
   
       <!-- Points -->
       <div class="points-control">
-        <button @click="">-</button>
+        <button class="minus" @click="">-</button>
         <span>{{ props.score }}</span>
-        <button @click="">+</button>
+        <button class="plus" @click="">+</button>
       </div>
   
       <!-- Players List -->
       <div class="players-section">
-        <h3>Players</h3>
         <ul>
           <li>
             Darien
@@ -66,16 +65,27 @@
       font-size: 35px;
     }
 
-    .team-actions{
+    .team-actions{ 
+      .clear{
+        // border: var(--main-text-color) solid 2px;
+        background-color: rgb(154, 154, 154);
+        
+        // background-color: #ff0000;
+      }
+
+      .reset{
+        background-color: rgb(16, 103, 15);
+
+      }
+
       button{
-        border: var(--main-text-color) 2px solid;
+        border: none;
         border-radius: 10px;
-        background-color: transparent;
-        color: var(--main-text-color);
+        color: aliceblue;
+        font-weight: bold;
 
         padding: 10px 15px;
         margin: 0px 5px;
-
       }
     }
 
@@ -85,12 +95,24 @@
       align-items: center;
       gap: 10px;
       margin: 15px 0;
+
+      .minus{
+        background-color: #ff0000;
+      }
+
+      span{
+        color: aliceblue;
+        font-size: 20px;
+      }
+
+      .plus{
+        background-color: var(--main-text-color);
+      }
     
       button {
-        background-color: #ff0000;
         color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 10px 30px;
         border-radius: 5px;
         cursor: pointer;
       }

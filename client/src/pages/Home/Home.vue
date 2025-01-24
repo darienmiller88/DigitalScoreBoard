@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import ScoreCard from '../../components/ScoreCard/ScoreCard.vue';
+    import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
     import TeamCards from '../../components/TeamCards/TeamCards.vue';
     import { Card } from "../../types/types"
     import { onMounted, ref } from 'vue';
@@ -7,7 +7,6 @@
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
-    // import { locationsStore } from "../../stores/locationsStore"
     import { storeToRefs } from 'pinia';
     import { scoreBoardApi } from "../../api/api"
     import { Location, SavedGame } from "../../types/types"
@@ -25,7 +24,6 @@
     const { addScoreCard, setCards, resetAllPoints, getWinner } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
     const { setButtonActive } = buttonActiveStore()
-    // const { addLocation } = locationsStore()
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
@@ -34,7 +32,6 @@
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
 
     const duplicateErrorMessage = ref<string>("")
-
 
     const addUser = async () => {
         const newCard: Card = {
@@ -116,18 +113,37 @@
         // }
         try {
             const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
-    
+            
             locations = locationsResponse.data
-            options.value = locations.map(location => {
-                setCards(location.users)
-
+            options.value = locations.map(location => {          
                 return location.location_name
             })     
 
+            //If there is no current location set, set it now.
             if (!selectedLocation.value) {
                 setSelectedLocation(options.value[0])
             }
 
+            //Find the target location in the list of locations from the database.
+            const targetLocation = locations.find(location => {
+                return location.location_name === selectedLocation.value
+            })
+
+            //If the scoreCards array is empty, populate it with the users from the location.
+            if (targetLocation && scoreCards.value.length === 0) {
+                setCards(targetLocation.users)
+            }
+
+            //If the list of users from the target location is greater than the list of users currently,
+            //append the difference to the current list of users
+            if (targetLocation && targetLocation.users.length > scoreCards.value.length) {
+                const index = targetLocation.users.length - scoreCards.value.length
+
+                scoreCards.value = [...scoreCards.value, ...targetLocation.users.slice(index)]
+            }
+
+            console.log("target location:", targetLocation, "scoreCards:", scoreCards.value);
+            
             //If there are no current score cards set in local storage, retrieve them from the database
             // locationsResponse.data.forEach((location, i) => {
             //     if (location.location_name === selectedLocation.value) {
@@ -229,7 +245,7 @@
     </div>
 
     <!-- Shows all users when "Add new users" is clicked -->
-    <div 
+    <!-- <div 
         id="user-cards-id" 
         class="user-cards" 
         v-if="currentButtonGroupState == ButtonState.ADD_NEW_USER"
@@ -242,10 +258,15 @@
             :point-value="100"
             :score="card.score"
         />
-    </div>
+    </div> -->
+    <ScoreCards 
+        v-if="currentButtonGroupState === ButtonState.ADD_NEW_USER"
+    />
 
     <!-- Shows Create new Team game form when "Create new team game" button is clicked  --> 
-    <TeamCards />
+    <TeamCards
+        v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME"
+    />
     <!-- <div class="team-cards">
         <TeamCard
             v-if="currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME"
@@ -439,47 +460,6 @@
             &:active{
                 transform: translateY(-5px);
             }
-        }
-    }
-
-    .team-cards{
-        display: grid;
-        grid-template-columns: 1fr;    
-        margin: auto;
-        padding: 10px 10px;
-
-        // border: 2px solid white; 
-        width: fit-content; 
-        max-width: 90vw;
-        max-height: 50vh;
-        overflow-y: scroll;
-
-        @media only screen and (min-width: 768px){
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            max-height: 75vh;
-        }
-    }
-
-    .user-cards{
-        display: grid;
-        grid-template-columns: 1fr;    
-
-        // border: 2px solid white; 
-        width: fit-content; 
-        max-width: 90vw;
-        max-height: 50vh;
-        overflow-y: scroll;
-
-        margin: auto;
-        padding: 0px 10px;
-
-        @media only screen and (min-width: 768px){
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            max-height: 75vh;
         }
     }
 
