@@ -199,14 +199,14 @@
             `"
             @click="setButtonActive(ButtonState.ADD_NEW_USER)"
         >Add new user</button>
-        <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
+        <!-- <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
         <button 
             :class="`
                 ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
                 ${currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME ? 'active' : ''}
             `"
             @click="setButtonActive(ButtonState.CREATE_NEW_TEAM_GAME)"
-        >Create new team game</button>
+        >Create new team game</button> -->
     </div>
 
     <form @submit.prevent="addUser">
