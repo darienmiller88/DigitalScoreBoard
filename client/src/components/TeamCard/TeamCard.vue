@@ -1,20 +1,15 @@
 <script setup lang="ts">
     import { Team } from "../../types/types"
-    // import Modal from "../Modal/Modal.vue";
-    // import AddNewPlayer from "../AddNewPlayer/AddNewPlayer.vue";
     
-    const props = defineProps<Team>()
-    // let show = true
-
-    // const handleHideModal = () => {
-    //   console.log('Modal is being hidden!');
-    //   show = false
-    // };
+    const props = defineProps<{
+      team: Team,
+      openModal: () => void
+    }>()
 </script>
 
 <template>
     <div class="team-scorecard">
-      <div class="team-name">{{ props.team_name }}</div>
+      <div class="team-name">{{ props.team.team_name }}</div>
   
       <!-- Team Actions -->
       <div class="team-actions">
@@ -25,7 +20,7 @@
       <!-- Points -->
       <div class="points-control">
         <button class="minus" @click="">-</button>
-        <span>{{ props.score }}</span>
+        <span>{{ props.team.score }}</span>
         <button class="plus" @click="">+</button>
       </div>
   
@@ -43,17 +38,12 @@
           <!-- <input
             placeholder="Enter player name"
           /> -->
-          <button @click="">Add Player To Team</button>
+          <button @click="openModal">Add Player To Team</button>
         </div>
       </div>
     </div>
 
-    <!-- <Modal 
-      :modal-header="'add team member'"
-      :show="show"
-      :modal-content="AddNewPlayer"
-      :onHide="handleHideModal"
-    /> -->
+    
 </template>
   
 <style scoped lang="scss">

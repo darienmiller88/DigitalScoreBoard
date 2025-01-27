@@ -1,9 +1,13 @@
 <script setup lang="ts">
-    import TeamCard from '../TeamCard/TeamCard.vue';
-    import { storeToRefs } from 'pinia';
-    import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
+    import TeamCard from '../TeamCard/TeamCard.vue'
+    import { ref } from "vue"; 
+    import { storeToRefs } from 'pinia'
+    import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore'
     import { Team } from "../../types/types"
+    import Modal from "../Modal/Modal.vue"
+    import AddNewPlayer from "../AddNewPlayer/AddNewPlayer.vue"
     
+    let show = ref(false)
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const teams: Team[] = [
         {
@@ -35,11 +39,17 @@
             v-if="currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME"
             v-for="(team, index) in teams" 
             :key="index"
-            :team_name="team.team_name"
-            :players="team.players"
-            :score="team.score"
+            :team="team"
+            :open-modal="() => show = true"
         />
     </div>
+
+    <Modal 
+      :modal-header="'Add team member'"
+      :show="show"
+      :modal-content="AddNewPlayer"
+      :onHide="() => show = false"
+    />
 </template>
 
 <style scoped lang="scss">

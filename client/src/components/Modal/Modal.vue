@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    const props = defineProps<{ 
+    let props = defineProps<{ 
         modalHeader: string
         show: boolean
         onHide: () => void
@@ -7,11 +7,12 @@
     }>()
 
     const closeModal = (e: Event) => {
-        console.log(e);
-        
+        // console.log("target", e.target, "modal:", props.modalContent);
+        props.onHide()
         if(e.target == props.modalContent){
-           props.onHide()
         }
+
+        console.log("show:", props.show)
     }
 </script>
 
@@ -21,10 +22,11 @@
             <div class="modal_header">
                 <div class="filler"></div>
                 <div class="header">{{ props.modalHeader }}</div>
-                <span class="close" @click="onHide" role="button" tabindex="0" >&times;</span>
+                <span class="close" @click="closeModal" role="button" tabindex="0" >&times;</span>
             </div>
             <div class="modal_content">
-                {{ props.modalContent }}
+                <component v-bind="modalContent"/>
+                <!-- {{ props.modalContent }} -->
             </div>
             <div class="modal_footer" >
                 <button @click="onHide">Close</button>
