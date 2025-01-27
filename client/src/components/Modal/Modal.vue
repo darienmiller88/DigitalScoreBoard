@@ -11,8 +11,6 @@
         props.onHide()
         if(e.target == props.modalContent){
         }
-
-        console.log("show:", props.show)
     }
 </script>
 
@@ -25,7 +23,7 @@
                 <span class="close" @click="closeModal" role="button" tabindex="0" >&times;</span>
             </div>
             <div class="modal_content">
-                <component v-bind="modalContent"/>
+                <component :is="modalContent" :playerName="'darien'"/>
                 <!-- {{ props.modalContent }} -->
             </div>
             <div class="modal_footer" >
