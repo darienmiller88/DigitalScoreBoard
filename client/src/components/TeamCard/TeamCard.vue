@@ -55,6 +55,7 @@
     
     text-align: center; 
     padding: 10px 10px;
+    margin: 20px 0px; 
     transition: 0.3s;
 
     border: var(--main-text-color) 2px solid;
