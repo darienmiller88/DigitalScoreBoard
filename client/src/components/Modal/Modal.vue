@@ -1,4 +1,6 @@
 <script setup lang="ts">
+    import { ref } from 'vue';
+
     let props = defineProps<{ 
         modalHeader: string
         show: boolean
@@ -6,25 +8,26 @@
         modalContent: any
     }>()
 
+    const modalRef = ref<HTMLElement | null>(null); // Create a ref
+
     const closeModal = (e: Event) => {
-        // console.log("target", e.target, "modal:", props.modalContent);
-        props.onHide()
-        if(e.target == props.modalContent){
+        if(e.target == modalRef.value){
+            props.onHide()       
         }
     }
+
 </script>
 
 <template>
-    <div :class="`modal ${show ? 'slidein' : 'slideout'}`" @click="closeModal" tabindex="0" role="button" >
+    <div :class="`modal ${show ? 'slidein' : 'slideout'}`" ref="modalRef"  @click="closeModal" >
         <div class="modal_body">
             <div class="modal_header">
                 <div class="filler"></div>
-                <div class="header">{{ props.modalHeader }}</div>
-                <span class="close" @click="closeModal" role="button" tabindex="0" >&times;</span>
+                <div class="header">{{ modalHeader }}</div>
+                <span class="close" @click="onHide" role="button" tabindex="0" >&times;</span>
             </div>
             <div class="modal_content">
                 <component :is="modalContent" :playerName="'darien'"/>
-                <!-- {{ props.modalContent }} -->
             </div>
             <div class="modal_footer" >
                 <button @click="onHide">Close</button>
