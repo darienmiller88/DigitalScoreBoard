@@ -175,7 +175,7 @@
 <template>
     <div class="title">Digital Score Board</div>
     <div :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
-        <div v-if="currentButtonGroupState == ButtonState.ADD_NEW_USER">
+        <div class="current-location" v-if="currentButtonGroupState == ButtonState.ADD_NEW_USER">
             Current Location: 
         </div> 
         <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
@@ -308,6 +308,10 @@
             font-size: 60px;
             margin: 10px 0px;
         }
+    }
+
+    .current-location{
+        margin-right: 10px;
     }
 
     .button-group{

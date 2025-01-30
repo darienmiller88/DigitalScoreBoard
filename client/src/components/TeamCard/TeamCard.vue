@@ -97,6 +97,11 @@
         border-radius: 10px;
         color: aliceblue;
         font-weight: bold;
+        font-size: 18px;
+
+        @media only screen and (min-width: 992px){
+          font-size: 15px;   
+        }
 
         padding: 10px 15px;
         margin: 0px 5px;
@@ -136,8 +141,6 @@
         cursor: pointer;
       }
     }
-
-
   }
   
   .players-section {
@@ -146,23 +149,24 @@
   
   .add-player {
     margin-top: 15px;
+    
+    button {
+      padding: 8px 20px;
+      background-color: #00bfff;
+      color: white;
+
+      border: none;
+      border-radius: 5px;
+
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+
+      @media only screen and (min-width: 992px){
+        font-size: 15px;   
+      }
+    }
   }
   
-  .add-player input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-  }
-  
-  .add-player button {
-    padding: 8px 15px;
-    background-color: #00bfff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-  }
 </style>
   

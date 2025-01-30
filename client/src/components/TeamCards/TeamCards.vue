@@ -61,7 +61,7 @@
 
         // border: 2px solid white; 
         width: fit-content; 
-        max-width: 90vw;
+        max-width: 95vw;
         max-height: 50vh;
         overflow-y: scroll;
 
