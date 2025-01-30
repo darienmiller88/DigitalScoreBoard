@@ -72,10 +72,11 @@
     }
 
     .team-actions{ 
+      display: flex;
+      justify-content: center;
       margin: 5px 0px;
 
       .clear{
-        // border: var(--main-text-color) solid 2px;
         background-color: rgb(154, 154, 154);  
         
         &:hover{

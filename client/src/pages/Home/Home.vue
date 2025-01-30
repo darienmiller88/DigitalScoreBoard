@@ -175,9 +175,9 @@
 <template>
     <div class="title">Digital Score Board</div>
     <div :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
-        <span v-if="currentButtonGroupState == ButtonState.ADD_NEW_USER">
+        <div v-if="currentButtonGroupState == ButtonState.ADD_NEW_USER">
             Current Location: 
-        </span> 
+        </div> 
         <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
         <select 
             v-else
@@ -375,9 +375,13 @@
     }
 
     .location{
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        text-align: center;
+
+        @media screen and (min-width: 768px) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         font-size: 30px;
         transition: 0.5s;
