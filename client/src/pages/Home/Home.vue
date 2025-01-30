@@ -174,7 +174,10 @@
 
 <template>
     <div class="title">Digital Score Board</div>
-    <div v-if="currentButtonGroupState !== ButtonState.CREATE_NEW_TEAM_GAME" :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">Current Location: 
+    <div :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
+        <span v-if="currentButtonGroupState == ButtonState.ADD_NEW_USER">
+            Current Location: 
+        </span> 
         <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
         <select 
             v-else
@@ -187,7 +190,11 @@
             <option v-for="(option, index) in options" :value="option" :key="index">
                 {{ option }}
             </option>
-        </select>    
+        </select>   
+        <button 
+            v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME" 
+            class="add-team-button"
+        >Add Team</button> 
     </div>
     <div class="button-group">
         <button 
@@ -215,7 +222,8 @@
         >Create new team game</button>
     </div>
 
-    <form @submit.prevent="addUser">
+    <!-- Only show this when the "Create new game" or "Add new user" is clicked -->
+    <form v-if="currentButtonGroupState !== ButtonState.CREATE_NEW_TEAM_GAME" @submit.prevent="addUser">
         <div class="add-user-wrapper">
             <label for="add-user">Name</label><br>
             <input 
@@ -231,6 +239,7 @@
             >
             <div class="error">{{ duplicateErrorMessage }}</div>
         </div>
+
         <button :class="`form-element ${isDarkMode ? 'dark-mode' : 'light-mode'}`" type="submit">
             Add User To Location
         </button>
@@ -366,7 +375,10 @@
     }
 
     .location{
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         font-size: 30px;
         transition: 0.5s;
 
@@ -382,6 +394,26 @@
 
         @media screen and (min-width: 768px) {
             font-size: 28px;
+        }
+    }
+
+    .add-team-button{
+        padding: 10px 25px;
+        margin: 0px 10px;
+
+        border: none;
+        border-radius: 5px;
+
+        background-color: dodgerblue;
+        color: aliceblue;
+        font-size: 20px;
+        transition: 0.3s;
+
+        @media screen and (min-width: 768px) {
+            &:hover{
+                cursor: pointer;
+                font-size: 26px;
+            }
         }
     }
 

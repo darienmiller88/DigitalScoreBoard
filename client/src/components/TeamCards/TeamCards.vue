@@ -11,22 +11,22 @@
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const teams: Team[] = [
         {
-            team_name: "L.L.R.D",
+            team_name: "Lawrence",
             score: 0,
             players: []
         },
         {
-            team_name: "Vought",
+            team_name: "Pelham Bay",
             score: 0,
             players: []
         },
         {
-            team_name: "Landshark",
+            team_name: "Elmwood",
             score: 0,
             players: []
         },
         {
-            team_name: "Trainheads",
+            team_name: "Flushing",
             score: 0,
             players: []
         }

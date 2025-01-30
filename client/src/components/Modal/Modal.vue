@@ -8,14 +8,13 @@
         modalContent: any
     }>()
 
-    const modalRef = ref<HTMLElement | null>(null); // Create a ref
+    const modalRef = ref<HTMLElement | null>(null);
 
     const closeModal = (e: Event) => {
         if(e.target == modalRef.value){
             props.onHide()       
         }
     }
-
 </script>
 
 <template>
