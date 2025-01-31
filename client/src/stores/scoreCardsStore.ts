@@ -44,9 +44,9 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
     const minusPoints = (index: number, amountToAdd: number) => {
         scoreCards.value[index].score -= amountToAdd
 
-        if (scoreCards.value[index].score < 0) {
-            scoreCards.value[index].score = 0
-        }
+        // if (scoreCards.value[index].score < 0) {
+        //     scoreCards.value[index].score = 0
+        // }
     }
 
     const resetPoints = (index: number) => {

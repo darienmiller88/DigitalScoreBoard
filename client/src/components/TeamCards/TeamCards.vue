@@ -10,26 +10,26 @@
     let show = ref(false)
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const teams: Team[] = [
-        {
-            team_name: "Lawrence",
-            score: 0,
-            players: []
-        },
-        {
-            team_name: "Pelham Bay",
-            score: 0,
-            players: []
-        },
-        {
-            team_name: "Elmwood",
-            score: 0,
-            players: []
-        },
-        {
-            team_name: "Flushing",
-            score: 0,
-            players: []
-        }
+        // {
+        //     team_name: "Lawrence",
+        //     score: 0,
+        //     players: []
+        // },
+        // {
+        //     team_name: "Pelham Bay",
+        //     score: 0,
+        //     players: []
+        // },
+        // {
+        //     team_name: "Elmwood",
+        //     score: 0,
+        //     players: []
+        // },
+        // {
+        //     team_name: "Flushing",
+        //     score: 0,
+        //     players: []
+        // }
     ]
 </script>
 
