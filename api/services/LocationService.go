@@ -67,6 +67,7 @@ func UpdateUsersForLocation(req *http.Request, mongoUpdateOperator string, locat
 		return updateUserResult
 	}
 	
+
 	filter := bson.M{"location_name": locationName}
 	update := bson.M{mongoUpdateOperator: bson.M{"users": bson.M{"name": username}}}
  	updateOneResult, err := database.GetLocationsCollection().UpdateOne(req.Context(), filter, update)

@@ -148,6 +148,10 @@ func AddLocation(res http.ResponseWriter, req *http.Request){
 	utilities.SendJSON(http.StatusOK, res, location)
 }
 
+func UpdateScore(res http.ResponseWriter, req *http.Request){
+
+}
+
 func AddUserToLocation(res http.ResponseWriter, req *http.Request){
 	modifyUserInLocation(res, req, PUSH)
 }

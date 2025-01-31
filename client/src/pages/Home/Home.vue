@@ -125,30 +125,32 @@
             }
 
             //Find the target location in the list of locations from the database.
-            const targetLocation = locations.find(location => {
-                return location.location_name === selectedLocation.value
-            })
+            // const targetLocation = locations.find(location => {
+            //     return location.location_name === selectedLocation.value
+            // })
 
-            //If the scoreCards array is empty, populate it with the users from the location.
-            if (targetLocation && scoreCards.value.length === 0) {
-                setCards(targetLocation.users)
-            }
+            
 
-            //If the list of users from the target location is greater than the list of users currently,
-            //append the difference to the current list of users
-            if (targetLocation && targetLocation.users.length > scoreCards.value.length) {
-                const index = targetLocation.users.length - scoreCards.value.length
+            // //If the scoreCards array is empty, populate it with the users from the location.
+            // if (targetLocation && scoreCards.value.length === 0) {
+            //     setCards(targetLocation.users)
+            // }
 
-                scoreCards.value = [...scoreCards.value, ...targetLocation.users.slice(index)]
-            }
+            // //If the list of users from the target location is greater than the list of users currently,
+            // //append the difference to the current list of users
+            // if (targetLocation && targetLocation.users.length > scoreCards.value.length) {
+            //     const index = targetLocation.users.length - scoreCards.value.length
 
-            //If the list of users from the target location is greater than the list of users currently,
-            //append the difference to the current list of users
-            if (targetLocation && targetLocation.users.length <= scoreCards.value.length) {
-                setCards(targetLocation.users)                
-            }
+            //     scoreCards.value = [...scoreCards.value, ...targetLocation.users.slice(index)]
+            // }
 
-            console.log("target location:", targetLocation, "scoreCards:", scoreCards.value);
+            // //If the list of users from the target location is greater than the list of users currently,
+            // //append the difference to the current list of users
+            // if (targetLocation && targetLocation.users.length <= scoreCards.value.length) {
+            //     setCards(targetLocation.users)                
+            // }
+
+            // console.log("target location:", targetLocation, "scoreCards:", scoreCards.value);
             
             //If there are no current score cards set in local storage, retrieve them from the database
             // locationsResponse.data.forEach((location, i) => {
