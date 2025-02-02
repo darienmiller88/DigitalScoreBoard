@@ -2,7 +2,7 @@
     import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
     import TeamCards from '../../components/TeamCards/TeamCards.vue';
     import GameButtonGroup from '../../components/GameButtonGroup/GameButtonGroup.vue';
-    import { Card } from "../../types/types"
+    import AddUserToLocation from '../../components/AddUserToLocation/AddUserToLocation.vue';
     import { onMounted, ref } from 'vue';
     import { darkModeStore } from "../../stores/darkModeStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
@@ -13,13 +13,12 @@
     import { Location, SavedGame } from "../../types/types"
     import { Icon } from "@iconify/vue"
 
-    const username = ref<string>("")
     const options = ref<string[]>([])
     const isLoading = ref<boolean>(true)
     let locations: Location[] = []
 
     //Stateful methods
-    const { addScoreCard, setCards, resetAllPoints, getWinner, totalPoints } = scoreCardsStore()
+    const {  setCards, resetAllPoints, getWinner, totalPoints } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
 
     //Stateful variables
@@ -27,36 +26,6 @@
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation } = storeToRefs(selectedLocationStore())
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
-
-    const duplicateErrorMessage = ref<string>("")
-
-    const addUser = async () => {
-        const newCard: Card = {
-            username: username.value,
-            score: 0
-        }
-
-        if (scoreCards.value.some(card => card.username == newCard.username)) {
-            duplicateErrorMessage.value = `${newCard.username} already exists! Please select another username.`
-            console.log("duplicate user:", duplicateErrorMessage);
-            
-            setTimeout(() => {
-                duplicateErrorMessage.value = ""
-            }, 3000);
-        }else{
-            addScoreCard(newCard)
-
-            try {
-                const res = await scoreBoardApi.post(`/add-user-to-location/${selectedLocation.value}`, {"username": username.value})
-                
-                console.log("res", res.data)
-            } catch (error) {
-                console.log("err:", error)
-            }
-
-            username.value = ""
-        }
-    }
 
     const optionClicked = async (event: Event) => {
         const selectedValue = (event.target as HTMLSelectElement).value;
@@ -200,27 +169,7 @@
     <GameButtonGroup />
 
     <!-- Only show this when the "Create new game" or "Add new user" is clicked -->
-    <form v-if="currentButtonGroupState !== ButtonState.CREATE_NEW_TEAM_GAME" @submit.prevent="addUser">
-        <div class="add-user-wrapper">
-            <label for="add-user">Name</label><br>
-            <input 
-                :class="`form-element ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`"
-                id="add-user" 
-                v-model="username" 
-                minlength="1"
-                maxlength="16" 
-                type="text" 
-                name="addUser" 
-                placeholder="Add user to game" 
-                required
-            >
-            <div class="error">{{ duplicateErrorMessage }}</div>
-        </div>
-
-        <button :class="`form-element ${isDarkMode ? 'dark-mode' : 'light-mode'}`" type="submit">
-            Add User To Location
-        </button>
-    </form>
+    <AddUserToLocation />
 
     <div class="reset-all-points-wrapper">
         <button type="button" @click="resetAllPoints" >
@@ -500,22 +449,26 @@
     .save-wrapper{
         text-align: center;
         margin: 40px;
+
+        button{
+            border-radius: 10px;
+            padding: 15px 35px;
+    
+            transition: 0.5s;
+            font-size: 25px;
+
+            &:hover{
+                cursor: pointer;
+                background-color: var(--main-text-color-transparent);
+            }
+
+            &:active {
+                transform: translateY(-5px);
+            }
+        }
     }
 
-    .save-wrapper button, form button{
-        border-radius: 10px;
-        padding: 15px 35px;
-
-        transition: 0.5s;
-        font-size: 25px;
-    }
-
-    .save-wrapper button:hover, form button:hover{
-        cursor: pointer;
-        background-color: var(--main-text-color-transparent);
-    }
-
-    .save-wrapper button:active, form button:active {
+    .save-wrapper button:active {
         transform: translateY(-5px);
     }
 </style>
