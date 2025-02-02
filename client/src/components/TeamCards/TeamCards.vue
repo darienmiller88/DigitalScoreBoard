@@ -7,7 +7,8 @@
     import Modal from "../Modal/Modal.vue"
     import AddNewPlayer from "../AddNewPlayer/AddNewPlayer.vue"
     
-    let show = ref(false)
+    let showAddTeamPlayerModal = ref(false)
+    let showTeamPlayersModal = ref(false)
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { teamCards } = storeToRefs(teamCardsStore())
 
@@ -23,15 +24,22 @@
             :score="team.score"
             :point-value="100"
             :team="team"
-            :open-modal="() => show = true"
+            :openAddTeamPlayerModal="() => showAddTeamPlayerModal = true"
         />
     </div>
 
     <Modal 
       :modal-header="'Add team member'"
-      :show="show"
+      :show="showAddTeamPlayerModal"
       :modal-content="AddNewPlayer"
-      :onHide="() => show = false"
+      :onHide="() => showAddTeamPlayerModal = false"
+    />
+
+    <Modal 
+      :modal-header="'View team players'"
+      :show="showTeamPlayersModal"
+      :modal-content="AddNewPlayer"
+      :onHide="() => showTeamPlayersModal = false"
     />
 </template>
 

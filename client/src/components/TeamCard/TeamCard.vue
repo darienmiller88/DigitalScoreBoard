@@ -6,7 +6,7 @@
       team: Team
       cardIndex: number
       pointValue: number
-      openModal: () => void
+      openAddTeamPlayerModal: () => void
     }>()
 
     const { addPoints, minusPoints, resetPoints } = teamCardsStore()
@@ -37,13 +37,19 @@
             <button @click="">Remove</button>
           </li>
         </ul> -->
+
+        <div class="view-players">
+          <button>
+            View Players
+          </button>
+        </div>
   
         <!-- Add Player -->
         <div class="add-player">
           <!-- <input
             placeholder="Enter player name"
           /> -->
-          <button @click="openModal">Add Player To Team</button>
+          <button @click="openAddTeamPlayerModal">Add Player To Team</button>
         </div>
       </div>
     </div>
@@ -147,9 +153,27 @@
       }
     }
   }
-  
+
   .players-section {
     margin-top: 20px;
+
+     .view-players{
+        button{
+          border: 2px solid var(--main-text-color);
+          border-radius: 5px;
+          padding: 10px 22px;
+
+          background-color: transparent;
+          color: var(--main-text-color);
+          transition: 0.3s;
+
+          &:hover{
+            cursor: pointer;
+            font-size: 17px;
+          }
+        }
+      }
+  
   }
   
   .add-player {
