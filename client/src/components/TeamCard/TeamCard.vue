@@ -1,10 +1,15 @@
 <script setup lang="ts">
+    import { teamCardsStore } from "../../stores/teamCardsStore";
     import { Team } from "../../types/types"
     
     const props = defineProps<{
-      team: Team,
+      team: Team
+      cardIndex: number
+      pointValue: number
       openModal: () => void
     }>()
+
+    const { addPoints, minusPoints, resetPoints } = teamCardsStore()
 </script>
 
 <template>
@@ -13,15 +18,15 @@
   
       <!-- Team Actions -->
       <div class="team-actions">
-        <button class="reset" @click="">Reset Points</button>
+        <button class="reset" @click="() => resetPoints(props.cardIndex)">Reset Points</button>
         <button class="clear" @click="">Clear Team</button>
       </div>
   
       <!-- Points -->
       <div class="points-control">
-        <button class="minus" @click="">-</button>
+        <button class="minus" @click="() => minusPoints(props.cardIndex, props.pointValue)">-</button>
         <span>{{ props.team.score }}</span>
-        <button class="plus" @click="">+</button>
+        <button class="plus" @click="() => addPoints(props.cardIndex, props.pointValue)">+</button>
       </div>
   
       <!-- Players List -->

@@ -3,42 +3,25 @@
     import { ref } from "vue"; 
     import { storeToRefs } from 'pinia'
     import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore'
-    import { Team } from "../../types/types"
+    import { teamCardsStore } from "../../stores/teamCardsStore"
     import Modal from "../Modal/Modal.vue"
     import AddNewPlayer from "../AddNewPlayer/AddNewPlayer.vue"
     
     let show = ref(false)
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
-    const teams: Team[] = [
-        // {
-        //     team_name: "Lawrence",
-        //     score: 0,
-        //     players: []
-        // },
-        // {
-        //     team_name: "Pelham Bay",
-        //     score: 0,
-        //     players: []
-        // },
-        // {
-        //     team_name: "Elmwood",
-        //     score: 0,
-        //     players: []
-        // },
-        // {
-        //     team_name: "Flushing",
-        //     score: 0,
-        //     players: []
-        // }
-    ]
+    const { teamCards } = storeToRefs(teamCardsStore())
+
 </script>
 
 <template>
     <div class="team-cards">
         <TeamCard
             v-if="currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME"
-            v-for="(team, index) in teams" 
+            v-for="(team, index) in teamCards" 
             :key="index"
+            :card-index="index"
+            :score="team.score"
+            :point-value="100"
             :team="team"
             :open-modal="() => show = true"
         />
