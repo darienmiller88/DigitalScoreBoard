@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
     import TeamCards from '../../components/TeamCards/TeamCards.vue';
+    import GameButtonGroup from '../../components/GameButtonGroup/GameButtonGroup.vue';
     import { Card } from "../../types/types"
     import { onMounted, ref } from 'vue';
     import { darkModeStore } from "../../stores/darkModeStore"
@@ -11,9 +12,6 @@
     import { scoreBoardApi } from "../../api/api"
     import { Location, SavedGame } from "../../types/types"
     import { Icon } from "@iconify/vue"
-    import { useWindowSize } from "@vueuse/core"
-
-    const { width } = useWindowSize();
 
     const username = ref<string>("")
     const options = ref<string[]>([])
@@ -23,7 +21,6 @@
     //Stateful methods
     const { addScoreCard, setCards, resetAllPoints, getWinner, totalPoints } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
-    const { setButtonActive } = buttonActiveStore()
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
@@ -198,31 +195,9 @@
             class="add-team-button"
         >Add Team</button> 
     </div>
-    <div class="button-group">
-        <button 
-            :class="`
-                ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
-                ${currentButtonGroupState == ButtonState.CREATE_NEW_GAME ? 'active' : ''}
-            `" 
-            @click="setButtonActive(ButtonState.CREATE_NEW_GAME)"
-        >Create new game</button>
-        <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
-        <button 
-            :class="`
-                ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
-                ${currentButtonGroupState == ButtonState.ADD_NEW_USER ? 'active' : ''}
-            `"
-            @click="setButtonActive(ButtonState.ADD_NEW_USER)"
-        >Add new user</button>
-        <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
-        <button 
-            :class="`
-                ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
-                ${currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME ? 'active' : ''}
-            `"
-            @click="setButtonActive(ButtonState.CREATE_NEW_TEAM_GAME)"
-        >Create new team game</button>
-    </div>
+
+    <!-- Contains the three buttons needed to select the options. -->
+    <GameButtonGroup />
 
     <!-- Only show this when the "Create new game" or "Add new user" is clicked -->
     <form v-if="currentButtonGroupState !== ButtonState.CREATE_NEW_TEAM_GAME" @submit.prevent="addUser">
@@ -253,7 +228,12 @@
         </button>
     </div>
 
-    <div class="total-points">Total Points: {{ totalPoints() }} </div>
+    <div 
+        v-if="currentButtonGroupState === ButtonState.ADD_NEW_USER" 
+        class="total-points"
+    >
+        Total Points: {{ totalPoints() }} 
+    </div>
 
     <!-- Shows Create new game form when "Create new game" button is clicked  -->
     <div 

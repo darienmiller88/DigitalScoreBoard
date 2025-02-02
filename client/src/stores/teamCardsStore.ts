@@ -64,6 +64,7 @@ export const teamCardsStore = defineStore("teamCards", () => {
         })
     }
 
+
     return { 
         teamCards, 
         addTeamCard, 
