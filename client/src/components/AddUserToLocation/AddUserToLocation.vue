@@ -86,6 +86,14 @@
         background-color: var(--main-text-color)
     }
 
+    .dark-mode-text{
+        color: var(--primary-color);
+    }
+
+    .light-mode-text{
+        color: var(--main-bg-color);
+    }
+
     form{
         text-align: center;
         margin-top: 20px;
@@ -117,6 +125,12 @@
                 border-radius: 5px;
 
                 background-color: transparent;
+            }
+
+            .error{
+                text-align: center;
+                color: red;
+                font-size: 25px;
             }
         }
 
