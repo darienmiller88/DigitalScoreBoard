@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { darkModeStore } from "../../stores/darkModeStore"
-    import { onMounted, ref } from 'vue';
+    import { onMounted, ref,  } from 'vue';
     import { buttonActiveStore, ButtonState} from "../../stores/buttonActiveStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
@@ -12,6 +12,7 @@
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
+    const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation } = storeToRefs(selectedLocationStore())
 
     //Stateful methods
@@ -20,6 +21,7 @@
 
     const isLoading = ref<boolean>(true)
     const options = ref<string[]>([])
+    const selectedLocationName = ref<string>((selectedLocation.value) ? selectedLocation.value.location_name : '')
     let locations: Location[] = []
 
     const optionClicked = async (event: Event) => {
@@ -28,17 +30,19 @@
         try {
             const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
             
-            locations = locationsResponse.data
-            locations.forEach(location => {
+            // locationsResponse.data
+            locationsResponse.data.forEach(location => {
                 if(location.location_name === selectedValue){
-                    setCards(location.users)                    
+                    setCards(location.users)     
+                    setSelectedLocation(location)               
                 }
             })
+
+            console.log("options:", options.value);
+            
         } catch (error) {
             console.log("err in clicking option:", error);
         }
-
-        setSelectedLocation(selectedValue)
     }
 
     onMounted(async () => {
@@ -52,7 +56,13 @@
 
             //If there is no current location set, set it now.
             if (!selectedLocation.value) {
-                setSelectedLocation(options.value[0])
+                //options.value[0]
+                setSelectedLocation(locations[0])
+            }
+
+            //If there are no current cards set, and there is a selectedLocation, set the card for the location.
+            if (!scoreCards.value && selectedLocation.value) {
+                setCards(selectedLocation.value.users)
             }
         } catch (error) {
             console.log("err:", error)
@@ -70,7 +80,7 @@
         <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
         <select 
             v-else
-            v-model="selectedLocation"
+            v-model="selectedLocationName"
             name="locations" 
             id="locations" 
             :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`" 

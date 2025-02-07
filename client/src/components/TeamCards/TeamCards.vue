@@ -65,6 +65,13 @@
 
         @media only screen and (min-width: 992px){
             display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            max-height: 75vh;
+        }
+
+        @media only screen and (min-width: 1400px){
+            display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
             max-height: 75vh;

@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { Location } from "../types/types"
 
 export const selectedLocationStore = defineStore("selectedLocation", () => {
-    const selectedLocation = ref<string>("")
+    const selectedLocation = ref<Location>()
 
-    const setSelectedLocation = (location: string) => {
+    const setSelectedLocation = (location: Location) => {
         selectedLocation.value = location
     }
 

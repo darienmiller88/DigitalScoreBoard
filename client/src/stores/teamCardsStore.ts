@@ -5,12 +5,12 @@ import { Team } from "../types/types"
 export const teamCardsStore = defineStore("teamCards", () => {
     const teamCards = ref<Team[]>([
         {
-            team_name: "Flushing",
+            team_name: "5030 Broadway",
             score: 0,
             players: []
         },
         {
-            team_name: "Port Richmond",
+            team_name: "W 154th Street",
             score: 0,
             players: []
         }

@@ -11,14 +11,12 @@
     import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
     import { storeToRefs } from 'pinia';
     import { scoreBoardApi } from "../../api/api"
-    import { Location, SavedGame } from "../../types/types"
+    import { SavedGame } from "../../types/types"
 
-    const options = ref<string[]>([])
     const isLoading = ref<boolean>(true)
-    let locations: Location[] = []
 
     //Stateful methods
-    const {  resetAllPoints, getWinner, totalPoints } = scoreCardsStore()
+    const { resetAllPoints, getWinner, totalPoints } = scoreCardsStore()
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
@@ -28,22 +26,27 @@
 
     const addSavedGame = async () => {
         try {
-            const savedGame: SavedGame = {
-                id: "",
-                winner: getWinner(),
-                location: {
+
+            //If the selectedLocation object is NOT NULL, create a new saved game.
+            if (selectedLocation.value) {
+                const savedGame: SavedGame = {
                     id: "",
-                    location_name: selectedLocation.value,
-                    users: scoreCards.value
-                },
-                total_points: 0,
-                average_points: 0.0,
-                created_at: new Date().toLocaleDateString()
+                    winner: getWinner(),
+                    location: {
+                        id: "",
+                        location_name: selectedLocation.value?.location_name,
+                        users: scoreCards.value
+                    },
+                    total_points: 0,
+                    average_points: 0.0,
+                    created_at: new Date().toLocaleDateString()
+                }
+    
+                const res = await scoreBoardApi.post("/save-game", savedGame)
+    
+                console.log("res: ", res.data)
             }
 
-            const res = await scoreBoardApi.post("/save-game", savedGame)
-
-            console.log("res: ", res.data)
         } catch (error) {
             console.log("err:", error);
         }
@@ -101,8 +104,8 @@
             console.log("err:", error);
         }
         
-        console.log("locations:", locations, "option:", options, "host:", window.location.hostname);
-        console.log("api:", scoreBoardApi.getUri());
+        // console.log("locations:", locations, "option:", options, "host:", window.location.hostname);
+        // console.log("api:", scoreBoardApi.getUri());
         
         isLoading.value = false
     })
