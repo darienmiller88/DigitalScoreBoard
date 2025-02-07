@@ -48,12 +48,12 @@
         display: grid;
         grid-template-columns: 1fr;    
         margin: auto;
-        padding: 10px 10px;
+        padding: 0px 10px;
 
         // border: 2px solid white; 
         width: fit-content; 
         max-width: 95vw;
-        max-height: 50vh;
+        max-height: 40vh;
         overflow-y: scroll;
 
         @media only screen and (min-width: 768px){
