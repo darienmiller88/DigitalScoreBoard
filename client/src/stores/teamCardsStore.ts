@@ -13,7 +13,12 @@ export const teamCardsStore = defineStore("teamCards", () => {
             team_name: "W 154th Street",
             score: 0,
             players: []
-        }
+        },
+        {
+            team_name: "Elmwood",
+            score: 0,
+            players: []
+        },
     ])
 
     const setTeamCards = (cards: Team[]) => {

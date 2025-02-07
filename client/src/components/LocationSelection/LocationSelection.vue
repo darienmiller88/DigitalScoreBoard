@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { darkModeStore } from "../../stores/darkModeStore"
-    import { onMounted, ref,  } from 'vue';
+    import { onMounted, ref } from 'vue';
     import { buttonActiveStore, ButtonState} from "../../stores/buttonActiveStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
@@ -21,8 +21,7 @@
 
     const isLoading = ref<boolean>(true)
     const options = ref<string[]>([])
-    const selectedLocationName = ref<string>((selectedLocation.value) ? selectedLocation.value.location_name : '')
-    let locations: Location[] = []
+    let selectedLocationName = ref<string>("")
 
     const optionClicked = async (event: Event) => {
         const selectedValue = (event.target as HTMLSelectElement).value;
@@ -30,16 +29,14 @@
         try {
             const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
             
-            // locationsResponse.data
+            //After retrieving the locations, find the location the user selected and update the cards
+            //for that location, and set this location as the selected one.
             locationsResponse.data.forEach(location => {
                 if(location.location_name === selectedValue){
                     setCards(location.users)     
                     setSelectedLocation(location)               
                 }
-            })
-
-            console.log("options:", options.value);
-            
+            })            
         } catch (error) {
             console.log("err in clicking option:", error);
         }
@@ -48,19 +45,28 @@
     onMounted(async () => {
         try {
             const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
-            
+            let locations: Location[] = []
+
+            //Assign the response from the server to the above variable to be referenced later.
             locations = locationsResponse.data
+
+            //Take all of the names from the all of the locations, and assign them to the options variable to
+            //listed on the dropdown menu.
             options.value = locations.map(location => {          
                 return location.location_name
             })     
 
-            //If there is no current location set, set it now.
+            //IF: If there is no current location set, set it now, and the current name for the options dropdown.
+            //ELSE: Assign the current name of the selectedLocation type to the selectedLocationName
+            //string variable so it can show on the options dropdown.
             if (!selectedLocation.value) {
-                //options.value[0]
+                selectedLocationName.value = options.value[0]
                 setSelectedLocation(locations[0])
+            }else{
+                selectedLocationName.value = selectedLocation.value.location_name
             }
 
-            //If there are no current cards set, and there is a selectedLocation, set the card for the location.
+            //If there are no current cards set, and there is a selectedLocation, set the cards for the location.
             if (!scoreCards.value && selectedLocation.value) {
                 setCards(selectedLocation.value.users)
             }
