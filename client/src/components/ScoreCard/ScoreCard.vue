@@ -70,16 +70,23 @@
     .user-card{
         border: 2px solid var(--main-text-color);
         border-radius: 10px;
-        width: fit-content;
+
+        width: 90vw;
         box-shadow: 8px 8px 5px rgba(173, 216, 230, 0.548);
+        margin: 20px 0px; 
+
         transition: 0.3s;
         text-align: center;
-        margin: 20px 0px; 
 
         @media screen and (min-width: 768px) {
             // margin-bottom/: 0px;
+            width: 40vw;
             margin: 20px 0px; 
+        }
 
+        @media screen and (min-width: 992px) {
+            width: 25vw;
+            margin: 20px 0px; 
         }
 
         &:hover{
@@ -130,8 +137,16 @@
 
         .score-wrapper{
             display: grid;
-            grid-template-columns: auto 100px auto;
+            grid-template-columns: auto 160px auto;
             // margin-top: 20px;
+
+            @media screen and (min-width: 768px) {
+                grid-template-columns: auto 150px auto;
+            }
+
+            @media screen and (min-width: 992px) {
+                grid-template-columns: auto 150px auto;
+            }
 
             .score{
                 display: flex;
@@ -147,7 +162,7 @@
                 border: 2px solid var(--main-bg-color);
                 
                 font-size: 30px;
-                padding: 12px 45px;
+                padding: 8px 25px;
 
                 transition: 0.5s;
 
@@ -174,7 +189,11 @@
 
         .username{
             font-size: 35px;            
-            margin: 0px 10px;
+            margin: 5px 15px;
+            // border: 3px dotted aliceblue;
+            overflow-x: scroll;
+            overflow-y: scroll;
+            white-space: nowrap;
         } 
     }
 </style>

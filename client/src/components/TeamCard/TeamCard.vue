@@ -66,12 +66,17 @@
     
     text-align: center; 
     padding: 10px 10px;
-    margin: 8px 0px; 
+    margin: 18px 0px; 
     transition: 0.3s;
 
     border: var(--main-text-color) 2px solid;
     border-radius: 10px;
     width: fit-content;
+
+    // No margins on tablets and above to allow "gap" to work
+    @media only screen and (min-width: 768px){
+      margin: 0px 0px; 
+    }
 
     &:hover{
         box-shadow: 10px 10px 15px var(--main-text-color);
