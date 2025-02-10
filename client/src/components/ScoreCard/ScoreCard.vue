@@ -89,6 +89,12 @@
             margin: 20px 0px; 
         }
 
+        @media screen and (min-width: 1400px) {
+            width: 15vw;
+            // height: 30vh;
+            margin: 20px 0px; 
+        }
+
         &:hover{
             box-shadow: 10px 10px 15px var(--main-text-color);
             transform: translateY(-5px);
@@ -145,7 +151,11 @@
             }
 
             @media screen and (min-width: 992px) {
-                grid-template-columns: auto 150px auto;
+                grid-template-columns: auto 170px auto;
+            }
+
+            @media screen and (min-width: 1400px) {
+                grid-template-columns: auto 300px auto;
             }
 
             .score{
@@ -153,7 +163,7 @@
                 align-items: center;
                 justify-content: center;
 
-                font-size: 20px;
+                font-size: 25px;
                 padding: 0px 20px;
             }
 
@@ -191,8 +201,8 @@
             font-size: 35px;            
             margin: 5px 15px;
             // border: 3px dotted aliceblue;
-            overflow-x: scroll;
-            overflow-y: scroll;
+            overflow-x: hidden;
+            text-overflow: ellipsis;
             white-space: nowrap;
         } 
     }

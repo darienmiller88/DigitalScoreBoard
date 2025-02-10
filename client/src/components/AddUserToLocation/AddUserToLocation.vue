@@ -58,7 +58,7 @@
                 id="add-user" 
                 v-model="username" 
                 minlength="1"
-                maxlength="20" 
+                maxlength="30" 
                 type="text" 
                 name="addUser" 
                 placeholder="Add user to game" 
