@@ -27,16 +27,10 @@
         const selectedValue = (event.target as HTMLSelectElement).value;
 
         try {
-            const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
+            const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${selectedValue}`)
             
-            //After retrieving the locations, find the location the user selected and update the cards
-            //for that location, and set this location as the selected one.
-            locationsResponse.data.forEach(location => {
-                if(location.location_name === selectedValue){
-                    setCards(location.users)     
-                    setSelectedLocation(location)               
-                }
-            })            
+            setCards(locationResponse.data.users)     
+            setSelectedLocation(locationResponse.data)               
         } catch (error) {
             console.log("err in clicking option:", error);
         }
@@ -70,6 +64,9 @@
             if (!scoreCards.value && selectedLocation.value) {
                 setCards(selectedLocation.value.users)
             }
+
+            console.log("Cards:", scoreCards.value);
+            
         } catch (error) {
             console.log("err:", error)
         }
