@@ -66,7 +66,7 @@
         @media only screen and (min-width: 992px){
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 50px;
+            gap: 40px;
         }
 
         @media only screen and (min-width: 1400px){
