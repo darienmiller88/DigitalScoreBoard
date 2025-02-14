@@ -29,16 +29,16 @@
     </div>
 
     <Modal 
-      :modal-header="'Add team member'"
+      :modalHeader="'Add team member'"
       :show="showAddTeamPlayerModal"
-      :modal-content="AddNewPlayer"
+      :modalContent="AddNewPlayer"
       :onHide="() => showAddTeamPlayerModal = false"
     />
 
     <Modal 
-      :modal-header="'View team players'"
+      :modalHeader="'View team players'"
       :show="showTeamPlayersModal"
-      :modal-content="AddNewPlayer"
+      :modalContent="AddNewPlayer"
       :onHide="() => showTeamPlayersModal = false"
     />
 </template>
