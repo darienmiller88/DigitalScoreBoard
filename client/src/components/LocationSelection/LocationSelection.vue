@@ -76,8 +76,8 @@
 </script>
 
 <template>
-    <div :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`" v-if="currentButtonGroupState != ButtonState.CREATE_NEW_TEAM_GAME">
-        <div class="current-location" >
+    <div :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
+        <div class="current-location" v-if="currentButtonGroupState != ButtonState.CREATE_NEW_TEAM_GAME">
             Current Location: 
         </div> 
         <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
@@ -93,8 +93,8 @@
                 {{ option }}
             </option>
         </select>   
-        <!-- v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME"  -->
         <button 
+            v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME" 
             class="add-team-button"
         >Add Team</button> 
     </div>
