@@ -59,8 +59,9 @@
         @media only screen and (min-width: 1300px){
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 30px;
+            gap: 25px;
             max-height: 75vh;
+            max-width: 95vw;
         }
     }
 </style>
