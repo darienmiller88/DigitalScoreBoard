@@ -37,7 +37,6 @@
         max-width: 90vw;
         max-height: 50vh;
         overflow-y: scroll;
-        border: 3px dotted red;
 
         margin: auto;
         padding: 0px 10px;
