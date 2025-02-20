@@ -154,8 +154,8 @@
                 grid-template-columns: auto 170px auto;
             }
 
-            @media screen and (min-width: 1400px) {
-                grid-template-columns: auto 200px auto;
+            @media screen and (min-width: 1300px) {
+                grid-template-columns: auto 100px auto;
             }
 
             .score{
