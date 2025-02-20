@@ -4,16 +4,16 @@ import { Team } from "../types/types"
 
 export const teamCardsStore = defineStore("teamCards", () => {
     const teamCards = ref<Team[]>([
-        {
-            team_name: "Grand Concourse",
-            score: 0,
-            players: []
-        },
-        {
-            team_name: "Pelham Bay Park",
-            score: 0,
-            players: []
-        },
+        // {
+        //     team_name: "Grand Concourse",
+        //     score: 0,
+        //     players: []
+        // },
+        // {
+        //     team_name: "Pelham Bay Park",
+        //     score: 0,
+        //     players: []
+        // },
         // {
         //     team_name: "Elmwood",
         //     score: 0,

@@ -37,6 +37,7 @@
         max-width: 90vw;
         max-height: 50vh;
         overflow-y: scroll;
+        border: 3px dotted red;
 
         margin: auto;
         padding: 0px 10px;
@@ -55,7 +56,7 @@
             max-height: 75vh;
         }
 
-        @media only screen and (min-width: 1400px){
+        @media only screen and (min-width: 1300px){
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 30px;

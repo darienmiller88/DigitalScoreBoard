@@ -36,6 +36,10 @@
         }
     }
 
+    const addTeam = () => {
+
+    }
+
     onMounted(async () => {
         try {
             const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
@@ -43,6 +47,14 @@
 
             //Assign the response from the server to the above variable to be referenced later.
             locations = locationsResponse.data
+
+
+            //create new game  and add new user have different menu options.
+            if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
+                
+            } else {
+                
+            }
 
             //Take all of the names from the all of the locations, and assign them to the options variable to
             //listed on the dropdown menu.
@@ -94,8 +106,10 @@
             </option>
         </select>   
         <button 
+            @click="addTeam"
             v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME" 
             class="add-team-button"
+        
         >Add Team</button> 
     </div>
 </template>
