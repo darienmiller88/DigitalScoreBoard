@@ -9,7 +9,7 @@
       openAddTeamPlayerModal: () => void
     }>()
 
-    const { addPoints, minusPoints, resetPoints } = teamCardsStore()
+    const { addPoints, minusPoints, resetPoints, removeTeamCard } = teamCardsStore()
 </script>
 
 <template>
@@ -19,7 +19,7 @@
       <!-- Team Actions -->
       <div class="team-actions">
         <button class="reset" @click="() => resetPoints(props.cardIndex)">Reset Points</button>
-        <button class="clear" @click="">Clear Team</button>
+        <button class="clear" @click="() => removeTeamCard(props.cardIndex)">Clear Team</button>
       </div>
   
       <!-- Points -->
@@ -53,8 +53,6 @@
         </div>
       </div>
     </div>
-
-    
 </template>
   
 <style scoped lang="scss">
