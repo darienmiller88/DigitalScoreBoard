@@ -47,9 +47,9 @@
             players: []
         })
 
-        options.value = locations.filter(
-            location => !teamCards.value.some(team => team.team_name === location.location_name)
-        ).map(location => location.location_name)
+        // options.value = locations.filter(
+        //     location => !teamCards.value.some(team => team.team_name === location.location_name)
+        // ).map(location => location.location_name)
     }
 
     // watch(options, (newOptions) => {
