@@ -70,9 +70,10 @@
 
             //create new game and add new user have different menu options.
             if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
-                // options.value = locations.filter(
-                //     location => !teamCards.value.some(team => team.team_name === location.location_name)
-                // ).map(location => location.location_name)
+                console.log(
+                 locations.filter(
+                    location => !teamCards.value.some(team => team.team_name === location.location_name)
+                ).map(location => location.location_name))
             } else {
             }
             
