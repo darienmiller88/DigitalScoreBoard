@@ -5,6 +5,7 @@
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { teamCardsStore } from "../../stores/teamCardsStore";
+    import { optionsStore } from "../../stores/optionsStore"; 
     import { storeToRefs } from "pinia";
     import { scoreBoardApi } from "../../api/api"
     import { Location } from "../../types/types"
@@ -16,14 +17,16 @@
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation } = storeToRefs(selectedLocationStore())
     const { teamCards } = storeToRefs(teamCardsStore())
+    const { options } = storeToRefs(optionsStore())
 
     //Stateful methods
     const { setCards } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
     const { addTeamCard } = teamCardsStore()
+    const { setOptions } = optionsStore()
 
     const isLoading = ref<boolean>(true)
-    const options = ref<string[]>([])
+    // const options = ref<string[]>([])
     let selectedLocationName = ref<string>("")
     let locations: Location[] = []
 
@@ -47,9 +50,12 @@
             players: []
         })
 
-        // options.value = locations.filter(
-        //     location => !teamCards.value.some(team => team.team_name === location.location_name)
-        // ).map(location => location.location_name)
+        //After adding the card, remove it from options.
+        setOptions(locations.filter(
+            location => !teamCards.value.some(team => team.team_name === location.location_name)
+        ).map(location => location.location_name))
+        
+        selectedLocationName.value = options.value[0]
     }
 
     // watch(options, (newOptions) => {
@@ -63,25 +69,23 @@
     onMounted(async () => {
         try {
             const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
-            // let locations: Location[] = []
 
             //Assign the response from the server to the above variable to be referenced later.
             locations = locationsResponse.data
 
             //create new game and add new user have different menu options.
             if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
-                console.log(
-                 locations.filter(
+                setOptions(locations.filter(
                     location => !teamCards.value.some(team => team.team_name === location.location_name)
                 ).map(location => location.location_name))
             } else {
+                //Take all of the names from the all of the locations, and assign them to the options variable to
+                //listed on the dropdown menu.
+                setOptions(locations.map(location => {          
+                    return location.location_name
+                }))
             }
             
-            //Take all of the names from the all of the locations, and assign them to the options variable to
-            //listed on the dropdown menu.
-            options.value = locations.map(location => {          
-                return location.location_name
-            }) 
             //IF: If there is no current location set, set it now, and the current name for the options dropdown.
             //ELSE: Assign the current name of the selectedLocation type to the selectedLocationName
             //string variable so it can show on the options dropdown.
@@ -97,8 +101,7 @@
                 setCards(selectedLocation.value.users)
             }
 
-            console.log("Cards:", scoreCards.value);
-            
+            console.log("selectedLocationName:", selectedLocationName.value);
         } catch (error) {
             console.log("err:", error)
         }
