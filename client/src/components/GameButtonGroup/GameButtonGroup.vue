@@ -1,17 +1,69 @@
 <script setup lang="ts">
+    import { ref } from "vue";
     import { storeToRefs } from "pinia";
     import { darkModeStore } from "../../stores/darkModeStore"
     import { buttonActiveStore, ButtonState } from "../../stores/buttonActiveStore"
+    import { optionsStore } from "../../stores/optionsStore";
     import { useWindowSize } from "@vueuse/core";
+    import { teamCardsStore } from "../../stores/teamCardsStore";
+    import { scoreBoardApi } from "../../api/api";
+    import { selectedLocationStore } from '../../stores/selectedLocationStore';
+    import { Location } from "../../types/types";
 
     const { width } = useWindowSize();
+    let islocationsLoaded = ref<boolean>(false)
+    let locations: Location[] = []
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
+    const { teamCards } = storeToRefs(teamCardsStore())
     const{ currentButtonGroupState } = storeToRefs(buttonActiveStore())
-
+    const { selectedLocationName, selectedLocation } = storeToRefs(selectedLocationStore())
+    const { remainingLocationOptions } = storeToRefs(optionsStore())
+    
     //Stateful methods
     const { setButtonActive } = buttonActiveStore()
+    const { setAllLocationOptions, setRemainingLocationOptions } = optionsStore()
+
+    const loadLocationOptions = async (buttonState: ButtonState) => {
+        //If the locations are NOT loaded yet, load them, and set the loaded flag to true to prevent
+        //unnecessary server calls.
+        if(!islocationsLoaded.value){
+            try {
+                const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
+    
+                locations = locationsResponse.data
+                islocationsLoaded.value = true
+            } catch (error) {
+                console.log("err:", error)
+            }
+        }
+
+        if (buttonState === ButtonState.ADD_NEW_USER) {
+            //When "ADD_NEW_USER" is clicked, load all locations from the server, and add them to options.
+            setAllLocationOptions(locations.map(location => {          
+                return location.location_name
+            }))
+            selectedLocationName.value = selectedLocation.value.location_name
+            setButtonActive(ButtonState.ADD_NEW_USER)
+        } else if(buttonState === ButtonState.CREATE_NEW_TEAM_GAME) {
+            //When "CREATE_NEW_TEAM_GAME" is clicked, set options to the locations that have NOT
+            //been added as a team card.
+            setRemainingLocationOptions(locations.filter(
+                location => !teamCards.value.some(team => team.team_name === location.location_name)
+            ).map(location => location.location_name))
+
+            selectedLocationName.value = remainingLocationOptions.value[0]            
+            setButtonActive(ButtonState.CREATE_NEW_TEAM_GAME)
+        }else{
+            setButtonActive(ButtonState.CREATE_NEW_GAME)
+        }
+
+        console.log("current button:", currentButtonGroupState.value);
+        
+    }
+
+
 </script>
 
 <template>
@@ -21,7 +73,7 @@
                 ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
                 ${currentButtonGroupState == ButtonState.CREATE_NEW_GAME ? 'active' : ''}
             `" 
-            @click="setButtonActive(ButtonState.CREATE_NEW_GAME)"
+            @click="() => loadLocationOptions(ButtonState.CREATE_NEW_GAME)"
         >Create new game</button>
         <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
         <button 
@@ -29,7 +81,7 @@
                 ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
                 ${currentButtonGroupState == ButtonState.ADD_NEW_USER ? 'active' : ''}
             `"
-            @click="setButtonActive(ButtonState.ADD_NEW_USER)"
+            @click="() => loadLocationOptions(ButtonState.ADD_NEW_USER)"
         >Add new user</button>
         <span v-if="width >= 768" :class="`${isDarkMode ? 'dark-mode-span' : 'light-mode-span'}`"></span>
         <button 
@@ -37,7 +89,7 @@
                 ${isDarkMode ? 'dark-mode-button-group' : 'light-mode-button-group'}
                 ${currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME ? 'active' : ''}
             `"
-            @click="setButtonActive(ButtonState.CREATE_NEW_TEAM_GAME)"
+            @click="() => loadLocationOptions(ButtonState.CREATE_NEW_TEAM_GAME)"
         >Create new team game</button>
     </div>
 </template>

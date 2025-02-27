@@ -2,7 +2,9 @@
     import { teamCardsStore } from "../../stores/teamCardsStore";
     import { optionsStore } from "../../stores/optionsStore";
     import { Team } from "../../types/types"
-
+    import { storeToRefs } from "pinia";
+    import { selectedLocationStore } from '../../stores/selectedLocationStore';
+        
     const props = defineProps<{
       team: Team
       cardIndex: number
@@ -10,12 +12,18 @@
       openAddTeamPlayerModal: () => void
     }>()
     
-    const { addOption } = optionsStore()
+    const { selectedLocationName } = storeToRefs(selectedLocationStore())
+    const { remainingLocationOptions } = storeToRefs(optionsStore())
+    const { addOptionToRemainingLocationOptions } = optionsStore()
     const { addPoints, minusPoints, resetPoints, removeTeamCard } = teamCardsStore()
 
     const resetOptions = (index: number) => {
         removeTeamCard(index)
-        addOption(props.team.team_name)
+        addOptionToRemainingLocationOptions(props.team.team_name)
+
+        if (remainingLocationOptions.value.length === 1) {
+          selectedLocationName.value = remainingLocationOptions.value[0]
+        }
     }
 </script>
 

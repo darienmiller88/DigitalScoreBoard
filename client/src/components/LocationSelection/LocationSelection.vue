@@ -15,20 +15,20 @@
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
-    const { selectedLocation } = storeToRefs(selectedLocationStore())
+    const { selectedLocation, selectedLocationName } = storeToRefs(selectedLocationStore())
     const { teamCards } = storeToRefs(teamCardsStore())
-    const { options } = storeToRefs(optionsStore())
+    const { allLocationOptions, remainingLocationOptions } = storeToRefs(optionsStore())
 
     //Stateful methods
     const { setCards } = scoreCardsStore()
     const { setSelectedLocation } = selectedLocationStore()
     const { addTeamCard } = teamCardsStore()
-    const { setOptions } = optionsStore()
+    const { setRemainingLocationOptions, setAllLocationOptions } = optionsStore()
 
     const isLoading = ref<boolean>(true)
-    // const options = ref<string[]>([])
-    let selectedLocationName = ref<string>("")
     let locations: Location[] = []
+    // const options = ref<string[]>([])
+    // let selectedLocationName = ref<string>("")
 
     const optionClicked = async (event: Event) => {
         const selectedValue = (event.target as HTMLSelectElement).value;
@@ -41,6 +41,8 @@
         } catch (error) {
             console.log("err in clicking option:", error);
         }
+
+        console.log("selectedLocationName:", selectedLocationName.value);
     }
 
     const addTeam = () => {
@@ -51,11 +53,11 @@
         })
 
         //After adding the card, remove it from options.
-        setOptions(locations.filter(
+        setRemainingLocationOptions(locations.filter(
             location => !teamCards.value.some(team => team.team_name === location.location_name)
         ).map(location => location.location_name))
         
-        selectedLocationName.value = options.value[0]
+        selectedLocationName.value = remainingLocationOptions.value[0]
     }
 
     // watch(options, (newOptions) => {
@@ -75,13 +77,14 @@
 
             //create new game and add new user have different menu options.
             if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
-                setOptions(locations.filter(
+                setRemainingLocationOptions(locations.filter(
                     location => !teamCards.value.some(team => team.team_name === location.location_name)
                 ).map(location => location.location_name))
+
             } else {
                 //Take all of the names from the all of the locations, and assign them to the options variable to
                 //listed on the dropdown menu.
-                setOptions(locations.map(location => {          
+                setAllLocationOptions(locations.map(location => {          
                     return location.location_name
                 }))
             }
@@ -90,10 +93,12 @@
             //ELSE: Assign the current name of the selectedLocation type to the selectedLocationName
             //string variable so it can show on the options dropdown.
             if (!selectedLocation.value) {
-                selectedLocationName.value = options.value[0]
+                selectedLocationName.value = allLocationOptions.value[0]
                 setSelectedLocation(locations[0])
-            }else{
+            }else if (currentButtonGroupState.value === ButtonState.ADD_NEW_USER) {
                 selectedLocationName.value = selectedLocation.value.location_name
+            }else{
+                selectedLocationName.value = remainingLocationOptions.value[0]            
             }
 
             //If there are no current cards set, and there is a selectedLocation, set the cards for the location.
@@ -116,23 +121,31 @@
             Current Location: 
         </div> 
         <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
+        <!-- v-else -->
         <select 
-            v-else
+            v-else-if="!isLoading || (remainingLocationOptions.length && currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME)"
             v-model="selectedLocationName"
             name="locations" 
             id="locations" 
             :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`" 
             @change="optionClicked"
         >
-            <option v-for="(option, index) in options" :value="option" :key="index">
+            <option 
+                v-if="currentButtonGroupState === ButtonState.ADD_NEW_USER" 
+                v-for="(option, index) in allLocationOptions" 
+                :value="option"
+                :key="index"
+            >
+                {{ option }}
+            </option>
+            <option v-else v-for="(option, index) in remainingLocationOptions" :value="option" :key="index+1">
                 {{ option }}
             </option>
         </select>   
         <button 
             @click="addTeam"
-            v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME" 
+            v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME && remainingLocationOptions.length && !isLoading" 
             class="add-team-button"
-        
         >Add Team</button> 
     </div>
 </template>
