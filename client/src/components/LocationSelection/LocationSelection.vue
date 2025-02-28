@@ -123,25 +123,33 @@
         <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
         <!-- v-else -->
         <select 
-            v-else-if="!isLoading || (remainingLocationOptions.length && currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME)"
+            v-else-if="!isLoading && (remainingLocationOptions.length && currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME)"
+            v-model="selectedLocationName"
+            name="remaining-locations" 
+            id="remaining-locations" 
+            :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`" 
+            @change="optionClicked"
+        >
+            <option v-for="(option, index) in remainingLocationOptions" :value="option" :key="index+1">
+                {{ option }}
+            </option>
+        </select>   
+        <select 
+            v-else-if="!isLoading && currentButtonGroupState == ButtonState.ADD_NEW_USER"
             v-model="selectedLocationName"
             name="locations" 
             id="locations" 
             :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`" 
             @change="optionClicked"
-        >
+            >
             <option 
-                v-if="currentButtonGroupState === ButtonState.ADD_NEW_USER" 
                 v-for="(option, index) in allLocationOptions" 
                 :value="option"
                 :key="index"
             >
                 {{ option }}
             </option>
-            <option v-else v-for="(option, index) in remainingLocationOptions" :value="option" :key="index+1">
-                {{ option }}
-            </option>
-        </select>   
+        </select> 
         <button 
             @click="addTeam"
             v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME && remainingLocationOptions.length && !isLoading" 

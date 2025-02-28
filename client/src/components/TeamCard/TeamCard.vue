@@ -21,6 +21,8 @@
         removeTeamCard(index)
         addOptionToRemainingLocationOptions(props.team.team_name)
 
+        //If after ALL the locations have been added to a team game, and one team card is removed, add
+        //that name to "selectedLocationName" variable so the select tag isn't empty.
         if (remainingLocationOptions.value.length === 1) {
           selectedLocationName.value = remainingLocationOptions.value[0]
         }
