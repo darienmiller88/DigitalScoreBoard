@@ -55,7 +55,7 @@
             max-height: 75vh;
         }
 
-        @media only screen and (min-width: 1300px){
+        @media only screen and (min-width: 1400px){
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 25px;
