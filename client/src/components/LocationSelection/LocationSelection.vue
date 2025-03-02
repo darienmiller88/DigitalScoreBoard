@@ -102,8 +102,10 @@
                 console.log("selectedLocation:", selectedLocation.value);
             }else if (currentButtonGroupState.value === ButtonState.ADD_NEW_USER) {
                 selectedLocationName.value = selectedLocation.value.location_name
+                console.log("ADD_NEW_USER:", selectedLocationName.value);
             }else{
-                selectedLocationName.value = remainingLocationOptions.value[0]            
+                selectedLocationName.value = remainingLocationOptions.value[0]   
+                console.log("else:", selectedLocationName.value);    
             }
 
             //If there are no current cards set, and there is a selectedLocation, set the cards for the location.
