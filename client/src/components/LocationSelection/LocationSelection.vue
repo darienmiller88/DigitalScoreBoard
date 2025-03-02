@@ -90,7 +90,6 @@
             }
             
             console.log("allLocationOptions", allLocationOptions.value);
-            console.log("selectedLocation:", selectedLocation.value);
             
             //IF: If there is no current location set, set it now, and the current name for the options dropdown.
             //ELSE: Assign the current name of the selectedLocation type to the selectedLocationName
@@ -98,6 +97,7 @@
             if (!selectedLocation.value) {
                 selectedLocationName.value = allLocationOptions.value[0]
                 setSelectedLocation(locations[0])
+                console.log("selectedLocation:", selectedLocation.value);
             }else if (currentButtonGroupState.value === ButtonState.ADD_NEW_USER) {
                 selectedLocationName.value = selectedLocation.value.location_name
             }else{
