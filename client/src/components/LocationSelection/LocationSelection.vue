@@ -96,7 +96,7 @@
             //IF: If there is no current location set, set it now, and the current name for the options dropdown.
             //ELSE: Assign the current name of the selectedLocation type to the selectedLocationName
             //string variable so it can show on the options dropdown.
-            if (!selectedLocation.value) {
+            if (!selectedLocation.value.id) {
                 selectedLocationName.value = allLocationOptions.value[0]
                 setSelectedLocation(locations[0])
                 console.log("selectedLocation:", selectedLocation.value);
@@ -109,7 +109,7 @@
             }
 
             //If there are no current cards set, and there is a selectedLocation, set the cards for the location.
-            if (!scoreCards.value && selectedLocation.value) {
+            if (!scoreCards.value.length && selectedLocation.value) {
                 setCards(selectedLocation.value.users)
             }
 
