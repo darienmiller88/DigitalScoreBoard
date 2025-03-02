@@ -90,8 +90,8 @@
             }
             
             console.log("allLocationOptions", allLocationOptions.value);
+            console.log("selectedLocation:", selectedLocation.value);
             
-
             //IF: If there is no current location set, set it now, and the current name for the options dropdown.
             //ELSE: Assign the current name of the selectedLocation type to the selectedLocationName
             //string variable so it can show on the options dropdown.

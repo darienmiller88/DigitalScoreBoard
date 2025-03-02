@@ -3,12 +3,12 @@ import { ref } from 'vue';
 import { Location } from "../types/types"
 
 export const selectedLocationStore = defineStore("selectedLocation", () => {
+    const selectedLocationName = ref<string>("")
     const selectedLocation = ref<Location>({
         id: "",
         users: [],
         location_name: ""
     })
-    const selectedLocationName = ref<string>("")
 
     const setSelectedLocation = (location: Location) => {
         selectedLocation.value = location
