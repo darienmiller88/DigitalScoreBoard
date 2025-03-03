@@ -10,6 +10,7 @@
     import { scoreBoardApi } from "../../api/api"
     import { Location } from "../../types/types"
     import { Icon } from "@iconify/vue"
+    import Select from "../Select/Select.vue";
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
@@ -75,23 +76,19 @@
             //Assign the response from the server to the above variable to be referenced later.
             locations = locationsResponse.data
 
-            //create new game and add new user have different menu options.
+            //if the user is on "CREATE_NEW_TEAM_GAME", load the remaining locations that have not been 
+            //added to the game.
             if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
                 setRemainingLocationOptions(locations.filter(
                     location => !teamCards.value.some(team => team.team_name === location.location_name)
                 ).map(location => location.location_name))
-
             } else {
-                //Take all of the names from the all of the locations, and assign them to the options variable to
-                //listed on the dropdown menu.
+                //Take all of the names from the all of the locations, and assign them to the options 
+                //variable to be listed on the dropdown menu.
                 setAllLocationOptions(locations.map(location => {          
                     return location.location_name
                 }))
-            }
-            
-            console.log("allLocationOptions", allLocationOptions.value);
-            
-            console.log("is selectedLocation false:", !selectedLocation.value);
+            }            
 
             //IF: If there is no current location set, set it now, and the current name for the options dropdown.
             //ELSE: Assign the current name of the selectedLocation type to the selectedLocationName
@@ -102,10 +99,8 @@
                 console.log("selectedLocation:", selectedLocation.value);
             }else if (currentButtonGroupState.value === ButtonState.ADD_NEW_USER) {
                 selectedLocationName.value = selectedLocation.value.location_name
-                console.log("ADD_NEW_USER:", selectedLocationName.value);
             }else{
                 selectedLocationName.value = remainingLocationOptions.value[0]   
-                console.log("else:", selectedLocationName.value);    
             }
 
             //If there are no current cards set, and there is a selectedLocation, set the cards for the location.
@@ -128,8 +123,22 @@
             Current Location: 
         </div> 
         <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
-        <!-- v-else -->
-        <select 
+
+        <!-- If the user is creating a new team game, choose this select tag. -->
+        <Select 
+            v-else-if="!isLoading && (remainingLocationOptions.length && currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME)"
+            :options="remainingLocationOptions"
+            :optionClicked="optionClicked"
+        />
+        
+        <!-- Otherwise choose this one -->
+        <Select 
+            v-else-if="!isLoading && currentButtonGroupState == ButtonState.ADD_NEW_USER"
+            :options="allLocationOptions"
+            :optionClicked="optionClicked"
+        />
+        
+        <!-- <select 
             v-else-if="!isLoading && (remainingLocationOptions.length && currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME)"
             v-model="selectedLocationName"
             name="remaining-locations" 
@@ -140,8 +149,9 @@
             <option v-for="(option, index) in remainingLocationOptions" :value="option" :key="index+1">
                 {{ option }}
             </option>
-        </select>   
-        <select 
+        </select>    -->
+
+        <!-- <select 
             v-else-if="!isLoading && currentButtonGroupState == ButtonState.ADD_NEW_USER"
             v-model="selectedLocationName"
             name="locations" 
@@ -156,7 +166,7 @@
             >
                 {{ option }}
             </option>
-        </select> 
+        </select>  -->
         <button 
             @click="addTeam"
             v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME && remainingLocationOptions.length && !isLoading" 
@@ -186,16 +196,6 @@
             margin-right: 10px;
         }
 
-        select {
-            font-size: 18px;
-            padding: 2px 5px;
-            transition: 0.5s;
-    
-            @media screen and (min-width: 768px) {
-                font-size: 28px;
-            }
-        }
-
         .add-team-button{
             padding: 10px 25px;
             margin: 0px 10px;
@@ -214,18 +214,6 @@
                     font-size: 26px;
                 }
             }
-        }
-
-        .dark-mode-select{
-            background-color: var(--main-bg-color);
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .light-mode-select{
-            background-color: var(--primary-color);
-            color: var(--main-bg-color);
-            border: 2px solid var(--main-bg-color);
         }
     }
 </style>
