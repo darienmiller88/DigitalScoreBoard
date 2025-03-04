@@ -44,7 +44,7 @@
             setAllLocationOptions(locations.map(location => {          
                 return location.location_name
             }))
-            
+
             selectedLocationName.value = selectedLocation.value.location_name
             setButtonActive(ButtonState.ADD_NEW_USER)
         } else if(buttonState === ButtonState.CREATE_NEW_TEAM_GAME) {
@@ -60,8 +60,7 @@
             setButtonActive(ButtonState.CREATE_NEW_GAME)
         }
 
-        console.log("current button:", currentButtonGroupState.value);
-        
+        console.log("current button:", currentButtonGroupState.value)
     }
 
 

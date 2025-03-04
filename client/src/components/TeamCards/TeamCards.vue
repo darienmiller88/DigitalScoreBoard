@@ -48,7 +48,7 @@
         display: grid;
         grid-template-columns: 1fr;    
         margin: auto;
-        padding: 0px 10px;
+        padding: 10px 10px;
 
         // border: 2px solid white; 
         width: fit-content; 
