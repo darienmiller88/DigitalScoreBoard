@@ -6,12 +6,12 @@
     import { teamCardsStore } from "../../stores/teamCardsStore"
     import Modal from "../Modal/Modal.vue"
     import AddNewPlayer from "../AddNewPlayer/AddNewPlayer.vue"
+    import ViewPlayers from '../ViewPlayers/ViewPlayers.vue';
     
     let showAddTeamPlayerModal = ref(false)
     let showTeamPlayersModal = ref(false)
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { teamCards } = storeToRefs(teamCardsStore())
-
 </script>
 
 <template>
@@ -25,6 +25,7 @@
             :point-value="100"
             :team="team"
             :openAddTeamPlayerModal="() => showAddTeamPlayerModal = true"
+            :openViewTeamPlayers="() => showTeamPlayersModal = true"
         />
     </div>
 
@@ -38,7 +39,7 @@
     <Modal 
       :modalHeader="'View team players'"
       :show="showTeamPlayersModal"
-      :modalContent="AddNewPlayer"
+      :modalContent="ViewPlayers"
       :onHide="() => showTeamPlayersModal = false"
     />
 </template>

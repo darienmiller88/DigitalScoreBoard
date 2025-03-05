@@ -10,6 +10,7 @@
       cardIndex: number
       pointValue: number
       openAddTeamPlayerModal: () => void
+      openViewTeamPlayers: () => void
     }>()
     
     const { selectedLocationName } = storeToRefs(selectedLocationStore())
@@ -56,9 +57,7 @@
         </ul> -->
 
         <div class="view-players">
-          <button>
-            View Players
-          </button>
+          <button @click="openViewTeamPlayers">View Players</button>
         </div>
   
         <!-- Add Player -->

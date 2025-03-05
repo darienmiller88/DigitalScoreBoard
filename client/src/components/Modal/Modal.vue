@@ -26,7 +26,8 @@
                 <span class="close" @click="onHide" role="button" tabindex="0" >&times;</span>
             </div>
             <div class="modal_content">
-                <component :is="modalContent" :playerName="'darien'"/>
+                <!-- :playerName="'darien'" -->
+                <component :is="modalContent" />
             </div>
             <div class="modal_footer" >
                 <button @click="onHide">Close</button>
