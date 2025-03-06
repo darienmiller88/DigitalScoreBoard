@@ -1,5 +1,8 @@
 <script setup lang="ts">
     import TeamCard from '../TeamCard/TeamCard.vue'
+    import { Card } from "../../types/types"
+    import { scoreBoardApi } from "../../api/api"
+    import { Team } from "../../types/types"
     import { ref } from "vue"; 
     import { storeToRefs } from 'pinia'
     import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore'
@@ -8,10 +11,46 @@
     import AddNewPlayer from "../AddNewPlayer/AddNewPlayer.vue"
     import ViewPlayers from '../ViewPlayers/ViewPlayers.vue';
     
-    let showAddTeamPlayerModal = ref(false)
-    let showTeamPlayersModal = ref(false)
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { teamCards } = storeToRefs(teamCardsStore())
+    
+    let showAddTeamPlayerModal = ref(false)
+    let showTeamPlayersModal = ref(false)
+
+    //Data to be ent to the "AddNewPlayer" component via the modal.
+    let addTeamNewPlayerData = ref<{
+        players: string[],
+        locationName: string
+    }>({
+        players: [],
+        locationName: ""
+    })
+
+    //Data to be ent to the "ViewPlayers" component via the modal.
+    let viewPlayersData = ref<{
+        teamPlayers: string[]
+    }>({
+        teamPlayers: []
+    })
+
+    const openAddTeamPlayerModal = (team: Team) => {
+        addTeamNewPlayerData.value.players = team.players
+        addTeamNewPlayerData.value.locationName = team.team_name
+        showAddTeamPlayerModal.value = true
+        
+        console.log("addTeamNewPlayerData", addTeamNewPlayerData.value)
+    }
+
+    const openViewTeamPlayersModal = async (team: Team) => {
+        try {
+            const teamPlayersResponse = await scoreBoardApi.get<Card[]>(`/get-all-users/${team.team_name}`)
+            
+            viewPlayersData.value.teamPlayers = teamPlayersResponse.data.map(team => team.username)
+            showTeamPlayersModal.value = true
+        } catch (error) {
+            console.log("error:", error)
+        }
+    }
 </script>
 
 <template>
@@ -24,8 +63,8 @@
             :score="team.score"
             :point-value="100"
             :team="team"
-            :openAddTeamPlayerModal="() => showAddTeamPlayerModal = true"
-            :openViewTeamPlayers="() => showTeamPlayersModal = true"
+            :openAddTeamPlayerModal="() => openAddTeamPlayerModal(team)"
+            :openViewTeamPlayers="() => openViewTeamPlayersModal(team)"
         />
     </div>
 
@@ -34,6 +73,7 @@
       :show="showAddTeamPlayerModal"
       :modalContent="AddNewPlayer"
       :onHide="() => showAddTeamPlayerModal = false"
+      :modalProps="addTeamNewPlayerData"
     />
 
     <Modal 
@@ -41,6 +81,7 @@
       :show="showTeamPlayersModal"
       :modalContent="ViewPlayers"
       :onHide="() => showTeamPlayersModal = false"
+      :modalProps="viewPlayersData"
     />
 </template>
 

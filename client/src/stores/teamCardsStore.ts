@@ -4,7 +4,7 @@ import { Team } from "../types/types"
 
 export const teamCardsStore = defineStore("teamCards", () => {
     const teamCards = ref<Team[]>([])
-
+    
     const setTeamCards = (cards: Team[]) => {
         teamCards.value = cards
     }

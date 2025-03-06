@@ -6,10 +6,10 @@
         show: boolean
         onHide: () => void
         modalContent: any
+        modalProps: Object
     }>()
 
     const modalRef = ref<HTMLElement | null>(null);
-
     const closeModal = (e: Event) => {
         if(e.target == modalRef.value){
             props.onHide()       
@@ -26,8 +26,7 @@
                 <span class="close" @click="onHide" role="button" tabindex="0" >&times;</span>
             </div>
             <div class="modal_content">
-                <!-- :playerName="'darien'" -->
-                <component :is="modalContent" />
+                <component :is="modalContent" v-bind="modalProps" />
             </div>
             <div class="modal_footer" >
                 <button @click="onHide">Close</button>
