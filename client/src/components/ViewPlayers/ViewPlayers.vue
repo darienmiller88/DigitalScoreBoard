@@ -5,10 +5,8 @@
 </script>
 
 <template>
-    <!-- <ul v-for="(player, index) in props.teamPlayers">
-         <li :key="index">{{ player }}</li>
-    </ul> -->
-    <div class="players">
+    <h2 v-if="!teamPlayers.length">No players added to team yet!</h2>
+    <div v-else class="players">
         <div class="player" v-for="(player, index) in props.teamPlayers" :key="index">
             {{ player }}
         </div>
@@ -16,6 +14,10 @@
 </template>
 
 <style scoped lang="scss">
+    h2{
+        text-align: center;
+    }
+
     .players{
         text-align: center;
         // border: 2px solid red;

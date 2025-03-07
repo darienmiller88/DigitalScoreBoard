@@ -19,10 +19,10 @@
 
     //Data to be ent to the "AddNewPlayer" component via the modal.
     let addTeamNewPlayerData = ref<{
-        players: string[],
+        teamPlayers: string[],
         locationName: string
     }>({
-        players: [],
+        teamPlayers: [],
         locationName: ""
     })
 
@@ -33,19 +33,28 @@
         teamPlayers: []
     })
 
-    const openAddTeamPlayerModal = (team: Team) => {
-        addTeamNewPlayerData.value.players = team.players
-        addTeamNewPlayerData.value.locationName = team.team_name
-        showAddTeamPlayerModal.value = true
-        
-        console.log("addTeamNewPlayerData", addTeamNewPlayerData.value)
-    }
-
-    const openViewTeamPlayersModal = async (team: Team) => {
+    const openAddTeamPlayerModal = async (team: Team) => {
         try {
             const teamPlayersResponse = await scoreBoardApi.get<Card[]>(`/get-all-users/${team.team_name}`)
             
-            viewPlayersData.value.teamPlayers = teamPlayersResponse.data.map(team => team.username)
+            // const teamPlayersToAdd: string[] = teamPlayersResponse.data.map(team => team.username).filter(playerFromServer => {
+            //     !team.players.some(teamPlayer => playerFromServer === teamPlayer)
+            // })
+            
+            console.log("all people:", teamPlayersResponse.data, "team:", team.players)
+            addTeamNewPlayerData.value.teamPlayers = teamPlayersResponse.data.map(team => team.username).filter(playerFromServer => 
+                !team.players.some(teamPlayer => playerFromServer === teamPlayer)
+            )
+            addTeamNewPlayerData.value.locationName = team.team_name
+            showAddTeamPlayerModal.value = true
+        } catch (error) {
+            console.log("error:", error)
+        }
+    }
+
+    const openViewTeamPlayersModal = (team: Team) => {
+        try {            
+            viewPlayersData.value.teamPlayers = team.players
             showTeamPlayersModal.value = true
         } catch (error) {
             console.log("error:", error)
