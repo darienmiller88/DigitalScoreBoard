@@ -17,35 +17,46 @@
     let showAddTeamPlayerModal = ref(false)
     let showTeamPlayersModal = ref(false)
 
-    //Data to be ent to the "AddNewPlayer" component via the modal.
+    //Data to be sent to the "AddNewPlayer" component via the modal.
     let addTeamNewPlayerData = ref<{
-        teamPlayers: string[],
-        locationName: string
+        teamPlayersAvailableToAdd: string[],
+        currentTeam: string[],
+        locationName: string,
+        addPlayerToTeam: (player: string) => void
     }>({
-        teamPlayers: [],
-        locationName: ""
+        teamPlayersAvailableToAdd: [],
+        currentTeam: [],
+        locationName: "",
+        addPlayerToTeam: () => {}
     })
 
-    //Data to be ent to the "ViewPlayers" component via the modal.
+    //Data to be sent to the "ViewPlayers" component via the modal.
     let viewPlayersData = ref<{
         teamPlayers: string[]
     }>({
         teamPlayers: []
     })
 
-    const openAddTeamPlayerModal = async (team: Team) => {
+    const openAddTeamPlayerModal = async (team: Team, cardIndex: number) => {
         try {
             const teamPlayersResponse = await scoreBoardApi.get<Card[]>(`/get-all-users/${team.team_name}`)
             
-            // const teamPlayersToAdd: string[] = teamPlayersResponse.data.map(team => team.username).filter(playerFromServer => {
-            //     !team.players.some(teamPlayer => playerFromServer === teamPlayer)
-            // })
-            
-            console.log("all people:", teamPlayersResponse.data, "team:", team.players)
-            addTeamNewPlayerData.value.teamPlayers = teamPlayersResponse.data.map(team => team.username).filter(playerFromServer => 
+            //Filter out the players that have already been added to a team for a given location.
+            addTeamNewPlayerData.value.teamPlayersAvailableToAdd = teamPlayersResponse.data.map(team => team.username).filter(playerFromServer => 
                 !team.players.some(teamPlayer => playerFromServer === teamPlayer)
             )
             addTeamNewPlayerData.value.locationName = team.team_name
+
+            //When a player is added to this specific team card, remove them from the list of team members
+            //that will be shown on list of players to add.
+            addTeamNewPlayerData.value.addPlayerToTeam = (player: string) => {
+                //Add this player to this specific card at this index.
+                teamCards.value[cardIndex].players.push(player)
+
+                //Update the current team.
+                addTeamNewPlayerData.value.currentTeam = teamCards.value[cardIndex].players
+            }
+
             showAddTeamPlayerModal.value = true
         } catch (error) {
             console.log("error:", error)
@@ -72,7 +83,7 @@
             :score="team.score"
             :point-value="100"
             :team="team"
-            :openAddTeamPlayerModal="() => openAddTeamPlayerModal(team)"
+            :openAddTeamPlayerModal="() => openAddTeamPlayerModal(team, index)"
             :openViewTeamPlayers="() => openViewTeamPlayersModal(team)"
         />
     </div>
