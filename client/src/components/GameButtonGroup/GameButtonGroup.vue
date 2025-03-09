@@ -59,11 +59,7 @@
         }else{
             setButtonActive(ButtonState.CREATE_NEW_GAME)
         }
-
-        console.log("current button:", currentButtonGroupState.value)
     }
-
-
 </script>
 
 <template>

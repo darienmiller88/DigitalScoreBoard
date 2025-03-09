@@ -13,14 +13,8 @@
     watchEffect(() => {
         if (props.teamPlayersAvailableToAdd.length > 0) {
             selectedPlayerName.value = props.teamPlayersAvailableToAdd[0];
-            console.log("available players:", props.teamPlayersAvailableToAdd);
         }
     })
-
-    const addPlayerToTeam = () => {
-        props.addPlayerToTeam(selectedPlayerName.value)
-        console.log("player added:", selectedPlayerName, "current team:", props.currentTeam)
-    }
 </script>
 
 <template>
@@ -31,7 +25,7 @@
                 {{ player }}
             </option>
         </select>
-        <button @click="addPlayerToTeam">Add Player</button>
+        <button @click="() => props.addPlayerToTeam(selectedPlayerName)">Add Player</button>
     </div>
 </template>
 
