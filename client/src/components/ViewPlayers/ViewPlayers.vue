@@ -46,6 +46,7 @@
 
             @media screen and (min-width: 992px) {
                 font-size: 26px;
+                max-height: 35vh;
             }
         }
 
@@ -62,7 +63,8 @@
             transition: 0.3s;
 
             &:hover{
-                padding: 10px 16px;
+                // padding: 10px 16px;
+                transform: scale(1.1);
             }
         }
     }
