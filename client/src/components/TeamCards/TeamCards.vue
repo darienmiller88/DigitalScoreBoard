@@ -78,6 +78,10 @@
             console.log("error:", error)
         }
     }
+
+    // const removeUserFromTeam = () => {
+
+    // }
 </script>
 
 <template>

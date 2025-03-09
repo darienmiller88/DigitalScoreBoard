@@ -85,7 +85,7 @@
                     text-align: center;
 
                     @media screen and (min-width: 768px) {
-                        font-size: 25px;
+                        font-size: 30px;
                     }
                 }
 
