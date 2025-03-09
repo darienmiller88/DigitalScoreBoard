@@ -14,7 +14,6 @@
         if (props.teamPlayersAvailableToAdd.length > 0) {
             selectedPlayerName.value = props.teamPlayersAvailableToAdd[0];
             console.log("available players:", props.teamPlayersAvailableToAdd);
-            
         }
     })
 

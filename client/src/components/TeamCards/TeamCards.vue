@@ -40,11 +40,13 @@
     const openAddTeamPlayerModal = async (team: Team, cardIndex: number) => {
         try {
             const teamPlayersResponse = await scoreBoardApi.get<Card[]>(`/get-all-users/${team.team_name}`)
-            
+            const allUsers: string[] = teamPlayersResponse.data.map(team => team.username)
+
             //Filter out the players that have already been added to a team for a given location.
-            addTeamNewPlayerData.value.teamPlayersAvailableToAdd = teamPlayersResponse.data.map(team => team.username).filter(playerFromServer => 
+            addTeamNewPlayerData.value.teamPlayersAvailableToAdd = allUsers.filter(playerFromServer => 
                 !team.players.some(teamPlayer => playerFromServer === teamPlayer)
             )
+            
             addTeamNewPlayerData.value.locationName = team.team_name
 
             //When a player is added to this specific team card, remove them from the list of team members
@@ -55,6 +57,11 @@
 
                 //Update the current team.
                 addTeamNewPlayerData.value.currentTeam = teamCards.value[cardIndex].players
+
+                //Filter out the player that was just added to this team.
+                addTeamNewPlayerData.value.teamPlayersAvailableToAdd = allUsers.filter(playerFromServer => 
+                    !teamCards.value[cardIndex].players.some(teamPlayer => playerFromServer === teamPlayer)
+                )
             }
 
             showAddTeamPlayerModal.value = true
