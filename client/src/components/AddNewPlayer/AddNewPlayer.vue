@@ -18,18 +18,25 @@
 </script>
 
 <template>
-    <h2 class="players-location">Players in {{ props.locationName }} avaible to add:</h2>
-    <div class="select-wrapper">
-        <select v-model="selectedPlayerName" name="team-players" id="team-players">
-            <option v-for="(player, index) in props.teamPlayersAvailableToAdd" :value="player" :key="index">
-                {{ player }}
-            </option>
-        </select>
-        <button @click="() => props.addPlayerToTeam(selectedPlayerName)">Add Player</button>
+    <h2 v-if="props.teamPlayersAvailableToAdd.length === 0" class="no-users">No users at {{ props.locationName }} left to add. </h2>
+    <div v-else>
+        <h2 class="players-location">Players in {{ props.locationName }} avaible to add:</h2>
+        <div class="select-wrapper">
+            <select v-model="selectedPlayerName" name="team-players" id="team-players">
+                <option v-for="(player, index) in props.teamPlayersAvailableToAdd" :value="player" :key="index">
+                    {{ player }}
+                </option>
+            </select>
+            <button @click="() => props.addPlayerToTeam(selectedPlayerName)">Add Player</button>
+        </div>
     </div>
 </template>
 
 <style scoped lang="scss">
+    .no-users{
+        text-align: center;
+    }
+
     .select-wrapper{
         text-align: center;
 

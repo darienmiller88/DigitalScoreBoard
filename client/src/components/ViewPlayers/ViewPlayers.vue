@@ -24,6 +24,10 @@
         max-height: 25vh;
         overflow-y: scroll;
 
+        @media screen and (min-width: 992px) {
+            max-height: 35vh;
+        }
+
         .player{
             display: flex;
             align-items: center;
@@ -46,7 +50,6 @@
 
             @media screen and (min-width: 992px) {
                 font-size: 26px;
-                max-height: 35vh;
             }
         }
 
