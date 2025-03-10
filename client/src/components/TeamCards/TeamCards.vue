@@ -72,7 +72,7 @@
         }
     }
 
-    const openViewTeamPlayersModal = (team: Team) => {
+    const openViewTeamPlayersModal = (team: Team, cardIndex: number) => {
         viewPlayersData.value.teamPlayers = team.players
         
         //This function will allo the ViewPlayer.vue component to remove a player from a team, and add them
@@ -81,6 +81,9 @@
             //Remove the player from the team.
             viewPlayersData.value.teamPlayers = viewPlayersData.value.teamPlayers.filter(teamPlayer => teamPlayer != playerToRemove)
             
+            //Do the same for the actual card value in the array of team cards.
+            teamCards.value[cardIndex].players = viewPlayersData.value.teamPlayers 
+
             //Afterwards, add them to the list of players that can be added to a team later.
             addTeamNewPlayerData.value.teamPlayersAvailableToAdd.push(playerToRemove)
         }
@@ -101,7 +104,7 @@
             :point-value="100"
             :team="team"
             :openAddTeamPlayerModal="() => openAddTeamPlayerModal(team, index)"
-            :openViewTeamPlayers="() => openViewTeamPlayersModal(team)"
+            :openViewTeamPlayers="() => openViewTeamPlayersModal(team, index)"
         />
     </div>
 
