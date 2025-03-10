@@ -1,6 +1,7 @@
 <script setup lang="ts">
     const props = defineProps<{
         teamPlayers: string[]
+        removePlayerFromTeam: (player: string) => void
     }>()
 </script>
 
@@ -9,7 +10,7 @@
     <div v-else class="players">
         <div class="player" v-for="(player, index) in props.teamPlayers" :key="index">
             {{ player }}
-            <button>Remove</button>
+            <button @click="() => props.removePlayerFromTeam(player)">Remove</button>
         </div>
     </div>
 </template>

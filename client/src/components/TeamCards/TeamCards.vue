@@ -17,7 +17,7 @@
     let showAddTeamPlayerModal = ref(false)
     let showTeamPlayersModal = ref(false)
 
-    //Data to be sent to the "AddNewPlayer" component via the modal.
+    //Data to be sent to the "AddNewPlayer.vue" component via the modal.
     let addTeamNewPlayerData = ref<{
         teamPlayersAvailableToAdd: string[],
         currentTeam: string[],
@@ -30,11 +30,13 @@
         addPlayerToTeam: () => {}
     })
 
-    //Data to be sent to the "ViewPlayers" component via the modal.
+    //Data to be sent to the "ViewPlayers.vue" component via the modal.
     let viewPlayersData = ref<{
         teamPlayers: string[]
+        removePlayerFromTeam: (player: string) => void
     }>({
-        teamPlayers: []
+        teamPlayers: [],
+        removePlayerFromTeam: () => {}
     })
 
     const openAddTeamPlayerModal = async (team: Team, cardIndex: number) => {
@@ -71,17 +73,21 @@
     }
 
     const openViewTeamPlayersModal = (team: Team) => {
-        try {            
-            viewPlayersData.value.teamPlayers = team.players
-            showTeamPlayersModal.value = true
-        } catch (error) {
-            console.log("error:", error)
+        viewPlayersData.value.teamPlayers = team.players
+        
+        //This function will allo the ViewPlayer.vue component to remove a player from a team, and add them
+        //back to the list of players that can be added to a team.
+        viewPlayersData.value.removePlayerFromTeam = (playerToRemove: string) => {
+            //Remove the player from the team.
+            viewPlayersData.value.teamPlayers = viewPlayersData.value.teamPlayers.filter(teamPlayer => teamPlayer != playerToRemove)
+            
+            //Afterwards, add them to the list of players that can be added to a team later.
+            addTeamNewPlayerData.value.teamPlayersAvailableToAdd.push(playerToRemove)
         }
+
+        //Finally, show the modal lololol.
+        showTeamPlayersModal.value = true
     }
-
-    // const removeUserFromTeam = () => {
-
-    // }
 </script>
 
 <template>
