@@ -4,6 +4,7 @@
     import GameButtonGroup from '../../components/GameButtonGroup/GameButtonGroup.vue';
     import AddUserToLocation from '../../components/AddUserToLocation/AddUserToLocation.vue';
     import LocationSelection from '../../components/LocationSelection/LocationSelection.vue';
+    import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import { onMounted, ref } from 'vue';
     import { darkModeStore } from "../../stores/darkModeStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
@@ -149,12 +150,15 @@
 
     <!-- Shows Create new Team game form when "Create new team game" button is clicked  --> 
     <TeamCards v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME" />
+
+    <!-- Saves a game to the server -->
+    <SaveGame />
  
-    <div class="save-wrapper">
+    <!-- <div class="save-wrapper">
         <button type="button" @click="addSavedGame" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
             Save Game
         </button>
-    </div>
+    </div> -->
 </template>
 
 <style scoped lang="scss">

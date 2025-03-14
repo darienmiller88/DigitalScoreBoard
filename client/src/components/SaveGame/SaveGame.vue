@@ -57,6 +57,17 @@
 </template>
 
 <style scoped lang="scss">
+    .dark-mode{
+        border: 2px var(--primary-color) solid;
+        color: var(--main-text-color);
+        background-color: transparent;
+    }
+
+    .light-mode{
+        color: var(--primary-color);
+        background-color: var(--main-text-color)
+    }
+    
      .save-wrapper{
         text-align: center;
         margin: 40px;
