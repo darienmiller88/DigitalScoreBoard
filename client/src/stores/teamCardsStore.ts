@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { Team } from "../types/types"
+import { Card, Team } from "../types/types"
 
 export const teamCardsStore = defineStore("teamCards", () => {
     const teamCards = ref<Team[]>([])
@@ -35,24 +35,53 @@ export const teamCardsStore = defineStore("teamCards", () => {
         teamCards.value[index].score = 0
     }
 
-    // const getWinner = (): Card => { 
-    //     let highestScore: Card = scoreCards.value[0]
+    const getWinningTeam = (): Card => { 
+        let highestScoringTeam: Team = teamCards.value[0]
 
-    //     for (let i = 1; i < scoreCards.value.length; i++) {
-    //         if (scoreCards.value[i].score > highestScore.score) {
-    //             highestScore = scoreCards.value[i];
-    //         }
-    //     }
+        for (let i = 1; i < teamCards.value.length; i++) {
+            if (teamCards.value[i].score > highestScoringTeam.score) {
+                highestScoringTeam = teamCards.value[i];
+            }
+        }
 
-    //     return highestScore
-    // }
+        return {
+            username: highestScoringTeam.team_name,
+            score: highestScoringTeam.score
+        }
+    }
+
+    const getTotalPoints = (): number => {
+        let totalPoints: number = 0
+
+        teamCards.value.forEach(team => {
+            totalPoints += team.score
+        })
+
+        return totalPoints
+    }
+
+    const getPlayers = (): Card[] => {
+        let players: Card[] = []; // Initialize players as an empty array of Card objects
+
+        teamCards.value.forEach(team => {
+            players = [...players, ...team.players.map(player => ({
+                username: player,
+                score: 0 
+            }))];
+        });
+
+        return players;
+    }
+
+    const getAveragePoints = (): number => {
+        return getTotalPoints() / teamCards.value.length
+    }
 
     const resetAllPoints = () => {
         teamCards.value.forEach(card => {
             card.score = 0
         })
     }
-
 
     return { 
         teamCards, 
@@ -62,7 +91,11 @@ export const teamCardsStore = defineStore("teamCards", () => {
         minusPoints, 
         resetPoints, 
         resetAllPoints, 
-        setTeamCards
+        setTeamCards,
+        getWinningTeam,
+        getTotalPoints,
+        getAveragePoints, 
+        getPlayers
     }
 }, {
     persist: true

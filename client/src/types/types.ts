@@ -19,7 +19,7 @@ export type SavedGame = {
     id:             string
     winner:         Card
     location?:      Location
-    teams?:         Location[]
+    teams?:         Team[]
     created_at:     string
     total_points:   number
     average_points: number
