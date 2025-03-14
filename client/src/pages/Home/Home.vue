@@ -6,52 +6,17 @@
     import LocationSelection from '../../components/LocationSelection/LocationSelection.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import { onMounted, ref } from 'vue';
-    import { darkModeStore } from "../../stores/darkModeStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-    import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
     import { storeToRefs } from 'pinia';
-    import { scoreBoardApi } from "../../api/api"
-    import { SavedGame } from "../../types/types"
 
     const isLoading = ref<boolean>(true)
 
     //Stateful methods
-    const { resetAllPoints, getWinner, totalPoints } = scoreCardsStore()
+    const { resetAllPoints, totalPoints } = scoreCardsStore()
 
     //Stateful variables
-    const { isDarkMode } = storeToRefs(darkModeStore())
-    const { scoreCards } = storeToRefs(scoreCardsStore())
-    const { selectedLocation } = storeToRefs(selectedLocationStore())
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
-
-    const addSavedGame = async () => {
-        try {
-
-            //If the selectedLocation object is NOT NULL, create a new saved game.
-            if (selectedLocation.value) {
-                const savedGame: SavedGame = {
-                    id: "",
-                    winner: getWinner(),
-                    location: {
-                        id: "",
-                        location_name: selectedLocation.value?.location_name,
-                        users: scoreCards.value
-                    },
-                    total_points: 0,
-                    average_points: 0.0,
-                    created_at: new Date().toLocaleDateString()
-                }
-    
-                const res = await scoreBoardApi.post("/save-game", savedGame)
-    
-                console.log("res: ", res.data)
-            }
-
-        } catch (error) {
-            console.log("err:", error);
-        }
-    }
 
     onMounted(async () => {
         // if (locationsFromLocalStorage.value.length) {
