@@ -120,7 +120,7 @@ func SaveGame(res http.ResponseWriter, req *http.Request){
 	// 	return
 	// }
 
-	// utilities.SendJSON(result.StatusCode, res, result.ResultData)
+	utilities.SendJSON(http.StatusOK, res, savedGame)
 }
 
 func AddLocation(res http.ResponseWriter, req *http.Request){

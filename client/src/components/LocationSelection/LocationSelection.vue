@@ -64,19 +64,19 @@
             //Assign the response from the server to the above variable to be referenced later.
             locations = locationsResponse.data
 
+            //Take all of the names from the all of the locations, and assign them to the options 
+            //variable to be listed on the dropdown menu.
+            setAllLocationOptions(locations.map(location => {          
+                return location.location_name
+            }))
+
             //if the user is on "CREATE_NEW_TEAM_GAME", load the remaining locations that have not been 
             //added to the game.
             if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
                 setRemainingLocationOptions(locations.filter(
                     location => !teamCards.value.some(team => team.team_name === location.location_name)
                 ).map(location => location.location_name))
-            } else {
-                //Take all of the names from the all of the locations, and assign them to the options 
-                //variable to be listed on the dropdown menu.
-                setAllLocationOptions(locations.map(location => {          
-                    return location.location_name
-                }))
-            }            
+            }           
 
             //IF: If there is no current location set, set it now, and the current name for the options dropdown.
             //ELSE: Assign the current name of the selectedLocation type to the selectedLocationName
@@ -87,6 +87,7 @@
                 console.log("selectedLocation:", selectedLocation.value);
             }else if (currentButtonGroupState.value === ButtonState.ADD_NEW_USER) {
                 selectedLocationName.value = selectedLocation.value.location_name
+                // selectedTeamGameLocationName.value = selectedLocation.value.location_name
             }else{
                 selectedLocationName.value = remainingLocationOptions.value[0]   
             }
@@ -106,30 +107,32 @@
 </script>
 
 <template>
-    <div  :class="`location ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
-        <div class="current-location" v-if="currentButtonGroupState != ButtonState.CREATE_NEW_TEAM_GAME">
-            Current Location: 
-        </div> 
+    <div :class="`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
         <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
+        <div class="location" v-if="!isLoading && currentButtonGroupState === ButtonState.ADD_NEW_USER" >
+            <span class="current-location">Current Location:</span>
+            <!-- <span v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME">Team game Location:</span> -->
 
-        <!-- If the user is creating a new team game, choose this select tag. -->
-        <Select 
-            v-else-if="!isLoading && (remainingLocationOptions.length && currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME)"
-            :options="remainingLocationOptions"
-            :optionClicked="optionClicked"
-        />
-        
-        <!-- Otherwise choose this one -->
-        <Select 
-            v-else-if="!isLoading && currentButtonGroupState == ButtonState.ADD_NEW_USER"
-            :options="allLocationOptions"
-            :optionClicked="optionClicked"
-        />
-        <button 
-            @click="addTeam"
-            v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME && remainingLocationOptions.length && !isLoading" 
-            class="add-team-button"
-        >Add Team</button> 
+            <Select 
+                :options="allLocationOptions"
+                :optionClicked="optionClicked"
+            />
+        </div>
+
+        <!-- If the user is creating a new team game, add this select tag. -->
+        <div class="location" v-if="!isLoading && currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME">
+            <Select 
+                v-if="remainingLocationOptions.length"
+                :options="remainingLocationOptions"
+                :optionClicked="optionClicked"
+            />
+            
+            <button 
+                @click="addTeam"
+                v-if="remainingLocationOptions.length" 
+                class="add-team-button"
+            >Add Team</button> 
+        </div>
     </div>
 </template>
 

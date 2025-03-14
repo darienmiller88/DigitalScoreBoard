@@ -4,6 +4,7 @@ import { Location } from "../types/types"
 
 export const selectedLocationStore = defineStore("selectedLocation", () => {
     const selectedLocationName = ref<string>("")
+    const selectedTeamGameLocationName = ref<string>("")
     const selectedLocation = ref<Location>({
         id: "",
         users: [],
@@ -15,7 +16,7 @@ export const selectedLocationStore = defineStore("selectedLocation", () => {
         selectedLocationName.value = location.location_name
     }
 
-    return { selectedLocation, selectedLocationName, setSelectedLocation }
+    return { selectedLocation, selectedLocationName, selectedTeamGameLocationName, setSelectedLocation }
 }, {
     persist: true
 })

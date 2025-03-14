@@ -53,8 +53,8 @@
         position: fixed;
         top: 0;
         z-index: 2;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
 
         background-color: rgba($color: #000000, $alpha: 0.4);
         transition: 0.3s;
@@ -106,7 +106,6 @@
                 background-color: white;
                 padding: 10px;
                 border-bottom: 1px solid $borderColor;
-                // border: 2px solid yellow;
             }
 
             .modal_footer{
@@ -143,7 +142,6 @@
         @media screen and (min-width: 992px) {
             .modal_body{
                 width: 50vw;
-                // height: 100vh;
             }
         }
     }

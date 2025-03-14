@@ -25,7 +25,7 @@
         <!--  -->
         <div class="location-date-wrapper">
             <div class="location">Location: 
-                <span>
+                <span v-if="props.location">
                     {{ props.location.location_name }}
                 </span>
             </div>

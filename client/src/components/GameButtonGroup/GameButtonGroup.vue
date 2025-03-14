@@ -39,15 +39,8 @@
             }
         }
 
-        if (buttonState === ButtonState.ADD_NEW_USER) {
-            //When "ADD_NEW_USER" is clicked, load all locations from the server, and add them to options.
-            setAllLocationOptions(locations.map(location => {          
-                return location.location_name
-            }))
-
-            selectedLocationName.value = selectedLocation.value.location_name
-            setButtonActive(ButtonState.ADD_NEW_USER)
-        } else if(buttonState === ButtonState.CREATE_NEW_TEAM_GAME) {
+        selectedLocationName.value = selectedLocation.value.location_name
+        if(buttonState === ButtonState.CREATE_NEW_TEAM_GAME) {
             //When "CREATE_NEW_TEAM_GAME" is clicked, set options to the locations that have NOT
             //been added as a team card.
             setRemainingLocationOptions(locations.filter(
@@ -56,6 +49,13 @@
 
             selectedLocationName.value = remainingLocationOptions.value[0]            
             setButtonActive(ButtonState.CREATE_NEW_TEAM_GAME)
+        }else if(buttonState == ButtonState.ADD_NEW_USER){
+            //load all locations from the server, and add them to options.
+            setAllLocationOptions(locations.map(location => {          
+                return location.location_name
+            }))
+
+            setButtonActive(ButtonState.ADD_NEW_USER)
         }else{
             setButtonActive(ButtonState.CREATE_NEW_GAME)
         }
