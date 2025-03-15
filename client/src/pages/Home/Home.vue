@@ -95,19 +95,12 @@
         </button>
     </div>
 
-    <div 
-        v-if="currentButtonGroupState === ButtonState.ADD_NEW_USER" 
-        class="total-points"
-    >
+    <div v-if="currentButtonGroupState === ButtonState.ADD_NEW_USER" class="total-points">
         Total Points: {{ totalPoints() }} 
     </div>
 
     <!-- Shows Create new game form when "Create new game" button is clicked  -->
-    <div 
-        class="create-new-game"
-        v-if="currentButtonGroupState == ButtonState.CREATE_NEW_GAME"
-    >
-
+    <div class="create-new-game" v-if="currentButtonGroupState == ButtonState.CREATE_NEW_GAME">
     </div>
 
     <!-- Shows all users when "Add new users" is clicked -->
@@ -118,12 +111,6 @@
 
     <!-- Saves a game to the server -->
     <SaveGame />
- 
-    <!-- <div class="save-wrapper">
-        <button type="button" @click="addSavedGame" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
-            Save Game
-        </button>
-    </div> -->
 </template>
 
 <style scoped lang="scss">

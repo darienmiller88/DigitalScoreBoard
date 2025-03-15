@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { storeToRefs } from 'pinia';
-    import { selectedLocationStore } from '../../stores/selectedLocationStore';
+    // import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { SavedGame } from '../../types/types';
     import { teamCardsStore } from '../../stores/teamCardsStore';
     import { scoreBoardApi } from '../../api/api';
@@ -8,7 +8,7 @@
     import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
 
     //Stateful methods
-    const { selectedLocation } = storeToRefs(selectedLocationStore())
+    // const { selectedLocation } = storeToRefs(selectedLocationStore())
     const { getWinningTeam, getTotalPoints, getAveragePoints, getPlayers } = teamCardsStore()
 
     //Stateful variables
@@ -20,7 +20,7 @@
         try {
 
             //If the selectedLocation object is NOT NULL, create a new saved game.
-            if (selectedLocation.value && currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
+            if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
                 const savedGame: SavedGame = {
                     id: "",
                     winner: getWinningTeam(),
@@ -39,7 +39,6 @@
                 
                 const res = await scoreBoardApi.post("/save-game", savedGame)
                 console.log("res: ", res.data)
-    
             }
 
         } catch (error) {
@@ -67,7 +66,7 @@
         color: var(--primary-color);
         background-color: var(--main-text-color)
     }
-    
+
      .save-wrapper{
         text-align: center;
         margin: 40px;

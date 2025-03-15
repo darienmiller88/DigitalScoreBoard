@@ -5,7 +5,6 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"github.com/go-ozzo/ozzo-validation"
-
 )
 
 type Location struct {
@@ -30,3 +29,7 @@ func (l *Location) Validate() error{
 		validation.Field(&l.LocationName, validation.Required),
 	)
 }
+
+// func (l *Location) findLocation() error{
+
+// }
