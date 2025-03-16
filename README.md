@@ -10,11 +10,14 @@ finishing touches I would like to make.
 * [Go](https://github.com/go-chi/chi)
 * [MongoDB-Atlas](https://www.mongodb.com/cloud/atlas)
 
-## Home Page Dark Mode
+## Home Page Dark Mode, team mode
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/4e030cc6-a890-4872-b207-5043f5a33748" />
 
-## Home Page Light Mode
-<img width="959" alt="image" src="https://github.com/user-attachments/assets/6d2d1208-439c-4248-93e5-ad80ebb7d10b" />
+## Home Page Light Mode, team mode
+<img width="955" alt="image" src="https://github.com/user-attachments/assets/087d5c21-9542-4d82-9650-750a84741d5c" />
+
+## Home Page, Add new user
+<img width="955" alt="image" src="https://github.com/user-attachments/assets/72e1446c-1c56-42c2-9062-8ee77d5050f1" />
 
 ## Saved games
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/f28c5dae-dcfb-493c-befd-532216690329" />
