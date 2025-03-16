@@ -31,11 +31,17 @@ func (l *Location) InitCreatedAtAndUpdatedAt(){
 func (l *Location) Validate() error{
 	return validation.ValidateStruct(
 		l,
-		validation.Field(&l.LocationName, validation.Required),
+		validation.Field(&l.LocationName, validation.Required, validation.By(l.findLocation)),
 	)
 }
 
-func (l *Location) findLocation() error{
+func (l *Location) findLocation(field interface{}) error{
+	locationName, ok := field.(string)
+
+	if !ok{
+		return fmt.Errorf("could not parse %T into object", field)
+	}
+
 	locationsCollection := database.GetLocationsCollection()
 	result, err := locationsCollection.Find(context.Background(), bson.D{})
 
@@ -50,7 +56,7 @@ func (l *Location) findLocation() error{
 	}
 
 	for _, location := range locations{
-		if l.LocationName == location.LocationName {
+		if locationName == location.LocationName {
 			return nil
 		}
 	}
