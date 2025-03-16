@@ -1,10 +1,15 @@
 package models
 
 import (
+	"context"
+	"fmt"
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"github.com/go-ozzo/ozzo-validation"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+
+	"DigitalScoreBoard/api/database"
 )
 
 type Location struct {
@@ -30,6 +35,26 @@ func (l *Location) Validate() error{
 	)
 }
 
-// func (l *Location) findLocation() error{
+func (l *Location) findLocation() error{
+	locationsCollection := database.GetLocationsCollection()
+	result, err := locationsCollection.Find(context.Background(), bson.D{})
 
-// }
+	if err != nil {
+		return err
+	}
+
+	locations := []Location{}
+
+	if err := result.All(context.Background(), &locations); err != nil {
+		return err
+	}
+
+	for _, location := range locations{
+		if l.LocationName == location.LocationName {
+			return nil
+		}
+	}
+
+	return fmt.Errorf("Location name\"%s\" is not a valid location name. Please choose from" +
+		"the following:  ", l.LocationName)
+}
