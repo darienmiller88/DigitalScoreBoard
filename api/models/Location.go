@@ -61,6 +61,12 @@ func (l *Location) findLocation(field interface{}) error{
 		}
 	}
 
-	return fmt.Errorf("Location name\"%s\" is not a valid location name. Please choose from" +
-		"the following:  ", l.LocationName)
+	locationNames := make([]string, len(locations)) 
+
+	for i, location := range locations {
+		locationNames[i] = location.LocationName
+	}	
+
+	return fmt.Errorf("Location name\"%s\" is not a valid location name. Please choose from " +
+		"the following: %v ", l.LocationName, locationNames)
 }

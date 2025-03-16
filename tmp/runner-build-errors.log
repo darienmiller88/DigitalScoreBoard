@@ -1,2 +1,0 @@
-# DigitalScoreBoard/api/models
-api\models\Location.go:59:22: invalid operation: locationName == location.LocationName (mismatched types UserCard and string)
