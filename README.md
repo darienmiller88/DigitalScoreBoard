@@ -2,7 +2,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1715535d-5c1e-46d4-80e2-fba5816cf2ca/deploy-status)](https://app.netlify.com/sites/messengerv2/deploys)
 
 I am volunteering to assist a co-worker in designing them a score board to more efficiently keep track of the 
-score of everyone participating! So far, the app is able to add users to a preset list of locations, save each game, and view each saved game. I am currently implenmenting team features which allows users to create teams based on the location, and add players from that location to the team. I'm mostly finished, but there are some
+score of everyone participating! So far, the app is able to add users to a preset list of locations, save each game, and view each saved game. I am currently implementing team features which allows users to create teams based on the location, and add players from that location to the team. I'm mostly finished, but there are some
 finishing touches I would like to make.
 
 ### Built With:
@@ -11,7 +11,7 @@ finishing touches I would like to make.
 * [MongoDB-Atlas](https://www.mongodb.com/cloud/atlas)
 
 ## Home Page Dark Mode
-<img width="959" alt="image" src="https://github.com/user-attachments/assets/f861030a-55f2-4d4a-a763-3ac84d9857ae" />
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/4e030cc6-a890-4872-b207-5043f5a33748" />
 
 ## Home Page Light Mode
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/6d2d1208-439c-4248-93e5-ad80ebb7d10b" />
