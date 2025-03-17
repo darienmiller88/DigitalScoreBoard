@@ -22,6 +22,10 @@ finishing touches I would like to make.
 ## Add player to team
 <img width="956" alt="image" src="https://github.com/user-attachments/assets/3d6c8a6b-9052-4542-8830-6a027da0d0e7" />
 
+## View team
+<img width="959" alt="image" src="https://github.com/user-attachments/assets/d1d37f6c-38e8-427e-a8a8-591eb49053f1" />
+
+
 ## Saved games
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/f28c5dae-dcfb-493c-befd-532216690329" />
 
