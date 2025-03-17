@@ -35,6 +35,7 @@ func (l *Location) Validate() error{
 	)
 }
 
+//Check to see if the location name is a valid location name based on a pre-defined set I have in mongoDB.
 func (l *Location) findLocation(field interface{}) error{
 	locationName, ok := field.(string)
 
@@ -55,6 +56,7 @@ func (l *Location) findLocation(field interface{}) error{
 		return err
 	}
 
+	//Check to see if there's a match between the location name the user sent, and the one's in the database.
 	for _, location := range locations{
 		if locationName == location.LocationName {
 			return nil
