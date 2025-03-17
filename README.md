@@ -3,7 +3,7 @@
 
 I am volunteering to assist a co-worker in designing them a score board to more efficiently keep track of the 
 score of everyone participating! So far, the app is able to add users to a preset list of locations, save each game, and view each saved game. I am currently implementing team features which allows users to create teams based on the location, and add players from that location to the team. I'm mostly finished, but there are some
-finishing touches I would like to make.
+finishing touches I would like to make. Thi as ued in a tournament at my job!
 
 ### Built With:
 * [Vue](https://vuejs.org/)
