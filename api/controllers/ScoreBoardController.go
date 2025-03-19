@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"net/http"
 
-	"DigitalScoreBoard/api/database"
+	// "DigitalScoreBoard/api/database"
 	"DigitalScoreBoard/api/models"
 	"DigitalScoreBoard/api/utilities"
 	"DigitalScoreBoard/api/services"
 
 	"github.com/go-chi/chi/v5"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	// "go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 const(
@@ -137,14 +137,14 @@ func AddLocation(res http.ResponseWriter, req *http.Request){
 	}
 
 	location.InitCreatedAtAndUpdatedAt()
-	result, err := database.GetLocationsCollection().InsertOne(req.Context(), location)
+	// result, err := database.GetLocationsCollection().InsertOne(req.Context(), location)
 
-	if err != nil {
-		http.Error(res, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	// if err != nil {
+	// 	http.Error(res, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
 
-	location.ID = result.InsertedID.(primitive.ObjectID)
+	// location.ID = result.InsertedID.(primitive.ObjectID)
 	utilities.SendJSON(http.StatusOK, res, location)
 }
 

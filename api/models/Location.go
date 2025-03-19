@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"time"
+	"strings"
 
 	"github.com/go-ozzo/ozzo-validation"
 	"go.mongodb.org/mongo-driver/bson"
@@ -69,6 +70,6 @@ func (l *Location) findLocation(field interface{}) error{
 		locationNames[i] = location.LocationName
 	}	
 
-	return fmt.Errorf("Location name\"%s\" is not a valid location name. Please choose from " +
-		"the following: %v ", l.LocationName, locationNames)
+	return fmt.Errorf("Location name *%s* is not a valid location name. Please choose from " +
+		"the following: [%s] ", l.LocationName, strings.Join(locationNames, ", "))
 }
