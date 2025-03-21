@@ -1,6 +1,5 @@
 <script setup lang="ts">
     import { storeToRefs } from 'pinia';
-    // import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { SavedGame } from '../../types/types';
     import { teamCardsStore } from '../../stores/teamCardsStore';
     import { scoreBoardApi } from '../../api/api';
@@ -8,7 +7,6 @@
     import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
 
     //Stateful methods
-    // const { selectedLocation } = storeToRefs(selectedLocationStore())
     const { getWinningTeam, getTotalPoints, getAveragePoints, getPlayers } = teamCardsStore()
 
     //Stateful variables

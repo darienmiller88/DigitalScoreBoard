@@ -112,6 +112,12 @@ func SaveGame(res http.ResponseWriter, req *http.Request){
 	}
 
 	fmt.Println("savedGame:", savedGame)
+
+	if err := savedGame.Validate(); err != nil{
+		fmt.Println("err", err)
+		utilities.SendJSON(http.StatusBadRequest, res, err)
+		return
+	}
 	// result := services.AddSavedGame(req, savedGame)
 
 
