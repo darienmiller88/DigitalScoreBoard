@@ -42,8 +42,12 @@ func (s *SavedGame) validateLocation(field interface{}) error{
 		return fmt.Errorf("could not parse %T into object", field)
 	}
 
-	if location == nil && s.Teams == nil{
+	if location == nil && s.Teams == nil {
 		return fmt.Errorf("fields 'location' and 'teams' both cannot be empty")
+	}
+
+	if location == nil && s.Teams != nil {
+		return fmt.Errorf("fields 'teams' requires field 'location'")
 	}
 
 	return s.Location.Validate()
