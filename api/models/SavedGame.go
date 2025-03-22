@@ -43,7 +43,7 @@ func (s *SavedGame) validateLocation(field interface{}) error{
 	}
 
 	if location == nil && s.Teams == nil{
-		return fmt.Errorf("fields 'location' and 'teams' both cannot be nil")
+		return fmt.Errorf("fields 'location' and 'teams' both cannot be empty")
 	}
 
 	return s.Location.Validate()
