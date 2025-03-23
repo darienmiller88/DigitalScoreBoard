@@ -108,7 +108,9 @@
 
 <template>
     <div :class="`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
-        <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
+        <div class="icon-wrapper">
+            <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
+        </div>
         <div class="location" v-if="!isLoading && currentButtonGroupState === ButtonState.ADD_NEW_USER" >
             <span class="current-location">Current Location:</span>
             <!-- <span v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME">Team game Location:</span> -->
@@ -137,6 +139,11 @@
 </template>
 
 <style scoped lang="scss">
+    .icon-wrapper{
+        text-align: center;
+        font-size: 45px;
+    }
+
     .location{
         text-align: center;
         
