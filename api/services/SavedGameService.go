@@ -13,11 +13,13 @@ import (
 
 func GetAllSavedGames(req *http.Request) models.Result[[]models.SavedGame] {
 	savedGamesCollection := database.GetSavedGamesCollections()
-	savedGamesResult     := models.Result[[]models.SavedGame]{}
 	findResult, err      := savedGamesCollection.Find(req.Context(), bson.D{})
 	
-	savedGamesResult.StatusCode = http.StatusInternalServerError
-	savedGamesResult.Err = err
+	//Initialize the result after trying to find all current saved games.
+	savedGamesResult     := models.Result[[]models.SavedGame]{
+		StatusCode: http.StatusInternalServerError,
+		Err: err,
+	}
 
 	if err != nil {
 		return savedGamesResult
