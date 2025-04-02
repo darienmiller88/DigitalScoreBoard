@@ -20,8 +20,35 @@ func (t *Team) Validate() error{
 	return validation.ValidateStruct(
 		t,
 		validation.Field(&t.TeamName, validation.By(t.checkTeamNameInLocations)),
+		// validation.Field(&t.Players, validation.By(t.checkTeamPlayers)),
 	)
 }
+
+// func (t *Team) checkTeamPlayers(field interface{}) error {
+// 	players, ok := field.([]string)
+
+// 	if !ok{
+// 		return fmt.Errorf("could not parse %T into object", field)
+// 	}
+
+// 	locations, err := getLocations()
+
+// 	if err != nil{
+// 		return err
+// 	}
+	
+// 	chosenLocationWithTeamName := Location{}
+
+// 	for _, location := range locations {
+// 		if t.TeamName == location.LocationName {
+// 			chosenLocationWithTeamName = location
+// 			break
+// 		}
+// 	}
+
+// 	slices.Index()
+
+// }
 
 func (t *Team) checkTeamNameInLocations(field interface{}) error{
 	locationName, ok := field.(string)
