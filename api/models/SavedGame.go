@@ -25,6 +25,7 @@ func (s *SavedGame) Validate() error{
 		s,
 		validation.Field(&s.Winner, validation.By(s.findWinner)),
 		validation.Field(&s.Location, validation.By(s.validateLocation)),
+		validation.Field(&s.Teams, validation.By(s.validateTeams)),
 	)
 }
 
@@ -51,6 +52,14 @@ func (s *SavedGame) validateLocation(field interface{}) error{
 	}
 
 	return s.Location.Validate()
+}
+
+func (s *SavedGame) validateTeams(field interface{}) error{
+	if len(*s.Teams) < 2 {
+		return fmt.Errorf("please include at least two teams")
+	}
+
+	return nil
 }
 
 func (s *SavedGame) findWinner(field interface{}) error{
@@ -81,7 +90,15 @@ func (s *SavedGame) CalcAveragePoints(){
 }
 
 func (s *SavedGame) CalcTotalPoints(){
-	for _, user := range s.Location.Users {
-		s.TotalPoints += user.Score
+	//If the user is playing a team game, calculate the total points using the teams, otherwise calculate it
+	//using each player at location.
+	if s.Teams != nil {
+		for _, team := range *s.Teams {
+			s.TotalPoints += team.Score
+		}
+	} else {
+		for _, user := range s.Location.Users {
+			s.TotalPoints += user.Score
+		}
 	}
 }

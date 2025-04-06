@@ -16,8 +16,6 @@
 
     const addSavedGame = async () => {
         try {
-
-            //If the selectedLocation object is NOT NULL, create a new saved game.
             if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
                 const savedGame: SavedGame = {
                     id: "",
