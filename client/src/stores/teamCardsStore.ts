@@ -60,6 +60,10 @@ export const teamCardsStore = defineStore("teamCards", () => {
         return totalPoints
     }
 
+    const addPlayerToTeam = (index: number, player: string) => {
+
+    }
+
     const getPlayers = (): Card[] => {
         let players: Card[] = []; // Initialize players as an empty array of Card objects
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { ref, watchEffect } from 'vue';
 
-    let selectedPlayerName = ref<string>("heloo")
+    let selectedPlayerName = ref<string>("")
     
     const props = defineProps<{
         teamPlayersAvailableToAdd: string[]
