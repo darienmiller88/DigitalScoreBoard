@@ -61,7 +61,7 @@ export const teamCardsStore = defineStore("teamCards", () => {
     }
 
     const addPlayerToTeam = (index: number, player: string) => {
-
+        teamCards.value[index].players.push(player)
     }
 
     const getPlayers = (): Card[] => {
@@ -90,6 +90,7 @@ export const teamCardsStore = defineStore("teamCards", () => {
     return { 
         teamCards, 
         addTeamCard, 
+        addPlayerToTeam,
         removeTeamCard, 
         addPoints, 
         minusPoints, 
