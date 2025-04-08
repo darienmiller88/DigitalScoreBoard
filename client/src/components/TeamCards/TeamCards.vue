@@ -11,6 +11,8 @@
     import AddNewPlayer from "../AddNewPlayer/AddNewPlayer.vue"
     import ViewPlayers from '../ViewPlayers/ViewPlayers.vue';
     
+    const { addPlayerToTeam } = teamCardsStore()
+
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { teamCards } = storeToRefs(teamCardsStore())
     
@@ -56,7 +58,7 @@
             addTeamNewPlayerData.value.addPlayerToTeam = (player: string) => {
                 
                 //Add this player to this specific card at this index.
-                teamCards.value[cardIndex].players.push(player)
+                addPlayerToTeam(cardIndex, player)
 
                 //Update the current team.
                 addTeamNewPlayerData.value.currentTeam = teamCards.value[cardIndex].players
