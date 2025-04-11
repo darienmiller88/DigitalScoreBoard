@@ -29,11 +29,11 @@ export const selectedTeamLocationStore = defineStore("selectedTeamLocation", () 
         location_name: ""
     })
 
-    const setSelectedLocation = (location: Location) => {
+    const setSelectedTeamLocation = (location: Location) => {
         selectedTeamLocation.value = location
     }
 
-    return { selectedTeamLocation, selectedTeamGameLocationName, setSelectedLocation }
+    return { selectedTeamLocation, selectedTeamGameLocationName, setSelectedTeamLocation }
 }, {
     persist: true
 })

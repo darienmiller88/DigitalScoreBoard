@@ -3,7 +3,7 @@
     import { onMounted, ref } from 'vue';
     import { buttonActiveStore, ButtonState } from "../../stores/buttonActiveStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-    import { selectedLocationStore } from '../../stores/selectedLocationStore';
+    import { selectedLocationStore, selectedTeamLocationStore } from '../../stores/selectedLocationStore';
     import { teamCardsStore } from "../../stores/teamCardsStore";
     import { optionsStore } from "../../stores/optionsStore"; 
     import { storeToRefs } from "pinia";
@@ -21,7 +21,8 @@
     const { allLocationOptions, remainingLocationOptions } = storeToRefs(optionsStore())
 
     //Stateful methods
-    const { setCards } = scoreCardsStore()
+    const { setUserCards } = scoreCardsStore()
+    const { selectedTeamLocation } = selectedTeamLocationStore()
     const { setSelectedLocation } = selectedLocationStore()
     const { addTeamCard } = teamCardsStore()
     const { setRemainingLocationOptions, setAllLocationOptions } = optionsStore()
@@ -35,8 +36,13 @@
         try {
             const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${selectedValue}`)
             
-            setCards(locationResponse.data.users)     
-            setSelectedLocation(locationResponse.data)               
+            if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
+
+            } else if(currentButtonGroupState.value === ButtonState.ADD_NEW_USER){
+                setUserCards(locationResponse.data.users)     
+                setSelectedLocation(locationResponse.data)               
+            }
+
         } catch (error) {
             console.log("err in clicking option:", error);
         }
@@ -94,7 +100,7 @@
 
             //If there are no current cards set, and there is a selectedLocation, set the cards for the location.
             if (!scoreCards.value.length && selectedLocation.value) {
-                setCards(selectedLocation.value.users)
+                setUserCards(selectedLocation.value.users)
             }
 
             console.log("selectedLocationName:", selectedLocationName.value);

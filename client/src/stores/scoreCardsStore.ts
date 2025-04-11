@@ -5,7 +5,7 @@ import { Card } from "../types/types"
 export const scoreCardsStore = defineStore("scoreCards", () => {
     const scoreCards = ref<Card[]>([])
 
-    const setCards = (cards: Card[]) => {
+    const setUserCards = (cards: Card[]) => {
         scoreCards.value = cards
     }
 
@@ -65,7 +65,7 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         minusPoints, 
         resetPoints, 
         resetAllPoints, 
-        setCards ,
+        setUserCards,
         getWinner, 
         totalPoints
     }
