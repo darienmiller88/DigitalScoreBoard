@@ -17,12 +17,14 @@
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation, selectedLocationName } = storeToRefs(selectedLocationStore())
+    const { selectedTeamGameLocation, selectedTeamGameLocationName } = storeToRefs(selectedTeamLocationStore())
+
     const { teamCards } = storeToRefs(teamCardsStore())
     const { allLocationOptions, remainingLocationOptions } = storeToRefs(optionsStore())
 
     //Stateful methods
     const { setUserCards } = scoreCardsStore()
-    const { selectedTeamLocation } = selectedTeamLocationStore()
+    const { setSelectedTeamLocation } = selectedTeamLocationStore()
     const { setSelectedLocation } = selectedLocationStore()
     const { addTeamCard } = teamCardsStore()
     const { setRemainingLocationOptions, setAllLocationOptions } = optionsStore()
@@ -37,7 +39,7 @@
             const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${selectedValue}`)
             
             if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
-
+                setSelectedTeamLocation(locationResponse.data)
             } else if(currentButtonGroupState.value === ButtonState.ADD_NEW_USER){
                 setUserCards(locationResponse.data.users)     
                 setSelectedLocation(locationResponse.data)               
@@ -94,6 +96,9 @@
             }else if (currentButtonGroupState.value === ButtonState.ADD_NEW_USER) {
                 selectedLocationName.value = selectedLocation.value.location_name
                 // selectedTeamGameLocationName.value = selectedLocation.value.location_name
+            }else if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME ) {
+                // selectedLocationName.value = selectedLocation.value.location_name
+                selectedTeamGameLocationName.value = selectedTeamGameLocation.value.location_name
             }else{
                 selectedLocationName.value = remainingLocationOptions.value[0]   
             }
