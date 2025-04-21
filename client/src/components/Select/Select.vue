@@ -7,7 +7,7 @@
 
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { selectedLocationName } = storeToRefs(selectedLocationStore())
-    const { selectedTeamLocation } = storeToRefs(selectedTeamLocationStore())
+    const { selectedTeamGameLocation } = storeToRefs(selectedTeamLocationStore())
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     
     const props = defineProps<{
@@ -16,7 +16,7 @@
     }>()
 
     const selectModel = computed(() => {
-        return currentButtonGroupState.value == ButtonState.CREATE_NEW_TEAM_GAME ? selectedTeamLocation : selectedLocationName
+        return currentButtonGroupState.value == ButtonState.CREATE_NEW_TEAM_GAME ? selectedTeamGameLocation : selectedLocationName
     })
 
     onMounted(() => {
