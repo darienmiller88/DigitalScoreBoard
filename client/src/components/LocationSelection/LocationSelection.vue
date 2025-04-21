@@ -40,9 +40,11 @@
             
             if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
                 setSelectedTeamLocation(locationResponse.data)
-            } else if(currentButtonGroupState.value === ButtonState.ADD_NEW_USER){
+            } else if(currentButtonGroupState.value === ButtonState.CREATE_NEW_GAME){
                 setUserCards(locationResponse.data.users)     
                 setSelectedLocation(locationResponse.data)               
+            }else{
+
             }
 
         } catch (error) {
@@ -93,7 +95,7 @@
                 selectedLocationName.value = allLocationOptions.value[0]
                 setSelectedLocation(locations[0])
                 console.log("selectedLocation:", selectedLocation.value);
-            }else if (currentButtonGroupState.value === ButtonState.ADD_NEW_USER) {
+            }else if (currentButtonGroupState.value === ButtonState.CREATE_NEW_GAME) {
                 selectedLocationName.value = selectedLocation.value.location_name
                 // selectedTeamGameLocationName.value = selectedLocation.value.location_name
             }else if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME ) {
@@ -122,7 +124,7 @@
         <div class="icon-wrapper">
             <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
         </div>
-        <div class="location" v-if="!isLoading && currentButtonGroupState === ButtonState.ADD_NEW_USER" >
+        <div class="location" v-if="!isLoading && currentButtonGroupState === ButtonState.CREATE_NEW_GAME" >
             <span class="current-location">Current Location:</span>
             <!-- <span v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME">Team game Location:</span> -->
 

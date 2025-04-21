@@ -2,14 +2,8 @@
     import ScoreCard from '../ScoreCard/ScoreCard.vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { storeToRefs } from 'pinia';
-    // import { onMounted } from 'vue';
 
     const { scoreCards } = storeToRefs(scoreCardsStore())
-
-    // onMounted(() => {
-    //     console.log("cards:", scoreCards.value);
-        
-    // })
 </script>
 
 <template>

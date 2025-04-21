@@ -95,16 +95,16 @@
         </button>
     </div>
 
-    <div v-if="currentButtonGroupState === ButtonState.ADD_NEW_USER" class="total-points">
+    <div v-if="currentButtonGroupState === ButtonState.CREATE_NEW_GAME" class="total-points">
         Total Points: {{ totalPoints() }} 
     </div>
 
     <!-- Shows Create new game form when "Create new game" button is clicked  -->
-    <div class="create-new-game" v-if="currentButtonGroupState == ButtonState.CREATE_NEW_GAME">
+    <div class="add-new-user" v-if="currentButtonGroupState == ButtonState.ADD_NEW_USER">
     </div>
 
     <!-- Shows all users when "Add new users" is clicked -->
-    <ScoreCards v-if="currentButtonGroupState === ButtonState.ADD_NEW_USER" />
+    <ScoreCards v-if="currentButtonGroupState === ButtonState.CREATE_NEW_GAME" />
 
     <!-- Shows Create new Team game form when "Create new team game" button is clicked  --> 
     <TeamCards v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME" />
