@@ -2,8 +2,8 @@
     import { selectedLocationStore, selectedTeamLocationStore } from '../../stores/selectedLocationStore';
     import { storeToRefs } from "pinia";
     import { darkModeStore } from "../../stores/darkModeStore"
-    import { computed, onMounted } from 'vue';
-    import { ButtonState, buttonActiveStore } from "../../stores/buttonActiveStore"
+    import { buttonActiveStore } from "../../stores/buttonActiveStore"
+    import { Location } from "../../types/types"
 
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { selectedLocationName } = storeToRefs(selectedLocationStore())
@@ -12,21 +12,14 @@
     
     const props = defineProps<{
         optionClicked: (event: Event) => void
+        selectModel: string | Location
         options: string[]
     }>()
-
-    const selectModel = computed(() => {
-        return currentButtonGroupState.value == ButtonState.CREATE_NEW_TEAM_GAME ? selectedTeamGameLocation : selectedLocationName
-    })
-
-    onMounted(() => {
-        console.log("selectModel: ", selectModel)
-    })
 </script>
 
 <template>
      <select 
-        v-model="selectedLocationName"
+        :value="selectModel"
         name="locations" 
         :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`" 
         @change="props.optionClicked"

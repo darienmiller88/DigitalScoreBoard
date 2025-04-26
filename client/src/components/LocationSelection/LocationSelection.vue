@@ -17,7 +17,7 @@
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation, selectedLocationName } = storeToRefs(selectedLocationStore())
-    const { selectedTeamGameLocation, selectedTeamGameLocationName } = storeToRefs(selectedTeamLocationStore())
+    const { selectedTeamGameLocation, selectedTeamGameLocationName, teamGameLocationName } = storeToRefs(selectedTeamLocationStore())
 
     const { teamCards } = storeToRefs(teamCardsStore())
     const { allLocationOptions, remainingLocationOptions } = storeToRefs(optionsStore())
@@ -51,6 +51,25 @@
             console.log("err in clicking option:", error);
         }
     }
+
+    const changeTeamGameLocation = async (event: Event) => {
+        const selectedValue = (event.target as HTMLSelectElement).value;
+
+        try {
+            const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${selectedValue}`)
+            setSelectedTeamLocation(locationResponse.data)
+        } catch (error) {
+            console.log("err in clicking option:", error);
+        }
+    }
+
+    // const getAllLocations = async () => {
+    //     try {
+    //         const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${selectedValue}`)
+    //     } catch (error) {
+    //         console.log("err in clicking option:", error);
+    //     }
+    // }
 
     const addTeam = () => {
         addTeamCard({
@@ -124,10 +143,13 @@
         <div class="icon-wrapper">
             <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
         </div>
+
+        <!-- This will show where a single player game is currently being played -->
         <div class="current-location" v-if="!isLoading && currentButtonGroupState === ButtonState.CREATE_NEW_GAME" >
             <span class="select-tag-label">Current Location:</span>
 
             <Select 
+                :selectModel="selectedLocationName"
                 :options="allLocationOptions"
                 :optionClicked="optionClicked"
             />
@@ -139,6 +161,7 @@
                 v-if="remainingLocationOptions.length"
                 :options="remainingLocationOptions"
                 :optionClicked="optionClicked"
+                :selectModel="selectedTeamGameLocationName"
             />
             
             <button 
@@ -152,6 +175,7 @@
             <span class="select-tag-label">Team game Location:</span>
 
             <Select 
+                :selectModel="teamGameLocationName"
                 :options="allLocationOptions"
                 :optionClicked="optionClicked"
             />
