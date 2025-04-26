@@ -124,9 +124,8 @@
         <div class="icon-wrapper">
             <Icon icon="svg-spinners:180-ring" v-if="isLoading"/>
         </div>
-        <div class="location" v-if="!isLoading && currentButtonGroupState === ButtonState.CREATE_NEW_GAME" >
-            <span class="current-location">Current Location:</span>
-            <!-- <span v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME">Team game Location:</span> -->
+        <div class="current-location" v-if="!isLoading && currentButtonGroupState === ButtonState.CREATE_NEW_GAME" >
+            <span class="select-tag-label">Current Location:</span>
 
             <Select 
                 :options="allLocationOptions"
@@ -135,7 +134,7 @@
         </div>
 
         <!-- If the user is creating a new team game, add this select tag. -->
-        <div class="location" v-if="!isLoading && currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME">
+        <div class="team-game-location" v-if="!isLoading && currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME">
             <Select 
                 v-if="remainingLocationOptions.length"
                 :options="remainingLocationOptions"
@@ -148,13 +147,30 @@
                 class="add-team-button"
             >Add Team</button> 
         </div>
-    </div>
+
+        <div v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME">
+            <span class="select-tag-label">Team game Location:</span>
+
+            <Select 
+                :options="allLocationOptions"
+                :optionClicked="optionClicked"
+            />
+        </div>
+</div>
 </template>
 
 <style scoped lang="scss">
     .icon-wrapper{
         text-align: center;
         font-size: 45px;
+    }
+
+    .select-tag-label{
+        
+    }
+
+    .current-location{
+
     }
 
     .location{
