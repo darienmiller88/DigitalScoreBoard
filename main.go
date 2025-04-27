@@ -14,6 +14,7 @@ import (
 	"DigitalScoreBoard/api/routes"
 )
 
+//Added from new laptop!! :)
 func main(){
 	godotenv.Load()
 
