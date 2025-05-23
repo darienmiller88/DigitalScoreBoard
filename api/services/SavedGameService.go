@@ -11,6 +11,7 @@ import (
 	"DigitalScoreBoard/api/models"
 )
 
+//This is a comment from my temp laptop to test commit success.
 func GetAllSavedGames(req *http.Request) models.Result[[]models.SavedGame] {
 	findResult, err := database.GetSavedGamesCollections().Find(req.Context(), bson.D{})
 	
