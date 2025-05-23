@@ -10,6 +10,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+const(
+	PUSH string = "$push"
+	PULL string = "$pull"
+)
+
 //Retrieve all locations from database.
 func GetAllLocations(req *http.Request) ([]models.Location, error) {
 	locationsCollection := database.GetLocationsCollection()
@@ -61,8 +66,8 @@ func UpdateUsersForLocation(req *http.Request, mongoUpdateOperator string, locat
 		StatusCode: http.StatusInternalServerError,
 	}
 	
-	if !(mongoUpdateOperator == "$pull" || mongoUpdateOperator == "$push"){
-		updateUserResult.Err = fmt.Errorf("mongo operator %s not valid. Must be either $pull or $push", mongoUpdateOperator)
+	if !(mongoUpdateOperator == PULL || mongoUpdateOperator == PUSH){
+		updateUserResult.Err = fmt.Errorf("mongo operator %s not valid. Must be either %s or %s", mongoUpdateOperator, PULL, PUSH)
 
 		return updateUserResult
 	}

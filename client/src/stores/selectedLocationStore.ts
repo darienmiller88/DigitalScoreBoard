@@ -23,23 +23,27 @@ export const selectedLocationStore = defineStore("selectedLocation", () => {
 
 export const selectedTeamLocationStore = defineStore("selectedTeamLocation", () => {
     // This stores the name of the team that was selected.
-     const selectedTeamGameLocationName = ref<string>("")
+    const selectedTeamName = ref<string>("")
 
     // This stores the location of where the team game is being played.
     const teamGameLocationName = ref<string>("")
 
     //Finally, this stores the location object of the team game.
-    const selectedTeamGameLocation = ref<Location>({
+    const selectedTeam = ref<Location>({
         id: "",
         users: [],
         location_name: ""
     })
 
-    const setSelectedTeamLocation = (location: Location) => {
-        selectedTeamGameLocation.value = location
+    const setTeamGameLocation = (locationName: string) => {
+        teamGameLocationName.value = locationName
     }
 
-    return { selectedTeamGameLocation, teamGameLocationName, selectedTeamGameLocationName, setSelectedTeamLocation }
+    const setSelectedTeam = (location: Location) => {
+        selectedTeam.value = location
+    }
+
+    return { setTeamGameLocation, setSelectedTeam, teamGameLocationName, selectedTeamName, selectedTeam }
 }, {
     persist: true
 })

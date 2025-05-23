@@ -17,14 +17,14 @@
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation, selectedLocationName } = storeToRefs(selectedLocationStore())
-    const { selectedTeamGameLocation, selectedTeamGameLocationName, teamGameLocationName } = storeToRefs(selectedTeamLocationStore())
+    const { selectedTeam, selectedTeamName, teamGameLocationName } = storeToRefs(selectedTeamLocationStore())
 
     const { teamCards } = storeToRefs(teamCardsStore())
     const { allLocationOptions, remainingLocationOptions } = storeToRefs(optionsStore())
 
     //Stateful methods
     const { setUserCards } = scoreCardsStore()
-    const { setSelectedTeamLocation } = selectedTeamLocationStore()
+    const { setSelectedTeam } = selectedTeamLocationStore()
     const { setSelectedLocation } = selectedLocationStore()
     const { addTeamCard } = teamCardsStore()
     const { setRemainingLocationOptions, setAllLocationOptions } = optionsStore()
@@ -63,13 +63,16 @@
         }
     }
 
-    // const getAllLocations = async () => {
-    //     try {
-    //         const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${selectedValue}`)
-    //     } catch (error) {
-    //         console.log("err in clicking option:", error);
-    //     }
-    // }
+    const getLocation = async (locationName: string): Promise<Location> => {
+        try {
+            const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${locationName}`)
+            
+            return locationResponse.data
+        } catch (error) {
+            console.log("err in clicking option:", error);
+            throw new Error("Failed to fetch location: " + error)
+        }
+    }
 
     const addTeam = () => {
         addTeamCard({
