@@ -9,7 +9,7 @@ finishing touches I would like to make. This was used in a tournament at my job!
 * [Vue](https://vuejs.org/)
 * [Go](https://github.com/go-chi/chi)
 * [MongoDB-Atlas](https://www.mongodb.com/cloud/atlas)
-* [Google Cloud Services]()
+* [Google Cloud Services](https://cloud.google.com/)
 
 ## Home Page Dark Mode, team mode
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/4e030cc6-a890-4872-b207-5043f5a33748" />
@@ -26,12 +26,14 @@ finishing touches I would like to make. This was used in a tournament at my job!
 ## View team
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/d1d37f6c-38e8-427e-a8a8-591eb49053f1" />
 
-
 ## Saved games
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/f28c5dae-dcfb-493c-befd-532216690329" />
 
+## Features
+I designed this application with a the goal of streamlining
+
 ## View api here:
-https://adaptscoreboardapi.fly.dev
+https://adaptscoreboard-678166011633.us-east4.run.app/
 
 ### Requirements:
 

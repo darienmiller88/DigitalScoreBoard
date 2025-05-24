@@ -29,9 +29,6 @@ func Init() {
 		panic(err)
 	}
 	
-	// if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{Key: "ping", Value: 1}}).Err(); err != nil {
-	// 	panic(err)
-	// }
 	if err := client.Ping(context.TODO(), readpref.Primary()); err != nil {
 		panic(err)
 	}
