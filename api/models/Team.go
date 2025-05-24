@@ -20,35 +20,49 @@ func (t *Team) Validate() error{
 	return validation.ValidateStruct(
 		t,
 		validation.Field(&t.TeamName, validation.By(t.checkTeamNameInLocations)),
-		// validation.Field(&t.Players, validation.By(t.checkTeamPlayers)),
+		validation.Field(&t.Players, validation.Length(1, 0), validation.By(t.checkTeamPlayers)),
 	)
 }
 
-// func (t *Team) checkTeamPlayers(field interface{}) error {
-// 	players, ok := field.([]string)
+func (t *Team) checkTeamPlayers(field interface{}) error {
+	players, ok := field.([]string)
 
-// 	if !ok{
-// 		return fmt.Errorf("could not parse %T into object", field)
-// 	}
+	if !ok{
+		return fmt.Errorf("could not parse %T into object", field)
+	}
 
-// 	locations, err := getLocations()
+	//Since the team name is validated first to ensure it matches a valid ADAPT location, we can just send it the 
+	//below method to get the Location object by the team name.
+	location, err := getLocationByName(t.TeamName)
 
-// 	if err != nil{
-// 		return err
-// 	}
+	if err != nil{
+		return err
+	}
+
+	//Save the amount of people in the players array sent by the client, as well as the number of people at the 
+	//actual ADAPT location.
+	numPlayers          := len(players)
+	numPeopleAtLocation := len(location.Users) 
 	
-// 	chosenLocationWithTeamName := Location{}
+	//If the client sent more players than actual people at this ADAPT location, send an error to prevent time wasting.
+	if numPlayers > numPeopleAtLocation {
+		return fmt.Errorf("length of players field cannot exceed total amount of people at ADAPT location: %d > %d", numPlayers, numPeopleAtLocation)
+	}
+	
+	//Iterate through each player to see if ANY of the names are not real names for the given location.
+	for _, newlyAddedplayer := range players{
 
-// 	for _, location := range locations {
-// 		if t.TeamName == location.LocationName {
-// 			chosenLocationWithTeamName = location
-// 			break
-// 		}
-// 	}
-
-// 	slices.Index()
-
-// }
+		//Next, check the above name and compare it to each name in the array of users for this ADAPT location.
+		//If there is no match for that name, return an error prematurely to reflect this.
+		for _, currentPlayer := range location.Users{
+			if newlyAddedplayer != currentPlayer.Name {
+				return fmt.Errorf("%s is not a valid person at the ADAPT location %s", newlyAddedplayer, t.TeamName)
+			}
+		}
+	}
+	
+	return nil
+}
 
 // Check to see if the team name passed in from the client actually exists as a Valid ADAPT Community Location.
 // In this case, the "team name" is just the name of the ADAPT location, not a customizable team name.
@@ -67,11 +81,14 @@ func (t *Team) checkTeamNameInLocations(field interface{}) error{
 
 	//Retrieve all of the locations from the database.
 	for _, location := range locations {
+
+		//If the location name sent by the client matches a Valid ADAPt location, return nil as the field is valid.
 		if locationName == location.LocationName {
 			return nil
 		}
 	}
 
+	//If the location did NOT match any of the ADAPT location names, prepare this data to send back to them.
 	locationNames := make([]string, len(locations)) 
 
 	//Sadly, there is no .Map() function to extract the location name from the Location object into a array of strings.
