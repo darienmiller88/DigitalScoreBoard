@@ -23,8 +23,14 @@ type SavedGame struct {
 func (s *SavedGame) Validate() error{
 	return validation.ValidateStruct(
 		s,
-		validation.Field(&s.Winner, validation.By(s.findWinner)),
+
+		//Order matters here! Validate the location first to ensure that the Location field is not nil.
 		validation.Field(&s.Location, validation.By(s.validateLocation)),
+		
+		//Afterwards, either field can be validated. I'm choosing to validate the winner field.
+		validation.Field(&s.Winner, validation.By(s.findWinner)),
+
+		//Finally, validate the teams field if the user chooses to add it.
 		validation.Field(&s.Teams, validation.By(s.validateTeams)),
 	)
 }
