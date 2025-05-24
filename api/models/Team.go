@@ -85,7 +85,7 @@ func (t *Team) checkTeamNameInLocations(field interface{}) error{
 }
 
 //Function to retrieve all ADAPT locations from database. Sadly, I cannot use the service for this as that would result
-// in a circular depency :(
+// in a circular dependency :(
 func getLocations() ([]Location, error){
 	locationsCollection := database.GetLocationsCollection()
 	result, err := locationsCollection.Find(context.Background(), bson.D{})
@@ -101,4 +101,16 @@ func getLocations() ([]Location, error){
 	}
 
 	return locations, nil
+}
+
+func getLocationByName(locationName string) (Location, error){
+	location := Location{}
+	locationsCollection := database.GetLocationsCollection()
+	err := locationsCollection.FindOne(context.Background(),  bson.D{{Key: "location_name", Value: locationName}}).Decode(&location)
+
+	if err != nil {
+		return Location{}, err
+	}
+
+	return location, nil
 }
