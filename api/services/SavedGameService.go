@@ -27,6 +27,7 @@ func GetAllSavedGames(req *http.Request) models.Result[[]models.SavedGame] {
 
 	savedGames := []models.SavedGame{}
 
+	//Unmarhall the mongo cursor into the array of saved games.
 	if err := findResult.All(req.Context(), &savedGames); err != nil{
 		savedGamesResult.Err = err
 		
@@ -67,14 +68,6 @@ func GetAllSavedGamesFromLocation(req *http.Request, locationName string) models
 
 func AddSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[models.SavedGame]{
 	savedGamesResult := models.Result[models.SavedGame]{}
-
-	if err := savedGame.Validate(); err != nil{
-		savedGamesResult.Err = err
-		savedGamesResult.StatusCode = http.StatusBadRequest
-
-		return savedGamesResult
-	}
-
 	savedGamesCollection := database.GetSavedGamesCollections()
 	result, err          := savedGamesCollection.InsertOne(req.Context(), savedGame)
 

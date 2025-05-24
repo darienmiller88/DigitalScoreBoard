@@ -51,11 +51,12 @@ func (s *SavedGame) validateLocation(field interface{}) error{
 		return fmt.Errorf("fields 'teams' requires field 'location'")
 	}
 
+	//User can pass in a non-nil Location and a nil team because this means a single player game was played.
 	return s.Location.Validate()
 }
 
 func (s *SavedGame) validateTeams(field interface{}) error{
-	if len(*s.Teams) < 2 {
+	if s.Teams != nil && len(*s.Teams) < 2 {
 		return fmt.Errorf("please include at least two teams")
 	}
 

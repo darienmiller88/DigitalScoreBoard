@@ -106,7 +106,6 @@ func SaveGame(res http.ResponseWriter, req *http.Request){
 	savedGame := models.SavedGame{}
 
 	if err := json.NewDecoder(req.Body).Decode(&savedGame); err != nil {
-		fmt.Println("err:", err)
 		http.Error(res, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -114,10 +113,16 @@ func SaveGame(res http.ResponseWriter, req *http.Request){
 	fmt.Println("savedGame:", savedGame)
 
 	if err := savedGame.Validate(); err != nil{
-		fmt.Println("err", err)
 		utilities.SendJSON(http.StatusBadRequest, res, err)
 		return
 	}
+
+	// if err := savedGame.Validate(); err != nil{
+	// 	savedGamesResult.Err = err
+	// 	savedGamesResult.StatusCode = http.StatusBadRequest
+
+	// 	return savedGamesResult
+	// }
 	// result := services.AddSavedGame(req, savedGame)
 
 
