@@ -13,11 +13,16 @@ import (
 	"DigitalScoreBoard/api/database"
 )
 
+// This struct will represent the ADAPT community network location where a jeopardy game was played.
 type Location struct {
 	ID           primitive.ObjectID `bson:"_id,omitempty" json:"id"` 
 	CreatedAt    time.Time          `bson:"created_at"    json:"created_at"` 
 	UpdatedAt    time.Time          `bson:"updated_at"    json:"updated_at"`
+
+	//The name of the ADAPT location (Pelham Bay, Lawrence, Elmwood, etc)
 	LocationName string             `bson:"location_name" json:"location_name"`
+
+	//Here are all of the users that played in the game.
 	Users        []UserCard         `bson:"users"         json:"users"`
 }
 
@@ -57,7 +62,7 @@ func (l *Location) findLocation(field interface{}) error{
 		return err
 	}
 
-	//Check to see if there's a match between the location name the user sent, and the one's in the database.
+	//Check to see if there's a match between the location name the user sent, and the ones in the database.
 	for _, location := range locations{
 		if locationName == location.LocationName {
 			return nil
@@ -66,6 +71,7 @@ func (l *Location) findLocation(field interface{}) error{
 
 	locationNames := make([]string, len(locations)) 
 
+	//Extract the location names from the Location objects (sadly there's no .Map() function to do this...)
 	for i, location := range locations {
 		locationNames[i] = location.LocationName
 	}	

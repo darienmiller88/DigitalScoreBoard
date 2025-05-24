@@ -50,6 +50,8 @@ func (t *Team) Validate() error{
 
 // }
 
+// Check to see if the team name passed in from the client actually exists as a Valid ADAPT Community Location.
+// In this case, the "team name" is just the name of the ADAPT location, not a customizable team name.
 func (t *Team) checkTeamNameInLocations(field interface{}) error{
 	locationName, ok := field.(string)
 
@@ -63,6 +65,7 @@ func (t *Team) checkTeamNameInLocations(field interface{}) error{
 		return err
 	}
 
+	//Retrieve all of the locations from the database.
 	for _, location := range locations {
 		if locationName == location.LocationName {
 			return nil
@@ -71,14 +74,18 @@ func (t *Team) checkTeamNameInLocations(field interface{}) error{
 
 	locationNames := make([]string, len(locations)) 
 
+	//Sadly, there is no .Map() function to extract the location name from the Location object into a array of strings.
 	for i, location := range locations {
 		locationNames[i] = location.LocationName
 	}	
 
+	//Finally, return a error message signaling to the user that the team name MUST be one of the valid ADAPT locations.
 	return fmt.Errorf("Team name '%s' is not a valid team name. Please choose from " +
 		"the following: [%s] ", locationName, strings.Join(locationNames, ", "))
 }
 
+//Function to retrieve all ADAPT locations from database. Sadly, I cannot use the service for this as that would result
+// in a circular depency :(
 func getLocations() ([]Location, error){
 	locationsCollection := database.GetLocationsCollection()
 	result, err := locationsCollection.Find(context.Background(), bson.D{})

@@ -27,7 +27,7 @@ func GetAllSavedGames(req *http.Request) models.Result[[]models.SavedGame] {
 
 	savedGames := []models.SavedGame{}
 
-	//Unmarhall the mongo cursor into the array of saved games.
+	//Unmarshall the mongo cursor into the array of saved games.
 	if err := findResult.All(req.Context(), &savedGames); err != nil{
 		savedGamesResult.Err = err
 		
