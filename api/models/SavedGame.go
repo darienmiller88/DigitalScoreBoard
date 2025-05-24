@@ -56,8 +56,10 @@ func (s *SavedGame) validateLocation(field interface{}) error{
 }
 
 func (s *SavedGame) validateTeams(field interface{}) error{
-	if s.Teams != nil && len(*s.Teams) < 2 {
-		return fmt.Errorf("please include at least two teams")
+	teamLimit := 2
+
+	if s.Teams != nil && len(*s.Teams) < teamLimit {
+		return fmt.Errorf("please include at least %d teams", teamLimit)
 	}
 
 	return nil
@@ -70,7 +72,8 @@ func (s *SavedGame) findWinner(field interface{}) error{
 		return fmt.Errorf("could not parse %T into object", field)
 	}
 
-	//Find the winner only when a single player game is played, not a team game.
+	//Try to Find the winner only when a single player game is played, not a team game. If the winner of the game
+	//was not found in the array of people at the ADAPT location, return the error.
 	if (s.Teams == nil && s.Location != nil) && !slices.Contains(s.Location.Users, winner){
 		return fmt.Errorf("could not find winner '%s' in list of players", winner.Name)
 	}
@@ -79,7 +82,13 @@ func (s *SavedGame) findWinner(field interface{}) error{
 }
 
 func (s *SavedGame) CalcAveragePoints(){
-	if len(s.Location.Users) == 0 {
+	//If there are either no people added to the ADAPT location yet, do not calculate the average.
+	if len(s.Location.Users) == 0{
+		return
+	}
+
+	//If there are no teams, do not calculate the average.
+	if s.Teams != nil && len(*s.Teams) == 0 {
 		return
 	}
 
@@ -87,7 +96,13 @@ func (s *SavedGame) CalcAveragePoints(){
 		s.CalcTotalPoints()
 	}
 
-	s.AveragePoints = float64(s.TotalPoints) / float64(len(s.Location.Users))
+	//If the user is playing a team game, calculate the average points using the number of teams, otherwise calculate it
+	//using the total number of people at each ADAPT location.
+	if s.Teams != nil {
+		s.AveragePoints = float64(s.TotalPoints) / float64(len(*s.Teams))
+	}else{
+		s.AveragePoints = float64(s.TotalPoints) / float64(len(s.Location.Users))
+	}
 }
 
 func (s *SavedGame) CalcTotalPoints(){
