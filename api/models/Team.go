@@ -20,12 +20,35 @@ func (t *Team) Validate() error{
 	return validation.ValidateStruct(
 		t,
 		validation.Field(&t.TeamName, validation.By(t.checkTeamNameInLocations)),
-		validation.Field(&t.Players, validation.Length(1, 0), validation.By(t.checkDuplicateTeamPlayers), validation.By(t.checkTeamPlayers)),
+		validation.Field(&t.Players, validation.Length(2, 0), validation.By(t.checkDuplicateTeamPlayers), validation.By(t.checkTeamPlayers)),
 	)
 }
 
 //Check for duplicates in the list of users sent by the client.
 func (t *Team) checkDuplicateTeamPlayers (field interface{}) error{
+	players, ok := field.([]string)
+
+	if !ok{
+		return fmt.Errorf("could not parse %T into object", field)
+	}
+	
+	//Create a map of string to int (value is irrelevant, I only care about the key)
+	uniqueNames := make(map[string]int)
+
+	//In order to see how if there are duplicate names, add all of the names the client passed into the map I just made.
+	//Let's say players len = 5. If all 5 names are unique, that map will also have 5 elements. If there are two
+	//duplicates (m, n, k, l, l), the map will have a length of 4 because the second "l" in that example is not given 
+	//its own bucket in the map, the value of the first "l" is simply overridden.
+	for _, player := range players{
+		uniqueNames[player] = 0
+	}
+	
+	//When the map is made, check to see if the len of the players array is greater than the map. If so, there are duplicates!
+	if len(players) > len(uniqueNames) {
+		return fmt.Errorf("no duplicate names allowed! [%s]", strings.Join(players, ", "))
+	}
+
+	//If not, return nil signifying validation success.
 	return nil
 }
 
