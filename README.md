@@ -9,6 +9,7 @@ finishing touches I would like to make. This was used in a tournament at my job!
 * [Vue](https://vuejs.org/)
 * [Go](https://github.com/go-chi/chi)
 * [MongoDB-Atlas](https://www.mongodb.com/cloud/atlas)
+* [Google Cloud Services]()
 
 ## Home Page Dark Mode, team mode
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/4e030cc6-a890-4872-b207-5043f5a33748" />
