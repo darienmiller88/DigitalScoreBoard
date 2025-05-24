@@ -20,10 +20,16 @@ func (t *Team) Validate() error{
 	return validation.ValidateStruct(
 		t,
 		validation.Field(&t.TeamName, validation.By(t.checkTeamNameInLocations)),
-		validation.Field(&t.Players, validation.Length(1, 0), validation.By(t.checkTeamPlayers)),
+		validation.Field(&t.Players, validation.Length(1, 0), validation.By(t.checkDuplicateTeamPlayers), validation.By(t.checkTeamPlayers)),
 	)
 }
 
+//Check for duplicates in the list of users sent by the client.
+func (t *Team) checkDuplicateTeamPlayers (field interface{}) error{
+	return nil
+}
+
+//Check to see if any of the players the client sent are invalid people at the specific ADAPT location. 
 func (t *Team) checkTeamPlayers(field interface{}) error {
 	players, ok := field.([]string)
 
@@ -50,6 +56,7 @@ func (t *Team) checkTeamPlayers(field interface{}) error {
 	}
 	
 	//Iterate through each player to see if ANY of the names are not real names for the given location.
+	//Best case run time is O(1), worst is O(N^2) if the first few names are correct, and the last one is incorrect.
 	for _, newlyAddedplayer := range players{
 
 		//Next, check the above name and compare it to each name in the array of users for this ADAPT location.
@@ -61,6 +68,8 @@ func (t *Team) checkTeamPlayers(field interface{}) error {
 		}
 	}
 	
+	//If every name the client sent matched the names of the players in the ADAPT location, return nil to allow
+	//validation success.
 	return nil
 }
 
