@@ -33,10 +33,14 @@ finishing touches I would like to make. This was used in a tournament at my job!
 So far, this application has the following features:
 
 * Single player Jeopardy. Client can add and remove Users to a specific ADAPT location, and add and subtract points to them.
-* Tournament/Team jeopardy mode where the c
+* Tournament/Team jeopardy mode where the client can choose the host location for the game, and which teams are playing.
+* The ability to save games, both single player and team jeopardy.
+* Viewing games, which will include the winner of the game, and the total and average amount of points earned during the game.
 
 ## View api here:
 https://adaptscoreboard-678166011633.us-east4.run.app/
+
+I made the choice to migrate the backend from fly.io to Google cloud due to cost overruns with the former, and the latter providing a free tier. Thankfully, deploying to Google Cloud was not hard at all! The features provided for the free tier seem to be reasonable too.
 
 ### Requirements:
 
