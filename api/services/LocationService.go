@@ -15,6 +15,19 @@ const(
 	PULL string = "$pull"
 )
 
+func AddNewAdaptLocation(req *http.Request, location models.Location) (error){
+	location.InitCreatedAtAndUpdatedAt()
+	// result, err := database.GetLocationsCollection().InsertOne(req.Context(), location)
+
+	// if err != nil {
+	// 	http.Error(res, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
+
+	// location.ID = result.InsertedID.(primitive.ObjectID)
+	return nil
+}
+
 //Retrieve all locations from database.
 func GetAllLocations(req *http.Request) ([]models.Location, error) {
 	locationsCollection := database.GetLocationsCollection()
