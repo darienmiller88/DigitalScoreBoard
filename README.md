@@ -3,7 +3,9 @@
 
 I am volunteering to assist a co-worker in designing them a score board to more efficiently keep track of the 
 score of everyone participating! So far, the app is able to add users to a preset list of locations, save each game, and view each saved game. I am currently implementing team features which allows users to create teams based on the location, and add players from that location to the team. I'm mostly finished, but there are some
-finishing touches I would like to make. This was used in a tournament at my job! 
+finishing touches I would like to make. 
+
+This was used in a citywide tournament hosted by my job across four boroughs, which was also streamed online to an audience of hundreds! As a result of this project replacing scorekeeping by paper, tournament organizers were able to save dozens of man hours, save each round of the tournament displaying the winner and the date plated, and as a result of digital score keeping, they were able to extend the length of each tournament round from 45 minutes to an hour!
 
 ### Built With:
 * [Vue](https://vuejs.org/)
@@ -49,8 +51,7 @@ I made the choice to migrate the backend from fly.io to Google cloud due to cost
 * Run go build to create a root level `DigitalScoreBoard.exe` file, and then run `.\DigitalScoreBoard` to run the executable. If an executable is not needed, simply input `go run main.go` instead, or `.\fresh` to enable a server restart on change.
 * `cd client` to access the Vue package, and run `npm run dev` to start vite server for Vue, which should be on port `5173`.
 
-### Notes
-I do have a Dockerfile for my go part of this project, but including causes the application to use it to deploy instead of pushes to github for whatever reason, so I'm not including it for now.
+*NOTE: Please run backend before frontend as there are onLoad calls that the frontend makes to the backend that will fail if the front end is run first.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
