@@ -1,17 +1,22 @@
 # Score board for Jeopardy
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1715535d-5c1e-46d4-80e2-fba5816cf2ca/deploy-status)](https://app.netlify.com/sites/messengerv2/deploys)
 
-I am volunteering to assist a co-worker in designing them a score board to more efficiently keep track of the 
-score of everyone participating! So far, the app is able to add users to a preset list of locations, save each game, and view each saved game. I am currently implementing team features which allows users to create teams based on the location, and add players from that location to the team. I'm mostly finished, but there are some
-finishing touches I would like to make. 
+I volunteered to assist a coworker by designing a scoreboard to efficiently track scores for Jeopardy games at our organization. The app allows adding players to different ADAPT locations, creating and managing teams, saving game results, and viewing every game ever played, with useful information like the total amount of points scored, the winner of the game! The core functionality is complete, and I'm currently finalizing the team features and polishing the UI to perfect it for another upcoming tournament.
 
-This was used in a citywide tournament hosted by my job across four boroughs, which was also streamed online to an audience of hundreds! As a result of this project replacing scorekeeping by paper, tournament organizers were able to save dozens of man hours, save each round of the tournament displaying the winner and the date plated, and as a result of digital score keeping, they were able to extend the length of each tournament round from 45 minutes to an hour!
+Here is a brief summary of the impact this app had:
+
+* Replaced paper based scorekeeping with a digital system.
+* Saved dozens of staff hours over the course of the event due to simplified score keeping.
+* Enabled consistent and simple score keeping, complete with timestamps and winners!
+* Efficient score keeping allowed rounds to be lengtened from 45 to 60 minutes.
+* Successfully used in a citywide, multi-borough tournament streamed to hundreds using company morning show.
 
 ### Built With:
 * [Vue](https://vuejs.org/)
 * [Go](https://github.com/go-chi/chi)
 * [MongoDB-Atlas](https://www.mongodb.com/cloud/atlas)
 * [Google Cloud Services](https://cloud.google.com/)
+* [Netlify](https://www.netlify.com/)
 
 ## Home Page Dark Mode, team mode
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/4e030cc6-a890-4872-b207-5043f5a33748" />
