@@ -79,7 +79,8 @@ func (l *Location) findLocation(field interface{}) error{
 
 	locationNames := make([]string, len(locations)) 
 
-	//Extract the location names from the Location objects (sadly there's no .Map() function to do this...)
+	//If there's no match, extract the location names from the Location objects (sadly there's no .Map() 
+	// function to do this...) to send back as part of the error message.
 	for i, location := range locations {
 		locationNames[i] = location.LocationName
 	}	

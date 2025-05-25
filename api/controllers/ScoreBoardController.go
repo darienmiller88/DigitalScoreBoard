@@ -196,7 +196,7 @@ func modifyUserInLocation(res http.ResponseWriter, req *http.Request, operation 
 	}
 
 	utilities.SendJSON(http.StatusOK, res, map[string]interface{}{
-		"message": fmt.Sprintf("%s was %s location: %s", username, message, location),
+		"message": fmt.Sprintf("%s was %s location: %s", username.Username, message, location),
 		"result": result,
 	})
 }

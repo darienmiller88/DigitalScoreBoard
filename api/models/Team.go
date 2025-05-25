@@ -43,7 +43,8 @@ func (t *Team) checkDuplicateTeamPlayers (field interface{}) error{
 		uniqueNames[player] = 0
 	}
 	
-	//When the map is made, check to see if the len of the players array is greater than the map. If so, there are duplicates!
+	//When the map is made, check to see if the len of the players array is greater than the map. If so, 
+	//then there are duplicates!
 	if len(players) > len(uniqueNames) {
 		return fmt.Errorf("no duplicate names allowed! [%s]", strings.Join(players, ", "))
 	}

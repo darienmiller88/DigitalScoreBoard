@@ -64,8 +64,19 @@ func (s *SavedGame) validateLocation(field interface{}) error{
 func (s *SavedGame) validateTeams(field interface{}) error{
 	teamLimit := 2
 
+	//If the client includes the Teams field, ensure they have at least two.
 	if s.Teams != nil && len(*s.Teams) < teamLimit {
 		return fmt.Errorf("please include at least %d teams", teamLimit)
+	}
+
+	//if they include the Teams field, and it has at least 2 teams, validate each team to ensure each team is valid,
+	//which entails a valid ADAPT location, and actual people there.
+	if s.Teams != nil{
+		for _, team := range *s.Teams {
+			if err := team.Validate(); err != nil {
+				return err
+			}
+		}
 	}
 
 	return nil
