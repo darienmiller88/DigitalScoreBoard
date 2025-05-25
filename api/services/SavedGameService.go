@@ -44,7 +44,7 @@ func GetAllSavedGamesFromLocation(req *http.Request, locationName string) models
 	savedGames           := []models.SavedGame{}
 	savedGamesCollection := database.GetSavedGamesCollections()
 	err                  := savedGamesCollection.FindOne(req.Context(), bson.D{
-		{Key: "location_name", Value: locationName},
+		{ Key: "location_name", Value: locationName },
 	}).Decode(&savedGames)
 	
 	savedGamesResult := models.Result[[]models.SavedGame]{}

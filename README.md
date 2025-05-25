@@ -30,7 +30,10 @@ finishing touches I would like to make. This was used in a tournament at my job!
 <img width="959" alt="image" src="https://github.com/user-attachments/assets/f28c5dae-dcfb-493c-befd-532216690329" />
 
 ## Features
-I designed this application with a the goal of streamlining
+So far, this application has the following features:
+
+* Single player Jeopardy. Client can add and remove Users to a specific ADAPT location, and add and subtract points to them.
+* Tournament/Team jeopardy mode where the c
 
 ## View api here:
 https://adaptscoreboard-678166011633.us-east4.run.app/

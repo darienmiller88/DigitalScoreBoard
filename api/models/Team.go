@@ -36,8 +36,8 @@ func (t *Team) checkDuplicateTeamPlayers (field interface{}) error{
 	uniqueNames := make(map[string]int)
 
 	//In order to see how if there are duplicate names, add all of the names the client passed into the map I just made.
-	//Let's say players len = 5. If all 5 names are unique, that map will also have 5 elements. If there are two
-	//duplicates (m, n, k, l, l), the map will have a length of 4 because the second "l" in that example is not given 
+	//Let's say players len = 5. If all 5 names are unique, that map will also have 5 elements. If there is one
+	//duplicate (m, n, k, l, l), the map will have a length of 4 because the second "l" in that example is not given 
 	//its own bucket in the map, the value of the first "l" is simply overridden.
 	for _, player := range players{
 		uniqueNames[player] = 0

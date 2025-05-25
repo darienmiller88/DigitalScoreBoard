@@ -164,11 +164,11 @@ func UpdateScore(res http.ResponseWriter, req *http.Request){
 }
 
 func AddUserToLocation(res http.ResponseWriter, req *http.Request){
-	modifyUserInLocation(res, req, PUSH)
+	modifyUserInLocation(res, req, services.PUSH)
 }
 
 func RemoveUserFromLocation(res http.ResponseWriter, req *http.Request){
-	modifyUserInLocation(res, req, PULL)
+	modifyUserInLocation(res, req, services.PULL)
 }
 
 func modifyUserInLocation(res http.ResponseWriter, req *http.Request, operation string){
@@ -191,7 +191,7 @@ func modifyUserInLocation(res http.ResponseWriter, req *http.Request, operation 
 	}
 
 	message := "added to"
-	if operation == PULL {
+	if operation == services.PULL  {
 		message = "removed from"
 	}
 
