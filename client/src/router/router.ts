@@ -4,7 +4,7 @@ import Register from '../pages/Register/Register.vue'
 import GenerateJeopardyQuestions from '../pages/GenerateJeopardyQuestions/GenerateJeopardyQuestions.vue'
 import Games from '../pages/Games/Games.vue'
 import TournamentMode from '../pages/TournamentMode/TournamentMode.vue'
-// import AddNewUser from '../pages/AddNewUser/AddNewUser.vue'
+import AddNewUser from '../pages/AddNewUser/AddNewUser.vue'
 
 // Create the router instance
 const router = createRouter({
@@ -13,6 +13,10 @@ const router = createRouter({
         {
             path: "/",
             component: Home
+        },
+        {
+            path: "/add-new-user",
+            component: AddNewUser
         },
         {
             path: "/view-games",
@@ -33,5 +37,4 @@ const router = createRouter({
     ]
 })
   
-
 export default router
