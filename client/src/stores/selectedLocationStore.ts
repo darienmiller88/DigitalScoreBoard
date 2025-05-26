@@ -21,11 +21,12 @@ export const selectedLocationStore = defineStore("selectedLocation", () => {
     persist: true
 })
 
+//For team player tournament games, this will be the store to hold the current game state.
 export const selectedTeamLocationStore = defineStore("selectedTeamLocation", () => {
     // This stores the name of the team that was selected.
     const selectedTeamName = ref<string>("")
 
-    // This stores the location of where the team game is being played.
+    // This stores the ADAPT location of where the team game is being played.
     const teamGameLocationName = ref<string>("")
 
     //Finally, this stores the location object of the team game.
