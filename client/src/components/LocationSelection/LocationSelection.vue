@@ -39,7 +39,7 @@
             const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${selectedValue}`)
             
             if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
-                setSelectedTeamLocation(locationResponse.data)
+                setSelectedTeam(locationResponse.data)
             } else if(currentButtonGroupState.value === ButtonState.CREATE_NEW_GAME){
                 setUserCards(locationResponse.data.users)     
                 setSelectedLocation(locationResponse.data)               
@@ -57,7 +57,7 @@
 
         try {
             const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${selectedValue}`)
-            setSelectedTeamLocation(locationResponse.data)
+            setSelectedTeam(locationResponse.data)
         } catch (error) {
             console.log("err in clicking option:", error);
         }
@@ -122,7 +122,7 @@
                 // selectedTeamGameLocationName.value = selectedLocation.value.location_name
             }else if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME ) {
                 // selectedLocationName.value = selectedLocation.value.location_name
-                selectedTeamGameLocationName.value = selectedTeamGameLocation.value.location_name
+                teamGameLocationName.value = selectedTeam.value.location_name
             }else{
                 selectedLocationName.value = remainingLocationOptions.value[0]   
             }
@@ -164,7 +164,7 @@
                 v-if="remainingLocationOptions.length"
                 :options="remainingLocationOptions"
                 :optionClicked="optionClicked"
-                :selectModel="selectedTeamGameLocationName"
+                :selectModel="selectedTeam"
             />
             
             <button 
