@@ -3,25 +3,37 @@
     import { selectedLocationStore, selectedTeamLocationStore } from '../../stores/selectedLocationStore';
     import { optionsStore } from "../../stores/optionsStore"
     import { teamCardsStore } from "../../stores/teamCardsStore";
-    import { GameMode, gameModeStore } from "../../stores/buttonActiveStore"
+    import { darkModeStore } from "../../stores/darkModeStore"
     import { storeToRefs } from 'pinia';
     import { Location } from "../../types/types"
+    import { scoreBoardApi } from '../../api/api';
 
     //ref variables
-    const { currentGameMode } = storeToRefs(gameModeStore())
     const { teamCards } = storeToRefs(teamCardsStore())
     const { remainingLocationOptions } = storeToRefs(optionsStore())
     const { selectedLocationName } = storeToRefs(selectedLocationStore())
-    const { } = storeToRefs(selectedTeamLocationStore())
+    const { selectedTeam } = storeToRefs(selectedTeamLocationStore())
+    const { isDarkMode } = storeToRefs(darkModeStore())
 
     //store methods
-    const { setAllLocationOptions, setRemainingLocationOptions} = optionsStore()
+    const { setRemainingLocationOptions} = optionsStore()
     const { addTeamCard } = teamCardsStore()
-    const { setSelectedLocation } = selectedLocationStore()
     const { setSelectedTeam } = selectedTeamLocationStore()
     
-    const isLoading = ref<boolean>(true)
+    const isLoading = ref<boolean>(false)
     let locations: Location[] = []
+
+    const optionClicked = async (event: Event) => {
+        const selectedValue = (event.target as HTMLSelectElement).value;
+
+        try {
+            const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${selectedValue}`)
+            
+            setSelectedTeam(locationResponse.data)
+        } catch (error) {
+            console.log("err in clicking option:", error);
+        }
+    }
 
     const addTeam = () => {
 
@@ -44,6 +56,8 @@
 </script>
 
 <template>
+    <div :class="`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
+    </div>
     <div class="team-game-location" v-if="!isLoading">
         <Select 
             v-if="remainingLocationOptions.length"
@@ -63,6 +77,6 @@
 
 <style scoped lang="scss">
     .team-game-location{
-
+        border: 2px solid beige;
     }
 </style>
