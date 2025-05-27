@@ -1,7 +1,9 @@
 <script setup lang="ts">
     import TeamCards from '../../components/TeamCards/TeamCards.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
+    import LocationSelection from '../../components/LocationSelection/LocationSelection.vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
+    import { ButtonState } from "../../stores/buttonActiveStore"
     import { ref } from 'vue';
 
      //Stateful methods
@@ -11,7 +13,7 @@
 
 <template>
     <!-- Contains the ADAPT locations in the select tag -->
-    <LocationSelection />
+    <LocationSelection :buttonState="ButtonState.CREATE_NEW_TEAM_GAME"/>
 
     <div class="reset-all-points-wrapper">
         <button type="button" @click="resetAllPoints" >

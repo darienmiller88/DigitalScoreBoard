@@ -31,6 +31,10 @@
 
     const isLoading = ref<boolean>(true)
     let locations: Location[] = []
+
+    const props = defineProps<{
+        buttonState: ButtonState
+    }>()
     
     const optionClicked = async (event: Event) => {
         const selectedValue = (event.target as HTMLSelectElement).value;

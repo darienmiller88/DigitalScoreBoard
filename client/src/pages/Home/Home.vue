@@ -78,10 +78,9 @@
 </script>
 
 <template>
-    <div class="title">Jeopardy Score Board</div>
     
     <!-- Contains the ADAPT locations in the select tag -->
-    <LocationSelection />
+    <!-- <LocationSelection /> -->
 
     <!-- Contains the three buttons needed to select the options. -->
     <GameButtonGroup />
