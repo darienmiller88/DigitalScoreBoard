@@ -1,19 +1,22 @@
 <script setup lang="ts">
     import TeamCards from '../../components/TeamCards/TeamCards.vue';
+    import AddNewTeam from '../../components/AddNewTeam/AddNewTeam.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import LocationSelection from '../../components/LocationSelection/LocationSelection.vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-    import { ButtonState } from "../../stores/buttonActiveStore"
+    import { GameMode } from "../../stores/buttonActiveStore"
     import { ref } from 'vue';
 
      //Stateful methods
     const { resetAllPoints } = scoreCardsStore()
-    const isLoading = ref<boolean>(true)
+
+    
 </script>
 
 <template>
     <!-- Contains the ADAPT locations in the select tag -->
-    <LocationSelection :buttonState="ButtonState.CREATE_NEW_TEAM_GAME"/>
+    <!-- <AddNewTeam /> -->
+    
 
     <div class="reset-all-points-wrapper">
         <button type="button" @click="resetAllPoints" >

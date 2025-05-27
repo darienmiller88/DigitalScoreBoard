@@ -7,7 +7,7 @@
 
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { selectedLocationName } = storeToRefs(selectedLocationStore())
-    const { selectedTeamGameLocation } = storeToRefs(selectedTeamLocationStore())
+    // const { selectedTeamGameLocation } = storeToRefs(selectedTeamLocationStore())
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     
     const props = defineProps<{
