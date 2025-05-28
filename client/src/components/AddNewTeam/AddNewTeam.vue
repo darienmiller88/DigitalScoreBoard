@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { onMounted, ref } from 'vue';
     import { selectedLocationStore, selectedTeamLocationStore } from '../../stores/selectedLocationStore';
     import { optionsStore } from "../../stores/optionsStore"
     import { teamCardsStore } from "../../stores/teamCardsStore";
@@ -10,17 +10,17 @@
 
     //ref variables
     const { teamCards } = storeToRefs(teamCardsStore())
-    const { remainingLocationOptions } = storeToRefs(optionsStore())
+    const { remainingLocationOptions, allLocationOptions } = storeToRefs(optionsStore())
     const { selectedLocationName } = storeToRefs(selectedLocationStore())
     const { selectedTeam } = storeToRefs(selectedTeamLocationStore())
     const { isDarkMode } = storeToRefs(darkModeStore())
 
     //store methods
-    const { setRemainingLocationOptions} = optionsStore()
+    const { setRemainingLocationOptions, setAllLocationOptions } = optionsStore()
     const { addTeamCard } = teamCardsStore()
     const { setSelectedTeam } = selectedTeamLocationStore()
     
-    const isLoading = ref<boolean>(false)
+    const isLoading = ref<boolean>(true)
     let locations: Location[] = []
 
     const optionClicked = async (event: Event) => {
@@ -46,13 +46,37 @@
         })
 
         //After adding the card, remove it from options.
-        setRemainingLocationOptions(locations.filter(
-            location => !teamCards.value.some(team => team.team_name === location.location_name)
-        ).map(location => location.location_name))
+        setRemainingLocationOptions(teamCards.value)
         
         //Set the current visible option for the all of the 
         // selectedLocationName.value = remainingLocationOptions.value[0]
     }
+
+    onMounted(async () => {
+        try {
+            
+            //If there are no locations currently already in local storage, retrieve them from the database first, and 
+            //load it to reduce database load.
+            if (!allLocationOptions.value.length) {
+                const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
+    
+                //Assign the response from the server to the above variable to be referenced later.
+                locations = locationsResponse.data
+                
+                //Load all the locations into the following ref, storing it into local storage for faster access.
+                setAllLocationOptions(locations.map(location => {          
+                    return location.location_name
+                }))
+            }
+            
+            setRemainingLocationOptions(teamCards.value)
+
+        } catch (error) {
+            
+        }
+
+        isLoading.value = false
+    })
 </script>
 
 <template>
@@ -66,9 +90,9 @@
             :selectModel="selectedTeam"
         />
         
+        <!-- v-if="remainingLocationOptions.length"  -->
         <button 
             @click="addTeam"
-            v-if="remainingLocationOptions.length" 
             class="add-team-button"
         >Add Team</button> 
     </div>

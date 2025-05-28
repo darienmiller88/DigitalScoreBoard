@@ -33,7 +33,7 @@
     let locations: Location[] = []
 
     const props = defineProps<{
-        gameMode: GameMode
+        buttonState: GameMode
     }>()
     
     const optionClicked = async (event: Event) => {
@@ -78,8 +78,6 @@
         }
     }
 
-    
-
     onMounted(async () => {
         try {
             const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
@@ -91,15 +89,7 @@
             //variable to be listed on the dropdown menu.
             setAllLocationOptions(locations.map(location => {          
                 return location.location_name
-            }))
-
-            //if the user is on "CREATE_NEW_TEAM_GAME", load the remaining locations that have not been 
-            //added to the game.
-            if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
-                setRemainingLocationOptions(locations.filter(
-                    location => !teamCards.value.some(team => team.team_name === location.location_name)
-                ).map(location => location.location_name))
-            }           
+            }))      
 
             //IF: If there is no current location set, set it now, and the current name for the options dropdown.
             //ELSE: Assign the current name of the selectedLocation type to the selectedLocationName
@@ -149,7 +139,21 @@
             />
         </div>
 
-        
+        <!-- If the user is creating a new team game, add this select tag. -->
+        <div class="team-game-location" v-if="!isLoading && currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME">
+            <Select 
+                v-if="remainingLocationOptions.length"
+                :options="remainingLocationOptions"
+                :optionClicked="optionClicked"
+                :selectModel="selectedTeam"
+            />
+            
+            <!-- @click="addTeam" -->
+            <button 
+                v-if="remainingLocationOptions.length" 
+                class="add-team-button"
+            >Add Team</button> 
+        </div>
 
         <div v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME">
             <span class="select-tag-label">Team game Location:</span>
