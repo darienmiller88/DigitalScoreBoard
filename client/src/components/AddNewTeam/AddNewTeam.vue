@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import Select from '../Select/Select.vue';
     import { onMounted, ref } from 'vue';
     import { selectedLocationStore, selectedTeamLocationStore } from '../../stores/selectedLocationStore';
     import { optionsStore } from "../../stores/optionsStore"
@@ -12,7 +13,7 @@
     const { teamCards } = storeToRefs(teamCardsStore())
     const { remainingLocationOptions, allLocationOptions } = storeToRefs(optionsStore())
     const { selectedLocationName } = storeToRefs(selectedLocationStore())
-    const { selectedTeam } = storeToRefs(selectedTeamLocationStore())
+    const { selectedTeam, selectedTeamName } = storeToRefs(selectedTeamLocationStore())
     const { isDarkMode } = storeToRefs(darkModeStore())
 
     //store methods
@@ -36,7 +37,8 @@
     }
 
     const addTeam = () => {
-
+        console.log("adding...");
+        
         //Create a new anonymous Team card with the following data:
         //The location for which team is playing, a score of 0, and no players (yet).
         addTeamCard({
@@ -68,11 +70,18 @@
                     return location.location_name
                 }))
             }
-            
+
+            //Afterwards, load the remaining teams left to the total remaining teams
             setRemainingLocationOptions(teamCards.value)
+            
+            //
+            selectedTeamName.value = selectedTeam.value.location_name
+
+            console.log("remaining locations:", remainingLocationOptions.value);
+            
 
         } catch (error) {
-            
+            console.log("err:", error);
         }
 
         isLoading.value = false
@@ -87,7 +96,7 @@
             v-if="remainingLocationOptions.length"
             :options="remainingLocationOptions"
             :optionClicked="optionClicked"
-            :selectModel="selectedTeam"
+            :selectModel="selectedTeam.location_name"
         />
         
         <!-- v-if="remainingLocationOptions.length"  -->
@@ -101,6 +110,43 @@
 
 <style scoped lang="scss">
     .team-game-location{
-        border: 2px solid beige;
+        text-align: center;
+        
+        @media screen and (min-width: 768px) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        font-size: 30px;
+        transition: 0.5s;
+        
+        // .underline{
+        //     text-decoration: underline;
+        // }
+
+        // .current-location{
+        //     margin-right: 10px;
+        // }
+
+        .add-team-button{
+            padding: 10px 25px;
+            margin: 0px 10px;
+
+            border: none;
+            border-radius: 5px;
+
+            background-color: dodgerblue;
+            color: aliceblue;
+            font-size: 20px;
+            transition: 0.3s;
+
+            @media screen and (min-width: 768px) {
+                &:hover{
+                    cursor: pointer;
+                    font-size: 26px;
+                }
+            }
+        }
     }
 </style>

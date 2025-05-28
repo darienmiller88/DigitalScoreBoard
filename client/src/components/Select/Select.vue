@@ -1,24 +1,23 @@
 <script setup lang="ts">
-    import { selectedLocationStore, selectedTeamLocationStore } from '../../stores/selectedLocationStore';
     import { storeToRefs } from "pinia";
     import { darkModeStore } from "../../stores/darkModeStore"
-    import { buttonActiveStore } from "../../stores/buttonActiveStore"
-    import { Location } from "../../types/types"
+    import { onMounted } from 'vue';
 
     const { isDarkMode } = storeToRefs(darkModeStore())
-    const { selectedLocationName } = storeToRefs(selectedLocationStore())
-    // const { selectedTeamGameLocation } = storeToRefs(selectedTeamLocationStore())
-    const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     
     const props = defineProps<{
         optionClicked: (event: Event) => void
-        selectModel: string | Location
+        selectModel: string
         options: string[]
     }>()
+
+    onMounted(() => {
+        console.log("options:", props.options);
+    })
 </script>
 
-<template>
-     <select 
+<template>    
+    <select 
         :value="selectModel"
         name="locations" 
         :class="`${isDarkMode ? 'dark-mode-select' : 'light-mode-select'}`" 
@@ -31,7 +30,7 @@
 </template>
 
 <style scoped lang="scss">
-     select {
+    select {
         font-size: 18px;
         padding: 2px 5px;
         transition: 0.5s;

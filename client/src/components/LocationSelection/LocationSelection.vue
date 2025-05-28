@@ -145,7 +145,7 @@
                 v-if="remainingLocationOptions.length"
                 :options="remainingLocationOptions"
                 :optionClicked="optionClicked"
-                :selectModel="selectedTeam"
+                :selectModel="selectedTeam.location_name"
             />
             
             <!-- @click="addTeam" -->
@@ -168,57 +168,57 @@
 </template>
 
 <style scoped lang="scss">
-    .icon-wrapper{
-        text-align: center;
-        font-size: 45px;
-    }
+    // .icon-wrapper{
+    //     text-align: center;
+    //     font-size: 45px;
+    // }
 
-    .select-tag-label{
+    // .select-tag-label{
         
-    }
+    // }
 
-    .current-location{
+    // .current-location{
 
-    }
+    // }
 
-    .location{
-        text-align: center;
+    // .location{
+    //     text-align: center;
         
-        @media screen and (min-width: 768px) {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    //     @media screen and (min-width: 768px) {
+    //         display: flex;
+    //         align-items: center;
+    //         justify-content: center;
+    //     }
 
-        font-size: 30px;
-        transition: 0.5s;
+    //     font-size: 30px;
+    //     transition: 0.5s;
         
-        .underline{
-            text-decoration: underline;
-        }
+    //     .underline{
+    //         text-decoration: underline;
+    //     }
 
-        .current-location{
-            margin-right: 10px;
-        }
+    //     .current-location{
+    //         margin-right: 10px;
+    //     }
 
-        .add-team-button{
-            padding: 10px 25px;
-            margin: 0px 10px;
+    //     .add-team-button{
+    //         padding: 10px 25px;
+    //         margin: 0px 10px;
 
-            border: none;
-            border-radius: 5px;
+    //         border: none;
+    //         border-radius: 5px;
 
-            background-color: dodgerblue;
-            color: aliceblue;
-            font-size: 20px;
-            transition: 0.3s;
+    //         background-color: dodgerblue;
+    //         color: aliceblue;
+    //         font-size: 20px;
+    //         transition: 0.3s;
 
-            @media screen and (min-width: 768px) {
-                &:hover{
-                    cursor: pointer;
-                    font-size: 26px;
-                }
-            }
-        }
-    }
+    //         @media screen and (min-width: 768px) {
+    //             &:hover{
+    //                 cursor: pointer;
+    //                 font-size: 26px;
+    //             }
+    //         }
+    //     }
+    // }
 </style>

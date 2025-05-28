@@ -23,13 +23,14 @@ export const selectedLocationStore = defineStore("selectedLocation", () => {
 
 //For team player tournament games, this will be the store to hold the current game state.
 export const selectedTeamLocationStore = defineStore("selectedTeamLocation", () => {
-    // This stores the name of the team that was selected.
+    // This stores the name of the team that was selected. This will be used to bind to the options tag.
     const selectedTeamName = ref<string>("")
 
     // This stores the ADAPT location of where the team game is being played.
     const teamGameLocationName = ref<string>("")
 
-    //Finally, this stores the location object of the team game.
+    //Finally, this stores the location object of the team game. It will be referenced when the user wants to add a
+    //team to the current list of teams, so instead of making a database call, it will done here.
     const selectedTeam = ref<Location>({
         id: "",
         users: [],
@@ -44,7 +45,11 @@ export const selectedTeamLocationStore = defineStore("selectedTeamLocation", () 
         selectedTeam.value = location
     }
 
-    return { setTeamGameLocation, setSelectedTeam, teamGameLocationName, selectedTeamName, selectedTeam }
+    const setSelectedTeamName = (teamName: string) => {
+        selectedTeamName.value = teamName
+    }
+
+    return { setTeamGameLocation, setSelectedTeam, setSelectedTeamName, teamGameLocationName, selectedTeamName, selectedTeam }
 }, {
     persist: true
 })
