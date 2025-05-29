@@ -2,7 +2,6 @@
     import { storeToRefs } from "pinia";
     import { darkModeStore } from "../../stores/darkModeStore"
     import { onMounted } from 'vue';
-    import { Location, Team } from "../../types/types"
 
     const { isDarkMode } = storeToRefs(darkModeStore())
     
@@ -33,8 +32,9 @@
 <style scoped lang="scss">
     select {
         font-size: 18px;
-        padding: 2px 5px;
+        padding: 5px 8px;
         transition: 0.5s;
+        border-radius: 10px;
 
         @media screen and (min-width: 768px) {
             font-size: 28px;

@@ -1,19 +1,19 @@
 <script setup lang="ts">
     import Select from '../Select/Select.vue';
     import { onMounted, ref } from 'vue';
-    import { selectedLocationStore, selectedTeamStore } from '../../stores/selectedLocationStore';
+    import { selectedTeamStore } from '../../stores/selectedLocationStore';
     import { optionsStore } from "../../stores/optionsStore"
     import { teamCardsStore } from "../../stores/teamCardsStore";
     import { darkModeStore } from "../../stores/darkModeStore"
     import { storeToRefs } from 'pinia';
     import { Location } from "../../types/types"
     import { scoreBoardApi } from '../../api/api';
+    import { Icon } from "@iconify/vue"
 
     //ref variables
     const { teamCards } = storeToRefs(teamCardsStore())
     const { remainingLocationOptions, allLocationOptions } = storeToRefs(optionsStore())
-    const { selectedLocationName } = storeToRefs(selectedLocationStore())
-    const { selectedTeam, selectedTeamName } = storeToRefs(selectedTeamStore())
+    const { selectedTeam } = storeToRefs(selectedTeamStore())
     const { isDarkMode } = storeToRefs(darkModeStore())
 
     //store methods
@@ -79,12 +79,7 @@
             //Afterwards, load the remaining teams left to the total remaining teams
             setRemainingLocationOptions(teamCards.value)
             
-            //
-            // selectedTeamName.value = selectedTeam.value
-
             console.log("remaining locations:", remainingLocationOptions.value);
-            
-
         } catch (error) {
             console.log("err:", error);
         }
@@ -95,25 +90,33 @@
 
 <template>
     <div :class="`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
-    </div>
-    <div class="team-game-location" v-if="!isLoading">
-        <Select 
-            v-if="remainingLocationOptions.length"
-            :options="remainingLocationOptions"
-            :optionClicked="optionClicked"
-            :selectModel="selectedTeam.team_name"
-        />
-        
-        <!-- v-if="remainingLocationOptions.length"  -->
-        <button 
-            @click="addTeam"
-            class="add-team-button"
-        >Add Team</button> 
+        <div class="icon-wrapper" >
+            <Icon icon="svg-spinners:180-ring"  :height="50" :width="50"/>
+        </div>
+        <div class="team-game-location" v-if="!isLoading && remainingLocationOptions.length">
+            <Select 
+                :options="remainingLocationOptions"
+                :optionClicked="optionClicked"
+                :selectModel="selectedTeam.team_name"
+            />
+            
+            <button 
+                @click="addTeam"
+                class="add-team-button"
+            >Add Team</button> 
+        </div>
     </div>
 </template>
 
 
 <style scoped lang="scss">
+    .icon-wrapper{
+        width: fit-content;
+        margin: auto;
+
+        color: var(--main-text-color);
+    }
+
     .team-game-location{
         text-align: center;
         
@@ -125,14 +128,6 @@
 
         font-size: 30px;
         transition: 0.5s;
-        
-        // .underline{
-        //     text-decoration: underline;
-        // }
-
-        // .current-location{
-        //     margin-right: 10px;
-        // }
 
         .add-team-button{
             padding: 10px 25px;
