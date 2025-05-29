@@ -78,8 +78,6 @@
 
             //Afterwards, load the remaining teams left to the total remaining teams
             setRemainingLocationOptions(teamCards.value)
-            
-            console.log("remaining locations:", remainingLocationOptions.value);
         } catch (error) {
             console.log("err:", error);
         }
@@ -90,7 +88,7 @@
 
 <template>
     <div :class="`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
-        <div class="icon-wrapper" >
+        <div class="icon-wrapper" v-if="isLoading">
             <Icon icon="svg-spinners:180-ring"  :height="50" :width="50"/>
         </div>
         <div class="team-game-location" v-if="!isLoading && remainingLocationOptions.length">
