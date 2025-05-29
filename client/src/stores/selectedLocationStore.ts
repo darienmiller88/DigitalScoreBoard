@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { Location } from "../types/types"
+import { Location, Team } from "../types/types"
 
 //For single player games, this stores the location of where the game is being played.
 export const selectedLocationStore = defineStore("selectedLocation", () => {
@@ -31,18 +31,18 @@ export const selectedTeamLocationStore = defineStore("selectedTeamLocation", () 
 
     //Finally, this stores the location object of the team game. It will be referenced when the user wants to add a
     //team to the current list of teams, so instead of making a database call, it will done here.
-    const selectedTeam = ref<Location>({
-        id: "",
-        users: [],
-        location_name: ""
+    const selectedTeam = ref<Team>({
+        score: 0,
+        team_name: "",
+        players: []
     })
 
     const setTeamGameLocation = (locationName: string) => {
         teamGameLocationName.value = locationName
     }
 
-    const setSelectedTeam = (location: Location) => {
-        selectedTeam.value = location
+    const setSelectedTeam = (team: Team) => {
+        selectedTeam.value = team
     }
 
     const setSelectedTeamName = (teamName: string) => {

@@ -2,6 +2,7 @@
     import { storeToRefs } from "pinia";
     import { darkModeStore } from "../../stores/darkModeStore"
     import { onMounted } from 'vue';
+    import { Location, Team } from "../../types/types"
 
     const { isDarkMode } = storeToRefs(darkModeStore())
     

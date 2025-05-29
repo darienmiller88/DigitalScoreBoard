@@ -30,7 +30,11 @@
         try {
             const locationResponse = await scoreBoardApi.get<Location>(`/get-location/${selectedValue}`)
             
-            setSelectedTeam(locationResponse.data)
+            setSelectedTeam({
+                players: locationResponse.data.users.map(user => user.username),
+                score: 0,
+                team_name: locationResponse.data.location_name
+            })
         } catch (error) {
             console.log("err in clicking option:", error);
         }
@@ -42,7 +46,7 @@
         //Create a new anonymous Team card with the following data:
         //The location for which team is playing, a score of 0, and no players (yet).
         addTeamCard({
-            team_name: selectedLocationName.value,
+            team_name: selectedTeam.value.team_name,
             score: 0,
             players: []
         })
@@ -51,6 +55,7 @@
         setRemainingLocationOptions(teamCards.value)
         
         //Set the current visible option for the all of the 
+        selectedTeam.value = teamCards.value[0]
         // selectedLocationName.value = remainingLocationOptions.value[0]
     }
 
@@ -75,7 +80,7 @@
             setRemainingLocationOptions(teamCards.value)
             
             //
-            selectedTeamName.value = selectedTeam.value.location_name
+            // selectedTeamName.value = selectedTeam.value
 
             console.log("remaining locations:", remainingLocationOptions.value);
             
@@ -96,7 +101,7 @@
             v-if="remainingLocationOptions.length"
             :options="remainingLocationOptions"
             :optionClicked="optionClicked"
-            :selectModel="selectedTeam.location_name"
+            :selectModel="selectedTeam.team_name"
         />
         
         <!-- v-if="remainingLocationOptions.length"  -->

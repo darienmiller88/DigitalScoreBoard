@@ -5,16 +5,17 @@
     import { Team } from "../../types/types"
     import { ref } from "vue"; 
     import { storeToRefs } from 'pinia'
-    import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore'
     import { teamCardsStore } from "../../stores/teamCardsStore"
     import Modal from "../Modal/Modal.vue"
     import AddNewPlayer from "../AddNewPlayer/AddNewPlayer.vue"
     import ViewPlayers from '../ViewPlayers/ViewPlayers.vue';
     
+    //Ref variable to get access to all teams playing
+    const { teamCards } = storeToRefs(teamCardsStore())
+
+    //method to change state to add player to the team
     const { addPlayerToTeam } = teamCardsStore()
 
-    const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
-    const { teamCards } = storeToRefs(teamCardsStore())
     
     let showAddTeamPlayerModal = ref(false)
     let showTeamPlayersModal = ref(false)
@@ -100,7 +101,6 @@
 <template>
     <div class="team-cards">
         <TeamCard
-            v-if="currentButtonGroupState == ButtonState.CREATE_NEW_TEAM_GAME"
             v-for="(team, index) in teamCards" 
             :key="index"
             :card-index="index"
@@ -136,7 +136,6 @@
         margin: auto;
         padding: 10px 10px;
 
-        // border: 2px solid white; 
         width: fit-content; 
         max-width: 95vw;
         max-height: 40vh;
