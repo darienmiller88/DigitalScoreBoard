@@ -3,7 +3,7 @@
     import { optionsStore } from "../../stores/optionsStore";
     import { Team } from "../../types/types"
     import { storeToRefs } from "pinia";
-    import { selectedLocationStore } from '../../stores/selectedLocationStore';
+    import { selectedTeamStore } from '../../stores/selectedLocationStore';
         
     const props = defineProps<{
       team: Team
@@ -13,7 +13,7 @@
       openViewTeamPlayers: () => void
     }>()
     
-    const { selectedLocationName } = storeToRefs(selectedLocationStore())
+    const { selectedTeam } = storeToRefs(selectedTeamStore())
     const { remainingLocationOptions } = storeToRefs(optionsStore())
     const { addOptionToRemainingLocationOptions } = optionsStore()
     const { addPoints, minusPoints, resetPoints, removeTeamCard } = teamCardsStore()
@@ -25,7 +25,7 @@
         //If after ALL the locations have been added to a team game, and one team card is removed, add
         //that name to "selectedLocationName" variable so the select tag isn't empty.
         if (remainingLocationOptions.value.length === 1) {
-          selectedLocationName.value = remainingLocationOptions.value[0]
+            selectedTeam.value.team_name = remainingLocationOptions.value[0]
         }
     }
 </script>
@@ -49,22 +49,12 @@
   
       <!-- Players List -->
       <div class="players-section">
-        <!-- <ul>
-          <li>
-            Darien
-            <button @click="">Remove</button>
-          </li>
-        </ul> -->
-
         <div class="view-players">
           <button @click="openViewTeamPlayers">View Players</button>
         </div>
   
         <!-- Add Player -->
         <div class="add-player">
-          <!-- <input
-            placeholder="Enter player name"
-          /> -->
           <button @click="openAddTeamPlayerModal">Add Player To Team</button>
         </div>
       </div>

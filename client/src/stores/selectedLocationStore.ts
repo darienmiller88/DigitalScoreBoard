@@ -22,7 +22,7 @@ export const selectedLocationStore = defineStore("selectedLocation", () => {
 })
 
 //For team player tournament games, this will be the store to hold the current game state.
-export const selectedTeamLocationStore = defineStore("selectedTeamLocation", () => {
+export const selectedTeamStore = defineStore("selectedTeamLocation", () => {
     // This stores the name of the team that was selected. This will be used to bind to the options tag.
     const selectedTeamName = ref<string>("")
 

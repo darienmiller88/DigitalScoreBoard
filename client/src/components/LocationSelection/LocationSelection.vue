@@ -3,7 +3,7 @@
     import { onMounted, ref } from 'vue';
     import { buttonActiveStore, ButtonState, GameMode } from "../../stores/buttonActiveStore"
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-    import { selectedLocationStore, selectedTeamLocationStore } from '../../stores/selectedLocationStore';
+    import { selectedLocationStore, selectedTeamStore } from '../../stores/selectedLocationStore';
     import { teamCardsStore } from "../../stores/teamCardsStore";
     import { optionsStore } from "../../stores/optionsStore"; 
     import { storeToRefs } from "pinia";
@@ -17,14 +17,14 @@
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation, selectedLocationName } = storeToRefs(selectedLocationStore())
-    const { selectedTeam, selectedTeamName, teamGameLocationName } = storeToRefs(selectedTeamLocationStore())
+    const { selectedTeam, selectedTeamName, teamGameLocationName } = storeToRefs(selectedTeamStore())
 
     const { teamCards } = storeToRefs(teamCardsStore())
     const { allLocationOptions, remainingLocationOptions } = storeToRefs(optionsStore())
 
     //Stateful methods
     const { setUserCards } = scoreCardsStore()
-    const { setSelectedTeam } = selectedTeamLocationStore()
+    const { setSelectedTeam } = selectedTeamStore()
     const { setSelectedLocation } = selectedLocationStore()
     const { addTeamCard } = teamCardsStore()
     const { setRemainingLocationOptions, setAllLocationOptions } = optionsStore()

@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import Select from '../Select/Select.vue';
     import { onMounted, ref } from 'vue';
-    import { selectedLocationStore, selectedTeamLocationStore } from '../../stores/selectedLocationStore';
+    import { selectedLocationStore, selectedTeamStore } from '../../stores/selectedLocationStore';
     import { optionsStore } from "../../stores/optionsStore"
     import { teamCardsStore } from "../../stores/teamCardsStore";
     import { darkModeStore } from "../../stores/darkModeStore"
@@ -13,13 +13,13 @@
     const { teamCards } = storeToRefs(teamCardsStore())
     const { remainingLocationOptions, allLocationOptions } = storeToRefs(optionsStore())
     const { selectedLocationName } = storeToRefs(selectedLocationStore())
-    const { selectedTeam, selectedTeamName } = storeToRefs(selectedTeamLocationStore())
+    const { selectedTeam, selectedTeamName } = storeToRefs(selectedTeamStore())
     const { isDarkMode } = storeToRefs(darkModeStore())
 
     //store methods
     const { setRemainingLocationOptions, setAllLocationOptions } = optionsStore()
     const { addTeamCard } = teamCardsStore()
-    const { setSelectedTeam } = selectedTeamLocationStore()
+    const { setSelectedTeam } = selectedTeamStore()
     
     const isLoading = ref<boolean>(true)
     let locations: Location[] = []
@@ -55,7 +55,7 @@
         setRemainingLocationOptions(teamCards.value)
         
         //Set the current visible option for the all of the 
-        selectedTeam.value = teamCards.value[0]
+        selectedTeam.value.team_name = remainingLocationOptions.value[0]
         // selectedLocationName.value = remainingLocationOptions.value[0]
     }
 

@@ -23,10 +23,10 @@ export const optionsStore = defineStore("optionsStore", () => {
     //     remainingLocationOptions.value = newOptions
     // }
 
-    //add an option to the list of Location options.
-    // const addOptionToRemainingLocationOptions = (option: string) => {
-    //     remainingLocationOptions.value.push(option)
-    // }
+    //add a team back to the list of Remaining teams. This happens when the "clear button" is clicked on a Team card.
+    const addOptionToRemainingLocationOptions = (option: string) => {
+        remainingLocationOptions.value.push(option)
+    }
    
     return { 
         allLocationOptions, 
@@ -34,6 +34,6 @@ export const optionsStore = defineStore("optionsStore", () => {
         setAllLocationOptions, 
         // setRemainingLocationOptions,
         setRemainingLocationOptions,
-        // addOptionToRemainingLocationOptions
+        addOptionToRemainingLocationOptions
     }
 })
