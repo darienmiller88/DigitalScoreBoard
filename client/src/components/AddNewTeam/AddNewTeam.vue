@@ -40,9 +40,7 @@
         }
     }
 
-    const addTeam = () => {
-        console.log("adding...");
-        
+    const addTeam = () => {        
         //Create a new anonymous Team card with the following data:
         //The location for which team is playing, a score of 0, and no players (yet).
         addTeamCard({
@@ -56,7 +54,6 @@
         
         //Set the current visible option for the all of the 
         selectedTeam.value.team_name = remainingLocationOptions.value[0]
-        // selectedLocationName.value = remainingLocationOptions.value[0]
     }
 
     onMounted(async () => {
