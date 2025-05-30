@@ -32,7 +32,7 @@
         <div class="links" v-else>
             <DarkModeToggle />
             <RouterLink to="/" class="link-item">Home</RouterLink>
-            <RouterLink to="/add-new-user" class="link-item">Add New Users</RouterLink>            
+            <RouterLink to="/add-new-players" class="link-item">Add New Players</RouterLink>            
             <RouterLink to="/tournament-mode" class="link-item">Team Mode</RouterLink>
             <RouterLink to="/view-games" class="link-item">View Games</RouterLink>
             

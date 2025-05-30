@@ -1,6 +1,5 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
-    import { buttonActiveStore, ButtonState} from "../../stores/buttonActiveStore"
+    import { ref } from 'vue'
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { darkModeStore } from "../../stores/darkModeStore"
     import { storeToRefs } from 'pinia';
@@ -9,20 +8,20 @@
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
 
     //Stateful variables
-    const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation } = storeToRefs(selectedLocationStore())
 
-    //Stateful methods
     const { addScoreCard } = scoreCardsStore()
 
     const duplicateErrorMessage = ref<string>("")
-    const username = ref<string>("")
+    const firstName = ref<string>("")
+    const lastName = ref<string>("")
+    let isLoading = true
 
     const addUser = async () => {
         const newCard: Card = {
-            username: username.value,
+            username: firstName.value + " " + lastName.value,
             score: 0
         }
 
@@ -37,43 +36,56 @@
             addScoreCard(newCard)
 
             try {
-                const res = await scoreBoardApi.post(`/add-user-to-location/${selectedLocation.value}`, {"username": username.value})
+                const res = await scoreBoardApi.post(`/add-user-to-location/${selectedLocation.value}`, {"username": newCard.username})
                 
                 console.log("res", res.data)
             } catch (error) {
                 console.log("err:", error)
             }
 
-            username.value = ""
+            firstName.value = ""
+            lastName.value = ""
         }
+
+        isLoading = false
     }
 </script>
 
 <template>
-    <!-- v-if="currentButtonGroupState !== ButtonState.CREATE_NEW_TEAM_GAME" -->
     <form  @submit.prevent="addUser">
         <div class="add-user-wrapper">
-            <label for="add-user">Name</label><br>
+            <label for="add-firstname">First Name</label><br>
             <input 
                 :class="`form-element ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`"
-                id="add-user" 
-                v-model="username" 
+                id="add-firstname" 
+                v-model="firstName" 
                 minlength="1"
-                maxlength="30" 
+                maxlength="15" 
                 type="text" 
-                name="addUser" 
-                placeholder="Add user to game" 
+                name="addFirstName" 
+                placeholder="Players First Name " 
+                required
+            ><br><br>
+            <label for="add-user">Last Name</label><br>
+            <input 
+                :class="`form-element ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`"
+                id="add-lastname" 
+                v-model="lastName" 
+                minlength="1"
+                maxlength="15" 
+                type="text" 
+                name="addLastName" 
+                placeholder="Player's Last Name" 
                 required
             >
             <div class="error">{{ duplicateErrorMessage }}</div>
         </div>
 
         <button :class="`form-element ${isDarkMode ? 'dark-mode' : 'light-mode'}`" type="submit">
-            Add User To Location
+            Add Player To Location
         </button>
     </form>
 </template>
-
 
 <style scoped lang="scss">
     .dark-mode{
@@ -153,5 +165,4 @@
             }
         }
     }
-
 </style>
