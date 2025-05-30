@@ -2,8 +2,8 @@
     import TeamCards from '../../components/TeamCards/TeamCards.vue';
     import AddNewTeam from '../../components/AddNewTeam/AddNewTeam.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
-    import { teamCardsStore } from "../../stores/teamCardsStore"
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
+    import { teamCardsStore } from "../../stores/teamCardsStore"
 
      //Stateful methods
     const { resetAllPoints } = teamCardsStore()

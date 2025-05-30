@@ -1,6 +1,5 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
-    import { buttonActiveStore, ButtonState} from "../../stores/buttonActiveStore"
+    import { ref } from 'vue'
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { darkModeStore } from "../../stores/darkModeStore"
     import { storeToRefs } from 'pinia';
@@ -9,12 +8,10 @@
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
 
     //Stateful variables
-    const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
     const { isDarkMode } = storeToRefs(darkModeStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation } = storeToRefs(selectedLocationStore())
 
-    //Stateful methods
     const { addScoreCard } = scoreCardsStore()
 
     const duplicateErrorMessage = ref<string>("")
@@ -50,7 +47,6 @@
 </script>
 
 <template>
-    <!-- v-if="currentButtonGroupState !== ButtonState.CREATE_NEW_TEAM_GAME" -->
     <form  @submit.prevent="addUser">
         <div class="add-user-wrapper">
             <label for="add-user">Name</label><br>
@@ -73,7 +69,6 @@
         </button>
     </form>
 </template>
-
 
 <style scoped lang="scss">
     .dark-mode{
@@ -153,5 +148,4 @@
             }
         }
     }
-
 </style>

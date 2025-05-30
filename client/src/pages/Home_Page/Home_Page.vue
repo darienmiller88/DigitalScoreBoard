@@ -83,16 +83,16 @@
     <!-- <LocationSelection /> -->
 
     <!-- Contains the three buttons needed to select the options. -->
-    <GameButtonGroup />
+    <!-- <GameButtonGroup /> -->
 
     <!-- Only show this when the "Create new game" or "Add new user" is clicked -->
-    <AddUserToLocation />
+    <!-- <AddUserToLocation /> -->
 
-    <div class="reset-all-points-wrapper">
+    <!-- <div class="reset-all-points-wrapper">
         <button type="button" @click="resetAllPoints" >
             Reset All Points
         </button>
-    </div>
+    </div> -->
 
     <div v-if="currentButtonGroupState === ButtonState.CREATE_NEW_GAME" class="total-points">
         Total Points: {{ totalPoints() }} 
