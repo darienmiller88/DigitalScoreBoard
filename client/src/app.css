@@ -6,13 +6,14 @@
     --main-text-color: #61dafb;
     --main-text-color-dark-transparent: #61dafbe1;
     --main-text-color-transparent: #61dafb82;
-    --primary-color: #fff0db;
+    --primary-color: #61dafb;
+    --primary-color-transparent: #61dafbe1;
     --toggle-background: #fff0db;
-    /* --toggle-slider: #00050f; */
 }
 
 [data-theme="light"] {
-    --text-color: #003366;
+    --primary-color: #003366;
+    --primary-color-transparent: #003366d0;
     --bg-color: #fff0db;
     --toggle-background: #00050f;
 }

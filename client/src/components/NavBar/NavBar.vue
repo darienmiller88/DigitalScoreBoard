@@ -55,7 +55,7 @@
     nav{
         display: flex;
         justify-content: space-between;
-        background-color: var(--main-text-color-dark-transparent);
+        background-color: var(--primary-color-transparent);
 
         position: sticky;
         top: 0;
@@ -92,11 +92,11 @@
         }
 
         .logo-item{
-            color: var(--main-bg-color);
+            color: aliceblue;
             transition: 0.5s;
 
             &:hover{
-                color: var(--primary-color);
+                color: black;
             }
         }
 
@@ -118,13 +118,13 @@
             font-size: 18px;
             padding: 0px 20px;
 
-            color: var(--primary-color);
+            color: aliceblue;
 
             transition: 0.5s;
             height: 100%;
 
             &:hover{
-                background-color: blue;
+                background-color: rgb(50, 50, 219);
             }
         }
 
