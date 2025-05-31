@@ -10,7 +10,7 @@
 
 <style scoped lang="scss">
     .title{
-        color: var(--main-text-color);
+        color: var(--primary-color);
         text-align: center;
         font-size: 40px;
         margin: 40px 0px;
