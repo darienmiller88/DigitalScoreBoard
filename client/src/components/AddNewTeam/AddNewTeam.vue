@@ -4,17 +4,15 @@
     import { selectedTeamStore } from '../../stores/selectedLocationStore';
     import { optionsStore } from "../../stores/optionsStore"
     import { teamCardsStore } from "../../stores/teamCardsStore";
-    import { darkModeStore } from "../../stores/darkModeStore"
     import { storeToRefs } from 'pinia';
     import { Location } from "../../types/types"
     import { scoreBoardApi } from '../../api/api';
-    import { Icon } from "@iconify/vue"
+    import Loading from '../Loading/Loading.vue';
 
     //ref variables
     const { teamCards } = storeToRefs(teamCardsStore())
     const { remainingLocationOptions, allLocationOptions } = storeToRefs(optionsStore())
     const { selectedTeam } = storeToRefs(selectedTeamStore())
-    const { isDarkMode } = storeToRefs(darkModeStore())
 
     //store methods
     const { setRemainingLocationOptions, setAllLocationOptions } = optionsStore()
@@ -84,10 +82,8 @@
 </script>
 
 <template>
-    <div :class="`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`">
-        <div class="icon-wrapper" v-if="isLoading">
-            <Icon icon="svg-spinners:180-ring"  :height="50" :width="50"/>
-        </div>
+    <div>
+        <Loading :height="50" v-if="isLoading"/>
         <div class="team-game-location" v-if="!isLoading && remainingLocationOptions.length">
             <Select 
                 :options="remainingLocationOptions"
@@ -105,13 +101,6 @@
 
 
 <style scoped lang="scss">
-    .icon-wrapper{
-        width: fit-content;
-        margin: auto;
-
-        color: var(--main-text-color);
-    }
-
     .team-game-location{
         text-align: center;
         
