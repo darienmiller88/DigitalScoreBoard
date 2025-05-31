@@ -8,13 +8,13 @@
     --main-text-color-transparent: #61dafb82;
     --primary-color: #61dafb;
     --primary-color-transparent: #61dafbe1;
-    --toggle-background: #fff0db;
+    --toggle-background: #f2e0c5;
 }
 
 [data-theme="light"] {
     --primary-color: #003366;
     --primary-color-transparent: #003366d0;
-    --bg-color: #fff0db;
+    --bg-color: #e6d1b0;
     --toggle-background: #00050f;
 }
 

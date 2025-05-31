@@ -45,38 +45,30 @@
 
 <template>
    <div class="save-wrapper">
-        <button type="button" @click="addSavedGame" :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
+        <button type="button" @click="addSavedGame">
             Save Game
         </button>
     </div>
 </template>
 
 <style scoped lang="scss">
-    .dark-mode{
-        border: 2px var(--primary-color) solid;
-        color: var(--main-text-color);
-        background-color: transparent;
-    }
-
-    .light-mode{
-        color: var(--primary-color);
-        background-color: var(--main-text-color)
-    }
-
      .save-wrapper{
         text-align: center;
         margin: 40px;
 
         button{
             border-radius: 10px;
+            border: none;
             padding: 15px 35px;
+            background-color: var(--primary-color);
+            color: aliceblue;
     
             transition: 0.5s;
             font-size: 25px;
 
             &:hover{
                 cursor: pointer;
-                background-color: var(--main-text-color-transparent);
+                background-color: var(--primary-color-transparent);
             }
 
             &:active {
