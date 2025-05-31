@@ -1,16 +1,13 @@
 <script setup lang="ts">
     import { useWindowSize } from "@vueuse/core"
-    import { darkModeStore } from "../../stores/darkModeStore";
-    import { storeToRefs } from "pinia";
     import { Icon } from "@iconify/vue"
     import { ref } from "vue";
     import PhoneNavMenu from "../PhoneNavMenu/PhoneNavMenu.vue";
     import DarkModeToggle from "../DarkModeToggle/DarkModeToggle.vue";
 
     const { width } = useWindowSize();
-    const { isDarkMode } = storeToRefs(darkModeStore())
     const isPhoneMenuActive = ref<boolean>(false)
-    const isActive: boolean[] = []
+    // const isActive: boolean[] = []
 
     const menuClick = () => {
         isPhoneMenuActive.value = !isPhoneMenuActive.value
@@ -18,7 +15,7 @@
 </script>
 
 <template>
-    <nav :class="`${isDarkMode ? 'dark-mode' : 'light-mode'}`">
+    <nav>
         <RouterLink to="/" class="logo">
             <img src="../../assets/sb.png" alt="logo">
             <div class="logo-item">
@@ -44,22 +41,15 @@
 </template>
 
 <style scoped lang="scss">
-    .dark-mode{
-        border: 3px solid var(--primary-color);
-    }
-
-    .light-mode{
-        border: 3px solid var(--main-bg-color);
-    }
-
     nav{
         display: flex;
         justify-content: space-between;
         background-color: var(--primary-color-transparent);
+        border: 3px solid var(--toggle-background);
 
         position: sticky;
         top: 0;
-        // z-index: -1000; 
+        z-index: 1000; 
     }
 
     .icon-wrapper{
