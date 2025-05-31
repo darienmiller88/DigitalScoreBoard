@@ -6,6 +6,7 @@
     import { Card } from "../../types/types"
     import { scoreBoardApi } from "../../api/api"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
+    import Loading from '../Loading/Loading.vue';
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
@@ -17,9 +18,11 @@
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")
     const lastName = ref<string>("")
-    let isLoading = true
+    let isLoading = ref<boolean>(false)
 
     const addUser = async () => {
+        isLoading.value = true
+
         const newCard: Card = {
             username: firstName.value + " " + lastName.value,
             score: 0
@@ -47,7 +50,7 @@
             lastName.value = ""
         }
 
-        isLoading = false
+        isLoading.value = false
     }
 </script>
 
@@ -82,7 +85,8 @@
         </div>
 
         <button class="form-element" type="submit">
-            Add Player To Location
+            <Loading :height="50" :usePrimary="false" v-if="isLoading" />
+            <div v-else> Add Player To Location </div>
         </button>
     </form>
 </template>

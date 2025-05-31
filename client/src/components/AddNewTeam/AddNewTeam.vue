@@ -83,7 +83,7 @@
 
 <template>
     <div>
-        <Loading :height="50" v-if="isLoading"/>
+        <Loading :height="50" :usePrimary="true" v-if="isLoading"/>
         <div class="team-game-location" v-if="!isLoading && remainingLocationOptions.length">
             <Select 
                 :options="remainingLocationOptions"
