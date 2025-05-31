@@ -1,9 +1,11 @@
 <script setup lang="ts">
+    import { ref } from 'vue';
     import { storeToRefs } from 'pinia';
     import { SavedGame } from '../../types/types';
     import { teamCardsStore } from '../../stores/teamCardsStore';
     import { scoreBoardApi } from '../../api/api';
     import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
+    import Loading from '../Loading/Loading.vue';
 
     //Stateful methods
     const { getWinningTeam, getTotalPoints, getAveragePoints, getPlayers } = teamCardsStore()
@@ -12,7 +14,11 @@
     const { teamCards } = storeToRefs(teamCardsStore())
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
 
+    let isLoading = ref<boolean>(false)
+
     const addSavedGame = async () => {
+        isLoading.value = false
+
         try {
             if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
                 const savedGame: SavedGame = {
@@ -38,13 +44,16 @@
         } catch (error) {
             console.log("err:", error);
         }
+
+        isLoading.value = true
     }
 </script>
 
 <template>
    <div class="save-wrapper">
         <button type="button" @click="addSavedGame" disabled>
-            Save Game
+            <Loading :height="30" :usePrimary="false" v-if="isLoading"/>
+            <div v-else> Save Game </div>
         </button>
     </div>
 </template>
