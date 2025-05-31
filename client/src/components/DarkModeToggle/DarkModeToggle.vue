@@ -12,10 +12,8 @@
 
         if (isDarkMode.value) {
             document.documentElement.setAttribute('data-theme', "dark");
-            // document.body.classList.remove("light")
         } else {
             document.documentElement.setAttribute('data-theme', "light");
-            // document.body.classList.add("light")
         }        
     }
 
@@ -70,10 +68,7 @@
     }
 
     .toggle-right{
-        // background-color: var(--main-bg-color);
-
         .slider{
-            // background-color: var(--primary-color);
             transform: translateX(calc($toggle-width - $slider-width - ($padding * 2)));
         }
     }
