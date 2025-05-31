@@ -63,17 +63,15 @@
   
 <style scoped lang="scss">
   .team-scorecard {
-    /* background-color: #10141e;
-    */
-    box-shadow: 8px 8px 5px rgba(173, 216, 230, 0.548);
-    color: var(--main-text-color);
+    box-shadow: 8px 8px 5px var(--primary-color-transparent);
+    color: var(--primary-color);
     
     text-align: center; 
     padding: 10px 10px;
     margin: 18px 0px; 
     transition: 0.3s;
 
-    border: var(--main-text-color) 2px solid;
+    border: var(--primary-color) 2px solid;
     border-radius: 10px;
     width: fit-content;
 
@@ -83,7 +81,7 @@
     }
 
     &:hover{
-        box-shadow: 10px 10px 15px var(--main-text-color);
+        box-shadow: 10px 10px 15px var(--primary-color);
         transform: translateY(-5px);
     }
 
@@ -142,15 +140,20 @@
 
       .minus{
         background-color: #ff0000;
+        font-size: 20px;
+        font-weight: 800;
       }
 
       span{
-        color: var(--main-text-color);
-        font-size: 20px;
+        color: var(--primary-color);
+        font-size: 25px;
+        margin: 0px 10px;
       }
 
       .plus{
-        background-color: var(--main-text-color);
+        background-color: var(--primary-color);
+        font-size: 20px;
+        font-weight: 800;
       }
     
       button {
@@ -168,12 +171,12 @@
 
      .view-players{
         button{
-          border: 2px solid var(--main-text-color);
+          border: 2px solid var(--primary-color);
           border-radius: 5px;
           padding: 10px 22px;
 
           background-color: transparent;
-          color: var(--main-text-color);
+          color: var(--primary-color);
           transition: 0.3s;
 
           &:hover{
@@ -190,7 +193,7 @@
     
     button {
       padding: 8px 20px;
-      background-color: #00bfff;
+      background-color: var(--primary-color);
       color: white;
 
       border: none;
