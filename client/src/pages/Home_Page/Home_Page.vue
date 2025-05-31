@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
     import TeamCards from '../../components/TeamCards/TeamCards.vue';
+    import PageTitle from '../../components/PageTitle/PageTitle.vue';
     import GameButtonGroup from '../../components/GameButtonGroup/GameButtonGroup.vue';
     import AddUserToLocation from '../../components/AddUserToLocation/AddUserToLocation.vue';
     import LocationSelection from '../../components/LocationSelection/LocationSelection.vue';
@@ -79,7 +80,7 @@
 
 <template>
 
-    <div class="title">Jeopardy Score Board</div>
+    <PageTitle :titleName="'Jeopardy Score Board'"/>
     
     <!-- Contains the ADAPT locations in the select tag -->
     <!-- <LocationSelection /> -->
@@ -132,18 +133,6 @@
 
     .light-mode-text{
         color: var(--main-bg-color);
-    }
-
-    .title{
-        color: var(--main-text-color);
-        text-align: center;
-        font-size: 40px;
-        margin: 40px 0px;
-
-        @media screen and (min-width: 768px) {
-            font-size: 60px;
-            margin: 10px 0px;
-        }
     }
 
     .error{

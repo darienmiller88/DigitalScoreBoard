@@ -1,17 +1,25 @@
  @import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:wght@700&family=Kanit:wght@300&family=Martian+Mono&family=Merriweather:wght@300&family=Open+Sans:wght@300&family=Oswald:wght@300;400&family=Rubik:ital,wght@0,500;1,900&display=swap');
 
 :root {
-    --main-bg-color: #00050f;
-    --main-bg-color-transparent: #00050fe9;
+    --bg-color: #00050f;
+    --bg-color-transparent: #00050fe9;
     --main-text-color: #61dafb;
     --main-text-color-dark-transparent: #61dafbe1;
     --main-text-color-transparent: #61dafb82;
-    --primary-color: #f8f9fa;
+    --primary-color: #fff0db;
+    --toggle-background: #fff0db;
+    /* --toggle-slider: #00050f; */
+}
+
+[data-theme="light"] {
+    --text-color: #003366;
+    --bg-color: #fff0db;
+    --toggle-background: #00050f;
 }
 
 body{
     margin: 0;
-    background-color: var(--main-bg-color);
+    background-color: var(--bg-color);
     transition: 0.5s;
 
     font-family: 'Gentium Book Plus', serif;
@@ -23,9 +31,10 @@ body{
     font-family: 'Rubik', sans-serif;
 }
 
-body.light{
+/* body.light{
     background-color: var(--primary-color);
-}
+    color: var(--light-mode-text-color);
+} */
 
 /* 
 Scrollbar styling

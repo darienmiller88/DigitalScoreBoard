@@ -11,19 +11,21 @@
         toggleDarkMode()
 
         if (isDarkMode.value) {
-            document.body.classList.remove("light")
+            document.documentElement.setAttribute('data-theme', "dark");
+            // document.body.classList.remove("light")
         } else {
-            document.body.classList.add("light")
+            document.documentElement.setAttribute('data-theme', "light");
+            // document.body.classList.add("light")
         }        
     }
 
      // Run on page load to set the initial class based on the dark mode state
      onMounted(() => {
         if (isDarkMode.value) {
-            document.body.classList.remove("light");
+            document.documentElement.setAttribute('data-theme', "dark");
         } else {
-            document.body.classList.add("light");
-        }
+            document.documentElement.setAttribute('data-theme', "light");
+        }   
     });
 </script>
 
@@ -43,7 +45,7 @@
     .mode-toggle{  
         display: flex;
 
-        background-color: var(--primary-color);
+        background-color: var(--toggle-background);
         border-radius: 20px;
         border: none;
 
@@ -53,7 +55,7 @@
         margin-right: 10px;
 
         .slider{
-            background-color: var(--main-bg-color);
+            background-color: var(--bg-color);
             width: $slider-width;
             height: $slider-width;
             border-radius: 50%;   
@@ -68,10 +70,10 @@
     }
 
     .toggle-right{
-        background-color: var(--main-bg-color);
+        // background-color: var(--main-bg-color);
 
         .slider{
-            background-color: var(--primary-color);
+            // background-color: var(--primary-color);
             transform: translateX(calc($toggle-width - $slider-width - ($padding * 2)));
         }
     }

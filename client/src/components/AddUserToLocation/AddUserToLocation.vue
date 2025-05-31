@@ -57,19 +57,19 @@
             <label for="add-firstname">First Name</label><br>
             <input 
                 :class="`form-element ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`"
-                id="add-firstname" 
+                id="add-first-name" 
                 v-model="firstName" 
                 minlength="1"
                 maxlength="15" 
                 type="text" 
                 name="addFirstName" 
-                placeholder="Players First Name " 
+                placeholder="Player's First Name " 
                 required
             ><br><br>
             <label for="add-user">Last Name</label><br>
             <input 
                 :class="`form-element ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`"
-                id="add-lastname" 
+                id="add-last-name" 
                 v-model="lastName" 
                 minlength="1"
                 maxlength="15" 
@@ -112,11 +112,11 @@
         margin-top: 20px;
 
         .form-element{
-            width: 40vw;
+            width: 75vw;
 
-            // @media screen and (min-width: 768px) {
-            //     width: 60vw;
-            // }
+            @media screen and (min-width: 768px) {
+                width: 40vw;
+            }
         }
 
         .add-user-wrapper{
