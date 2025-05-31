@@ -10,6 +10,7 @@
     const { width } = useWindowSize();
     const { isDarkMode } = storeToRefs(darkModeStore())
     const isPhoneMenuActive = ref<boolean>(false)
+    const isActive: boolean[] = []
 
     const menuClick = () => {
         isPhoneMenuActive.value = !isPhoneMenuActive.value
@@ -125,6 +126,10 @@
             &:hover{
                 background-color: blue;
             }
+        }
+
+        .active{
+            background-color: blue;
         }
     }
 </style>

@@ -78,6 +78,8 @@
 </script>
 
 <template>
+
+    <div class="title">Jeopardy Score Board</div>
     
     <!-- Contains the ADAPT locations in the select tag -->
     <!-- <LocationSelection /> -->

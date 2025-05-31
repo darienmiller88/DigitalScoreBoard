@@ -112,11 +112,11 @@
         margin-top: 20px;
 
         .form-element{
-            width: 85vw;
+            width: 40vw;
 
-            @media screen and (min-width: 768px) {
-                width: 60vw;
-            }
+            // @media screen and (min-width: 768px) {
+            //     width: 60vw;
+            // }
         }
 
         .add-user-wrapper{
