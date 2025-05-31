@@ -3,7 +3,6 @@
     import { SavedGame } from '../../types/types';
     import { teamCardsStore } from '../../stores/teamCardsStore';
     import { scoreBoardApi } from '../../api/api';
-    import { darkModeStore } from "../../stores/darkModeStore"
     import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
 
     //Stateful methods
@@ -11,7 +10,6 @@
 
     //Stateful variables
     const { teamCards } = storeToRefs(teamCardsStore())
-    const { isDarkMode } = storeToRefs(darkModeStore())
     const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
 
     const addSavedGame = async () => {
@@ -45,7 +43,7 @@
 
 <template>
    <div class="save-wrapper">
-        <button type="button" @click="addSavedGame">
+        <button type="button" @click="addSavedGame" disabled>
             Save Game
         </button>
     </div>
