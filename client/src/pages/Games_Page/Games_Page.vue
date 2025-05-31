@@ -3,7 +3,8 @@
     import { SavedGame } from "../../types/types"
     import { onMounted, ref } from 'vue';
     import { scoreBoardApi } from "../../api/api"
-    import { Icon } from "@iconify/vue"
+    import PageTitle from '../../components/PageTitle/PageTitle.vue';
+    import Loading from '../../components/Loading/Loading.vue';
 
     const isLoading = ref<boolean>(true)
     let games: SavedGame[] = [
@@ -72,10 +73,8 @@
 </script>
 
 <template>
-    <div class="title">Saved Games</div>
-    <div class="loading-wrapper" v-if="isLoading">
-        <Icon icon="line-md:loading-twotone-loop" color="#61dafb" height="60" width="60"/>
-    </div>
+    <PageTitle :titleName="'Saved Games'"/>
+    <Loading :height="50" :usePrimary="true" v-if="isLoading"/>
     <div class="games" v-else>
        <Game 
           v-for="(game, index) in games"
@@ -86,24 +85,7 @@
 </template>
 
 <style scoped lang="scss">
-    .title{
-        font-size: 40px;
-        text-align: center;
-        color: var(--main-text-color);
-        margin: 15px;
-
-        @media screen and (min-width: 768px) {
-            font-size: 50px;
-        }
-    }
-
-    .loading-wrapper{
-        text-align: center;
-        margin-top: 60px;
-    }
-
     .games{
-        // border: 1px solid var(--main-text-color); 
         overflow-y: scroll;
 
         height: 70vh;
