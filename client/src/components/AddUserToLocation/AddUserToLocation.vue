@@ -81,32 +81,13 @@
             <div class="error">{{ duplicateErrorMessage }}</div>
         </div>
 
-        <button :class="`form-element ${isDarkMode ? 'dark-mode' : 'light-mode'}`" type="submit">
+        <button class="form-element" type="submit">
             Add Player To Location
         </button>
     </form>
 </template>
 
 <style scoped lang="scss">
-    .dark-mode{
-        border: 2px var(--primary-color) solid;
-        color: var(--main-text-color);
-        background-color: transparent;
-    }
-
-    .light-mode{
-        color: var(--primary-color);
-        background-color: var(--main-text-color)
-    }
-
-    .dark-mode-text{
-        color: var(--primary-color);
-    }
-
-    .light-mode-text{
-        color: var(--main-bg-color);
-    }
-
     form{
         text-align: center;
         margin-top: 20px;
@@ -120,7 +101,7 @@
         }
 
         .add-user-wrapper{
-            color: var(--main-text-color);
+            color: var(--primary-color);
             text-align: left;
             width: fit-content;
             margin: auto;
@@ -134,7 +115,7 @@
                 font-size: 25px;
                 padding: 10px;
 
-                border: 2px solid var(--main-text-color);
+                border: 2px solid var(--primary-color);
                 border-radius: 5px;
 
                 background-color: transparent;
@@ -154,10 +135,14 @@
             transition: 0.5s;
             font-size: 25px;
             margin-top: 10px;   
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+
+            border: 2px solid var(--primary-color);
 
             &:hover{
                 cursor: pointer;
-                background-color: var(--main-text-color-transparent);
+                background-color: var(--primary-color-transparent);
             }
 
             &:active {
