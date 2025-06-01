@@ -85,7 +85,7 @@
         </div>
 
         <button class="form-element" type="submit">
-            <Loading :height="50" :usePrimary="false" v-if="isLoading" />
+            <Loading :height="35" :usePrimary="false" v-if="isLoading" />
             <div v-else> Add Player To Location </div>
         </button>
     </form>
@@ -136,9 +136,9 @@
             border-radius: 10px;
             padding: 15px 35px;
 
-            transition: 0.5s;
+            transition: 0.3s;
             font-size: 25px;
-            font-weight: 900;
+            font-weight: 600;
             margin-top: 10px;   
             background-color: var(--primary-color);
             color: var(--bg-color);
