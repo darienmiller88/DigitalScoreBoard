@@ -83,5 +83,22 @@
 </template>
 
 <style scoped lang="scss">
+    .games{
+        overflow-y: scroll;
 
+        height: 70vh;
+        width: 95vw;
+        margin: auto;
+        transition: 0.3s;
+
+        @media screen and (min-width: 768px) {
+            width: fit-content;
+            padding: 0px 30px;
+        }
+
+        &:hover{
+            box-shadow: 0 4px 10px var(--main-text-color);
+        }
+
+    }
 </style>
