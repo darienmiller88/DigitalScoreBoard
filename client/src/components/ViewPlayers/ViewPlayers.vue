@@ -5,6 +5,7 @@
     }>()
 </script>
 
+<!-- This component will be sent to the modal when the user clicks on "view players" on the team card -->
 <template>
     <h2 v-if="!teamPlayers.length">No players added to team yet!</h2>
     <div v-else class="players">
@@ -67,7 +68,6 @@
             transition: 0.3s;
 
             &:hover{
-                // padding: 10px 16px;
                 transform: scale(1.1);
             }
         }
