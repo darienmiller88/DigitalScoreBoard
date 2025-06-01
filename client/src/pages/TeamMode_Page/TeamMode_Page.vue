@@ -5,7 +5,7 @@
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import { teamCardsStore } from "../../stores/teamCardsStore"
 
-     //Stateful methods
+     //Stateful method(s)
     const { resetAllPoints } = teamCardsStore()
 </script>
 
@@ -16,13 +16,9 @@
     <!-- Button to reset all of the points for every team playing -->
     <ResetPoints :resetAllPoints="resetAllPoints"/>
 
-    <!-- Shows Create new Team game form when "Create new team game" button is clicked  --> 
+    <!-- Show all team cards added by the user  --> 
     <TeamCards />
 
     <!-- Saves a game to the server -->
     <SaveGame />
 </template>
-
-<style scoped lang="scss">
-    
-</style>
