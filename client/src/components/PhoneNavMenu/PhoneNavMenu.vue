@@ -51,7 +51,7 @@
             .link-item{
                 // border: 2px solid red;
                 text-align: center;
-                color: var(--primary-color);
+                color: aliceblue;
                 font-size: 35px;
                 padding: 30px;
                 transition: 0.2s;
