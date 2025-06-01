@@ -3,6 +3,7 @@
     import Game from '../../components/Game/Game.vue';
     import { SavedGame } from '../../types/types';
     import { scoreBoardApi } from '../../api/api';
+    import Loading from '../Loading/Loading.vue';
 
     const isLoading = ref<boolean>(true)
 
@@ -99,6 +100,5 @@
         &:hover{
             box-shadow: 0 4px 10px var(--main-text-color);
         }
-
     }
 </style>
