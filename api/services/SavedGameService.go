@@ -30,6 +30,7 @@ func GetAllSavedGames(req *http.Request) models.Result[[]models.SavedGame] {
 	//Unmarshall the mongo cursor into the array of saved games.
 	if err := findResult.All(req.Context(), &savedGames); err != nil{
 		savedGamesResult.Err = err
+		savedGamesResult.StatusCode = http.StatusInternalServerError
 		
 		return savedGamesResult
 	}
