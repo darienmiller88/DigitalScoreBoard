@@ -41,7 +41,6 @@
             display: flex;
             justify-content: end;
             padding: 20px;
-            // border: 2px solid white;
         }
 
         .links{
@@ -49,7 +48,6 @@
             flex-direction: column;
 
             .link-item{
-                // border: 2px solid red;
                 text-align: center;
                 color: aliceblue;
                 font-size: 35px;
