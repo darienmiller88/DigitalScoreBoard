@@ -138,6 +138,7 @@
 
             transition: 0.5s;
             font-size: 25px;
+            font-weight: 900;
             margin-top: 10px;   
             background-color: var(--primary-color);
             color: var(--bg-color);
