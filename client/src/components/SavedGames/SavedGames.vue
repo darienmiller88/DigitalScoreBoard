@@ -98,7 +98,7 @@
         }
 
         &:hover{
-            box-shadow: 0 4px 10px var(--main-text-color);
+            box-shadow: 0 4px 10px var(--primary-color);
         }
     }
 </style>

@@ -33,11 +33,6 @@ body{
     font-family: 'Rubik', sans-serif;
 }
 
-/* body.light{
-    background-color: var(--primary-color);
-    color: var(--light-mode-text-color);
-} */
-
 /* 
 Scrollbar styling
 */
@@ -55,11 +50,11 @@ Scrollbar styling
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--main-text-color); 
+    background: var(--primary-color); 
     border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--main-text-color-transparent); 
+    background: var(--primary-color-transparent); 
 }

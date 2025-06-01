@@ -51,9 +51,8 @@
     .game{
         border-radius: 10px;
 
-        // color: var(--main-text-color);
         background-color: white;
-        box-shadow: 8px 8px 5px rgba(173, 216, 230, 0.548);
+        box-shadow: 8px 8px 5px var(--primary-color);
         transition: 0.3s;
 
         width: 80vw;
@@ -71,7 +70,7 @@
         }
 
         &:hover{
-            box-shadow: 10px 10px 15px var(--main-text-color);
+            box-shadow: 10px 10px 15px var(--primary-color);
             transform: translateY(-5px);
         }
 
@@ -80,7 +79,6 @@
             align-items: center;
             font-size: 30px;
             font-style: italic;
-            // border: 2px solid var(--main-text-color);
 
             img{
                 height: 45px;
@@ -100,11 +98,11 @@
 
         .view-players-wrapper{
             margin: 15px;
-            // margin-top: 18px;
+
             button{
                 padding: 10px 28px;
                 
-                background-color: var(--main-text-color);
+                background-color: var(--primary-color);
                 color: aliceblue;
                 font-size: 18px;
 
@@ -120,7 +118,6 @@
         }
 
         .location-date-wrapper{
-            // margin-top: 15px;
             color: grey;
         }
 
