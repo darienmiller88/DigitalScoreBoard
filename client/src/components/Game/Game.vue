@@ -3,21 +3,26 @@
     import { useWindowSize } from "@vueuse/core"
     import star from "../../assets/star.png"
 
-    const props = defineProps<SavedGame>()
+    // const props = defineProps<SavedGame>()
     const { width } = useWindowSize();
+
+    const props = defineProps<{
+        game: SavedGame,
+        openModal: () => void
+    }>()
 </script>
 
 <template>
     <div class="game">
         <div class="winner-wrapper">
             <img :src="star" alt="">
-            <span class="winner"> Winner: {{ props.winner.username }} </span> 
+            <span class="winner"> Winner: {{ props.game.winner.username }} </span> 
             <img :src="star" alt="">
         </div>
-        <div class="score">Score: {{ props.winner.score }}</div>
+        <div class="score">Score: {{ props.game.winner.score }}</div>
 
         <div class="view-players-wrapper">
-            <button>
+            <button @click="props.openModal">
                 View players
             </button>
         </div>
@@ -25,21 +30,21 @@
         <!--  -->
         <div class="location-date-wrapper">
             <div class="location">Location: 
-                <span v-if="props.location">
-                    {{ props.location.location_name }}
+                <span v-if="props.game.location">
+                    {{ props.game.location.location_name }}
                 </span>
             </div>
-            <div class="date-played">Date played: {{ props.created_at }}</div>
+            <div class="date-played">Date played: {{ props.game.created_at }}</div>
         </div>
 
         <!--  -->
         <div class="points-wrapper">
             <div class="total-points">
-                <span>{{ props.total_points }}</span><br>
+                <span>{{ props.game.total_points }}</span><br>
                 Total points 
             </div>
             <div class="average-points">
-                <span>{{ props.average_points }}</span><br>
+                <span>{{ props.game.average_points }}</span><br>
                 <span v-if="width < 768">Avg. Points</span>
                 <span v-else>Avgerage Points</span>
             </div>

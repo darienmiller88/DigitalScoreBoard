@@ -1,11 +1,14 @@
 <script setup lang="ts">
     import { onMounted, ref } from 'vue';
-    import Game from '../../components/Game/Game.vue';
     import { SavedGame } from '../../types/types';
     import { scoreBoardApi } from '../../api/api';
     import Loading from '../Loading/Loading.vue';
+    import Game from '../../components/Game/Game.vue';
+    import Modal from '../Modal/Modal.vue';
+    import ViewSavedGamePlayers from '../ViewSavedGamePlayers/ViewSavedGamePlayers.vue';
 
     const isLoading = ref<boolean>(true)
+    let showPeopleWhoPlayed = ref<boolean>(false)
 
     let games: SavedGame[] = [
         {
@@ -77,10 +80,19 @@
     <div class="games" v-else>
        <Game 
           v-for="(game, index) in games"
-          v-bind="game"
+          :game="game"
           :key="index"
-       />
+          :openModal="() => showPeopleWhoPlayed = true"
+        />
     </div>
+
+    <Modal 
+        :modalHeader="'People who played'"
+        :show="showPeopleWhoPlayed"
+        :modalContent="ViewSavedGamePlayers"
+        :onHide="() => showPeopleWhoPlayed = false"
+        :modalProps="{}"
+    />
 </template>
 
 <style scoped lang="scss">
