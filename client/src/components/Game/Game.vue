@@ -9,9 +9,9 @@
 
 <template>
     <div class="game">
-        <div class="winner">
+        <div class="winner-wrapper">
             <img :src="star" alt="">
-            Winner: {{ props.winner.username }}
+            <span class="winner"> Winner: {{ props.winner.username }} </span> 
             <img :src="star" alt="">
         </div>
         <div class="score">Score: {{ props.winner.score }}</div>
@@ -45,6 +45,8 @@
             </div>
         </div>
     </div>
+
+    
 </template>
 
 <style scoped lang="scss">
@@ -74,11 +76,17 @@
             transform: translateY(-5px);
         }
 
-        .winner{
+        .winner-wrapper{
             display: flex;
             align-items: center;
             font-size: 30px;
             font-style: italic;
+
+            .winner{
+                @media screen and (min-width: 768px) {
+                    margin: 0px 20px;
+                }
+            }
 
             img{
                 height: 45px;
@@ -88,6 +96,10 @@
                 @media screen and (min-width: 768px) {
                     height: 60px;
                 }
+            }
+
+            @media screen and (min-width: 768px) {
+                margin: 0px 40px;
             }
         }
 

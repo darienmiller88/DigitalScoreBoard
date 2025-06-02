@@ -6,6 +6,7 @@
     import { scoreBoardApi } from '../../api/api';
     import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
     import Loading from '../Loading/Loading.vue';
+    import Modal from '../Modal/Modal.vue';
 
     //Stateful methods
     const { getWinningTeam, getTotalPoints, getAveragePoints, getPlayers } = teamCardsStore()
@@ -56,6 +57,10 @@
             <div v-else> Save Game </div>
         </button>
     </div>
+
+    <!-- <Modal 
+    
+    /> -->
 </template>
 
 <style scoped lang="scss">
