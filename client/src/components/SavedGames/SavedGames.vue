@@ -2,13 +2,16 @@
     import { onMounted, ref } from 'vue';
     import { SavedGame } from '../../types/types';
     import { scoreBoardApi } from '../../api/api';
+    import { Card, Team} from "../../types/types"
     import Loading from '../Loading/Loading.vue';
     import Game from '../../components/Game/Game.vue';
     import Modal from '../Modal/Modal.vue';
     import ViewSavedGamePlayers from '../ViewSavedGamePlayers/ViewSavedGamePlayers.vue';
+    import ViewSavedGameTeams from '../ViewSavedGameTeams/ViewSavedGameTeams.vue';
 
     const isLoading = ref<boolean>(true)
     let showPeopleWhoPlayed = ref<boolean>(false)
+    let showTeamsWhoPlayed = ref<boolean>(false)
 
     let games: SavedGame[] = [
         {
@@ -61,6 +64,14 @@
         }
     ]
 
+    let playersInSavedGame = ref<Card[]>()
+    let teamsInSavedGame = ref<Team[]>()
+
+    const openViewPlayersModal = (players: Card[] | Team[]) => {
+        showPeopleWhoPlayed.value = true
+        // playersInSavedGame.value = players
+    }
+
     onMounted(async () => {
         try {
             const savedGameResult = await scoreBoardApi.get<SavedGame[]>("/get-saved-games")
@@ -82,15 +93,27 @@
           v-for="(game, index) in games"
           :game="game"
           :key="index"
-          :openModal="() => showPeopleWhoPlayed = true"
+          :isSavedGameATeamGame="game.teams !== null"
+          :viewTeamsInSavedGame="(game: SavedGame) => teamsInSavedGame = game.teams"
+          :viewPlayersInSavedGame = "(game: SavedGame) => playersInSavedGame = game.location?.users"
         />
     </div>
 
+    <!-- Modal to show the teams that played if the client submitted a team game -->
     <Modal 
-        :modalHeader="'People who played'"
+        :modalHeader="'View People who played'"
         :show="showPeopleWhoPlayed"
         :modalContent="ViewSavedGamePlayers"
         :onHide="() => showPeopleWhoPlayed = false"
+        :modalProps="{}"
+    />
+
+    <!-- MOdal to show the teams that played if the client submitted a team game -->
+    <Modal 
+        :modalHeader="'View Teams who played'"
+        :show="showTeamsWhoPlayed"
+        :modalContent="ViewSavedGameTeams"
+        :onHide="() => showTeamsWhoPlayed = false"
         :modalProps="{}"
     />
 </template>
