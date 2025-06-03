@@ -112,7 +112,7 @@
           v-for="(game, index) in games"
           :game="game"
           :key="index"
-          :isSavedGameATeamGame="game.teams !== null"
+          :isSavedGameATeamGame="game.teams !== undefined"
           :viewTeamsInSavedGame="openViewSavedGamesTeams"
           :viewPlayersInSavedGame = "openViewSavedGamesPlayers"
         />
