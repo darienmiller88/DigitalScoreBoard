@@ -21,7 +21,7 @@
             total_points: 5000,
             winner: {
                 username: "darien",
-                score: 100
+                score: 1000
             },
             location: {
                 id: "1",
@@ -60,6 +60,50 @@
                     },
                 ],
                 location_name: "Lawrence"
+            }
+        },
+        {
+            id: "4",
+            created_at: new Date().toLocaleString(),
+            average_points: 90,
+            total_points: 5000,
+            winner: {
+                username: "Lawrence",
+                score: 4000
+            },
+            teams: [
+                {
+                    team_name: "Lawrence",
+                    score: 5000,
+                    players: ["Michelle", "Nijmah"]
+                },
+                {
+                    team_name: "Elmwood",
+                    score: 4000,
+                    players: ["Shaniqua", "Micki"]
+                }
+            ],
+            location: {
+                id: "3",
+                users: [
+                    {
+                        username: "Nijmah",
+                        score: 300
+                    },
+                    {
+                        username: "Michelle",
+                        score: 400
+                    },
+                    {
+                        username: "Shaniqua",
+                        score: 700
+                    },
+                    {
+                        username: "Micki",
+                        score: 400
+                    },
+                ],
+                location_name: "Elmwood"
             }
         }
     ]
