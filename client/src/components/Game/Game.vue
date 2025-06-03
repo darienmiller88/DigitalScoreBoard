@@ -12,6 +12,14 @@
         viewPlayersInSavedGame: (game: SavedGame) => void
         viewTeamsInSavedGame: (game: SavedGame) => void
     }>()
+
+    const handleOnClick = () => {
+        if (props.isSavedGameATeamGame) {
+            props.viewTeamsInSavedGame(props.game)
+        }else{
+            props.viewPlayersInSavedGame(props.game)
+        }
+    }
 </script>
 
 <template>
@@ -24,7 +32,7 @@
         <div class="score">Score: {{ props.game.winner.score }}</div>
 
         <div class="view-players-wrapper">
-            <button @click=" isSavedGameATeamGame ? () => props.viewTeamsInSavedGame(props.game) : () => props.viewPlayersInSavedGame(props.game)">
+            <button @click="handleOnClick">
                 View players
             </button>
         </div>

@@ -124,9 +124,9 @@
         :show="showPeopleWhoPlayed"
         :modalContent="ViewSavedGamePlayers"
         :onHide="() => showPeopleWhoPlayed = false"
-        :modalProps="playersInSavedGame"
+        :modalProps="{ playersInSavedGame: playersInSavedGame }"
     />
-    
+
 
     <!-- Modal to show the teams that played if the client submitted a team game -->
     <Modal 
@@ -134,7 +134,7 @@
         :show="showTeamsWhoPlayed"
         :modalContent="ViewSavedGameTeams"
         :onHide="() => showTeamsWhoPlayed = false"
-        :modalProps="teamsInSavedGame"
+        :modalProps="{ teamsInSavedGame: teamsInSavedGame }"
     />
 </template>
 
