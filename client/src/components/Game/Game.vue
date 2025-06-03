@@ -33,7 +33,8 @@
 
         <div class="view-players-wrapper">
             <button @click="handleOnClick">
-                View players
+                <span v-if="props.isSavedGameATeamGame">View Teams</span> 
+                <span v-else>View Players</span> 
             </button>
         </div>
 
