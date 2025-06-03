@@ -64,12 +64,31 @@
         }
     ]
 
-    let playersInSavedGame = ref<Card[]>()
-    let teamsInSavedGame = ref<Team[]>()
+    let playersInSavedGame = ref<Card[]>([])
+    let teamsInSavedGame = ref<Team[]>([])
 
-    const openViewPlayersModal = (players: Card[] | Team[]) => {
+    const openViewSavedGamesPlayers = (game: SavedGame) => {
+        let location = game.location
+
+        if (location) {
+            playersInSavedGame.value = location.users
+        }
+
+        console.log("clicked, viewing players");
+
         showPeopleWhoPlayed.value = true
-        // playersInSavedGame.value = players
+    }
+
+    const openViewSavedGamesTeams = (game: SavedGame) => {
+        let teams = game.teams
+
+        if (teams) {
+            teamsInSavedGame.value = teams            
+        }
+
+        console.log("clicked, viewing teams");
+        
+        showTeamsWhoPlayed.value = true
     }
 
     onMounted(async () => {
@@ -94,8 +113,8 @@
           :game="game"
           :key="index"
           :isSavedGameATeamGame="game.teams !== null"
-          :viewTeamsInSavedGame="(game: SavedGame) => teamsInSavedGame = game.teams"
-          :viewPlayersInSavedGame = "(game: SavedGame) => playersInSavedGame = game.location?.users"
+          :viewTeamsInSavedGame="openViewSavedGamesTeams"
+          :viewPlayersInSavedGame = "openViewSavedGamesPlayers"
         />
     </div>
 
@@ -105,16 +124,17 @@
         :show="showPeopleWhoPlayed"
         :modalContent="ViewSavedGamePlayers"
         :onHide="() => showPeopleWhoPlayed = false"
-        :modalProps="{}"
+        :modalProps="playersInSavedGame"
     />
+    
 
-    <!-- MOdal to show the teams that played if the client submitted a team game -->
+    <!-- Modal to show the teams that played if the client submitted a team game -->
     <Modal 
         :modalHeader="'View Teams who played'"
         :show="showTeamsWhoPlayed"
         :modalContent="ViewSavedGameTeams"
         :onHide="() => showTeamsWhoPlayed = false"
-        :modalProps="{}"
+        :modalProps="teamsInSavedGame"
     />
 </template>
 

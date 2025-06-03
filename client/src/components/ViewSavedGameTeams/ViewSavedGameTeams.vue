@@ -1,10 +1,16 @@
 <script setup lang="ts">
+    import { Team } from "../../types/types"
 
+    const props = defineProps<{
+        teamsInSavedGame: Team[]
+    }>()
 </script>
 
 <template>
     <div>
-        View teams for saved game
+        view saved game teams
+
+        <ul v-for="team in props.teamsInSavedGame"> {{ team.team_name }}</ul>        
     </div>
 </template>
 

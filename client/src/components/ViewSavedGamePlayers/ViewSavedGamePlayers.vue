@@ -1,9 +1,8 @@
 <script setup lang="ts">
-    import { Card, Team } from "../../types/types"
+    import { Card } from "../../types/types"
 
     const props = defineProps<{
-        isSavedGameATeamGame: boolean
-        players: Card | Team
+        playersInSavedGame: Card[]
     }>()
 </script>
 
@@ -11,10 +10,7 @@
     <div>
         view saved game players
         <!-- If the saved game is a Team, render out the teams differentl -->
-        <ul v-if="isSavedGameATeamGame" v-for="player in props.players"> {{ player }}</ul>
-        
-        <!-- Otherwise, render out the list of players -->
-        <ol v-else v-for="player in props.players"> {{ player }}</ol>
+        <ul v-for="player in props.playersInSavedGame"> {{ player.username }}</ul>        
     </div>
 </template>
 
