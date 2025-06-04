@@ -8,8 +8,6 @@
 
 <template>
     <div>
-        view saved game teams
-
         <ul v-for="team in props.teamsInSavedGame"> {{ team.team_name }}</ul>        
     </div>
 </template>

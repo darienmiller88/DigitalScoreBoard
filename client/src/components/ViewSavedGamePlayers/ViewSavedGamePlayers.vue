@@ -8,7 +8,6 @@
 
 <template>
     <div>
-        view saved game players
         <!-- If the saved game is a Team, render out the teams differentl -->
         <ul v-for="player in props.playersInSavedGame"> {{ player.username }}</ul>        
     </div>
