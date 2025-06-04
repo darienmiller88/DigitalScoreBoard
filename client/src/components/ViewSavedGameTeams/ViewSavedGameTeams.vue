@@ -11,7 +11,11 @@
         <div class="team" v-for="team in props.teamsInSavedGame">
             {{ team.team_name }}
 
-            
+            <div class="players">
+                <div class="player" v-for="player in team.players">
+                    {{ player }}
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -22,6 +26,14 @@
 
         .team{
             border: 2px solid red;
+
+            .players{
+                border: 2px solid purple;
+
+                .player{
+
+                }
+            }
         }
     }
 </style>
