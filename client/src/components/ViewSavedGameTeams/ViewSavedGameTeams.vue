@@ -7,11 +7,15 @@
 </script>
 
 <template>
-    <div>
-        <ul v-for="team in props.teamsInSavedGame"> {{ team.team_name }}</ul>        
+    <div class="teams"> 
+        <div v-for="team in props.teamsInSavedGame">
+            {{ team.team_name }}
+        </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-
+    .teams{
+        border: 2px solid black;
+    }
 </style>
