@@ -34,6 +34,14 @@
                         username: "Marth",
                         score: 400
                     },
+                     {
+                        username: "Reina",
+                        score: 300
+                    },
+                    {
+                        username: "Marth",
+                        score: 400
+                    }
                 ],
                 location_name: "Pelham"
             }

@@ -7,12 +7,30 @@
 </script>
 
 <template>
-    <div>
-        <!-- If the saved game is a Team, render out the teams differentl -->
-        <ul v-for="player in props.playersInSavedGame"> {{ player.username }}</ul>        
+    <div class="player" v-for="player in props.playersInSavedGame">
+        {{ player.username }} scored: <span> {{ player.score }} </span> 
     </div>
 </template>
 
 <style scoped lang="scss">
+    .player{
+        text-align: center;
+        transition: 0.3s;
+        
+        font-size: 24px;
+        margin-bottom: 1rem;
+        padding: 0.8rem 1rem;
 
+        background: white;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(5, 5, 5, 0.6);
+
+        span{
+            color: rgb(17, 175, 28);
+        }
+
+        &:hover{
+            box-shadow: 0 1px 3px rgba(15, 15, 15, 0.9);
+        }
+    }
 </style>
