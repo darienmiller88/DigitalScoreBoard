@@ -10,6 +10,8 @@
     <div class="teams"> 
         <div class="team" v-for="team in props.teamsInSavedGame">
             {{ team.team_name }}
+
+            
         </div>
     </div>
 </template>

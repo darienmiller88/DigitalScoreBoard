@@ -126,8 +126,6 @@
             playersInSavedGame.value = location.users
         }
 
-        console.log("clicked, viewing players");
-
         showPeopleWhoPlayed.value = true
     }
 
@@ -137,8 +135,6 @@
         if (teams) {
             teamsInSavedGame.value = teams            
         }
-
-        console.log("clicked, viewing teams");
         
         showTeamsWhoPlayed.value = true
     }
