@@ -10,7 +10,7 @@
     <div class="teams"> 
         <div class="team" v-for="team in props.teamsInSavedGame">
             <div class="team-name">
-                {{ team.team_name }}
+                Players on: <i>Team {{ team.team_name }}</i>
             </div> 
 
             <div class="players">
@@ -25,14 +25,14 @@
 <style scoped lang="scss">
     .teams{
         text-align: center;
-        height: 45vh;
+        height: 50vh;
         overflow-y: scroll;
 
         .team{
             transition: 0.3s;
             box-shadow: 0 1px 3px rgba(5, 5, 5, 0.6);
             background-color: rgba(245, 245, 245, 0.6);
-            margin: 10px;
+            margin: 15px;
             border-radius: 10px;
 
             &:hover{
