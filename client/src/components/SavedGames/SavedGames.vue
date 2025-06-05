@@ -83,12 +83,12 @@
                 {
                     team_name: "Lawrence",
                     score: 5000,
-                    players: ["Michelle", "Nijmah"]
+                    players: ["Michelle", "Nijmah", "Betty", "Denise"]
                 },
                 {
                     team_name: "Elmwood",
                     score: 4000,
-                    players: ["Shaniqua", "Micki"]
+                    players: ["Shaniqua", "Micki", "William", "Luis"]
                 }
             ],
             location: {
@@ -103,11 +103,27 @@
                         score: 400
                     },
                     {
+                        username: "Betty",
+                        score: 700
+                    },
+                    {
+                        username: "Denise",
+                        score: 400
+                    },
+                    {
                         username: "Shaniqua",
                         score: 700
                     },
                     {
                         username: "Micki",
+                        score: 400
+                    },
+                    {
+                        username: "Luis",
+                        score: 700
+                    },
+                    {
+                        username: "William",
                         score: 400
                     },
                 ],
