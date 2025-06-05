@@ -25,16 +25,15 @@
 <style scoped lang="scss">
     .teams{
         text-align: center;
-        // border: 2px solid black;
         height: 45vh;
         overflow-y: scroll;
 
         .team{
-            // border: 2px solid red;
-            // background-color: rgba(15, 15, 15, 0.9);
             transition: 0.3s;
             box-shadow: 0 1px 3px rgba(5, 5, 5, 0.6);
+            background-color: rgba(245, 245, 245, 0.6);
             margin: 10px;
+            border-radius: 10px;
 
             &:hover{
                 box-shadow: 0 3px 6px rgba(15, 15, 15, 0.9);
@@ -51,10 +50,11 @@
                 overflow-y: scroll;
                 
                 .player{
-                    font-size: 18px;
+                    font-size: 22px;
                     padding: 8px;
                     margin: 10px;
                     transition: 0.3s;
+                    border-radius: 10px;
                     
                     box-shadow: 0 1px 3px rgba(5, 5, 5, 0.6);
 
