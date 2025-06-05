@@ -13,7 +13,7 @@
         viewTeamsInSavedGame: (game: SavedGame) => void
     }>()
 
-    const handleOnClick = () => {
+    const openModal = () => {
         if (props.isSavedGameATeamGame) {
             props.viewTeamsInSavedGame(props.game)
         }else{
@@ -32,7 +32,7 @@
         <div class="score">Score: {{ props.game.winner.score }}</div>
 
         <div class="view-players-wrapper">
-            <button @click="handleOnClick">
+            <button @click="openModal">
                 <span v-if="props.isSavedGameATeamGame">View Teams</span> 
                 <span v-else>View Players</span> 
             </button>
@@ -61,8 +61,6 @@
             </div>
         </div>
     </div>
-
-    
 </template>
 
 <style scoped lang="scss">
