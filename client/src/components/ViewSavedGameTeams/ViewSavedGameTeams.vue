@@ -25,12 +25,20 @@
 <style scoped lang="scss">
     .teams{
         text-align: center;
-        border: 2px solid black;
+        // border: 2px solid black;
         height: 45vh;
         overflow-y: scroll;
 
         .team{
             // border: 2px solid red;
+            // background-color: rgba(15, 15, 15, 0.9);
+            transition: 0.3s;
+            box-shadow: 0 1px 3px rgba(5, 5, 5, 0.6);
+            margin: 10px;
+
+            &:hover{
+                box-shadow: 0 3px 6px rgba(15, 15, 15, 0.9);
+            }
 
             .team-name{ 
                 font-size: 25px;
@@ -39,7 +47,6 @@
             }
 
             .players{
-                border: 2px solid purple;
                 height: 18vh;
                 overflow-y: scroll;
                 
@@ -47,8 +54,13 @@
                     font-size: 18px;
                     padding: 8px;
                     margin: 10px;
+                    transition: 0.3s;
                     
                     box-shadow: 0 1px 3px rgba(5, 5, 5, 0.6);
+
+                    &:hover{
+                        box-shadow: 0 3px 6px rgba(15, 15, 15, 0.9);
+                    }
                 }
             }
         }
