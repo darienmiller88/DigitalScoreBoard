@@ -26,11 +26,11 @@
     .teams{
         text-align: center;
         border: 2px solid black;
-        height: 30vh;
+        height: 45vh;
         overflow-y: scroll;
 
         .team{
-            border: 2px solid red;
+            // border: 2px solid red;
 
             .team-name{ 
                 font-size: 25px;
@@ -40,12 +40,15 @@
 
             .players{
                 border: 2px solid purple;
-                height: 13vh;
+                height: 18vh;
                 overflow-y: scroll;
                 
                 .player{
                     font-size: 18px;
-                    padding: 10px;
+                    padding: 8px;
+                    margin: 10px;
+                    
+                    box-shadow: 0 1px 3px rgba(5, 5, 5, 0.6);
                 }
             }
         }
