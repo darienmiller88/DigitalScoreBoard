@@ -1,9 +1,5 @@
-<script setup lang="ts">
-    import { storeToRefs } from "pinia";
-    import { darkModeStore } from "../../stores/darkModeStore"
+<script setup lang="ts">   
     import { onMounted } from 'vue';
-
-    const { isDarkMode } = storeToRefs(darkModeStore())
     
     const props = defineProps<{
         optionClicked: (event: Event) => void
