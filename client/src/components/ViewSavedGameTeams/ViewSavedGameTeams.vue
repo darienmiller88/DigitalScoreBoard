@@ -46,8 +46,9 @@
             }
 
             .players{
-                height: 18vh;
+                height: 22vh;
                 overflow-y: scroll;
+                padding: 10px;
                 
                 .player{
                     font-size: 22px;
