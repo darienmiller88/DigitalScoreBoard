@@ -4,12 +4,15 @@
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import { teamCardsStore } from "../../stores/teamCardsStore"
+    import PageTitle from '../../components/PageTitle/PageTitle.vue';
 
      //Stateful method(s)
     const { resetAllPoints } = teamCardsStore()
 </script>
 
 <template>
+    <PageTitle titleName="Teams to Add"/>
+
     <!-- Contains the ADAPT locations in the select tag -->
     <AddNewTeam />
 
