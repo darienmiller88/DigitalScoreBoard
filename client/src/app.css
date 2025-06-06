@@ -14,7 +14,7 @@
 [data-theme="light"] {
     --primary-color: #003366;
     --primary-color-transparent: #003366d0;
-    --bg-color: lch(89.96% 15.56 82.99);
+    --bg-color: #f2e0c5;
     --bg-color-transparent: #f2e0c5b2;
     --toggle-background: #00050f;
 }
