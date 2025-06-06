@@ -1,10 +1,6 @@
 <script setup lang="ts">
     import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
-    import TeamCards from '../../components/TeamCards/TeamCards.vue';
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
-    import GameButtonGroup from '../../components/GameButtonGroup/GameButtonGroup.vue';
-    import AddUserToLocation from '../../components/AddUserToLocation/AddUserToLocation.vue';
-    import LocationSelection from '../../components/LocationSelection/LocationSelection.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import { onMounted, ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
@@ -81,15 +77,6 @@
 <template>
 
     <PageTitle :titleName="'Jeopardy Score Board'"/>
-    
-    <!-- Contains the ADAPT locations in the select tag -->
-    <!-- <LocationSelection /> -->
-
-    <!-- Contains the three buttons needed to select the options. -->
-    <!-- <GameButtonGroup /> -->
-
-    <!-- Only show this when the "Create new game" or "Add new user" is clicked -->
-    <!-- <AddUserToLocation /> -->
 
     <!-- <div class="reset-all-points-wrapper">
         <button type="button" @click="resetAllPoints" >
@@ -97,19 +84,12 @@
         </button>
     </div> -->
 
-    <div v-if="currentButtonGroupState === ButtonState.CREATE_NEW_GAME" class="total-points">
+    <div >
         Total Points: {{ totalPoints() }} 
     </div>
 
-    <!-- Shows Create new game form when "Create new game" button is clicked  -->
-    <div class="add-new-user" v-if="currentButtonGroupState == ButtonState.ADD_NEW_USER">
-    </div>
-
     <!-- Shows all users when "Add new users" is clicked -->
-    <ScoreCards v-if="currentButtonGroupState === ButtonState.CREATE_NEW_GAME" />
-
-    <!-- Shows Create new Team game form when "Create new team game" button is clicked  --> 
-    <TeamCards v-if="currentButtonGroupState === ButtonState.CREATE_NEW_TEAM_GAME" />
+    <ScoreCards />
 
     <!-- Saves a game to the server -->
     <SaveGame />

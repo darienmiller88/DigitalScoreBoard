@@ -28,47 +28,26 @@
 
 <template>
      <div class="user-card">
-        <div :class="`username ${isDarkMode ? 'dark-mode' : 'light-mode'}`">{{ username }}</div>
+        <div class="username">{{ username }}</div>
         <div class="divider"></div>
-        <button 
-            :class="`remove ${isDarkMode ? 'dark-mode-button' : 'light-mode-button'}`" 
-            @click="removeCardFromLocation()"
-        >Remove User</button>
+        <button class="remove" @click="removeCardFromLocation()" >
+            Remove User
+        </button>
         <br>
         <button class="reset" @click="() => resetPoints(cardIndex)" >
             Reset points
         </button>
         <div class="score-wrapper">
             <button class="minus-points" @click="() => minusPoints(cardIndex, pointValue)">-</button>
-            <div :class="`score ${isDarkMode ? 'dark-mode' : 'light-mode'}`">{{ score }}</div>
+            <div class="score">{{ score }}</div>
             <button class="add-points" @click="() => addPoints(cardIndex, pointValue)">+</button>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-    .dark-mode{
-        transition: 0.5s;
-        color: var(--main-text-color);
-    }
-
-    .light-mode{
-        transition: 0.5s;
-        color: var(--main-text-color);
-    }
-
-    .dark-mode-button{
-        color: var(--main-text-color);
-        border: 2px solid var(--primary-color);
-    }
-
-    .light-mode-button{
-        color: var(--main-text-color);
-        border: 2px solid var(--main-text-color);
-    }
-
     .user-card{
-        border: 2px solid var(--main-text-color);
+        border: 2px solid var(--primary-color);
         border-radius: 10px;
 
         width: 90vw;
@@ -91,18 +70,17 @@
 
         @media screen and (min-width: 1400px) {
             width: 15vw;
-            // height: 30vh;
             margin: 20px 0px; 
         }
 
         &:hover{
-            box-shadow: 10px 10px 15px var(--main-text-color);
+            box-shadow: 10px 10px 15px var(--primary-color-color);
             transform: translateY(-5px);
         }
         
         .divider{
             width: 99%;
-            border: 2px solid var(--main-text-color);
+            border: 2px solid var(--primary-color);
             margin-top: 5px;
             margin-bottom: 20px;
         }
@@ -111,7 +89,7 @@
             border-radius: 10px;
 
             padding: 10px 20px;
-            color: var(--main-text-color);
+            color: var(--primary-color);
             background-color: transparent;
 
             transition: 0.5s;
@@ -119,7 +97,7 @@
 
             &:hover{
                 cursor: pointer;
-                background-color: var(--main-text-color-transparent);
+                background-color: var(--primary-color-transparent);
             }
         }
 
