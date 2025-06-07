@@ -77,6 +77,10 @@
             box-shadow: 10px 10px 15px var(--primary-color-color);
             transform: translateY(-5px);
         }
+
+        .username{
+            color: var(--primary-color);
+        }
         
         .divider{
             width: 99%;
@@ -87,6 +91,7 @@
 
         .remove{
             border-radius: 10px;
+            border: 2px solid var(--primary-color);
 
             padding: 10px 20px;
             color: var(--primary-color);
@@ -103,10 +108,10 @@
 
         .reset{
             margin: 10px 0px;
-            padding: 5px 10px;
+            padding: 7px 12px;
 
-            background-color: var(--main-text-color);
-            color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: var(--bg-color);
             font-weight: bold;
 
             border-radius: 50px;
@@ -115,14 +120,13 @@
 
             &:hover{
                 cursor: pointer;
-                background-color: var(--main-text-color-transparent);
+                background-color: var(--primary-color-transparent);
             }
         }
 
         .score-wrapper{
             display: grid;
             grid-template-columns: auto 160px auto;
-            // margin-top: 20px;
 
             @media screen and (min-width: 768px) {
                 grid-template-columns: auto 150px auto;
@@ -140,6 +144,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                color: var(--primary-color);
 
                 font-size: 25px;
                 padding: 0px 20px;
@@ -147,7 +152,8 @@
 
             button{
                 border-radius: 15px;
-                border: 2px solid var(--main-bg-color);
+                border: 2px solid var(--bg-color);
+                // border: none;
                 
                 font-size: 30px;
                 padding: 8px 25px;
@@ -161,8 +167,8 @@
 
                 &:hover{
                     cursor: pointer;
-                    color: var(--primary-color);
-                    border: 2px solid var(--primary-color);
+                    color: aliceblue;
+                    border: 2px solid aliceblue;
                 }
             }
 
@@ -171,14 +177,13 @@
             }
 
             .add-points{
-                background-color: var(--main-text-color);
+                background-color: var(--primary-color);
             }
         }
 
         .username{
             font-size: 35px;            
             margin: 5px 15px;
-            // border: 3px dotted aliceblue;
             overflow-x: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
