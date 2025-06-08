@@ -4,16 +4,11 @@
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import { onMounted, ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-    import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
-    import { storeToRefs } from 'pinia';
 
     const isLoading = ref<boolean>(true)
 
     //Stateful methods
     const { resetAllPoints, totalPoints } = scoreCardsStore()
-
-    //Stateful variables
-    const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
 
     onMounted(async () => {
         // if (locationsFromLocalStorage.value.length) {
@@ -96,25 +91,6 @@
 </template>
 
 <style scoped lang="scss">
-    .dark-mode{
-        border: 2px var(--primary-color) solid;
-        color: var(--main-text-color);
-        background-color: transparent;
-    }
-
-    .light-mode{
-        color: var(--primary-color);
-        background-color: var(--main-text-color)
-    }
-
-    .dark-mode-text{
-        color: var(--primary-color);
-    }
-
-    .light-mode-text{
-        color: var(--main-bg-color);
-    }
-
     .error{
         text-align: center;
         color: red;
