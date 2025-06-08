@@ -1,11 +1,9 @@
 <script setup lang="ts">
-    import { darkModeStore } from '../../stores/darkModeStore';
     import { storeToRefs } from 'pinia';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { scoreBoardApi } from '../../api/api';
 
-    const { isDarkMode } = storeToRefs(darkModeStore())
     const { removeCard, addPoints, minusPoints, resetPoints } = scoreCardsStore()
     const { selectedLocation } = storeToRefs(selectedLocationStore())
     const props = defineProps<{ 
@@ -58,7 +56,6 @@
         text-align: center;
 
         @media screen and (min-width: 768px) {
-            // margin-bottom/: 0px;
             width: 40vw;
             margin: 20px 0px; 
         }
@@ -153,7 +150,6 @@
             button{
                 border-radius: 15px;
                 border: 2px solid var(--bg-color);
-                // border: none;
                 
                 font-size: 30px;
                 padding: 8px 25px;
