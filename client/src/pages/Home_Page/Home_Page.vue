@@ -76,12 +76,6 @@
 
     <ResetPoints :resetAllPoints="resetAllPoints"/>
 
-    <!-- <div class="reset-all-points-wrapper">
-        <button type="button" @click="resetAllPoints" >
-            Reset All Points
-        </button>
-    </div> -->
-
     <div >
         Total Points: {{ totalPoints() }} 
     </div>
@@ -100,62 +94,9 @@
         font-size: 25px;
     }
 
-    .reset-all-points-wrapper{
-        text-align: center;
-        margin: 25px;
-
-        button{
-            border-radius: 10px;
-            border: none;
-
-            padding: 10px 18px;
-            font-size: 16px;
-            font-weight: 700;
-            transition: 0.3s;
-            
-            background-color: red;
-            color: aliceblue;
-
-            &:hover{
-                cursor: pointer;
-                background-color: rgba($color: #e30909, $alpha: .8);
-            }
-            
-            &:active{
-                transform: translateY(-5px);
-            }
-        }
-    }
-
     .total-points{
         text-align: center;
         font-size: 30px;
         color: var(--main-text-color);
-    }
-
-    .save-wrapper{
-        text-align: center;
-        margin: 40px;
-
-        button{
-            border-radius: 10px;
-            padding: 15px 35px;
-    
-            transition: 0.5s;
-            font-size: 25px;
-
-            &:hover{
-                cursor: pointer;
-                background-color: var(--main-text-color-transparent);
-            }
-
-            &:active {
-                transform: translateY(-5px);
-            }
-        }
-    }
-
-    .save-wrapper button:active {
-        transform: translateY(-5px);
-    }
+    }  
 </style>
