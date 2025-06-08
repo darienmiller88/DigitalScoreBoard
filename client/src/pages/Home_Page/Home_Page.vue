@@ -2,6 +2,7 @@
     import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
+    import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import { onMounted, ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
 
@@ -72,6 +73,8 @@
 <template>
 
     <PageTitle :titleName="'Jeopardy Score Board'"/>
+
+    <ResetPoints :resetAllPoints="resetAllPoints"/>
 
     <!-- <div class="reset-all-points-wrapper">
         <button type="button" @click="resetAllPoints" >
