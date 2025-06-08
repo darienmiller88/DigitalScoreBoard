@@ -31,7 +31,7 @@ export const teamCardsStore = defineStore("teamCards", () => {
         teamCards.value[index].score -= amountToAdd
     }
 
-    const resetPoints = (index: number) => {
+    const resetPointsForTeam = (index: number) => {
         teamCards.value[index].score = 0
     }
 
@@ -60,19 +60,23 @@ export const teamCardsStore = defineStore("teamCards", () => {
         return totalPoints
     }
 
+    const totalPoints = (): number => {
+        return teamCards.value.reduce((accumulator, team) => accumulator + team.score, 0)
+    }
+
     const addPlayerToTeam = (index: number, player: string) => {
         teamCards.value[index].players.push(player)
     }
 
     const getPlayers = (): Card[] => {
-        let players: Card[] = []; // Initialize players as an empty array of Card objects
+        let players: Card[] = []
 
         teamCards.value.forEach(team => {
             players = [...players, ...team.players.map(player => ({
                 username: player,
                 score: 0 
-            }))];
-        });
+            }))]
+        })
 
         return players;
     }
@@ -94,11 +98,11 @@ export const teamCardsStore = defineStore("teamCards", () => {
         removeTeamCard, 
         addPoints, 
         minusPoints, 
-        resetPoints, 
+        resetPointsForTeam, 
         resetAllPoints, 
         setTeamCards,
         getWinningTeam,
-        getTotalPoints,
+        totalPoints,
         getAveragePoints, 
         getPlayers
     }

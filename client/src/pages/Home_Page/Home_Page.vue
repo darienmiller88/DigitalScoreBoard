@@ -76,7 +76,7 @@
 
     <ResetPoints :resetAllPoints="resetAllPoints"/>
 
-    <div >
+    <div class="total-points">
         Total Points: {{ totalPoints() }} 
     </div>
 
