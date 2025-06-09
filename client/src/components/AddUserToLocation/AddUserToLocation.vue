@@ -1,7 +1,6 @@
 <script setup lang="ts">
     import { ref } from 'vue'
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-    import { darkModeStore } from "../../stores/darkModeStore"
     import { storeToRefs } from 'pinia';
     import { Card } from "../../types/types"
     import { scoreBoardApi } from "../../api/api"
@@ -10,7 +9,6 @@
     import Select from '../Select/Select.vue';
 
     //Stateful variables
-    const { isDarkMode } = storeToRefs(darkModeStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { selectedLocation } = storeToRefs(selectedLocationStore())
 
