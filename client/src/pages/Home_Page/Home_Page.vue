@@ -81,7 +81,7 @@
     </div>
 
     <!-- Shows all users when "Add new users" is clicked -->
-    <ScoreCards />
+    <!-- <ScoreCards /> -->
 
     <!-- Saves a game to the server -->
     <SaveGame />
@@ -97,6 +97,6 @@
     .total-points{
         text-align: center;
         font-size: 30px;
-        color: var(--main-text-color);
+        color: var(--primary-color);
     }  
 </style>

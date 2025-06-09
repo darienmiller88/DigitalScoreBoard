@@ -7,6 +7,7 @@
     import { scoreBoardApi } from "../../api/api"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import Loading from '../Loading/Loading.vue';
+    import Select from '../Select/Select.vue';
 
     //Stateful variables
     const { isDarkMode } = storeToRefs(darkModeStore())
@@ -55,11 +56,13 @@
 </script>
 
 <template>
-    <form  @submit.prevent="addUser">
+
+
+    <form @submit.prevent="addUser">
         <div class="add-user-wrapper">
             <label for="add-firstname">First Name</label><br>
             <input 
-                :class="`form-element ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`"
+                class="form-element"
                 id="add-first-name" 
                 v-model="firstName" 
                 minlength="1"
@@ -71,7 +74,7 @@
             ><br><br>
             <label for="add-user">Last Name</label><br>
             <input 
-                :class="`form-element ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`"
+                class="form-element"
                 id="add-last-name" 
                 v-model="lastName" 
                 minlength="1"
