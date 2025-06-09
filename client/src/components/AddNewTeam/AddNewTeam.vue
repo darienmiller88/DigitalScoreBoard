@@ -11,16 +11,15 @@
 
     //ref variables
     const { teamCards } = storeToRefs(teamCardsStore())
-    const { remainingLocationOptions, allLocationOptions } = storeToRefs(optionsStore())
+    const { remainingLocationOptions } = storeToRefs(optionsStore())
     const { selectedTeam } = storeToRefs(selectedTeamStore())
 
     //store methods
-    const { setRemainingLocationOptions, setAllLocationOptions } = optionsStore()
+    const { setRemainingLocationOptions } = optionsStore()
     const { addTeamCard } = teamCardsStore()
     const { setSelectedTeam } = selectedTeamStore()
     
     const isLoading = ref<boolean>(true)
-    let locations: Location[] = []
 
     const optionClicked = async (event: Event) => {
         const selectedValue = (event.target as HTMLSelectElement).value;
@@ -55,28 +54,10 @@
     }
 
     onMounted(async () => {
-        try {
-            
-            //If there are no locations currently already in local storage, retrieve them from the database first, and 
-            //load it to reduce database load.
-            if (!allLocationOptions.value.length) {
-                const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
-    
-                //Assign the response from the server to the above variable to be referenced later.
-                locations = locationsResponse.data
-                
-                //Load all the locations into the following ref, storing it into local storage for faster access.
-                setAllLocationOptions(locations.map(location => {          
-                    return location.location_name
-                }))
-            }
-
-            //Afterwards, load the remaining teams left to the total remaining teams
-            setRemainingLocationOptions(teamCards.value)
-        } catch (error) {
-            console.log("err:", error);
-        }
-
+        
+        //Afterwards, load the remaining teams left to the total remaining teams
+        setRemainingLocationOptions(teamCards.value)
+        
         isLoading.value = false
     })
 </script>

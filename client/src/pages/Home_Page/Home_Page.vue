@@ -1,15 +1,24 @@
 <script setup lang="ts">
     import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
+    import { optionsStore } from "../../stores/optionsStore"
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import { onMounted, ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
+    import { storeToRefs } from 'pinia';
+    import { scoreBoardApi } from '../../api/api';
+    import { Location } from "../../types/types"
 
     const isLoading = ref<boolean>(true)
 
     //Stateful methods
+    const { setAllLocationOptions } = optionsStore()
     const { resetAllPoints, totalPoints } = scoreCardsStore()
+    
+    //ref variables
+    const { allLocationOptions } = storeToRefs(optionsStore())
+
 
     onMounted(async () => {
         // if (locationsFromLocalStorage.value.length) {
@@ -20,6 +29,17 @@
         // } else {
         // }
         try {
+
+            //If there are no locations currently already in local storage, retrieve them from the database first, and 
+            //load it to reduce database load.
+            if (!allLocationOptions.value.length) {
+                const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
+                    
+                //Load all the locations into the following ref, storing it into local storage for faster access.
+                setAllLocationOptions(locationsResponse.data.map(location => {          
+                    return location.location_name
+                }))
+            }
             //Find the target location in the list of locations from the database.
             // const targetLocation = locations.find(location => {
             //     return location.location_name === selectedLocation.value
