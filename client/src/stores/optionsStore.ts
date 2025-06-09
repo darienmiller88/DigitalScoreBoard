@@ -18,11 +18,6 @@ export const optionsStore = defineStore("optionsStore", () => {
         )
     }
 
-    //Overides the remainingLocationOptions options with a set of locations not added to a team game.
-    // const setRemainingLocationOptions = (newOptions: string[]) => {
-    //     remainingLocationOptions.value = newOptions
-    // }
-
     //add a team back to the list of Remaining teams. This happens when the "clear button" is clicked on a Team card.
     const addOptionToRemainingLocationOptions = (option: string) => {
         remainingLocationOptions.value.push(option)
@@ -32,7 +27,6 @@ export const optionsStore = defineStore("optionsStore", () => {
         allLocationOptions, 
         remainingLocationOptions, 
         setAllLocationOptions, 
-        // setRemainingLocationOptions,
         setRemainingLocationOptions,
         addOptionToRemainingLocationOptions
     }
