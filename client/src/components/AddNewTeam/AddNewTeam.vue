@@ -68,7 +68,7 @@
         <div class="team-game-location" v-if="!isLoading && remainingLocationOptions.length">
             <Select 
                 :options="remainingLocationOptions"
-                :optionClicked="optionClicked"
+                :onChange="optionClicked"
                 :selectModel="selectedTeam.team_name"
             />
             

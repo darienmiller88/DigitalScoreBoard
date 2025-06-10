@@ -56,6 +56,10 @@
         isLoading.value = false
     }
 
+    const onChangeSelect = (event: Event) => {
+
+    }
+
     onMounted(() => {
         locationModel.value = allLocationOptions.value[0]
     })
