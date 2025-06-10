@@ -8,7 +8,7 @@
     import Loading from '../Loading/Loading.vue';
 
     //Stateful methods
-    const { getWinningTeam, getTotalPoints, getAveragePoints, getPlayers } = teamCardsStore()
+    const { getWinningTeam, totalPoints, getAveragePoints, getPlayers } = teamCardsStore()
 
     //Stateful variables
     const { teamCards } = storeToRefs(teamCardsStore())
@@ -30,7 +30,7 @@
                         users: getPlayers(),
                         id: ""
                     },
-                    total_points: getTotalPoints(),
+                    total_points: totalPoints(),
                     average_points: getAveragePoints(),
                     created_at: new Date().toLocaleDateString()
                 }

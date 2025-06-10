@@ -2,7 +2,7 @@
     import { onMounted } from 'vue';
     
     const props = defineProps<{
-        optionClicked: (event: Event) => void
+        onChange: (event: Event) => void
         selectModel: string
         options: string[]
     }>()
@@ -16,7 +16,7 @@
     <select 
         :value="selectModel"
         name="locations" 
-        @change="props.optionClicked"
+        @change="props.onChange"
     >
         <option v-for="(option, index) in props.options" :value="option" :key="index+1">
             {{ option }}

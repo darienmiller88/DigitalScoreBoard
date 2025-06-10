@@ -2,7 +2,7 @@
     import { ref, onMounted } from 'vue'
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { storeToRefs } from 'pinia';
-    import { Player } from "../../types/types"
+    import { PlayerCard } from "../../types/types"
     import { scoreBoardApi } from "../../api/api"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { optionsStore } from "../../stores/optionsStore"
@@ -26,23 +26,23 @@
     const addUser = async () => {
         isLoading.value = true
 
-        const newPlayer: Player = {
+        const newPlayer: PlayerCard = {
             username: firstName.value + " " + lastName.value,
             score: 0
         }
 
         if (scoreCards.value.some(card => card.username == newPlayer.username)) {
-            duplicateErrorMessage.value = `${newCard.username} already exists! Please select another username.`
+            duplicateErrorMessage.value = `${newPlayer.username} already exists! Please select another username.`
             console.log("duplicate user:", duplicateErrorMessage);
             
             setTimeout(() => {
                 duplicateErrorMessage.value = ""
             }, 3000);
         }else{
-            addScoreCard(newCard)
+            addScoreCard(newPlayer)
 
             try {
-                const res = await scoreBoardApi.post(`/add-user-to-location/${locationModel}`, {"username": newCard.username})
+                const res = await scoreBoardApi.post(`/add-user-to-location/${locationModel}`, {"username": newPlayer.username})
                 
                 console.log("res", res.data)
             } catch (error) {
@@ -57,7 +57,7 @@
     }
 
     onMounted(() => {
-        // locationModel
+        locationModel.value = allLocationOptions.value[0]
     })
 </script>
 
