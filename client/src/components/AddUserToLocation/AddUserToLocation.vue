@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref } from 'vue'
+    import { ref, onMounted } from 'vue'
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { storeToRefs } from 'pinia';
     import { Player } from "../../types/types"
@@ -55,6 +55,10 @@
 
         isLoading.value = false
     }
+
+    onMounted(() => {
+        // locationModel
+    })
 </script>
 
 <template>
