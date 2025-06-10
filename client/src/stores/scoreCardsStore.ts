@@ -1,15 +1,15 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { Card } from "../types/types"
+import { Player } from "../types/types"
 
 export const scoreCardsStore = defineStore("scoreCards", () => {
-    const scoreCards = ref<Card[]>([])
+    const scoreCards = ref<Player[]>([])
 
-    const setUserCards = (cards: Card[]) => {
+    const setUserCards = (cards: Player[]) => {
         scoreCards.value = cards
     }
 
-    const addScoreCard = (card: Card) => {
+    const addScoreCard = (card: Player) => {
         scoreCards.value = [...scoreCards.value, card]
     }
 
@@ -39,8 +39,8 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         return scoreCards.value.reduce((accumulator, currentValue) => accumulator + currentValue.score, 0)
     }
 
-    const getWinner = (): Card => { 
-        let highestScore: Card = scoreCards.value[0]
+    const getWinner = (): Player => { 
+        let highestScore: Player = scoreCards.value[0]
 
         for (let i = 1; i < scoreCards.value.length; i++) {
             if (scoreCards.value[i].score > highestScore.score) {

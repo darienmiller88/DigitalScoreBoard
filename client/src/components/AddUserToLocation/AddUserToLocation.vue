@@ -2,32 +2,36 @@
     import { ref } from 'vue'
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { storeToRefs } from 'pinia';
-    import { Card } from "../../types/types"
+    import { Player } from "../../types/types"
     import { scoreBoardApi } from "../../api/api"
     import { selectedLocationStore } from '../../stores/selectedLocationStore';
+    import { optionsStore } from "../../stores/optionsStore"
     import Loading from '../Loading/Loading.vue';
     import Select from '../Select/Select.vue';
 
     //Stateful variables
     const { scoreCards } = storeToRefs(scoreCardsStore())
-    const { selectedLocation } = storeToRefs(selectedLocationStore())
+    // const { selectedLocation } = storeToRefs(selectedLocationStore())
+    const { allLocationOptions } = storeToRefs(optionsStore())
 
+    //Stateful methods
     const { addScoreCard } = scoreCardsStore()
 
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")
     const lastName = ref<string>("")
+    const locationModel = ref<string>("")
     let isLoading = ref<boolean>(false)
 
     const addUser = async () => {
         isLoading.value = true
 
-        const newCard: Card = {
+        const newPlayer: Player = {
             username: firstName.value + " " + lastName.value,
             score: 0
         }
 
-        if (scoreCards.value.some(card => card.username == newCard.username)) {
+        if (scoreCards.value.some(card => card.username == newPlayer.username)) {
             duplicateErrorMessage.value = `${newCard.username} already exists! Please select another username.`
             console.log("duplicate user:", duplicateErrorMessage);
             
@@ -38,7 +42,7 @@
             addScoreCard(newCard)
 
             try {
-                const res = await scoreBoardApi.post(`/add-user-to-location/${selectedLocation.value}`, {"username": newCard.username})
+                const res = await scoreBoardApi.post(`/add-user-to-location/${locationModel}`, {"username": newCard.username})
                 
                 console.log("res", res.data)
             } catch (error) {
@@ -54,7 +58,10 @@
 </script>
 
 <template>
-
+    <Select 
+        :options="allLocationOptions"
+        :selectModel="locationModel"
+    />
 
     <form @submit.prevent="addUser">
         <div class="add-user-wrapper">

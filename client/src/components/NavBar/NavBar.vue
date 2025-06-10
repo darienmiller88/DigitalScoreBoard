@@ -34,7 +34,8 @@
             <RouterLink to="/remove-player" class="link-item">Remove Player</RouterLink>                  
             <RouterLink to="/team-mode" class="link-item">Team Mode</RouterLink>
             <RouterLink to="/view-games" class="link-item">View Games</RouterLink>
-            
+            <!-- <RouterLink class="link-item">Sign out</RouterLink> -->
+
             <!-- <RouterLink to="/generate-questions" class="link-item">Generate Questions</RouterLink> -->
         </div>
     </nav>

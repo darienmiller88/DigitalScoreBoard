@@ -1,4 +1,4 @@
-export type Card = {
+export type Player = {
     username: string
     score: number
 }
@@ -11,13 +11,13 @@ export type Team = {
 
 export type Location = {
     id:            string
-    users:         Card[]
+    users:         Player[]
     location_name: string
 }
 
 export type SavedGame = {
     id:             string
-    winner:         Card
+    winner:         Player
     location?:      Location
     teams?:         Team[]
     created_at:     string
