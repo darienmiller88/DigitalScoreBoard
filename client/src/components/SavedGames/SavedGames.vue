@@ -2,7 +2,7 @@
     import { onMounted, ref } from 'vue';
     import { SavedGame } from '../../types/types';
     import { scoreBoardApi } from '../../api/api';
-    import { Card, Team} from "../../types/types"
+    import { PlayerCard, Team} from "../../types/types"
     import Loading from '../Loading/Loading.vue';
     import Game from '../../components/Game/Game.vue';
     import Modal from '../Modal/Modal.vue';
@@ -132,7 +132,7 @@
         }
     ]
 
-    let playersInSavedGame = ref<Card[]>([])
+    let playersInSavedGame = ref<PlayerCard[]>([])
     let teamsInSavedGame = ref<Team[]>([])
 
     const openViewSavedGamesPlayers = (game: SavedGame) => {
