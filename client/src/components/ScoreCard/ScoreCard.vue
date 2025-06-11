@@ -13,9 +13,12 @@
         username: string 
     }>()
 
+
+    //testing
     const removeCardFromLocation = async () => {
         removeCard(props.cardIndex)
 
+        //Remove
         try {
             await scoreBoardApi.delete(`/remove-user-from-location/${selectedLocation.value}`, {data: {username: props.username}})
         } catch (error) {
