@@ -4,7 +4,6 @@
     import { storeToRefs } from 'pinia';
     import { PlayerCard } from "../../types/types"
     import { scoreBoardApi } from "../../api/api"
-    import { selectedLocationStore } from '../../stores/selectedLocationStore';
     import { optionsStore } from "../../stores/optionsStore"
     import Loading from '../Loading/Loading.vue';
     import Select from '../Select/Select.vue';
@@ -57,7 +56,7 @@
     }
 
     const onChangeSelect = (event: Event) => {
-
+        locationModel.value = (event.target as HTMLSelectElement).value;
     }
 
     onMounted(() => {
@@ -69,6 +68,7 @@
     <Select 
         :options="allLocationOptions"
         :selectModel="locationModel"
+        :onChange="onChangeSelect"
     />
 
     <form @submit.prevent="addUser">
