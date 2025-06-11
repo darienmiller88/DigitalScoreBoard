@@ -1,8 +1,8 @@
 <script setup lang="ts">
-    import { Card } from "../../types/types"
+    import { PlayerCard } from "../../types/types"
 
     const props = defineProps<{
-        playersInSavedGame: Card[]
+        playersInSavedGame: PlayerCard[]
     }>()
 </script>
 

@@ -15,23 +15,23 @@
 
 
     //testing
-    const removeCardFromLocation = async () => {
-        removeCard(props.cardIndex)
+    // const removeCardFromLocation = async () => {
+    //     removeCard(props.cardIndex)
 
-        //Remove
-        try {
-            await scoreBoardApi.delete(`/remove-user-from-location/${selectedLocation.value}`, {data: {username: props.username}})
-        } catch (error) {
-            console.log("err:", error);
-        }
-    }
+    //     //Remove
+    //     try {
+    //         await scoreBoardApi.delete(`/remove-user-from-location/${selectedLocation.value}`, {data: {username: props.username}})
+    //     } catch (error) {
+    //         console.log("err:", error);
+    //     }
+    // }
 </script>
 
 <template>
      <div class="user-card">
         <div class="username">{{ username }}</div>
         <div class="divider"></div>
-        <button class="remove" @click="removeCardFromLocation()" >
+        <button class="remove" @click="() => removeCard(cardIndex)" >
             Remove User
         </button>
         <br>
