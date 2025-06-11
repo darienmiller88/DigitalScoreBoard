@@ -16,9 +16,9 @@
     const { selectedTeam } = storeToRefs(selectedTeamStore())
     const { remainingLocationOptions } = storeToRefs(optionsStore())
     const { addOptionToRemainingLocationOptions } = optionsStore()
-    const { addPoints, minusPoints, resetPoints, removeTeamCard } = teamCardsStore()
+    const { addPoints, minusPoints, removeTeamCard, resetPointsForTeam } = teamCardsStore()
 
-    const resetOptions = (index: number) => {
+    const removeCardAndResetOptions = (index: number) => {
         removeTeamCard(index)
         addOptionToRemainingLocationOptions(props.team.team_name)
 
@@ -36,8 +36,8 @@
   
       <!-- Team Actions -->
       <div class="team-actions">
-        <button class="reset" @click="() => resetPoints(props.cardIndex)">Reset Points</button>
-        <button class="clear" @click="() => resetOptions(props.cardIndex)">Clear Team</button>
+        <button class="reset" @click="() => resetPointsForTeam(props.cardIndex)">Reset Points</button>
+        <button class="clear" @click="() => removeCardAndResetOptions(props.cardIndex)">Clear Team</button>
       </div>
   
       <!-- Points -->

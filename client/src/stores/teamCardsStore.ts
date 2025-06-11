@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { Card, Team } from "../types/types"
+import { PlayerCard, Team } from "../types/types"
 
 export const teamCardsStore = defineStore("teamCards", () => {
     const teamCards = ref<Team[]>([])
@@ -35,7 +35,7 @@ export const teamCardsStore = defineStore("teamCards", () => {
         teamCards.value[index].score = 0
     }
 
-    const getWinningTeam = (): Card => { 
+    const getWinningTeam = (): PlayerCard => { 
         let highestScoringTeam: Team = teamCards.value[0]
 
         for (let i = 1; i < teamCards.value.length; i++) {
@@ -68,8 +68,8 @@ export const teamCardsStore = defineStore("teamCards", () => {
         teamCards.value[index].players.push(player)
     }
 
-    const getPlayers = (): Card[] => {
-        let players: Card[] = []
+    const getPlayers = (): PlayerCard[] => {
+        let players: PlayerCard[] = []
 
         teamCards.value.forEach(team => {
             players = [...players, ...team.players.map(player => ({
