@@ -30,4 +30,6 @@ export const optionsStore = defineStore("optionsStore", () => {
         setRemainingLocationOptions,
         addOptionToRemainingLocationOptions
     }
+}, {
+    persist: true
 })

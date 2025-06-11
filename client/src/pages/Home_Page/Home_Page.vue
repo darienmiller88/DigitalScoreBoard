@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
+    // import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
     import { optionsStore } from "../../stores/optionsStore"
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
