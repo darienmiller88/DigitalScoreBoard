@@ -1,0 +1,60 @@
+ @import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:wght@700&family=Kanit:wght@300&family=Martian+Mono&family=Merriweather:wght@300&family=Open+Sans:wght@300&family=Oswald:wght@300;400&family=Rubik:ital,wght@0,500;1,900&display=swap');
+
+:root {
+    --bg-color: #00050f;
+    --bg-color-transparent: #00050fe9;
+    --main-text-color: #61dafb;
+    --main-text-color-dark-transparent: #61dafbe1;
+    --main-text-color-transparent: #61dafb82;
+    --primary-color: #61dafb;
+    --primary-color-transparent: #61dafbe1;
+    --toggle-background: #f2e0c5;
+}
+
+[data-theme="light"] {
+    --primary-color: #003366;
+    --primary-color-transparent: #003366d0;
+    --bg-color: #f2e0c5;
+    --bg-color-transparent: #f2e0c5b2;
+    --toggle-background: #00050f;
+}
+
+body{
+    margin: 0;
+    background-color: var(--bg-color);
+    transition: 0.5s;
+
+    font-family: 'Gentium Book Plus', serif;
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Martian Mono', monospace;
+    font-family: 'Merriweather', serif;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Rubik', sans-serif;
+}
+
+/* 
+Scrollbar styling
+*/
+
+::-webkit-scrollbar {
+    width: 6px;    
+    height: 0px;  
+    transition: 0.3s;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0); 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color); 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color-transparent); 
+}
