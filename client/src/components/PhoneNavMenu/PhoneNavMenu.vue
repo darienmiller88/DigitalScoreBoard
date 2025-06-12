@@ -15,7 +15,8 @@
         </div>
         <div class="links" @click="menuClick">
             <RouterLink to="/" class="link-item">Home</RouterLink>
-            <RouterLink to="/add-new-players" class="link-item">Add New Players</RouterLink>            
+            <RouterLink to="/add-new-players" class="link-item">Add New Players</RouterLink>     
+            <RouterLink to="/remove-player" class="link-item">Remove Player</RouterLink>                         
             <RouterLink to="/team-mode" class="link-item">Team Mode</RouterLink>
             <RouterLink to="/view-games" class="link-item">View Games</RouterLink>
         </div>

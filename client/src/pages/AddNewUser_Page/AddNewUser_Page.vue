@@ -1,10 +1,10 @@
 <script setup lang="ts">
-    import AddUserToLocation from '../../components/AddUserToLocation/AddUserToLocation.vue';
+    import AddUserToLocationContainer from '../../container/AddUserToLocationContainer/AddUserToLocationContainer.vue';
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
 </script>
 
 <template>
     <PageTitle :titleName="'Add New Player'"/>
 
-    <AddUserToLocation />
+    <AddUserToLocationContainer />
 </template>
