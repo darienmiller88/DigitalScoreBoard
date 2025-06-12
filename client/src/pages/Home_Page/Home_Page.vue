@@ -1,26 +1,17 @@
 <script setup lang="ts">
-    // import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
-    import { optionsStore } from "../../stores/optionsStore"
+    import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import { onMounted, ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-    import { storeToRefs } from 'pinia';
-    import { scoreBoardApi } from '../../api/api';
-    import { Location } from "../../types/types"
     import { getAllLocations } from "../../utils/utils"
 
     const isLoading = ref<boolean>(true)
 
     //Stateful methods
-    const { setAllLocationOptions } = optionsStore()
     const { resetAllPoints, totalPoints } = scoreCardsStore()
-    
-    //ref variables
-    const { allLocationOptions } = storeToRefs(optionsStore())
-
-
+  
     onMounted(async () => {
         // if (locationsFromLocalStorage.value.length) {
         //     locations = locationsFromLocalStorage.value
@@ -93,7 +84,7 @@
     </div>
 
     <!-- Shows all users when "Add new users" is clicked -->
-    <!-- <ScoreCards /> -->
+    <ScoreCards />
 
     <!-- Saves a game to the server -->
     <SaveGame />
