@@ -7,6 +7,8 @@ const { setAllLocationOptions } = optionsStore()
 const { allLocationOptions } = storeToRefs(optionsStore())
 
 export const getAllLocations = async () => {
+    //Only load the all the location names if they're NOT in location storage. As a result, this function will be called
+    //most one time. This is done to reduce database calls.
     if (!allLocationOptions.value.length) {
         const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
             
