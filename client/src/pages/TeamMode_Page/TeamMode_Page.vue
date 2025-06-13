@@ -1,9 +1,13 @@
 <script setup lang="ts">
-    import TeamCards from '../../components/TeamCards/TeamCards.vue';
+    //libraries and stores
+    import { teamCardsStore } from "../../stores/teamCardsStore"
+
+    //Components
+    // import TeamCards from '../../components/TeamCards/TeamCards.vue';
+    import TeamCardsContainer from "../../container/TeamCardsContainer/TeamCardsContainer.vue";
     import AddNewTeam from '../../components/AddNewTeam/AddNewTeam.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
-    import { teamCardsStore } from "../../stores/teamCardsStore"
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
 
      //Stateful method(s)
@@ -20,7 +24,7 @@
     <ResetPoints :resetAllPoints="resetAllPoints"/>
 
     <!-- Show all team cards added by the user  --> 
-    <TeamCards />
+    <TeamCardsContainer />
 
     <!-- Saves a game to the server -->
     <SaveGame />

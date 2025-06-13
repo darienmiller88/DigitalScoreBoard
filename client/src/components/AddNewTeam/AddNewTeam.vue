@@ -1,5 +1,4 @@
 <script setup lang="ts">
-    import Select from '../Select/Select.vue';
     import { onMounted, ref } from 'vue';
     import { selectedTeamStore } from '../../stores/selectedLocationStore';
     import { optionsStore } from "../../stores/optionsStore"
@@ -7,6 +6,9 @@
     import { storeToRefs } from 'pinia';
     import { Location } from "../../types/types"
     import { scoreBoardApi } from '../../api/api';
+    
+    //Components
+    import Select from '../Select/Select.vue';
     import Loading from '../Loading/Loading.vue';
 
     //ref variables
@@ -55,7 +57,7 @@
 
     onMounted(async () => {
         
-        //Afterwards, load the remaining teams left to the total remaining teams
+        //On pade load, load the remaining teams left to the total remaining teams
         setRemainingLocationOptions(teamCards.value)
         
         isLoading.value = false
