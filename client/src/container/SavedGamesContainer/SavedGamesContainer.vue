@@ -1,13 +1,16 @@
 <script setup lang="ts">
+    //Libraries
     import { onMounted, ref } from 'vue';
     import { SavedGame } from '../../types/types';
     import { scoreBoardApi } from '../../api/api';
     import { PlayerCard, Team} from "../../types/types"
-    import Loading from '../Loading/Loading.vue';
+
+    //Components
+    import Loading from '../../components/Loading/Loading.vue';
     import Game from '../../components/Game/Game.vue';
-    import Modal from '../Modal/Modal.vue';
-    import ViewSavedGamePlayers from '../ViewSavedGamePlayers/ViewSavedGamePlayers.vue';
-    import ViewSavedGameTeams from '../ViewSavedGameTeams/ViewSavedGameTeams.vue';
+    import Modal from '..//../components/Modal/Modal.vue';
+    import ViewSavedGamePlayers from '../../components/ViewSavedGamePlayers/ViewSavedGamePlayers.vue';
+    import ViewSavedGameTeams from '../../components/ViewSavedGameTeams/ViewSavedGameTeams.vue';
 
     const isLoading = ref<boolean>(true)
     let showPeopleWhoPlayed = ref<boolean>(false)

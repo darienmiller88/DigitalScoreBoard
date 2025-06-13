@@ -2,9 +2,11 @@
     //libraries and stores
     import { teamCardsStore } from "../../stores/teamCardsStore"
 
-    //Components
+    //Containers
     import TeamCardsContainer from "../../container/TeamCardsContainer/TeamCardsContainer.vue";
     import AddNewTeamContainer from "../../container/AddNewTeamContainer/AddNewTeamContainer.vue";
+    
+    //Components
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
