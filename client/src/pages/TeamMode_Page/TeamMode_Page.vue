@@ -3,9 +3,8 @@
     import { teamCardsStore } from "../../stores/teamCardsStore"
 
     //Components
-    // import TeamCards from '../../components/TeamCards/TeamCards.vue';
     import TeamCardsContainer from "../../container/TeamCardsContainer/TeamCardsContainer.vue";
-    import AddNewTeam from '../../components/AddNewTeam/AddNewTeam.vue';
+    import AddNewTeamContainer from "../../container/AddNewTeamContainer/AddNewTeamContainer.vue";
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
@@ -18,7 +17,7 @@
     <PageTitle titleName="Teams to Add"/>
 
     <!-- Contains the ADAPT locations in the select tag -->
-    <AddNewTeam />
+    <AddNewTeamContainer />
 
     <!-- Button to reset all of the points for every team playing -->
     <ResetPoints :resetAllPoints="resetAllPoints"/>

@@ -8,8 +8,8 @@
     import { scoreBoardApi } from '../../api/api';
     
     //Components
-    import Select from '../Select/Select.vue';
-    import Loading from '../Loading/Loading.vue';
+    import Select from '../../components/Select/Select.vue';
+    import Loading from '../../components/Loading/Loading.vue';
 
     //ref variables
     const { teamCards } = storeToRefs(teamCardsStore())
