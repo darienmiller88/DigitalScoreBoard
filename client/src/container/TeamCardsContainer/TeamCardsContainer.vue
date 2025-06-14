@@ -143,23 +143,26 @@
         max-height: 40vh;
         overflow-y: scroll;
 
-        @media only screen and (min-width: 768px){
+        // Tablet styles
+        @media (min-width: 768px) and (max-width: 1023px){
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 50px;
             max-height: 75vh;
         }
 
-        @media only screen and (min-width: 992px){
+        //Non 2k or 4k laptops
+        @media (min-width: 1024px){
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 40px;
         }
 
-        @media only screen and (min-width: 1400px){
+        // 2k monitors and up
+        @media (min-width: 2560px){
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 50px;
         }
     }
 </style>
