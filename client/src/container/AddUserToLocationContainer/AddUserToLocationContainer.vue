@@ -13,7 +13,6 @@
 
     //Stateful variables
     const { scoreCards } = storeToRefs(scoreCardsStore())
-    // const { selectedLocation } = storeToRefs(selectedLocationStore())
     const { allLocationOptions } = storeToRefs(optionsStore())
 
     //Stateful methods
@@ -68,11 +67,13 @@
 </script>
 
 <template>
-    <Select 
-        :options="allLocationOptions"
-        :selectModel="locationModel"
-        :onChange="onChangeSelect"
-    />
+    <div class="select-wrapper">
+        <Select 
+            :options="allLocationOptions"
+            :selectModel="locationModel"
+            :onChange="onChangeSelect"
+        />
+    </div>
 
     <form @submit.prevent="addUser">
         <div class="add-user-wrapper">
@@ -111,6 +112,10 @@
 </template>
 
 <style scoped lang="scss">
+    .select-wrapper{
+        text-align: center;
+    }
+
     form{
         text-align: center;
         margin-top: 20px;
