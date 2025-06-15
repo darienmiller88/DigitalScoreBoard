@@ -13,7 +13,7 @@
         color: var(--primary-color);
         text-align: center;
         font-size: 40px;
-        margin: 40px 0px;
+        margin: 30px 0px;
 
         @media screen and (min-width: 768px) {
             font-size: 60px;

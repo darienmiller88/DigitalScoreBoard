@@ -162,17 +162,22 @@
         }
 
         button{
+            border: 2px solid var(--primary-color);
             border-radius: 10px;
-            padding: 15px 35px;
+            padding: 15px 22px;
+            margin-top: 15px;   
 
             transition: 0.3s;
-            font-size: 25px;
+            font-size: 23px;
             font-weight: 600;
-            margin-top: 10px;   
+
             background-color: var(--primary-color);
             color: var(--bg-color);
-
-            border: 2px solid var(--primary-color);
+            
+            @media (min-width: 768px) {
+                font-size: 25px;
+                padding: 15px 35px;
+            }
 
             &:hover{
                 cursor: pointer;
