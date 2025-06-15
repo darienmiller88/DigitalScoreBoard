@@ -34,11 +34,22 @@
 
         border: 2px solid black;
 
+        // Show two columns of cards for tablets
         @media only screen and (min-width: 768px){
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             max-height: 75vh;
         }
+
+        //Show three columns for laptops less than 2K
+        @media only screen and (min-width: 992px){
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-height: 75vh;
+        }
+
+       
     }
 </style>
