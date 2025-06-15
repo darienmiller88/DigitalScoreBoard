@@ -15,7 +15,7 @@
         border: 2px solid var(--primary-color);
         border-radius: 10px;
 
-        width: 90vw;
+        width: 85vw;
         box-shadow: 8px 8px 5px rgba(173, 216, 230, 0.548);
         margin: 20px 0px; 
 
