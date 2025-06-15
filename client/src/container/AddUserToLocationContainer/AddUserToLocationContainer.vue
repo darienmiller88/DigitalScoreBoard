@@ -114,6 +114,11 @@
 <style scoped lang="scss">
     .select-wrapper{
         text-align: center;
+        
+        @media (min-width: 786px) {
+            margin: 20px;
+            
+        }
     }
 
     form{
