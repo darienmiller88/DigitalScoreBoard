@@ -50,6 +50,11 @@
             max-height: 75vh;
         }
 
-       
+        @media only screen and (min-width: 2560px){
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-height: 75vh;
+        }
     }
 </style>
