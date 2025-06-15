@@ -28,7 +28,7 @@
 </script>
 
 <template>
-     <div class="user-card">
+     <div class="score-card">
         <div class="username">{{ username }}</div>
         <div class="divider"></div>
         <button class="remove" @click="() => removeCard(cardIndex)" >
@@ -47,7 +47,7 @@
 </template>
 
 <style scoped lang="scss">
-    .user-card{
+    .score-card{
         border: 2px solid var(--primary-color);
         border-radius: 10px;
 
