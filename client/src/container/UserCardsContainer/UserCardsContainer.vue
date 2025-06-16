@@ -50,6 +50,7 @@
             max-height: 75vh;
         }
 
+        // 2k monitors
         @media only screen and (min-width: 2560px){
             display: grid;
             grid-template-columns: repeat(3, 1fr);

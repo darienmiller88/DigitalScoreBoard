@@ -164,11 +164,11 @@
         button{
             border: 2px solid var(--primary-color);
             border-radius: 10px;
-            padding: 15px 22px;
+            padding: 15px 10px;
             margin-top: 15px;   
 
             transition: 0.3s;
-            font-size: 23px;
+            font-size: 20px;
             font-weight: 600;
 
             background-color: var(--primary-color);
