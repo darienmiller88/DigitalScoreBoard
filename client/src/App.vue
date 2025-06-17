@@ -1,9 +1,10 @@
 <script setup lang="ts">
   import { onMounted } from "vue";
-import NavBar from "./components/NavBar/NavBar.vue"
+  import NavBar from "./components/NavBar/NavBar.vue"
+  import { getAllLocations } from "./utils/utils"
 
-  onMounted(() => {
-      console.log("app.vue")
+  onMounted(async () => {
+      await getAllLocations()
   })
 </script>
 
