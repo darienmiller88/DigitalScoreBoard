@@ -55,6 +55,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px 50px;
+            padding: 0px 10px;
             max-height: 75vh;
         }
 

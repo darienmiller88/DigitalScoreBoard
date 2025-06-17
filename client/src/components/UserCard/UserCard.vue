@@ -47,6 +47,7 @@
         .username{
             color: var(--primary-color);
             font-size: 30px;
+            margin: 10px 0px;
         }
 
         .divider{
@@ -54,6 +55,43 @@
             border: 2px solid var(--primary-color);
             margin-top: 5px;
             margin-bottom: 20px;
+        }
+
+        .remove-wrapper{
+            button{
+                padding: 10px 20px;
+                border-radius: 10px;
+                border: none;
+                background-color: red;
+                color: var(--bg-color);
+                font-weight: 600;
+                font-size: 16px;
+
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+
+            margin-bottom: 10px;
+        }
+
+        .edit-wrapper{
+            button{
+                padding: 10px 20px;
+                border-radius: 10px;
+                border: none;
+                background-color: rgb(0, 255, 106);
+                color: var(--bg-color);
+                font-weight: 600;
+                font-size: 16px;
+                transition:  0.3s;
+                
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+
+            margin-bottom: 10px;
         }
     }
 </style>
