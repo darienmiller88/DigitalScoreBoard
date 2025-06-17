@@ -10,6 +10,7 @@
 </script>
 
 <template>
+    <div class="people">People at {{ "Lawrence:" }}</div>
     <div class="user-cards">
         <UserCard
             v-for="username in usernames"
@@ -19,6 +20,13 @@
 </template>
 
 <style scoped lang="scss">
+    .people{
+        text-align: center;
+        font-size: 26px;
+        color: var(--primary-color);
+        margin-top: 20px;
+    }
+
     .user-cards{
         display: grid;
         grid-template-columns: 1fr;    
@@ -46,7 +54,7 @@
         @media only screen and (min-width: 992px){
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 10px 50px;
             max-height: 75vh;
         }
 

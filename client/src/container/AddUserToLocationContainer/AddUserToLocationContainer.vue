@@ -117,7 +117,6 @@
         
         @media (min-width: 786px) {
             margin: 20px;
-            
         }
     }
 
