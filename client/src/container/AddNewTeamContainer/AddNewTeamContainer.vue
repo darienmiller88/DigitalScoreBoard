@@ -105,7 +105,7 @@
 
             background-color: dodgerblue;
             color: aliceblue;
-            font-size: 17px;
+            font-size: 20px;
             transition: 0.3s;
 
             @media screen and (min-width: 768px) {

@@ -26,7 +26,7 @@
 
 <style scoped lang="scss">
     select {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 600;
         padding: 5px 8px;
         transition: 0.5s;
