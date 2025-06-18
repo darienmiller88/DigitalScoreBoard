@@ -5,7 +5,6 @@
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import { onMounted, ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-    import { getAllLocations } from "../../utils/utils"
 
     const isLoading = ref<boolean>(true)
 
@@ -21,7 +20,6 @@
         // } else {
         // }
 
-        await getAllLocations()
         try {
             //Find the target location in the list of locations from the database.
             // const targetLocation = locations.find(location => {

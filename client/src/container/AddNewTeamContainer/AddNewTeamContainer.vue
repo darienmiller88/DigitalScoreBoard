@@ -97,7 +97,7 @@
         transition: 0.5s;
 
         .add-team-button{
-            padding: 10px 25px;
+            padding: 10px 20px;
             margin: 0px 10px;
 
             border: none;
@@ -105,7 +105,7 @@
 
             background-color: dodgerblue;
             color: aliceblue;
-            font-size: 20px;
+            font-size: 17px;
             transition: 0.3s;
 
             @media screen and (min-width: 768px) {
