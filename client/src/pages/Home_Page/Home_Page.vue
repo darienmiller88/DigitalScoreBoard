@@ -70,7 +70,7 @@
 
 <template>
 
-    <PageTitle :titleName="'Jeopardy Score Board'"/>
+    <PageTitle :titleName="'Create New Game'"/>
 
     <ResetPoints :resetAllPoints="resetAllPoints"/>
 
