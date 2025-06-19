@@ -39,6 +39,11 @@
         margin-top: 20px;
         margin-bottom: 20px;
         overflow-y: scroll;
+        transition: 0.3s;
+
+        &:hover{
+            box-shadow: 0 4px 10px var(--primary-color);
+        }
 
         // Show two columns of cards for tablets
         @media only screen and (min-width: 768px){

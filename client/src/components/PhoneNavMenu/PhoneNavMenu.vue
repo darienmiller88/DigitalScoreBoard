@@ -1,5 +1,8 @@
 <script setup lang="ts">
     import { Icon } from "@iconify/vue"
+    import { useWindowSize } from "@vueuse/core"
+
+    const { width } = useWindowSize();
 
     defineProps<{
         isPhoneMenuActive: boolean
@@ -11,7 +14,7 @@
 <template>
     <div :class="`menu ${isPhoneMenuActive ? 'slide-in': ''}`">
         <div class="icon-wrapper">
-            <Icon icon="tabler:circle-letter-x" width="50" @click="menuClick"/>
+            <Icon icon="tabler:circle-letter-x" :width="width < 820 ? 50 : 75" @click="menuClick"/>
         </div>
         <div class="links" @click="menuClick">
             <RouterLink to="/" class="link-item">Create New Game</RouterLink>
@@ -31,7 +34,6 @@
     .menu{
         display: grid;
         grid-template-rows: 10% auto;
-
 
         background-color: aliceblue;
         width: 100vw;
@@ -60,7 +62,6 @@
                 width: 40vw;
                 border: 1px solid rgb(255, 215, 0);
                 text-align: center;
-                // margin: auto;
             }
             
             .link-item{
@@ -70,10 +71,14 @@
 
                 text-align: center;
                 color: rgb(0, 31, 81);
-                font-size: 35px;
+                font-size: 25px;
                 padding: 25px;
                 transition: 0.2s;
                 text-decoration: none;
+
+                @media (min-width: 768px) {
+                    font-size: 45px;
+                }
             }
         }
     }

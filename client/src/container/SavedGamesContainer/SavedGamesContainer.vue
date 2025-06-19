@@ -38,11 +38,11 @@
                         score: 400
                     },
                      {
-                        username: "Reina",
-                        score: 300
+                        username: "Ricky",
+                        score: 3000
                     },
                     {
-                        username: "Marth",
+                        username: "Garth",
                         score: 400
                     }
                 ],
