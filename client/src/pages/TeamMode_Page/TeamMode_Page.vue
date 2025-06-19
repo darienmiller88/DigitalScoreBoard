@@ -22,7 +22,9 @@
     <AddNewTeamContainer />
 
     <!-- Button to reset all of the points for every team playing -->
-    <ResetPoints :resetAllPoints="resetAllPoints"/>
+    <div class="reset-points-wrapper">
+        <ResetPoints :resetAllPoints="resetAllPoints"/>
+    </div>
 
     <!-- Show all team cards added by the user  --> 
     <TeamCardsContainer />
@@ -30,3 +32,9 @@
     <!-- Saves a game to the server -->
     <SaveGame />
 </template>
+
+<style lang="scss">
+    .reset-points-wrapper{
+        margin: 20px;
+    }
+</style>
