@@ -1,5 +1,8 @@
 <script setup lang="ts">
     import UserCard from '../../components/UserCard/UserCard.vue';
+    import Modal from '../../components/Modal/Modal.vue';
+    import EditPlayerName from '../../components/EditPlayerName/EditPlayerName.vue';
+import { ref } from 'vue';
 
     const usernames = [
         "darien miller",
@@ -10,6 +13,8 @@
         "Luis Hernandez",
         "superdeeduperlongexmaple ofaververylongname"
     ]
+
+    let showEditPlayerNameModal = ref<boolean>(false)
 </script>
 
 <template>
@@ -20,6 +25,14 @@
             :username="username"
         />
     </div>
+
+    <Modal 
+        :modalHeader="'Edit Username'"
+        :modalContent="EditPlayerName"
+        :modalProps="{}"
+        :show="showEditPlayerNameModal"
+        :onHide="() => showEditPlayerNameModal = false"
+    />
 </template>
 
 <style scoped lang="scss">
