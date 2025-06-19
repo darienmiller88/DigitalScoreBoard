@@ -25,7 +25,7 @@
         width: 85vw;
         box-shadow: 8px 8px 5px var(--primary-color-transparent);
         margin: 20px 0px; 
-
+        
         transition: 0.3s;
         text-align: center;
 
@@ -34,26 +34,58 @@
             box-shadow: 10px 10px 15px var(--primary-color);
         }
 
-        @media screen and (min-width: 768px) {
+        @media (min-width: 768px) {
             width: 40vw;
             margin: 20px 0px; 
         }
 
-        @media screen and (min-width: 992px) {
-            width: 25vw;
+        @media (min-width: 992px) {
+            // width: 25vw;
             margin: 20px 0px; 
         }
 
-        @media screen and (min-width: 1400px) {
-            width: 15vw;
+        @media (min-width: 1025px) {
+            width: 25vw;
             margin: 20px 0px; 
         }
 
         .username{
             color: var(--primary-color);
-            font-size: 30px;
+            font-size: 25px;
             margin: 10px 0px;
+            overflow-x: scroll;
+            white-space: nowrap;
+            padding: 0px 20px;
+
+            &::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: var(--primary-color); 
+                border-radius: 3px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            // For wider tablets
+            @media (min-width: 992px) {
+                font-size: 35px;
+            }
+
+            //For laptops with smaller displays
+            @media (min-width: 1025px) {
+                font-size: 35px;
+            }
+
+            @media (min-width: 2560px) {
+                font-size: 45px;
+            }
         }
+
+        
 
         .divider{
             width: 99%;

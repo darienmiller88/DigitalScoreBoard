@@ -7,7 +7,8 @@
         "mark rubens",
         "shaniqua blank",
         "Daniel Negroni",
-        "Luis Hernandez"
+        "Luis Hernandez",
+        "superdeeduperlongexmaple ofaververylongname"
     ]
 </script>
 
@@ -48,7 +49,7 @@
         }
 
         // Show two columns of cards for tablets
-        @media only screen and (min-width: 768px){
+        @media (min-width: 768px) and (max-width: 1024px){
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
@@ -57,7 +58,7 @@
         }
 
         //Show three columns for laptops less than 2K
-        @media only screen and (min-width: 992px){
+        @media only screen and (min-width: 1025px){
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px 50px;

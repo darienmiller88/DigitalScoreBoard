@@ -15,7 +15,6 @@
 <style scoped lang="scss">
     .reset-all-points-wrapper{
         text-align: center;
-        margin: 25px;
 
         button{
             border-radius: 10px;

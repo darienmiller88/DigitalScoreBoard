@@ -95,5 +95,6 @@
         text-align: center;
         font-size: 30px;
         color: var(--primary-color);
+        padding: 20px;
     }  
 </style>
