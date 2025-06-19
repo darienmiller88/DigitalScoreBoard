@@ -2,7 +2,7 @@
     import UserCard from '../../components/UserCard/UserCard.vue';
     import Modal from '../../components/Modal/Modal.vue';
     import EditPlayerName from '../../components/EditPlayerName/EditPlayerName.vue';
-import { ref } from 'vue';
+    import { ref } from 'vue';
 
     const usernames = [
         "darien miller",
@@ -15,6 +15,12 @@ import { ref } from 'vue';
     ]
 
     let showEditPlayerNameModal = ref<boolean>(false)
+    let usernameToEdit = ref<string>("")
+
+    const addUserNameToEdit = (username: string) => {
+        usernameToEdit.value = username
+        showEditPlayerNameModal.value = true
+    }
 </script>
 
 <template>
@@ -23,13 +29,14 @@ import { ref } from 'vue';
         <UserCard
             v-for="username in usernames"
             :username="username"
+            :showModal="addUserNameToEdit"
         />
     </div>
 
     <Modal 
         :modalHeader="'Edit Username'"
         :modalContent="EditPlayerName"
-        :modalProps="{}"
+        :modalProps="{ username: usernameToEdit }"
         :show="showEditPlayerNameModal"
         :onHide="() => showEditPlayerNameModal = false"
     />

@@ -1,6 +1,7 @@
 <script setup lang="ts">
     defineProps<{
         username: string
+        showModal: (username: string) => void
     }>()
 </script>
 
@@ -12,7 +13,7 @@
             <button>Remove User</button>
         </div>
         <div class="edit-wrapper">
-            <button>Edit Name</button>
+            <button @click="() => showModal(username)">Edit Name</button>
         </div>
     </div>
 </template>
