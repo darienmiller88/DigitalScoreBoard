@@ -15,20 +15,26 @@
         </div>
         <div class="links" @click="menuClick">
             <RouterLink to="/" class="link-item">Home</RouterLink>
-            <RouterLink to="/add-new-players" class="link-item">Add New Players</RouterLink>     
-            <RouterLink to="/remove-player" class="link-item">Remove Player</RouterLink>                         
+            <div class="divider"></div>
+            <RouterLink to="/add-new-players" class="link-item">Add New Players</RouterLink> 
+            <div class="divider"></div>    
+            <!-- <RouterLink to="/remove-player" class="link-item">Remove Player</RouterLink>                          -->
             <RouterLink to="/team-mode" class="link-item">Team Mode</RouterLink>
+            <div class="divider"></div>
             <RouterLink to="/view-games" class="link-item">View Games</RouterLink>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Share+Tech&display=swap');
+    
     .menu{
         display: grid;
         grid-template-rows: 10% auto;
 
-        background-color: rgba(78, 78, 78, 0.932);
+
+        background-color: aliceblue;
         width: 100vw;
         height: 100vh;
         z-index: 1000;
@@ -47,13 +53,26 @@
         .links{
             display: flex;
             flex-direction: column;
+            align-items: center;
 
-            .link-item{
+            .divider{
+                width: 40vw;
+                border: 1px solid rgb(255, 215, 0);
                 text-align: center;
-                color: aliceblue;
+                // margin: auto;
+            }
+            
+            .link-item{
+                font-family: "Share Tech", sans-serif;
+                font-weight: 600;
+                font-style: normal;
+
+                text-align: center;
+                color: black;
                 font-size: 35px;
-                padding: 30px;
+                padding: 25px;
                 transition: 0.2s;
+                text-decoration: none;
             }
         }
     }
