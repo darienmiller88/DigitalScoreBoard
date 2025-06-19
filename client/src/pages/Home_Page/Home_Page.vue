@@ -3,10 +3,8 @@
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
-    import { onMounted, ref } from 'vue';
+    import { onMounted } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-
-    const isLoading = ref<boolean>(true)
 
     //Stateful methods
     const { resetAllPoints, totalPoints } = scoreCardsStore()
@@ -67,7 +65,6 @@
         // console.log("locations:", locations, "option:", options, "host:", window.location.hostname);
         // console.log("api:", scoreBoardApi.getUri());
         
-        isLoading.value = false
     })
 </script>
 

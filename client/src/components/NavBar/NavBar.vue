@@ -7,7 +7,7 @@
 
     const { width } = useWindowSize();
     const isPhoneMenuActive = ref<boolean>(false)
-    // const isActive: boolean[] = []
+    // const isActive: boolean[] = [true, false, false, false]
 
     const menuClick = () => {
         isPhoneMenuActive.value = !isPhoneMenuActive.value
@@ -18,9 +18,7 @@
     <nav>
         <RouterLink to="/" class="logo">
             <img src="../../assets/sb.png" alt="logo">
-            <div class="logo-item">
-                Scoreboard
-            </div>
+            <div class="logo-item"> Scoreboard </div>
         </RouterLink>
         
         <div v-if="width <= 820" class="icon-wrapper">
@@ -29,13 +27,11 @@
         </div>
         <div class="links" v-else>
             <DarkModeToggle />
-            <RouterLink to="/" class="link-item">Home</RouterLink>
+            <RouterLink to="/" class="link-item">Create Game</RouterLink>
             <RouterLink to="/add-new-players" class="link-item">Add Player</RouterLink>      
             <RouterLink to="/team-mode" class="link-item">Team Mode</RouterLink>
             <RouterLink to="/view-games" class="link-item">View Games</RouterLink>
             <!-- <RouterLink class="link-item">Sign out</RouterLink> -->
-
-            <!-- <RouterLink to="/generate-questions" class="link-item">Generate Questions</RouterLink> -->
         </div>
     </nav>
     <PhoneNavMenu :isPhoneMenuActive="isPhoneMenuActive" :menuClick="menuClick"/>
