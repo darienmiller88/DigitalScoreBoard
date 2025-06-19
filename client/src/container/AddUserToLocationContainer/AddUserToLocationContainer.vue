@@ -128,6 +128,10 @@
             width: 75vw;
 
             @media screen and (min-width: 768px) {
+                width: 50vw;
+            }
+
+            @media screen and (min-width: 992px) {
                 width: 40vw;
             }
         }
@@ -174,6 +178,11 @@
             color: var(--bg-color);
             
             @media (min-width: 768px) {
+                font-size: 28px;
+                padding: 10px 14px;
+            }
+
+            @media (min-width: 992px) {
                 font-size: 25px;
                 padding: 15px 35px;
             }

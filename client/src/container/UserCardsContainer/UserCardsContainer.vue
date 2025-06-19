@@ -22,7 +22,7 @@
 <style scoped lang="scss">
     .people{
         text-align: center;
-        font-size: 26px;
+        font-size: 30px;
         color: var(--primary-color);
         margin-top: 20px;
     }
@@ -39,8 +39,6 @@
         margin-top: 20px;
         margin-bottom: 20px;
         overflow-y: scroll;
-
-        border: 2px solid black;
 
         // Show two columns of cards for tablets
         @media only screen and (min-width: 768px){
