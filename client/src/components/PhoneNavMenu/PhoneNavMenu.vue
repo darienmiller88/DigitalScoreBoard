@@ -14,11 +14,10 @@
             <Icon icon="tabler:circle-letter-x" width="50" @click="menuClick"/>
         </div>
         <div class="links" @click="menuClick">
-            <RouterLink to="/" class="link-item">Home</RouterLink>
+            <RouterLink to="/" class="link-item">Create New Game</RouterLink>
             <div class="divider"></div>
             <RouterLink to="/add-new-players" class="link-item">Add New Players</RouterLink> 
             <div class="divider"></div>    
-            <!-- <RouterLink to="/remove-player" class="link-item">Remove Player</RouterLink>                          -->
             <RouterLink to="/team-mode" class="link-item">Team Mode</RouterLink>
             <div class="divider"></div>
             <RouterLink to="/view-games" class="link-item">View Games</RouterLink>
@@ -55,6 +54,8 @@
             flex-direction: column;
             align-items: center;
 
+            padding: 60px;
+
             .divider{
                 width: 40vw;
                 border: 1px solid rgb(255, 215, 0);
@@ -68,7 +69,7 @@
                 font-style: normal;
 
                 text-align: center;
-                color: black;
+                color: rgb(0, 31, 81);
                 font-size: 35px;
                 padding: 25px;
                 transition: 0.2s;
