@@ -23,11 +23,16 @@
         border-radius: 10px;
 
         width: 85vw;
-        box-shadow: 8px 8px 5px rgba(173, 216, 230, 0.548);
+        box-shadow: 8px 8px 5px var(--primary-color-transparent);
         margin: 20px 0px; 
 
         transition: 0.3s;
         text-align: center;
+
+        &:hover{
+            transform: translateY(-5px);
+            box-shadow: 10px 10px 15px var(--primary-color);
+        }
 
         @media screen and (min-width: 768px) {
             width: 40vw;
@@ -61,14 +66,19 @@
             button{
                 padding: 10px 20px;
                 border-radius: 10px;
-                border: none;
-                background-color: red;
+                
+                border: 2px solid var(--bg-color);
                 color: var(--bg-color);
+                background-color: red;
+
                 font-weight: 600;
                 font-size: 16px;
+                transition: 0.3s;
 
                 &:hover{
                     cursor: pointer;
+                    border: 2px solid var(--primary-color);
+                    color: var(--primary-color);
                 }
             }
 
@@ -79,15 +89,19 @@
             button{
                 padding: 10px 20px;
                 border-radius: 10px;
-                border: none;
-                background-color: rgb(0, 255, 106);
+
+                background-color: rgb(20, 174, 56);
                 color: var(--bg-color);
+                border: 2px solid var(--bg-color);
+
                 font-weight: 600;
                 font-size: 16px;
                 transition:  0.3s;
                 
                 &:hover{
                     cursor: pointer;
+                    border: 2px solid var(--primary-color);
+                    color: var(--primary-color);
                 }
             }
 

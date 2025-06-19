@@ -5,7 +5,9 @@
         "darien miller",
         "angela lourens",
         "mark rubens",
-        "shaniqua blank"
+        "shaniqua blank",
+        "Daniel Negroni",
+        "Luis Hernandez"
     ]
 </script>
 
@@ -50,7 +52,8 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
-            max-height: 75vh;
+            max-height: 45vh;
+            padding: 0px 20px;
         }
 
         //Show three columns for laptops less than 2K
@@ -58,8 +61,8 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px 50px;
-            padding: 0px 10px;
             max-height: 75vh;
+            padding: 0px 10px;
         }
 
         // 2k monitors

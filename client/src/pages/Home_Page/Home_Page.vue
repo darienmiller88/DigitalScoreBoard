@@ -69,7 +69,6 @@
 </script>
 
 <template>
-
     <PageTitle :titleName="'Create New Game'"/>
 
     <ResetPoints :resetAllPoints="resetAllPoints"/>
