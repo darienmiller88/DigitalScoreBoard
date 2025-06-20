@@ -45,7 +45,7 @@
             required
         /><br />
         <div class="button-wrapper">
-            <button>Submit</button>
+            <button>Submit Name Change</button>
         </div>
     </form>
 </template>
@@ -77,6 +77,18 @@
         
             button{
                 width: 100%;
+                background-color: dodgerblue;
+                color: aliceblue;
+                border: none;
+                border-radius: 10px;
+                font-size: 20px;
+                padding: 12px;
+                transition: 0.3s;
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: grey;
+                }
             }
         }
     }
