@@ -66,9 +66,13 @@
         }
 
         input{
-            width: 25vw;
             padding: 10px;
             font-size: 20px;
+            width: 75vw;
+
+            @media (min-width: 768px) {
+                width: 25vw;
+            }
         }
 
         .button-wrapper{
