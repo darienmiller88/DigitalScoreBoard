@@ -80,17 +80,15 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    // border: 2px solid red;
-                    font-size: 17px;
+                    font-size: 22px;
                     text-align: center;
 
-                    @media screen and (min-width: 768px) {
+                    @media (min-width: 768px) {
                         font-size: 30px;
                     }
                 }
 
                 .close{
-                    // border: 2px solid saddlebrown;
                     text-align: right;
                     transition: 0.5s;
                     font-size: 35px;
@@ -133,13 +131,13 @@
             }
         }
 
-        @media screen and (min-width: 768px) {
+        @media (min-width: 768px) {
             .modal_body{
                 width: 80vw;
             }
         }
 
-        @media screen and (min-width: 992px) {
+        @media (min-width: 992px) {
             .modal_body{
                 width: 50vw;
             }

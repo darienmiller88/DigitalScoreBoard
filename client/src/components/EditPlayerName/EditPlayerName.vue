@@ -1,43 +1,83 @@
 <script setup lang="ts">
     import { ref } from 'vue';
 
-    defineProps<{
+    const props = defineProps<{
         username: string
+        hideModal: () => void
     }>()
 
     let editFirstName = ref<string>("")
     let editLastName = ref<string>("")
 
     const onSubmit = () => {
-        console.log(editFirstName, editLastName)
+        console.log("name:", editFirstName.value, editLastName.value)
+        
+        //Close modal after submitting
+        props.hideModal()
     }
 </script>
 
 <template>
-    <div>
+    <!-- <div class="content-title">
         Editing player "{{ username }}"...
-    </div>
+    </div> -->
     <form @submit.prevent="onSubmit">
+        <label>First Name</label><br />
         <input 
             class="form-element"
             id="edit-first-name"
             v-model="editFirstName"
             name="edit-first-name"
+            :maxlength="15"
             type="text" 
             placeholder="Edit First Name"
-        /><br />
+            required
+        /><br /><br/>
+        <label>Last Name</label><br />
         <input 
             class="form-element"
             id="edit-last-name"
             v-model="editLastName"
             name="edit-last-name"
+            :maxlength="15"
             type="text" 
             placeholder="Edit Last Name"
+            required
         /><br />
-        <button>Submit</button>
+        <div class="button-wrapper">
+            <button>Submit</button>
+        </div>
     </form>
 </template>
 
 <style scoped lang="scss">
+    .content-title{
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
 
+    form{
+        width: fit-content;
+        margin: auto;
+
+        label{
+            font-size: 20px;
+        }
+
+        input{
+            width: 25vw;
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        .button-wrapper{
+            text-align: center;
+            margin: 15px;
+        
+            button{
+                width: 100%;
+            }
+        }
+    }
 </style>

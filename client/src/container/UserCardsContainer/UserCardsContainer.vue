@@ -36,7 +36,10 @@
     <Modal 
         :modalHeader="'Edit Username'"
         :modalContent="EditPlayerName"
-        :modalProps="{ username: usernameToEdit }"
+        :modalProps="{ 
+            username: usernameToEdit,
+            hideModal: () => showEditPlayerNameModal = false
+        }"
         :show="showEditPlayerNameModal"
         :onHide="() => showEditPlayerNameModal = false"
     />
