@@ -173,17 +173,17 @@ func RemoveUserFromLocation(res http.ResponseWriter, req *http.Request){
 
 func modifyUserInLocation(res http.ResponseWriter, req *http.Request, operation string){
 	location := chi.URLParam(req, "location-name")
-	username := struct{
-		Username string `json:"username"`
+	playerName := struct{
+		PlayerName string `json:"player_name"`
 	}{}
 
 	// Decode the username from request body
-	if err := json.NewDecoder(req.Body).Decode(&username); err != nil{
+	if err := json.NewDecoder(req.Body).Decode(&playerName); err != nil{
 		http.Error(res, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	result := services.UpdateUsersForLocation(req, operation, location, username.Username)
+	result := services.UpdateUsersForLocation(req, operation, location, playerName.PlayerName)
 
 	if result.Err != nil {
 		http.Error(res, result.Err.Error(), result.StatusCode)
@@ -196,7 +196,7 @@ func modifyUserInLocation(res http.ResponseWriter, req *http.Request, operation 
 	}
 
 	utilities.SendJSON(http.StatusOK, res, map[string]interface{}{
-		"message": fmt.Sprintf("%s was %s location: %s", username.Username, message, location),
+		"message": fmt.Sprintf("%s was %s location: %s", playerName.PlayerName, message, location),
 		"result": result,
 	})
 }
