@@ -183,8 +183,6 @@ func modifyUserInLocation(res http.ResponseWriter, req *http.Request, operation 
 		return
 	}
 
-	fmt.Println("player:", playerName.PlayerName)
-
 	result := services.UpdateUsersForLocation(req, operation, location, playerName.PlayerName)
 
 	if result.Err != nil {
