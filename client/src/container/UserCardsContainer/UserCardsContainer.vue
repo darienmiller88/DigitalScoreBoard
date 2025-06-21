@@ -5,7 +5,7 @@
     import { ref } from 'vue';
     import { scoreBoardApi } from "../../api/api"
 
-    let usernames = [
+    let usernames = ref<string[]>([
         "darien miller",
         "angela lourens",
         "mark rubens",
@@ -14,7 +14,7 @@
         "Luis Hernandez",
         "Victoria Inuhauzo",
         "superdeeduperlongexmaple ofaververylongname"
-    ]
+    ])
 
     let showEditPlayerNameModal = ref<boolean>(false)
     let usernameToEdit = ref<string>("")
@@ -29,7 +29,7 @@
     }
 
     const removePlayer = async (playerIndex: number) => {
-        usernames = usernames.filter((_, index) => {
+        usernames.value = usernames.value.filter((_, index) => {
             return playerIndex != index
         })
 
@@ -37,8 +37,7 @@
             await scoreBoardApi.delete(`/remove-user-from-location/${props.currentLocation}`, { data: { username: usernameToEdit.value } })
         } catch (error) {
             console.log("err:", error);
-        }
-        
+        }   
     }
 </script>
 
