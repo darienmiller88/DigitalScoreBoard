@@ -19,20 +19,17 @@
     const { addScoreCard } = scoreCardsStore()
 
     let isLoading = ref<boolean>(false)
-    let currentLocation = ref<string>("")
+    // let currentLocation = ref<string>("")
     
-    //Expose the current location to the parent so it can be passed down to both of its children. This will allow 
-    //all child components in the "Add New User" route/page to have access to the current location without using
-    //a pinia store, which I feel is only necessary for shared state across the entire app, not in one page.
-    defineExpose({
-        currentLocation
-    })
-
 
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")
     const lastName = ref<string>("")
-    
+    const props = defineProps<{
+        currentLocation: string
+        changeLocation: (location: string) => void
+    }>()
+
     const addUser = async () => {
         isLoading.value = true
 
@@ -52,7 +49,7 @@
             addScoreCard(newPlayer)
 
             try {
-                const res = await scoreBoardApi.post(`/add-user-to-location/${currentLocation.value}`, {"username": newPlayer.username})
+                const res = await scoreBoardApi.post(`/add-user-to-location/${props.currentLocation}`, {"username": newPlayer.username})
                 
                 console.log("res", res.data)
             } catch (error) {
@@ -67,12 +64,12 @@
     }
 
     const onChangeSelect = (event: Event) => {
-        currentLocation.value = (event.target as HTMLSelectElement).value;
+        props.changeLocation((event.target as HTMLSelectElement).value)
     }
 
+    // when this component is mounted, load the current location with the first location so the select tag isn't blank
     onMounted(() => {
-        // when this component is mounted, load the current location with the first location so the select tag isn't blank
-        currentLocation.value = allLocationOptions.value[0]
+        props.changeLocation(allLocationOptions.value[0])
     })
 </script>
 

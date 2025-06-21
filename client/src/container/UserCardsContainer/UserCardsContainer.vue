@@ -18,15 +18,10 @@
 
     let showEditPlayerNameModal = ref<boolean>(false)
     let usernameToEdit = ref<string>("")
-    let currentLocation = ref<string>("")
     
-    //Expose the current location to the parent so it can be passed down to both of its children. This will allow 
-    //all child components in the "Add New User" route/page to have access to the current location without using
-    //a pinia store, which I feel is only necessary for shared state across the entire app, not in one page.
-    defineExpose({
-        currentLocation
-    })
-
+    const props = defineProps<{
+        currentLocation: string
+    }>()
 
     const addUserNameToEdit = (username: string) => {
         usernameToEdit.value = username
@@ -39,7 +34,7 @@
         })
 
         try {
-            await scoreBoardApi.delete(`/remove-user-from-location/${currentLocation.value}`, { data: { username: usernameToEdit.value } })
+            await scoreBoardApi.delete(`/remove-user-from-location/${props.currentLocation}`, { data: { username: usernameToEdit.value } })
         } catch (error) {
             console.log("err:", error);
         }

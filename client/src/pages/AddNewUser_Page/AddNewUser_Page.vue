@@ -2,15 +2,14 @@
     import AddUserToLocationContainer from '../../container/AddUserToLocationContainer/AddUserToLocationContainer.vue';
     import UserCardsContainer from '../../container/UserCardsContainer/UserCardsContainer.vue';
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
-    import { ref } from 'vue';
 
-    let currentLocationRef = ref<string>("")
+    import { setLocation, currentLocation } from "./currentLocation"
 </script>
 
 <template>
     <PageTitle :titleName="'Add New Player'"/>
 
-    <AddUserToLocationContainer :currentLocation="currentLocationRef"/>
+    <AddUserToLocationContainer :changeLocation="setLocation" :currentLocation="currentLocation"/>
 
-    <UserCardsContainer :currentLocation="currentLocationRef"/>
+    <UserCardsContainer :currentLocation="currentLocation"/>
 </template>
