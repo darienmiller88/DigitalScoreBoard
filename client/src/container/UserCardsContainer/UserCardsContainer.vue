@@ -43,7 +43,7 @@
 </script>
 
 <template>
-    <div class="people">People at {{ currentLocation }}:</div>
+    <div class="people">Players at {{ currentLocation }}:</div>
     <div class="user-cards">
         <UserCard
             v-for="(username, index) in usernames"
