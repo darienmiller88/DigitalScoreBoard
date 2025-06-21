@@ -34,7 +34,8 @@
         }   
     }
 
-    const addPlayers = async (locationName: string) => {
+
+    const getPlayers = async (locationName: string) => {
         try {            
             const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`) 
             
@@ -46,12 +47,12 @@
  
     //When the location is changed, retrieve the new list of players from that location.
     watch(() => props.currentLocation, async (newLocation) => {
-        await addPlayers(newLocation)
+        await getPlayers(newLocation)
     })
 
     //On mount, get the first location from the list of all locations, and display the players from there.
     onMounted(async () => {
-        await addPlayers(allLocationOptions[0])
+        await getPlayers(allLocationOptions[0])
     })
 </script>
 
