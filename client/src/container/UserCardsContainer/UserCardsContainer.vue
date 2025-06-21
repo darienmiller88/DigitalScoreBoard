@@ -4,19 +4,22 @@
     import Modal from '../../components/Modal/Modal.vue';
     import EditPlayerName from '../../components/EditPlayerName/EditPlayerName.vue';
     import Loading from '../../components/Loading/Loading.vue';
+    
 
     //Data/Data manipulation
     import { onMounted, ref, watch } from 'vue';
     import { scoreBoardApi } from "../../api/api"
     import { PlayerCard } from "../../types/types"
     import { optionsStore } from "../../stores/optionsStore"
+    import { useToast } from "vue-toastification";
 
-    const { allLocationOptions } = optionsStore()
     let players = ref<string[]>([])
     let showEditPlayerNameModal = ref<boolean>(false)
     let playerNameToEdit = ref<string>("")
     let isLoading = ref<boolean>(true)
     
+    const { allLocationOptions } = optionsStore()
+    const toast = useToast()
     const props = defineProps<{
         currentLocation: string
     }>()
@@ -37,6 +40,10 @@
 
         try {
             await scoreBoardApi.delete(`/remove-user-from-location/${props.currentLocation}`, { data: { player_name: playerToRemove } })
+            
+            toast.success(`${playerToRemove} removed!`, {
+                timeout: 2000
+            });
         } catch (error) {
             console.log("err:", error);
         }   

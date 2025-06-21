@@ -17,7 +17,8 @@
     "pinia-plugin-persistedstate": "^4.1.1",
     "sass": "^1.79.4",
     "vue": "^3.5.12",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "@iconify/vue": "^4.1.2",
