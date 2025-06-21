@@ -5,10 +5,10 @@
     import { onMounted, ref, watch } from 'vue';
     import { scoreBoardApi } from "../../api/api"
     import { PlayerCard } from "../../types/types"
-    // import { optionsStore } from "../../stores/optionsStore"
+    import { optionsStore } from "../../stores/optionsStore"
 
+    const { allLocationOptions } = optionsStore()
     let players = ref<string[]>([])
-
     let showEditPlayerNameModal = ref<boolean>(false)
     let usernameToEdit = ref<string>("")
     
@@ -37,23 +37,21 @@
         console.log("new location:", newLocation)
     })
 
+    //On mount, get the first location from the list of all locations, and display the players from there.
     onMounted(async () => {
-        try {
-            console.log("location:", props.currentLocation);
+        try {            
+            const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${allLocationOptions[0]}`) 
             
-            const players = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${props.currentLocation}`)
-
-            console.log("players:", players.data)
-            
+            players.value = [...players.value, ...playersResult.data.map(player => player.username)]
         } catch (error) {
             console.log("err:", error);
-            
         }
     })
 </script>
 
 <template>
-    <div class="people">Players at {{ currentLocation }}:</div>
+    <div class="no-players" v-if="players.length === 0">No Players at {{ currentLocation }}.</div>
+    <div class="people" v-else>Players at {{ currentLocation }}:</div>
     <div class="user-cards">
         <UserCard
             v-for="(player, index) in players"
@@ -78,6 +76,13 @@
 </template>
 
 <style scoped lang="scss">
+    .no-players{
+        text-align: center;
+        font-size: 25px;
+        margin: 25px;
+        color: var(--primary-color);
+    }
+
     .people{
         text-align: center;
         font-size: 30px;
