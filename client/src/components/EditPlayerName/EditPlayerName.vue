@@ -2,7 +2,7 @@
     import { ref } from 'vue';
 
     const props = defineProps<{
-        username: string
+        playerName: string
         hideModal: () => void
     }>()
 
