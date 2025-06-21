@@ -34,26 +34,24 @@
         }   
     }
 
-    //When the location is changed, retrieve the new list of players from that location.
-    watch(() => props.currentLocation, async (newLocation) =>{
+    const addPlayers = async (locationName: string) => {
         try {            
-            const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${newLocation}`) 
+            const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`) 
             
             players.value = playersResult.data.map(player => player.username)
         } catch (error) {
             console.log("err:", error);
         }
+    }
+ 
+    //When the location is changed, retrieve the new list of players from that location.
+    watch(() => props.currentLocation, async (newLocation) => {
+        await addPlayers(newLocation)
     })
 
     //On mount, get the first location from the list of all locations, and display the players from there.
     onMounted(async () => {
-        try {            
-            const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${allLocationOptions[0]}`) 
-            
-            players.value = playersResult.data.map(player => player.username)
-        } catch (error) {
-            console.log("err:", error);
-        }
+        await addPlayers(allLocationOptions[0])
     })
 </script>
 
