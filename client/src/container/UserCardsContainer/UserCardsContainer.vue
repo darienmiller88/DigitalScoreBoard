@@ -34,8 +34,15 @@
         }   
     }
 
+    //When the location is changed, retrieve the new list of players from that location.
     watch(() => props.currentLocation, async (newLocation) =>{
-        console.log("new location:", newLocation)
+        try {            
+            const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${newLocation}`) 
+            
+            players.value = playersResult.data.map(player => player.username)
+        } catch (error) {
+            console.log("err:", error);
+        }
     })
 
     //On mount, get the first location from the list of all locations, and display the players from there.
@@ -43,7 +50,7 @@
         try {            
             const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${allLocationOptions[0]}`) 
             
-            players.value = [...players.value, ...playersResult.data.map(player => player.username)]
+            players.value = playersResult.data.map(player => player.username)
         } catch (error) {
             console.log("err:", error);
         }
@@ -124,7 +131,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 10px 50px;
             max-height: 75vh;
-            padding: 0px 10px;
+            padding: 0px 15px;
         }
 
         // 2k monitors
