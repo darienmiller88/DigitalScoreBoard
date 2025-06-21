@@ -2,19 +2,12 @@
     import UserCard from '../../components/UserCard/UserCard.vue';
     import Modal from '../../components/Modal/Modal.vue';
     import EditPlayerName from '../../components/EditPlayerName/EditPlayerName.vue';
-    import { ref } from 'vue';
+    import { onMounted, ref, watch } from 'vue';
     import { scoreBoardApi } from "../../api/api"
+    import { PlayerCard } from "../../types/types"
+    // import { optionsStore } from "../../stores/optionsStore"
 
-    let usernames = ref<string[]>([
-        "darien miller",
-        "angela lourens",
-        "mark rubens",
-        "shaniqua blank",
-        "Daniel Negroni",
-        "Luis Hernandez",
-        "Victoria Inuhauzo",
-        "superdeeduperlongexmaple ofaververylongname"
-    ])
+    let players = ref<string[]>([])
 
     let showEditPlayerNameModal = ref<boolean>(false)
     let usernameToEdit = ref<string>("")
@@ -29,7 +22,7 @@
     }
 
     const removePlayer = async (playerIndex: number) => {
-        usernames.value = usernames.value.filter((_, index) => {
+        players.value = players.value.filter((_, index) => {
             return playerIndex != index
         })
 
@@ -39,16 +32,34 @@
             console.log("err:", error);
         }   
     }
+
+    watch(() => props.currentLocation, async (newLocation) =>{
+        console.log("new location:", newLocation)
+    })
+
+    onMounted(async () => {
+        try {
+            console.log("location:", props.currentLocation);
+            
+            const players = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${props.currentLocation}`)
+
+            console.log("players:", players.data)
+            
+        } catch (error) {
+            console.log("err:", error);
+            
+        }
+    })
 </script>
 
 <template>
     <div class="people">Players at {{ currentLocation }}:</div>
     <div class="user-cards">
         <UserCard
-            v-for="(username, index) in usernames"
+            v-for="(player, index) in players"
             :key="index"
             :playerIndex="index"
-            :username="username"
+            :player="player"
             :showModal="addUserNameToEdit"
             :removePlayer="removePlayer"
         />
