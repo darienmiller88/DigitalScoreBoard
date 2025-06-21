@@ -18,12 +18,21 @@
     //Stateful methods
     const { addScoreCard } = scoreCardsStore()
 
+    let isLoading = ref<boolean>(false)
+    let currentLocation = ref<string>("")
+    
+    //Expose the current location to the parent so it can be passed down to both of its children. This will allow 
+    //all child components in the "Add New User" route/page to have access to the current location without using
+    //a pinia store, which I feel is only necessary for shared state across the entire app, not in one page.
+    defineExpose({
+        currentLocation
+    })
+
+
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")
     const lastName = ref<string>("")
-    const locationModel = ref<string>("")
-    let isLoading = ref<boolean>(false)
-
+    
     const addUser = async () => {
         isLoading.value = true
 
@@ -43,7 +52,7 @@
             addScoreCard(newPlayer)
 
             try {
-                const res = await scoreBoardApi.post(`/add-user-to-location/${locationModel}`, {"username": newPlayer.username})
+                const res = await scoreBoardApi.post(`/add-user-to-location/${currentLocation.value}`, {"username": newPlayer.username})
                 
                 console.log("res", res.data)
             } catch (error) {
@@ -58,11 +67,12 @@
     }
 
     const onChangeSelect = (event: Event) => {
-        locationModel.value = (event.target as HTMLSelectElement).value;
+        currentLocation.value = (event.target as HTMLSelectElement).value;
     }
 
     onMounted(() => {
-        locationModel.value = allLocationOptions.value[0]
+        // when this component is mounted, load the current location with the first location so the select tag isn't blank
+        currentLocation.value = allLocationOptions.value[0]
     })
 </script>
 
@@ -70,7 +80,7 @@
     <div class="select-wrapper">
         <Select 
             :options="allLocationOptions"
-            :selectModel="locationModel"
+            :selectModel="currentLocation"
             :onChange="onChangeSelect"
         />
     </div>
@@ -104,7 +114,7 @@
             <div class="error">{{ duplicateErrorMessage }}</div>
         </div>
 
-        <button class="form-element" type="submit">
+        <button class="form-element" type="submit" disabled>
             <Loading :height="35" :usePrimary="false" v-if="isLoading" />
             <div v-else> Add Player To Location </div>
         </button>

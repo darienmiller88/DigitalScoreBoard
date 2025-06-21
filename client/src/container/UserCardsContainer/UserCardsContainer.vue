@@ -3,33 +3,60 @@
     import Modal from '../../components/Modal/Modal.vue';
     import EditPlayerName from '../../components/EditPlayerName/EditPlayerName.vue';
     import { ref } from 'vue';
+    import { scoreBoardApi } from "../../api/api"
 
-    const usernames = [
+    let usernames = [
         "darien miller",
         "angela lourens",
         "mark rubens",
         "shaniqua blank",
         "Daniel Negroni",
         "Luis Hernandez",
+        "Victoria Inuhauzo",
         "superdeeduperlongexmaple ofaververylongname"
     ]
 
     let showEditPlayerNameModal = ref<boolean>(false)
     let usernameToEdit = ref<string>("")
+    let currentLocation = ref<string>("")
+    
+    //Expose the current location to the parent so it can be passed down to both of its children. This will allow 
+    //all child components in the "Add New User" route/page to have access to the current location without using
+    //a pinia store, which I feel is only necessary for shared state across the entire app, not in one page.
+    defineExpose({
+        currentLocation
+    })
+
 
     const addUserNameToEdit = (username: string) => {
         usernameToEdit.value = username
         showEditPlayerNameModal.value = true
     }
+
+    const removePlayer = async (playerIndex: number) => {
+        usernames = usernames.filter((_, index) => {
+            return playerIndex != index
+        })
+
+        try {
+            await scoreBoardApi.delete(`/remove-user-from-location/${currentLocation.value}`, { data: { username: usernameToEdit.value } })
+        } catch (error) {
+            console.log("err:", error);
+        }
+        
+    }
 </script>
 
 <template>
-    <div class="people">People at {{ "Lawrence:" }}</div>
+    <div class="people">People at {{ currentLocation }}:</div>
     <div class="user-cards">
         <UserCard
-            v-for="username in usernames"
+            v-for="(username, index) in usernames"
+            :key="index"
+            :playerIndex="index"
             :username="username"
             :showModal="addUserNameToEdit"
+            :removePlayer="removePlayer"
         />
     </div>
 

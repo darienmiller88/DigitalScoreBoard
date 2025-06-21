@@ -85,7 +85,7 @@
                 color: aliceblue;
                 border: none;
                 border-radius: 10px;
-                font-size: 20px;
+                font-size: 18px;
                 padding: 12px;
                 transition: 0.3s;
 

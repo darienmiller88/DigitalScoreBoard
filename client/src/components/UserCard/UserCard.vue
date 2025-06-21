@@ -1,7 +1,9 @@
 <script setup lang="ts">
     defineProps<{
         username: string
+        playerIndex: number
         showModal: (username: string) => void
+        removePlayer: (playerIndex: number) => void
     }>()
 </script>
 
@@ -78,7 +80,7 @@
 
             //For laptops with smaller displays
             @media (min-width: 1025px) {
-                font-size: 35px;
+                font-size: 30px;
             }
 
             @media (min-width: 2560px) {
