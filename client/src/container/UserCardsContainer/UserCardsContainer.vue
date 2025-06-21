@@ -10,14 +10,15 @@
     const { allLocationOptions } = optionsStore()
     let players = ref<string[]>([])
     let showEditPlayerNameModal = ref<boolean>(false)
-    let usernameToEdit = ref<string>("")
+    let playerNameToEdit = ref<string>("")
     
     const props = defineProps<{
         currentLocation: string
     }>()
 
-    const addUserNameToEdit = (username: string) => {
-        usernameToEdit.value = username
+    //Function for UserCard child to use edit the name currently on the card i.e. from mary rose to mary gold
+    const addPlayerNameToEdit = (username: string) => {
+        playerNameToEdit.value = username
         showEditPlayerNameModal.value = true
     }
 
@@ -27,7 +28,7 @@
         })
 
         try {
-            await scoreBoardApi.delete(`/remove-user-from-location/${props.currentLocation}`, { data: { username: usernameToEdit.value } })
+            await scoreBoardApi.delete(`/remove-user-from-location/${props.currentLocation}`, { data: { username: playerNameToEdit.value } })
         } catch (error) {
             console.log("err:", error);
         }   
@@ -57,8 +58,8 @@
             v-for="(player, index) in players"
             :key="index"
             :playerIndex="index"
-            :player="player"
-            :showModal="addUserNameToEdit"
+            :playerName="player"
+            :showModal="addPlayerNameToEdit"
             :removePlayer="removePlayer"
         />
     </div>
@@ -67,7 +68,7 @@
         :modalHeader="'Edit Username'"
         :modalContent="EditPlayerName"
         :modalProps="{ 
-            username: usernameToEdit,
+            playerName: playerNameToEdit,
             hideModal: () => showEditPlayerNameModal = false
         }"
         :show="showEditPlayerNameModal"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
     defineProps<{
-        player: string
+        playerName: string
         playerIndex: number
         showModal: (username: string) => void
         removePlayer: (playerIndex: number) => void
@@ -9,13 +9,13 @@
 
 <template>
     <div class="user-card">
-        <div class="player">{{ player }}</div>
+        <div class="player">{{ playerName }}</div>
         <div class="divider"></div>
         <div class="remove-wrapper">
             <button @click="() => removePlayer(playerIndex)" disabled>Remove User</button>
         </div>
         <div class="edit-wrapper">
-            <button @click="() => showModal(player)">Edit Name</button>
+            <button @click="() => showModal(playerName)">Edit Name</button>
         </div>
     </div>
 </template>
