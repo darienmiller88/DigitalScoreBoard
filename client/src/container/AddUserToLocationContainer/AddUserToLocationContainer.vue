@@ -18,9 +18,7 @@
     //Stateful methods
     const { addScoreCard } = scoreCardsStore()
 
-    let isLoading = ref<boolean>(false)
-    // let currentLocation = ref<string>("")
-    
+    let isLoading = ref<boolean>(false)    
 
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")

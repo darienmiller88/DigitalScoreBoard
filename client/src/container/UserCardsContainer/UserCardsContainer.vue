@@ -1,7 +1,11 @@
 <script setup lang="ts">
+    //Components
     import UserCard from '../../components/UserCard/UserCard.vue';
     import Modal from '../../components/Modal/Modal.vue';
     import EditPlayerName from '../../components/EditPlayerName/EditPlayerName.vue';
+    import Loading from '../../components/Loading/Loading.vue';
+
+    //Data/Data manipulation
     import { onMounted, ref, watch } from 'vue';
     import { scoreBoardApi } from "../../api/api"
     import { PlayerCard } from "../../types/types"
@@ -11,6 +15,7 @@
     let players = ref<string[]>([])
     let showEditPlayerNameModal = ref<boolean>(false)
     let playerNameToEdit = ref<string>("")
+    let isLoading = ref<boolean>(true)
     
     const props = defineProps<{
         currentLocation: string
@@ -22,19 +27,22 @@
         showEditPlayerNameModal.value = true
     }
 
+    //Remove a player from a given ADAPT location.
     const removePlayer = async (playerIndex: number) => {
+        const playerToRemove: string = players.value[playerIndex]
+
         players.value = players.value.filter((_, index) => {
             return playerIndex != index
         })
 
         try {
-            await scoreBoardApi.delete(`/remove-user-from-location/${props.currentLocation}`, { data: { username: playerNameToEdit.value } })
+            await scoreBoardApi.delete(`/remove-user-from-location/${props.currentLocation}`, { data: { player_name: playerToRemove } })
         } catch (error) {
             console.log("err:", error);
         }   
     }
 
-
+    //Retrieve all players from a given ADAPT location.
     const getPlayers = async (locationName: string) => {
         try {            
             const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`) 
@@ -47,27 +55,41 @@
  
     //When the location is changed, retrieve the new list of players from that location.
     watch(() => props.currentLocation, async (newLocation) => {
+        //When getting the new list of users, first display the loading spinner
+        isLoading.value = true
+
+        //Get all of the players
         await getPlayers(newLocation)
+
+        //Then remove the loading spinner
+        isLoading.value = false
     })
 
     //On mount, get the first location from the list of all locations, and display the players from there.
     onMounted(async () => {
         await getPlayers(allLocationOptions[0])
+
+        isLoading.value = false
     })
 </script>
 
 <template>
-    <div class="no-players" v-if="players.length === 0">No Players at {{ currentLocation }}.</div>
-    <div class="people" v-else>Players at {{ currentLocation }}:</div>
-    <div class="user-cards">
-        <UserCard
-            v-for="(player, index) in players"
-            :key="index"
-            :playerIndex="index"
-            :playerName="player"
-            :showModal="addPlayerNameToEdit"
-            :removePlayer="removePlayer"
-        />
+    <div v-if="isLoading" class="loading-wrapper">
+        <Loading :height="100" :usePrimary="true"/>
+    </div>
+    <div v-else>
+        <div class="no-players" v-if="players.length === 0">No Players at {{ currentLocation }}.</div>
+        <div class="people" v-else>Players at {{ currentLocation }}:</div>
+        <div class="user-cards">
+            <UserCard
+                v-for="(player, index) in players"
+                :key="index"
+                :playerIndex="index"
+                :playerName="player"
+                :showModal="addPlayerNameToEdit"
+                :removePlayer="removePlayer"
+            />
+        </div> 
     </div>
 
     <Modal 
@@ -83,6 +105,10 @@
 </template>
 
 <style scoped lang="scss">
+    .loading-wrapper{
+        margin: 40px;    
+    }
+
     .no-players{
         text-align: center;
         font-size: 25px;

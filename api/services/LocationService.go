@@ -97,7 +97,7 @@ func UpdateUsersForLocation(req *http.Request, mongoUpdateOperator string, locat
 	}
 
 	if updateOneResult.ModifiedCount == 0 {
-		updateUserResult.Err = fmt.Errorf("no location \"%s\" found", locationName)
+		updateUserResult.Err = fmt.Errorf("no location \"%s\" found OR player \"%s\" not found", locationName, username)
 		updateUserResult.StatusCode = http.StatusNotFound
 
 		return updateUserResult
