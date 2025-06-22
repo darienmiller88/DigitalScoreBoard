@@ -16,3 +16,11 @@ export const removePlayerFromArray = (playerIndex: number) => {
         return playerIndex != index
     })
 }
+
+export const addNewPlayerToArray = (playerName: string) => {
+    players.value = [...players.value, playerName]
+}
+
+export const editPlayerName = (playerIndex: number, newName: string) => {
+    players.value.splice(playerIndex, 1, newName)
+}

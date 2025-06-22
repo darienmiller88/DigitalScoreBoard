@@ -5,7 +5,6 @@
     import EditPlayerName from '../../components/EditPlayerName/EditPlayerName.vue';
     import Loading from '../../components/Loading/Loading.vue';
     
-
     //Data/Data manipulation
     import { onMounted, ref, watch } from 'vue';
     import { scoreBoardApi } from "../../api/api"
@@ -13,7 +12,6 @@
     import { optionsStore } from "../../stores/optionsStore"
     import { useToast } from "vue-toastification";
 
-    // let players = ref<string[]>([])
     let showEditPlayerNameModal = ref<boolean>(false)
     let playerNameToEdit = ref<string>("")
     let isLoading = ref<boolean>(true)

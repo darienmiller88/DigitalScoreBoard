@@ -1,10 +1,9 @@
 <script setup lang="ts">
     //libraries
     import { ref, onMounted } from 'vue'
-    import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { storeToRefs } from 'pinia';
-    import { PlayerCard } from "../../types/types"
     import { scoreBoardApi } from "../../api/api"
+    import { useToast } from "vue-toastification";
     import { optionsStore } from "../../stores/optionsStore"
 
     //Components
@@ -12,46 +11,47 @@
     import Select from '../../components/Select/Select.vue'
 
     //Stateful variables
-    const { scoreCards } = storeToRefs(scoreCardsStore())
     const { allLocationOptions } = storeToRefs(optionsStore())
 
-    //Stateful methods
-    const { addScoreCard } = scoreCardsStore()
-
     let isLoading = ref<boolean>(false)    
-
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")
     const lastName = ref<string>("")
+    const toast = useToast()
+
+    //Props
     const props = defineProps<{
         currentLocation: string
         changeLocation: (location: string) => void
+        players: string[]
+        addNewPlayerToArray: (playerName: string) => void
     }>()
 
     const addUser = async () => {
+        const newPlayer: string = firstName.value + " " + lastName.value
+        
         isLoading.value = true
-
-        const newPlayer: PlayerCard = {
-            username: firstName.value + " " + lastName.value,
-            score: 0
-        }
-
-        if (scoreCards.value.some(card => card.username == newPlayer.username)) {
-            duplicateErrorMessage.value = `${newPlayer.username} already exists! Please select another username.`
-            console.log("duplicate user:", duplicateErrorMessage);
+        if (props.players.some(player => player.toLowerCase() === newPlayer.toLowerCase())) {
+            duplicateErrorMessage.value = `${newPlayer} already exists! Please select another name.`
             
             setTimeout(() => {
                 duplicateErrorMessage.value = ""
             }, 3000);
         }else{
-            addScoreCard(newPlayer)
+            props.addNewPlayerToArray(newPlayer)
 
             try {
-                const res = await scoreBoardApi.post(`/add-user-to-location/${props.currentLocation}`, {"username": newPlayer.username})
+                const res = await scoreBoardApi.post(`/add-user-to-location/${props.currentLocation}`, { player_name: newPlayer })
                 
+                toast.success(`${newPlayer} successfully added!`, {
+                    timeout: 2000
+                })
                 console.log("res", res.data)
             } catch (error) {
                 console.log("err:", error)
+                toast.success(`Error occurred: ${error}`, {
+                    timeout: 2000
+                })
             }
 
             firstName.value = ""
