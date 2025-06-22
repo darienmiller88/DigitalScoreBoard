@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -15,17 +16,23 @@ const(
 	PULL string = "$pull"
 )
 
-func AddNewAdaptLocation(req *http.Request, location models.Location) (error){
-	location.InitCreatedAtAndUpdatedAt()
-	// result, err := database.GetLocationsCollection().InsertOne(req.Context(), location)
+func AddNewAdaptLocation(req *http.Request, location models.Location) models.Result[models.Location]{
+	insertOneResult, err := database.GetLocationsCollection().InsertOne(req.Context(), location)
+	locationResult := models.Result[models.Location]{}
 
-	// if err != nil {
-	// 	http.Error(res, err.Error(), http.StatusInternalServerError)
-	// 	return
-	// }
+	if err != nil{
+		locationResult.Err = err
+		locationResult.StatusCode = http.StatusInternalServerError
 
-	// location.ID = result.InsertedID.(primitive.ObjectID)
-	return nil
+		return locationResult
+	}
+	
+	location.ID = insertOneResult.InsertedID.(primitive.ObjectID)
+
+	locationResult.ResultData = location
+	locationResult.StatusCode = http.StatusOK
+
+	return locationResult
 }
 
 //Retrieve all locations from database.
