@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"slices"
 
 	// "DigitalScoreBoard/api/database"
 	"DigitalScoreBoard/api/models"
@@ -172,14 +173,25 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
+	//First, get the location to ensure the client sent one that actually exists. 
 	locationResult := services.GetLocation(req, location)
 
+	// If not, return an appropriate error.
 	if locationResult.Err != nil {
 		http.Error(res, locationResult.Err.Error(), locationResult.StatusCode)
 		return
 	}
 
-	//Using both the location and new playername, call the following service and provide both to it.
+	//validate to ensure the old name exists, the new name trimmed is at most 30 characters, and that the new name is
+	//not taken
+
+	if result := slices.Index(locationResult.ResultData.Users, models.UserCard{ Name: playerNames.OldPlayerName }); result == -1 {
+		http.Error(res, fmt.Sprintf("Player \"%s\" at location %s does not exist", playerNames.OldPlayerName, location), http.StatusNotFound)
+		return
+	}
+
+	//After validating both the old player name, and the new player name, using both the location and new playername,
+	// call the following service and provide both to it.
 	updateResult := services.UpdatePlayerName(req, location, playerNames.OldPlayerName, playerNames.NewPlayerName)
 
 	if updateResult.Err != nil {

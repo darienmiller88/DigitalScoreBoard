@@ -80,6 +80,7 @@ func GetLocation(req *http.Request, locationName string) models.Result[models.Lo
 	return result
 }
 
+//This handler will allow the client to change the name of a particular player
 func UpdatePlayerName(req *http.Request, locationName string, oldPlayerName string, newPlayerName string) models.Result[*mongo.UpdateResult]{
 	updateUserResult := models.Result[*mongo.UpdateResult]{
 		StatusCode: http.StatusInternalServerError,
