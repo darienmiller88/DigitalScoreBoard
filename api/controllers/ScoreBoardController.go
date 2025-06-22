@@ -160,7 +160,25 @@ func AddLocation(res http.ResponseWriter, req *http.Request){
 }
 
 func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
-	
+	location := chi.URLParam(req, "location-name")
+	playerName := struct{
+		PlayerName string `json:"player_name"`
+	}{}
+
+	// Decode the player name from request body
+	if err := json.NewDecoder(req.Body).Decode(&playerName); err != nil{
+		http.Error(res, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	locationResult := services.GetLocation(req, location)
+
+	if locationResult.Err != nil {
+		http.Error(res, locationResult.Err.Error(), locationResult.StatusCode)
+		return
+	}
+
+	utilities.SendJSON(locationResult.StatusCode, res, locationResult.ResultData)
 }
 
 func UpdateScore(res http.ResponseWriter, req *http.Request){

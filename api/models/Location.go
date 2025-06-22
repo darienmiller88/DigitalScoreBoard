@@ -26,14 +26,6 @@ type Location struct {
 	Users        []UserCard         `bson:"users"         json:"users"`
 }
 
-type LocationDTO struct {
-	//The name of the ADAPT location (Pelham Bay, Lawrence, Elmwood, etc)
-	LocationName string       `bson:"location_name" json:"location_name"`
-
-	//Here are all of the users that played in the game.
-	Users       []UserCardDTO `bson:"users"         json:"users"`
-}
-
 func (l *Location) InitCreatedAtAndUpdatedAt(){
 	l.CreatedAt = time.Now()
 	l.UpdatedAt = time.Now()

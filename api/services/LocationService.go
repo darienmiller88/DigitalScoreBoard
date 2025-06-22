@@ -73,6 +73,20 @@ func GetLocation(req *http.Request, locationName string) models.Result[models.Lo
 	return result
 }
 
+func UpdatePlayerName(req *http.Request, locationName string, playerName string) models.Result[*mongo.UpdateResult]{
+	updateUserResult := models.Result[*mongo.UpdateResult]{
+		StatusCode: http.StatusInternalServerError,
+	}
+	
+	// filter := bson.M{"location_name": locationName}
+	// update := bson.M{"$set": bson.M{"users": bson.M{"name": playerName}}}
+
+	// updateOneResult, err := database.GetLocationsCollection().UpdateOne(req.Context(), filter, update)
+
+
+	return updateUserResult
+}
+
 //Service function to allow adding or removing a user to or from an Adapt location.
 func UpdateUsersForLocation(req *http.Request, mongoUpdateOperator string, locationName string, username string) models.Result[*mongo.UpdateResult] {
 	updateUserResult := models.Result[*mongo.UpdateResult]{
@@ -84,7 +98,6 @@ func UpdateUsersForLocation(req *http.Request, mongoUpdateOperator string, locat
 
 		return updateUserResult
 	}
-	
 
 	filter := bson.M{"location_name": locationName}
 	update := bson.M{mongoUpdateOperator: bson.M{"users": bson.M{"name": username}}}
