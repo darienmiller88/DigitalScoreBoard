@@ -46,28 +46,28 @@ func GetAllUsersByLocation(res http.ResponseWriter, req *http.Request){
 
 //Get all of the Adapt locations.
 func GetAllLocations(res http.ResponseWriter, req *http.Request){
-	locations, err := services.GetAllLocations(req)
+	var locationsResult models.Result[[]models.Location] = services.GetAllLocations(req)
 
-	if err != nil{
-		http.Error(res, err.Error(), http.StatusInternalServerError)
+	if locationsResult.Err != nil{
+		http.Error(res, locationsResult.Err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	utilities.SendJSON(http.StatusOK, res, locations)
+	utilities.SendJSON(http.StatusOK, res, locationsResult.ResultData)
 }
 
 //Get ALL users for ALL locations.
 func GetAllUsers(res http.ResponseWriter, req *http.Request) {
-	locations, err := services.GetAllLocations(req)
+	var result models.Result[[]models.Location] = services.GetAllLocations(req)
 
-	if err != nil{
-		http.Error(res, err.Error(), http.StatusInternalServerError)
+	if result.Err != nil{
+		http.Error(res, result.Err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	users := []models.UserCard{}
 
-	for _, location := range locations {
+	for _, location := range result.ResultData {
 		users = append(users, location.Users...)
 	}
 

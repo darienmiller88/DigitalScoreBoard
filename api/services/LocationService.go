@@ -16,6 +16,7 @@ const(
 	PULL string = "$pull"
 )
 
+//Add a new adapt location, which for now, I will not expose.
 func AddNewAdaptLocation(req *http.Request, location models.Location) models.Result[models.Location]{
 	insertOneResult, err := database.GetLocationsCollection().InsertOne(req.Context(), location)
 	locationResult := models.Result[models.Location]{}
@@ -28,7 +29,6 @@ func AddNewAdaptLocation(req *http.Request, location models.Location) models.Res
 	}
 	
 	location.ID = insertOneResult.InsertedID.(primitive.ObjectID)
-
 	locationResult.ResultData = location
 	locationResult.StatusCode = http.StatusOK
 
@@ -36,21 +36,21 @@ func AddNewAdaptLocation(req *http.Request, location models.Location) models.Res
 }
 
 //Retrieve all locations from database.
-func GetAllLocations(req *http.Request) ([]models.Location, error) {
+func GetAllLocations(req *http.Request) models.Result[[]models.Location] {
 	locationsCollection := database.GetLocationsCollection()
-	result, err := locationsCollection.Find(req.Context(), bson.D{})
+	findResult, err := locationsCollection.Find(req.Context(), bson.D{})
 
 	if err != nil {
-		return []models.Location{}, err
+		return models.Result[[]models.Location]{ StatusCode: http.StatusInternalServerError, Err: err }
 	}
 
 	locations := []models.Location{}
 
-	if err := result.All(req.Context(), &locations); err != nil {
-		return []models.Location{}, err
+	if err := findResult.All(req.Context(), &locations); err != nil {
+		return models.Result[[]models.Location]{ StatusCode: http.StatusInternalServerError, Err: err }
 	}
 
-	return locations, nil
+	return models.Result[[]models.Location]{ StatusCode: http.StatusOK, ResultData: locations }
 }
 
 //Retrieve one location from MongoDB.
