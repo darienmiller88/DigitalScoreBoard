@@ -35,19 +35,21 @@
     const removePlayerFromDB = async (playerIndex: number) => {
         const playerToRemove: string = props.players[playerIndex]
 
+        //First, remove the player from the front end.
         props.removePlayerFromArray(playerIndex)
 
         try {
+            //Afterwards, remove them from the back end
             await scoreBoardApi.delete(`/remove-user-from-location/${props.currentLocation}`, { data: { player_name: playerToRemove } })
             
             toast.success(`${playerToRemove} removed!`, {
                 timeout: 2000
             })
         } catch (error) {
-            console.log("err:", error);
+            console.log("err:", error)
             toast.error(`Error: ${error}`, {
                 timeout: 2000
-            });
+            })
         }   
     }
 
@@ -106,7 +108,8 @@
         :modalContent="EditPlayerName"
         :modalProps="{ 
             playerName: playerNameToEdit,
-            hideModal: () => showEditPlayerNameModal = false
+            hideModal: () => showEditPlayerNameModal = false,
+            players: props.players
         }"
         :show="showEditPlayerNameModal"
         :onHide="() => showEditPlayerNameModal = false"

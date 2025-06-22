@@ -4,6 +4,7 @@
     const props = defineProps<{
         playerName: string
         hideModal: () => void
+        players: string[]
     }>()
 
     let editFirstName = ref<string>("")
@@ -11,6 +12,7 @@
 
     const onSubmit = () => {
         console.log("name:", editFirstName.value, editLastName.value)
+        console.log("players:", props.players);
         
         //Close modal after submitting
         props.hideModal()

@@ -159,6 +159,10 @@ func AddLocation(res http.ResponseWriter, req *http.Request){
 	utilities.SendJSON(http.StatusOK, res, location)
 }
 
+func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
+	
+}
+
 func UpdateScore(res http.ResponseWriter, req *http.Request){
 
 }
