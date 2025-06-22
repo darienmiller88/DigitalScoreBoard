@@ -14,6 +14,7 @@
     const { allLocationOptions } = storeToRefs(optionsStore())
 
     let isLoading = ref<boolean>(false)    
+    let isDuplicatePlayer = ref<boolean>(false)
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")
     const lastName = ref<string>("")
@@ -33,9 +34,11 @@
         isLoading.value = true
         if (props.players.some(player => player.toLowerCase() === newPlayer.toLowerCase())) {
             duplicateErrorMessage.value = `${newPlayer} already exists! Please select another name.`
-            
+            isDuplicatePlayer.value = true
+
             setTimeout(() => {
                 duplicateErrorMessage.value = ""
+                isDuplicatePlayer.value = false
             }, 3000);
         }else{
             props.addNewPlayerToArray(newPlayer)
@@ -106,7 +109,7 @@
                 placeholder="Player's Last Name" 
                 required
             >
-            <div class="error">{{ duplicateErrorMessage }}</div>
+            <div class="error" v-if="isDuplicatePlayer">{{ duplicateErrorMessage }}</div>
         </div>
 
         <button class="form-element" type="submit" >
@@ -172,6 +175,8 @@
                 text-align: center;
                 color: red;
                 font-size: 25px;
+                font-weight: 600;
+                margin: 15px;
             }
         }
 
