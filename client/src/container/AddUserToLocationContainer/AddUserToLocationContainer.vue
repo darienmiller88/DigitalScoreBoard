@@ -109,7 +109,7 @@
             <div class="error">{{ duplicateErrorMessage }}</div>
         </div>
 
-        <button class="form-element" type="submit" disabled>
+        <button class="form-element" type="submit" >
             <Loading :height="35" :usePrimary="false" v-if="isLoading" />
             <div v-else> Add Player To Location </div>
         </button>

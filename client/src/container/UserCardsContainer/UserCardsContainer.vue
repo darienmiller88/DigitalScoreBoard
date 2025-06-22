@@ -13,7 +13,7 @@
     import { optionsStore } from "../../stores/optionsStore"
     import { useToast } from "vue-toastification";
 
-    let players = ref<string[]>([])
+    // let players = ref<string[]>([])
     let showEditPlayerNameModal = ref<boolean>(false)
     let playerNameToEdit = ref<string>("")
     let isLoading = ref<boolean>(true)
@@ -22,6 +22,9 @@
     const toast = useToast()
     const props = defineProps<{
         currentLocation: string
+        players: string[]
+        removePlayerFromArray: (playerIndex: number) => void
+        setPlayers: (newPlayers: string[]) => void
     }>()
 
     //Function for UserCard child to use edit the name currently on the card i.e. from mary rose to mary gold
@@ -31,21 +34,22 @@
     }
 
     //Remove a player from a given ADAPT location.
-    const removePlayer = async (playerIndex: number) => {
-        const playerToRemove: string = players.value[playerIndex]
+    const removePlayerFromDB = async (playerIndex: number) => {
+        const playerToRemove: string = props.players[playerIndex]
 
-        players.value = players.value.filter((_, index) => {
-            return playerIndex != index
-        })
+        props.removePlayerFromArray(playerIndex)
 
         try {
             await scoreBoardApi.delete(`/remove-user-from-location/${props.currentLocation}`, { data: { player_name: playerToRemove } })
             
             toast.success(`${playerToRemove} removed!`, {
                 timeout: 2000
-            });
+            })
         } catch (error) {
             console.log("err:", error);
+            toast.error(`Error: ${error}`, {
+                timeout: 2000
+            });
         }   
     }
 
@@ -54,7 +58,7 @@
         try {            
             const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`) 
             
-            players.value = playersResult.data.map(player => player.username)
+            props.setPlayers(playersResult.data.map(player => player.username))
         } catch (error) {
             console.log("err:", error);
         }
@@ -94,7 +98,7 @@
                 :playerIndex="index"
                 :playerName="player"
                 :showModal="addPlayerNameToEdit"
-                :removePlayer="removePlayer"
+                :removePlayer="removePlayerFromDB"
             />
         </div> 
     </div>
@@ -169,7 +173,7 @@
         // 2k monitors
         @media only screen and (min-width: 2560px){
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 30px;
             max-height: 75vh;
         }
