@@ -12,7 +12,7 @@
         <div class="player">{{ playerName }}</div>
         <div class="divider"></div>
         <div class="remove-wrapper">
-            <button @click="() => removePlayer(playerIndex)">Remove User</button>
+            <button @click="() => removePlayer(playerIndex)">Remove Player</button>
         </div>
         <div class="edit-wrapper">
             <button @click="() => showModal(playerName)">Edit Name</button>
