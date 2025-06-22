@@ -178,11 +178,18 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
-	utilities.SendJSON(locationResult.StatusCode, res, locationResult.ResultData)
-}
+	//Using both the location and new playername, call the following service and provide both to it.
+	updateResult := services.UpdatePlayerName(req, location, playerName.PlayerName)
 
-func UpdateScore(res http.ResponseWriter, req *http.Request){
+	if updateResult.Err != nil {
+		http.Error(res, updateResult.Err.Error(), updateResult.StatusCode)
+		return
+	}
 
+	utilities.SendJSON(updateResult.StatusCode, res, utilities.M{
+		"message": fmt.Sprintf("player name updated %s", playerName.PlayerName),
+		"update_result": updateResult,
+	})
 }
 
 func AddUserToLocation(res http.ResponseWriter, req *http.Request){
@@ -217,7 +224,7 @@ func modifyUserInLocation(res http.ResponseWriter, req *http.Request, operation 
 		message = "removed from"
 	}
 
-	utilities.SendJSON(http.StatusOK, res, map[string]interface{}{
+	utilities.SendJSON(http.StatusOK, res, utilities.M{
 		"message": fmt.Sprintf("%s was %s location: %s", playerName.PlayerName, message, location),
 		"result": result,
 	})
