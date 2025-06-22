@@ -65,12 +65,13 @@ func GetLocation(req *http.Request, locationName string) models.Result[models.Lo
 
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
+			result.Err = fmt.Errorf("location \"%s\" does not exist. Please try another one", locationName)
 			result.StatusCode = http.StatusNotFound
 		} else {
+			result.Err = err
 			result.StatusCode = http.StatusInternalServerError
 		}
 
-		result.Err = err
 		return result
 	}
 
