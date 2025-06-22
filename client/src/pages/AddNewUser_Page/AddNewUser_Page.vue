@@ -16,6 +16,10 @@
         :addNewPlayerToArray="addNewPlayerToArray"    
     />
     
-    <UserCardsContainer :players="players" :setPlayers="setPlayers" :removePlayerFromArray="removePlayerFromArray" :currentLocation="currentLocation"/>
-
+    <UserCardsContainer
+        :players="players" 
+        :setPlayers="setPlayers" 
+        :removePlayerFromArray="removePlayerFromArray" 
+        :currentLocation="currentLocation"
+    />
 </template>
