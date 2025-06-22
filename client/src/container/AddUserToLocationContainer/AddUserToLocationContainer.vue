@@ -154,12 +154,18 @@
 
             input{
                 font-size: 25px;
-                padding: 10px;
+                padding: 15px;
 
                 border: 2px solid var(--primary-color);
                 border-radius: 5px;
 
                 background-color: transparent;
+                color: var(--primary-color);
+
+                &:focus{
+                    border: 2px solid var(--primary-color);
+                    outline: none;
+                }
             }
 
             .error{
