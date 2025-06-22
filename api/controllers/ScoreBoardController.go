@@ -161,12 +161,13 @@ func AddLocation(res http.ResponseWriter, req *http.Request){
 
 func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 	location := chi.URLParam(req, "location-name")
-	playerName := struct{
-		PlayerName string `json:"player_name"`
+	playerNames := struct{
+		NewPlayerName string `json:"new_player_name"`
+		OldPlayerName string `json:"old_player_name"`		
 	}{}
 
-	// Decode the player name from request body
-	if err := json.NewDecoder(req.Body).Decode(&playerName); err != nil{
+	// Decode the player names from request body
+	if err := json.NewDecoder(req.Body).Decode(&playerNames); err != nil{
 		http.Error(res, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -179,7 +180,7 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 	}
 
 	//Using both the location and new playername, call the following service and provide both to it.
-	updateResult := services.UpdatePlayerName(req, location, playerName.PlayerName)
+	updateResult := services.UpdatePlayerName(req, location, playerNames.OldPlayerName, playerNames.NewPlayerName)
 
 	if updateResult.Err != nil {
 		http.Error(res, updateResult.Err.Error(), updateResult.StatusCode)
@@ -187,7 +188,7 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 	}
 
 	utilities.SendJSON(updateResult.StatusCode, res, utilities.M{
-		"message": fmt.Sprintf("player name updated %s", playerName.PlayerName),
+		"message": fmt.Sprintf("player name updated to \"%s\"", playerNames.NewPlayerName),
 		"update_result": updateResult,
 	})
 }

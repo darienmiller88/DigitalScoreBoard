@@ -80,16 +80,26 @@ func GetLocation(req *http.Request, locationName string) models.Result[models.Lo
 	return result
 }
 
-func UpdatePlayerName(req *http.Request, locationName string, playerName string) models.Result[*mongo.UpdateResult]{
+func UpdatePlayerName(req *http.Request, locationName string, oldPlayerName string, newPlayerName string) models.Result[*mongo.UpdateResult]{
 	updateUserResult := models.Result[*mongo.UpdateResult]{
 		StatusCode: http.StatusInternalServerError,
 	}
 	
-	// filter := bson.M{"location_name": locationName}
-	// update := bson.M{"$set": bson.M{"users": bson.M{"name": playerName}}}
+	//Filter first for the location, and then for the player in the "users" array field.
+	filter := bson.M{ "location_name": locationName, "users.name": oldPlayerName }
+	update := bson.M{ "$set": bson.M{ "users.$.name": newPlayerName } }
 
-	// updateOneResult, err := database.GetLocationsCollection().UpdateOne(req.Context(), filter, update)
+	updateOneResult, err := database.GetLocationsCollection().UpdateOne(req.Context(), filter, update)
 
+	if err != nil{
+		updateUserResult.Err = err
+
+		return updateUserResult
+	}
+
+	//If the update was succesful, return an Ok(200) and the update return data.
+	updateUserResult.ResultData = updateOneResult
+	updateUserResult.StatusCode = http.StatusOK
 
 	return updateUserResult
 }
