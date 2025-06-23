@@ -5,13 +5,15 @@ import (
 	"fmt"
 	"net/http"
 	"slices"
+	"strings"
 
 	// "DigitalScoreBoard/api/database"
 	"DigitalScoreBoard/api/models"
-	"DigitalScoreBoard/api/utilities"
 	"DigitalScoreBoard/api/services"
+	"DigitalScoreBoard/api/utilities"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-ozzo/ozzo-validation"
 	// "go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -173,6 +175,15 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
+	validation.ValidateStruct(&playerNames,
+		validation.Field(&playerNames.NewPlayerName, validation.Required, validation.Length(3, 30)),
+		validation.Field(&playerNames.OldPlayerName, validation.Required),
+	)
+
+	if playerNames.NewPlayerName == "" || playerNames.OldPlayerName == "" {
+		
+	}
+
 	//First, get the location to ensure the client sent one that actually exists. 
 	locationResult := services.GetLocation(req, location)
 
@@ -185,8 +196,16 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 	//validate to ensure the old name exists, the new name trimmed is at most 30 characters, and that the new name is
 	//not taken
 
+	//
 	if result := slices.Index(locationResult.ResultData.Users, models.UserCard{ Name: playerNames.OldPlayerName }); result == -1 {
 		http.Error(res, fmt.Sprintf("Player \"%s\" at location %s does not exist", playerNames.OldPlayerName, location), http.StatusNotFound)
+		return
+	}
+
+	newNameLen := len(strings.Trim(playerNames.NewPlayerName, " "))
+	maxLen, minLen := 30, 3
+	if newNameLen > maxLen || newNameLen < minLen {
+		http.Error(res, fmt.Sprintf("New name must be between %d and%d characters long", minLen, maxLen), http.StatusBadRequest)
 		return
 	}
 

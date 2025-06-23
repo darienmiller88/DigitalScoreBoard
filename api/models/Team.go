@@ -78,19 +78,33 @@ func (t *Team) checkTeamPlayers(field interface{}) error {
 	if numPlayers > numPeopleAtLocation {
 		return fmt.Errorf("length of players field cannot exceed total amount of people at ADAPT location: %d > %d", numPlayers, numPeopleAtLocation)
 	}
+
+	uniquePlayersMap := make(map[string]int)
+	
+	//First create a map out of the players at a given adapt location to allow constant time lookup for each person.
+	for _, player := range location.Users{
+		uniquePlayersMap[player.Name] = 0
+	}
+
+	//Afterwards, check each player the client sent to see if it exists in the map. If not, return the following error.
+	for _, newlyAddedplayer := range players{
+		if _, exists := uniquePlayersMap[newlyAddedplayer]; !exists {
+			return fmt.Errorf("%s is not a valid person at the ADAPT location %s", newlyAddedplayer, t.TeamName)
+		}
+	}
 	
 	//Iterate through each player to see if ANY of the names are not real names for the given location.
 	//Best case run time is O(1), worst is O(N^2) if the first few names are correct, and the last one is incorrect.
-	for _, newlyAddedplayer := range players{
+	// for _, newlyAddedplayer := range players{
 
-		//Next, check the above name and compare it to each name in the array of users for this ADAPT location.
-		//If there is no match for that name, return an error prematurely to reflect this.
-		for _, currentPlayer := range location.Users{
-			if newlyAddedplayer != currentPlayer.Name {
-				return fmt.Errorf("%s is not a valid person at the ADAPT location %s", newlyAddedplayer, t.TeamName)
-			}
-		}
-	}
+	// 	//Next, check the above name and compare it to each name in the array of users for this ADAPT location.
+	// 	//If there is no match for that name, return an error prematurely to reflect this.
+	// 	for _, currentPlayer := range location.Users{
+	// 		if newlyAddedplayer != currentPlayer.Name {
+	// 			return fmt.Errorf("%s is not a valid person at the ADAPT location %s", newlyAddedplayer, t.TeamName)
+	// 		}
+	// 	}
+	// }
 	
 	//If every name the client sent matched the names of the players in the ADAPT location, return nil to allow
 	//validation success.
