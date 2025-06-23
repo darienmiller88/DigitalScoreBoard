@@ -89,7 +89,7 @@ func (t *Team) checkTeamPlayers(field interface{}) error {
 	//Afterwards, check each player the client sent to see if it exists in the map. If not, return the following error.
 	for _, newlyAddedplayer := range players{
 		if _, exists := uniquePlayersMap[newlyAddedplayer]; !exists {
-			return fmt.Errorf("%s is not a valid person at the ADAPT location %s", newlyAddedplayer, t.TeamName)
+			return fmt.Errorf("'%s' is not a valid person at the ADAPT location '%s'", newlyAddedplayer, t.TeamName)
 		}
 	}
 	
