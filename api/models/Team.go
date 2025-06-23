@@ -93,19 +93,6 @@ func (t *Team) checkTeamPlayers(field interface{}) error {
 		}
 	}
 	
-	//Iterate through each player to see if ANY of the names are not real names for the given location.
-	//Best case run time is O(1), worst is O(N^2) if the first few names are correct, and the last one is incorrect.
-	// for _, newlyAddedplayer := range players{
-
-	// 	//Next, check the above name and compare it to each name in the array of users for this ADAPT location.
-	// 	//If there is no match for that name, return an error prematurely to reflect this.
-	// 	for _, currentPlayer := range location.Users{
-	// 		if newlyAddedplayer != currentPlayer.Name {
-	// 			return fmt.Errorf("%s is not a valid person at the ADAPT location %s", newlyAddedplayer, t.TeamName)
-	// 		}
-	// 	}
-	// }
-	
 	//If every name the client sent matched the names of the players in the ADAPT location, return nil to allow
 	//validation success.
 	return nil
