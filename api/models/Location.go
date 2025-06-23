@@ -78,5 +78,5 @@ func (l *Location) findLocation(field interface{}) error{
 	}	
 
 	return fmt.Errorf("Location name '%s' is not a valid location name. Please choose from " +
-		"the following: [%s] ", l.LocationName, strings.Join(locationNames, ", "))
+		"the following: [%s]", l.LocationName, strings.Join(locationNames, ", "))
 }

@@ -62,22 +62,34 @@ func (s *SavedGame) validateLocation(field interface{}) error{
 }
 
 func (s *SavedGame) validateTeams(field interface{}) error{
-	teamLimit := 2
+	if s.Teams != nil {
+		teamLimit := 2
+		
+		//If the client includes the Teams field, ensure they include exactly 2.
+		if len(*s.Teams) != teamLimit {
+			return fmt.Errorf("please include at only %d teams", teamLimit)
+		} 
 
-	//If the client includes the Teams field, ensure they include exactly 2.
-	if s.Teams != nil && len(*s.Teams) != teamLimit {
-		return fmt.Errorf("please include at only %d teams", teamLimit)
-	}
+		uniqueTeams := make(map[string]int)
 
-	//if they include the Teams field, and it has at least 2 teams, validate each team to ensure each team is valid,
-	//which entails a valid ADAPT location, and actual people there.
-	if s.Teams != nil{
+		//In order to see if there are duplciate teams, create a map out of the teams the client sent.
+		for _, team := range *s.Teams{
+			uniqueTeams[team.TeamName] = 0
+		}
+
+		//If the number of unique teams is less than the total number of teams, there are duplicates.
+		if len(uniqueTeams) < len(*s.Teams) {
+			return fmt.Errorf("no duplicate teams allowed")
+		}
+
+		//if they include the Teams field, and it has at least 2 teams, validate each team to ensure each team is valid,
+		//which entails a valid ADAPT location, and actual people there.
 		for _, team := range *s.Teams {
 			if err := team.Validate(); err != nil {
 				return err
 			}
 		}
-	}
+	} 
 
 	return nil
 }
