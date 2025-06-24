@@ -37,12 +37,12 @@ func (l *Location) InitCreatedAtAndUpdatedAt(){
 func (l *Location) Validate() error{
 	return validation.ValidateStruct(
 		l,
-		validation.Field(&l.LocationName, validation.Required, validation.By(l.findLocation)),
+		validation.Field(&l.LocationName, validation.Required, validation.By(l.findAndSetLocation)),
 	)
 }
 
 //Check to see if the location name is a valid location name based on a pre-defined set I have in mongoDB.
-func (l *Location) findLocation(field interface{}) error{
+func (l *Location) findAndSetLocation(field interface{}) error{
 	locationName, ok := field.(string)
 
 	if !ok{
@@ -64,7 +64,11 @@ func (l *Location) findLocation(field interface{}) error{
 
 	//Check to see if there's a match between the location name the user sent, and the ones in the database.
 	for _, location := range locations{
+
+		//If the client sent a correct location, assign the users at that location to this instance of a location.
 		if locationName == location.LocationName {
+			l.Users = location.Users
+			
 			return nil
 		}
 	}

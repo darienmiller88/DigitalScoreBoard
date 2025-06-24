@@ -82,7 +82,7 @@ func (s *SavedGame) validateTeams(field interface{}) error{
 			return fmt.Errorf("no duplicate teams allowed")
 		}
 
-		//if they include the Teams field, and it has at least 2 teams, validate each team to ensure each team is valid,
+		//if they include the Teams field, and it has only 2 unique teams, validate each team to ensure each team is valid,
 		//which entails a valid ADAPT location, and actual people there.
 		for _, team := range *s.Teams {
 			if err := team.Validate(); err != nil {
@@ -99,6 +99,12 @@ func (s *SavedGame) findWinner(field interface{}) error{
 
 	if !ok{
 		return fmt.Errorf("could not parse %T into object", field)
+	}
+
+	if s.Teams == nil {
+		
+	} else{
+
 	}
 
 	//Try to Find the winner only when a single player game is played, not a team game. If the winner of the game
