@@ -1,16 +1,12 @@
 package models
 
 import (
-	"context"
 	"fmt"
 	"time"
 	"strings"
 
 	"github.com/go-ozzo/ozzo-validation"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-
-	"DigitalScoreBoard/api/database"
 )
 
 // This struct will represent the ADAPT community network location where a jeopardy game was played.
@@ -37,9 +33,20 @@ func (l *Location) InitCreatedAtAndUpdatedAt(){
 func (l *Location) Validate() error{
 	return validation.ValidateStruct(
 		l,
+		validation.Field(&l.Users, validation.Required, validation.Length(1, 0)),
 		validation.Field(&l.LocationName, validation.Required, validation.By(l.findAndSetLocation)),
 	)
 }
+
+// func (l *Location) setUsersFromValidLocation(field interface{}) error{
+// 	players, ok := field.([]UserCard)
+
+// 	if !ok{
+// 		return fmt.Errorf("could not parse %T into object", field)
+// 	}
+
+// 	getLocationByName()
+// }
 
 //Check to see if the location name is a valid location name based on a pre-defined set I have in mongoDB.
 func (l *Location) findAndSetLocation(field interface{}) error{
@@ -49,16 +56,9 @@ func (l *Location) findAndSetLocation(field interface{}) error{
 		return fmt.Errorf("could not parse %T into object", field)
 	}
 
-	locationsCollection := database.GetLocationsCollection()
-	result, err := locationsCollection.Find(context.Background(), bson.D{})
+	locations, err := getLocations()
 
 	if err != nil {
-		return err
-	}
-
-	locations := []Location{}
-
-	if err := result.All(context.Background(), &locations); err != nil {
 		return err
 	}
 
@@ -67,8 +67,9 @@ func (l *Location) findAndSetLocation(field interface{}) error{
 
 		//If the client sent a correct location, assign the users at that location to this instance of a location.
 		if locationName == location.LocationName {
+
 			l.Users = location.Users
-			
+
 			return nil
 		}
 	}

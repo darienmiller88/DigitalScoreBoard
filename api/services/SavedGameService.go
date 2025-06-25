@@ -87,8 +87,8 @@ func AddSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[m
 	savedGame.CalcAveragePoints()
 
 	//initialize the location so it has the current date for create at and update at
-	savedGame.Location.InitCreatedAtAndUpdatedAt()	
-	savedGame.Location.LocationName = location.LocationName
+	savedGame.InitCreatedAtAndUpdatedAt()
+	savedGame.Location = &location
 	
 	//Finally, attach the id of the location to saved game's location, and the id of the newly created 
 	//saved game.

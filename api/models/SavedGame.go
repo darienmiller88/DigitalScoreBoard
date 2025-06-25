@@ -120,12 +120,7 @@ func (s *SavedGame) CalcAveragePoints(){
 	//If there are either no people added to the ADAPT location yet, do not calculate the average.
 	if len(s.Location.Users) == 0{
 		return
-	}
-
-	//If there are no teams, do not calculate the average.
-	if s.Teams != nil && len(*s.Teams) == 0 {
-		return
-	}
+	} 
 
 	if s.TotalPoints == 0 {
 		s.CalcTotalPoints()
