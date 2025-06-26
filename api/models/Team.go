@@ -20,7 +20,7 @@ func (t *Team) Validate() error{
 	return validation.ValidateStruct(
 		t,
 		validation.Field(&t.TeamName, validation.By(t.checkTeamNameInLocations)),
-		validation.Field(&t.Players, validation.Length(2, 0), validation.By(t.checkDuplicateTeamPlayers), validation.By(t.checkTeamPlayers)),
+		validation.Field(&t.Players, validation.Required, validation.Length(2, 0), validation.By(t.checkDuplicateTeamPlayers), validation.By(t.checkTeamPlayers)),
 	)
 }
 
@@ -116,7 +116,7 @@ func (t *Team) checkTeamNameInLocations(field interface{}) error{
 	//Retrieve all of the locations from the database.
 	for _, location := range locations {
 
-		//If the location name sent by the client matches a Valid ADAPt location, return nil as the field is valid.
+		//If the location name sent by the client matches a Valid ADAPT location, return nil as the field is valid.
 		if locationName == location.LocationName {
 			return nil
 		}

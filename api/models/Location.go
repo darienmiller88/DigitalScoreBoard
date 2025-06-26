@@ -67,7 +67,6 @@ func (l *Location) findAndSetLocation(field interface{}) error{
 
 		//If the client sent a correct location, assign the users at that location to this instance of a location.
 		if locationName == location.LocationName {
-
 			l.Users = location.Users
 
 			return nil
