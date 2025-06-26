@@ -3,7 +3,6 @@ package models
 import (
 	"fmt"
 	"time"
-	"slices"
 
 	"github.com/go-ozzo/ozzo-validation"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -28,7 +27,7 @@ func (s *SavedGame) Validate() error{
 		validation.Field(&s.Location, validation.By(s.validateLocation)),
 		
 		//Afterwards, either field can be validated. I'm choosing to validate the winner field.
-		validation.Field(&s.Winner, validation.By(s.findWinner)),
+		// validation.Field(&s.Winner, validation.By(s.findWinner)),
 
 		//Finally, validate the teams field if the user chooses to add it.
 		validation.Field(&s.Teams, validation.By(s.validateTeams)),
@@ -41,6 +40,36 @@ func (s *SavedGame) InitCreatedAtAndUpdatedAt(){
 
 	s.Location.InitCreatedAtAndUpdatedAt()
 }
+
+func (s *SavedGame) FindWinner() UserCard{
+	if s.Teams != nil {
+		teams := *s.Teams
+		winningTeam := teams[0]
+
+		for _, team := range teams{
+			if team.Score > winningTeam.Score {
+				winningTeam = team
+			}
+		}
+
+		s.Winner.Name = winningTeam.TeamName
+		s.Winner.Score = winningTeam.Score
+	} else{
+		players := s.Location.Users
+		winningPlayer := players[0]
+
+		for _, player := range players{
+			if player.Score > winningPlayer.Score{
+				winningPlayer = player
+			}
+		}
+
+		s.Winner = winningPlayer
+	}
+
+	return s.Winner
+}
+
 
 func (s *SavedGame) validateLocation(field interface{}) error{
 	location, ok := field.(*Location)
@@ -90,28 +119,6 @@ func (s *SavedGame) validateTeams(field interface{}) error{
 			}
 		}
 	} 
-
-	return nil
-}
-
-func (s *SavedGame) findWinner(field interface{}) error{
-	winner, ok := field.(UserCard)
-
-	if !ok{
-		return fmt.Errorf("could not parse %T into object", field)
-	}
-
-	if s.Teams == nil {
-		
-	} else{
-
-	}
-
-	//Try to Find the winner only when a single player game is played, not a team game. If the winner of the game
-	//was not found in the array of people at the ADAPT location, return the error.
-	if (s.Teams == nil && s.Location != nil) && !slices.Contains(s.Location.Users, winner){
-		return fmt.Errorf("could not find winner '%s' in list of players", winner.Name)
-	}
 
 	return nil
 }
