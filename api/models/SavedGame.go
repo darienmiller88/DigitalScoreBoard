@@ -41,12 +41,13 @@ func (s *SavedGame) InitCreatedAtAndUpdatedAt(){
 	s.Location.InitCreatedAtAndUpdatedAt()
 }
 
-func (s *SavedGame) FindWinner() UserCard{
+func (s *SavedGame) CalculateWinner() {
 	if s.Teams != nil {
 		teams := *s.Teams
 		winningTeam := teams[0]
 
-		for _, team := range teams{
+		//Set the first team as the winning team, and compare each subsequent team to see whose score is the highest
+		for _, team := range teams[1:]{
 			if team.Score > winningTeam.Score {
 				winningTeam = team
 			}
@@ -58,6 +59,7 @@ func (s *SavedGame) FindWinner() UserCard{
 		players := s.Location.Users
 		winningPlayer := players[0]
 
+		//Set the first player as the winning player, and compare each subsequent player to see whose score is the highest
 		for _, player := range players{
 			if player.Score > winningPlayer.Score{
 				winningPlayer = player
@@ -66,10 +68,7 @@ func (s *SavedGame) FindWinner() UserCard{
 
 		s.Winner = winningPlayer
 	}
-
-	return s.Winner
 }
-
 
 func (s *SavedGame) validateLocation(field interface{}) error{
 	location, ok := field.(*Location)
