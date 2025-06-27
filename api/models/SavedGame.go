@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/go-ozzo/ozzo-validation"
+	"github.com/go-ozzo/ozzo-validation/v4"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -27,12 +27,13 @@ func (s *SavedGame) Validate() error{
 	return validation.ValidateStruct(
 		s,
 
-		//Order matters here! Validate the location first to ensure that the Location field is not nil.
-		// validation.Field(&s.Location, validation.By(s.validateLocation)),
+		//Order matters here! Validate the location name first to ensure that the Location field is not nil.
 		validation.Field(&s.LocationName, validation.Required, validation.By(s.validateLocationName)),
 
 		//Finally, validate the teams field if the user chooses to add it.
-		validation.Field(&s.Teams, validation.By(s.validateTeams)),
+		validation.Field(&s.Teams, validation.Required.When(s.Players == nil).Error("Must include field 'teams' or 'players'"), validation.By(s.validateTeams)),
+
+		validation.Field(&s.Players, validation.Required.When(s.Teams == nil).Error("Must include field 'teams' or 'players'")),
 	)
 }
 
@@ -58,6 +59,7 @@ func (s *SavedGame) validateLocationName(field interface{}) error {
 
 	return nil
 }
+
 
 
 func (s *SavedGame) CalculateWinner() {
@@ -106,6 +108,14 @@ func (s *SavedGame) validateLocation(field interface{}) error{
 
 	//User can pass in a non-nil Location and a nil team because this means a single player game was played.
 	return s.Location.Validate()
+}
+
+func (s *SavedGame) validatePlayers(field interface{}) error{
+	if s.Players != nil {
+		
+	}	
+
+	return  nil
 }
 
 func (s *SavedGame) validateTeams(field interface{}) error{

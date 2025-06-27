@@ -83,7 +83,6 @@ func AddSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[m
 	location := GetLocation(req, savedGame.Location.LocationName).ResultData
 
 	//initialize the location so it has the current date for create at and update at
-	savedGame.InitCreatedAtAndUpdatedAt()
 	savedGame.Location = &location
 	
 	//Calculate both the total amount of points earned, as well as the average.
