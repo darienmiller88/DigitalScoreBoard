@@ -118,6 +118,7 @@ func SaveGame(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
+	savedGame.InitCreatedAtAndUpdatedAt()
 	result := services.AddSavedGame(req, savedGame)
 
 	if result.Err != nil {
@@ -125,7 +126,7 @@ func SaveGame(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
-	utilities.SendJSON(result.StatusCode, res, result.ResultData)
+	utilities.SendJSON(result.StatusCode, res, result)
 }
 
 func AddLocation(res http.ResponseWriter, req *http.Request){

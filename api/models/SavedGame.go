@@ -13,6 +13,10 @@ type SavedGame struct {
 	CreatedAt     time.Time          `bson:"created_at"`
 	UpdatedAt     time.Time          `bson:"updated_at"`
 	Location      *Location          `bson:",omitempty"     json:"location"`
+	LocationName  string			 `bson:"location_name"  json:"location_name"`
+
+	Players       *[]UserCard        `bson:",omitempty"     json:"players"`
+
 	Teams         *[]Team            `bson:",omitempty"     json:"teams"`
 	TotalPoints   int 			     `bson:"total_points"   json:"total_points"`
 	AveragePoints float64            `bson:"average_points" json:"average_points"`
@@ -24,10 +28,8 @@ func (s *SavedGame) Validate() error{
 		s,
 
 		//Order matters here! Validate the location first to ensure that the Location field is not nil.
-		validation.Field(&s.Location, validation.By(s.validateLocation)),
-		
-		//Afterwards, either field can be validated. I'm choosing to validate the winner field.
-		// validation.Field(&s.Winner, validation.By(s.findWinner)),
+		// validation.Field(&s.Location, validation.By(s.validateLocation)),
+		validation.Field(&s.LocationName, validation.Required, validation.By(s.validateLocationName)),
 
 		//Finally, validate the teams field if the user chooses to add it.
 		validation.Field(&s.Teams, validation.By(s.validateTeams)),
@@ -40,6 +42,23 @@ func (s *SavedGame) InitCreatedAtAndUpdatedAt(){
 
 	s.Location.InitCreatedAtAndUpdatedAt()
 }
+
+func (s *SavedGame) validateLocationName(field interface{}) error {
+	locationName, ok := field.(string)
+
+	if !ok {
+		return fmt.Errorf("could not parse %T into object", field)	
+	}
+
+	_, err := getLocationByName(locationName)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 
 func (s *SavedGame) CalculateWinner() {
 	if s.Teams != nil {
@@ -60,7 +79,7 @@ func (s *SavedGame) CalculateWinner() {
 		winningPlayer := players[0]
 
 		//Set the first player as the winning player, and compare each subsequent player to see whose score is the highest
-		for _, player := range players{
+		for _, player := range players[1:]{
 			if player.Score > winningPlayer.Score{
 				winningPlayer = player
 			}

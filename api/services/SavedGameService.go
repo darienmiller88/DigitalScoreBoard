@@ -89,6 +89,9 @@ func AddSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[m
 	//Calculate both the total amount of points earned, as well as the average.
 	savedGame.CalcTotalPoints()
 	savedGame.CalcAveragePoints()
+
+	//Calculate the winner of the game that was played.
+	savedGame.CalculateWinner()
 	
 	//Finally, attach the id of the newly created saved game.
 	savedGame.ID = insertResult.InsertedID.(primitive.ObjectID)
