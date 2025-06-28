@@ -172,7 +172,7 @@ func (s *SavedGame) validateTeams(field interface{}) error{
 		
 		//If the client includes the Teams field, ensure they include exactly 2.
 		if len(*s.Teams) != teamLimit {
-			return fmt.Errorf("please include only %d teams", teamLimit)
+			return fmt.Errorf("please include exactly %d teams", teamLimit)
 		} 
 
 		uniqueTeams := make(map[string]int)
