@@ -68,24 +68,27 @@ func GetAllSavedGamesFromLocation(req *http.Request, locationName string) models
 }
 
 func AddSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[models.SavedGame]{
-	savedGamesCollection := database.GetSavedGamesCollections()
+	//Initialize the saved game's created and updated fields.
+	savedGame.InitCreatedAtAndUpdatedAt()
+
+	//Calculate both the total amount of points earned, as well as the average.
+	savedGame.CalcTotalPoints()
+	savedGame.CalcAveragePoints()
+	
+	//Calculate the winner of the game that was played.
+	savedGame.CalculateWinner()
+	
+	//create the result object, get the saved games collection, and insert the saved game into the database.
 	savedGamesResult     := models.Result[models.SavedGame]{}
-	insertResult, err    := savedGamesCollection.InsertOne(req.Context(), savedGame)
+	savedGamesCollection := database.GetSavedGamesCollections()
+	insertResult, err    := savedGamesCollection.InsertOne(req.Context(), &savedGame)
 
 	if err != nil{ 
 		savedGamesResult.Err = err
 		savedGamesResult.StatusCode = http.StatusInternalServerError
-
+		
 		return savedGamesResult
 	}
-
-	
-	//Calculate both the total amount of points earned, as well as the average.
-	savedGame.CalcTotalPoints()
-	savedGame.CalcAveragePoints()
-
-	//Calculate the winner of the game that was played.
-	savedGame.CalculateWinner()
 	
 	//Finally, attach the id of the newly created saved game.
 	savedGame.ID = insertResult.InsertedID.(primitive.ObjectID)

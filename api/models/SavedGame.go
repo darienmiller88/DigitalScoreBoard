@@ -30,10 +30,32 @@ func (s *SavedGame) Validate() error{
 		validation.Field(&s.LocationName, validation.Required, validation.By(s.validateLocationName)),
 
 		//Validate the teams field if the user chooses to add it.
-		validation.Field(&s.Teams, validation.Required.When(s.Players == nil).Error("Must include field 'teams' or 'players'"), validation.By(s.validateTeams)),
+		validation.Field(
+			&s.Teams, 
 
+			//Validate to check to make sure that the client did not send in both a non-nil players AND teams field
+			validation.By(s.validatePlayersAndTeams), 
+
+			//Afterwards, enforce a "Required" requirement for the teams field when there is no Players field
+			validation.Required.When(s.Players == nil), 
+
+			//When both checks pass, validate each team the client sent 
+			validation.By(s.validateTeams),
+		),
+		
 		//Validate the players field if the user chooses to add it.
-		validation.Field(&s.Players, validation.Required.When(s.Teams == nil).Error("Must include field 'teams' or 'players'"), validation.By(s.validatePlayers)),
+		validation.Field(
+			&s.Players, 
+
+			//Validate to check to make sure that the client did not send in both a non-nil players AND teams field
+			validation.By(s.validatePlayersAndTeams), 
+
+			//Afterwards, enforce a requirement for the players field when there is no Teams field
+			validation.Required.When(s.Teams == nil).Error("Must include at least one player"), 
+
+			//When both checks pass, validate each player the client sent 
+			validation.By(s.validatePlayers),
+		),
 	)
 }
 
@@ -95,6 +117,15 @@ func (s *SavedGame) CalculateWinner() {
 	}
 }
 
+//Ensure that players and teams aren't both included
+func (s *SavedGame) validatePlayersAndTeams(field interface{}) error{
+	if s.Players != nil && s.Teams != nil {
+		return fmt.Errorf("field 'players' and field 'teams' both cannot be included")
+	}
+
+	return nil
+}
+
 func (s *SavedGame) validatePlayers(field interface{}) error{
 	if s.Players != nil {
 		location, err := getLocationByName(s.LocationName)
@@ -111,7 +142,7 @@ func (s *SavedGame) validatePlayers(field interface{}) error{
 
 		for _, player := range *s.Players{
 			if _, exists := uniquePlayerNames[player.Name]; !exists {
-				return fmt.Errorf("player %s does not exist for ADAPT location %s", player.Name, location.LocationName)
+				return fmt.Errorf("player '%s' does not exist for ADAPT location %s", player.Name, location.LocationName)
 			}
 		}
 	}	
@@ -141,7 +172,7 @@ func (s *SavedGame) validateTeams(field interface{}) error{
 		
 		//If the client includes the Teams field, ensure they include exactly 2.
 		if len(*s.Teams) != teamLimit {
-			return fmt.Errorf("please include at only %d teams", teamLimit)
+			return fmt.Errorf("please include only %d teams", teamLimit)
 		} 
 
 		uniqueTeams := make(map[string]int)

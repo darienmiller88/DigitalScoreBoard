@@ -118,15 +118,14 @@ func SaveGame(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
-	savedGame.InitCreatedAtAndUpdatedAt()
-	result := services.AddSavedGame(req, savedGame)
+	// result := services.AddSavedGame(req, savedGame)
 
-	if result.Err != nil {
-		http.Error(res, result.Err.Error(), result.StatusCode)
-		return
-	}
+	// if result.Err != nil {
+	// 	http.Error(res, result.Err.Error(), result.StatusCode)
+	// 	return
+	// }
 
-	utilities.SendJSON(result.StatusCode, res, result)
+	utilities.SendJSON(200, res, utilities.M{"message": "passed validation"})
 }
 
 func AddLocation(res http.ResponseWriter, req *http.Request){
