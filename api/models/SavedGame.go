@@ -12,7 +12,6 @@ type SavedGame struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty"` // The MongoDB document ID
 	CreatedAt     time.Time          `bson:"created_at"`
 	UpdatedAt     time.Time          `bson:"updated_at"`
-	Location      *Location          `bson:",omitempty"     json:"location"`
 	LocationName  string			 `bson:"location_name"  json:"location_name"`
 
 	Players       *[]UserCard        `bson:",omitempty"     json:"players"`
@@ -30,37 +29,42 @@ func (s *SavedGame) Validate() error{
 		//Order matters here! Validate the location name first to ensure that the Location field is not nil.
 		validation.Field(&s.LocationName, validation.Required, validation.By(s.validateLocationName)),
 
-		//Finally, validate the teams field if the user chooses to add it.
+		//Validate the teams field if the user chooses to add it.
 		validation.Field(&s.Teams, validation.Required.When(s.Players == nil).Error("Must include field 'teams' or 'players'"), validation.By(s.validateTeams)),
 
-		validation.Field(&s.Players, validation.Required.When(s.Teams == nil).Error("Must include field 'teams' or 'players'")),
+		//Validate the players field if the user chooses to add it.
+		validation.Field(&s.Players, validation.Required.When(s.Teams == nil).Error("Must include field 'teams' or 'players'"), validation.By(s.validatePlayers)),
 	)
 }
 
 func (s *SavedGame) InitCreatedAtAndUpdatedAt(){
 	s.CreatedAt = time.Now()
 	s.UpdatedAt = time.Now()
-
-	s.Location.InitCreatedAtAndUpdatedAt()
 }
 
-func (s *SavedGame) validateLocationName(field interface{}) error {
-	locationName, ok := field.(string)
-
-	if !ok {
-		return fmt.Errorf("could not parse %T into object", field)	
+func (s *SavedGame) CalcAveragePoints(){
+	//If the user is playing a team game, calculate the average points using the number of teams, otherwise calculate it
+	//using the total number of people at each ADAPT location.
+	if s.Teams != nil {
+		s.AveragePoints = float64(s.TotalPoints) / float64(len(*s.Teams))
+	}else{
+		s.AveragePoints = float64(s.TotalPoints) / float64(len(*s.Players))
 	}
-
-	_, err := getLocationByName(locationName)
-
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
 
-
+func (s *SavedGame) CalcTotalPoints(){
+	//If the user is playing a team game, calculate the total points using the teams, otherwise calculate it
+	//using each player at location.
+	if s.Teams != nil {
+		for _, team := range *s.Teams {
+			s.TotalPoints += team.Score
+		}
+	} else {
+		for _, user := range *s.Players {
+			s.TotalPoints += user.Score
+		}
+	}
+}
 
 func (s *SavedGame) CalculateWinner() {
 	if s.Teams != nil {
@@ -77,7 +81,7 @@ func (s *SavedGame) CalculateWinner() {
 		s.Winner.Name = winningTeam.TeamName
 		s.Winner.Score = winningTeam.Score
 	} else{
-		players := s.Location.Users
+		players := *s.Players
 		winningPlayer := players[0]
 
 		//Set the first player as the winning player, and compare each subsequent player to see whose score is the highest
@@ -91,31 +95,44 @@ func (s *SavedGame) CalculateWinner() {
 	}
 }
 
-func (s *SavedGame) validateLocation(field interface{}) error{
-	location, ok := field.(*Location)
-
-	if !ok {
-		return fmt.Errorf("could not parse %T into object", field)
-	}
-
-	if location == nil && s.Teams == nil {
-		return fmt.Errorf("fields 'location' and 'teams' both cannot be empty")
-	}
-
-	if location == nil && s.Teams != nil {
-		return fmt.Errorf("fields 'teams' requires field 'location'")
-	}
-
-	//User can pass in a non-nil Location and a nil team because this means a single player game was played.
-	return s.Location.Validate()
-}
-
 func (s *SavedGame) validatePlayers(field interface{}) error{
 	if s.Players != nil {
-		
+		location, err := getLocationByName(s.LocationName)
+
+		if err != nil {
+			return err
+		}
+
+		uniquePlayerNames := make(map[string]int)
+
+		for _, player := range location.Users{
+			uniquePlayerNames[player.Name] = 0
+		}
+
+		for _, player := range *s.Players{
+			if _, exists := uniquePlayerNames[player.Name]; !exists {
+				return fmt.Errorf("player %s does not exist for ADAPT location %s", player.Name, location.LocationName)
+			}
+		}
 	}	
 
 	return  nil
+}
+
+func (s *SavedGame) validateLocationName(field interface{}) error {
+	locationName, ok := field.(string)
+
+	if !ok {
+		return fmt.Errorf("could not parse %T into object", field)	
+	}
+
+	_, err := getLocationByName(locationName)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (s *SavedGame) validateTeams(field interface{}) error{
@@ -151,35 +168,3 @@ func (s *SavedGame) validateTeams(field interface{}) error{
 	return nil
 }
 
-func (s *SavedGame) CalcAveragePoints(){
-	//If there are either no people added to the ADAPT location yet, do not calculate the average.
-	if len(s.Location.Users) == 0{
-		return
-	} 
-
-	if s.TotalPoints == 0 {
-		s.CalcTotalPoints()
-	}
-
-	//If the user is playing a team game, calculate the average points using the number of teams, otherwise calculate it
-	//using the total number of people at each ADAPT location.
-	if s.Teams != nil {
-		s.AveragePoints = float64(s.TotalPoints) / float64(len(*s.Teams))
-	}else{
-		s.AveragePoints = float64(s.TotalPoints) / float64(len(s.Location.Users))
-	}
-}
-
-func (s *SavedGame) CalcTotalPoints(){
-	//If the user is playing a team game, calculate the total points using the teams, otherwise calculate it
-	//using each player at location.
-	if s.Teams != nil {
-		for _, team := range *s.Teams {
-			s.TotalPoints += team.Score
-		}
-	} else {
-		for _, user := range s.Location.Users {
-			s.TotalPoints += user.Score
-		}
-	}
-}

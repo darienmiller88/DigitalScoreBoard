@@ -38,16 +38,6 @@ func (l *Location) Validate() error{
 	)
 }
 
-// func (l *Location) setUsersFromValidLocation(field interface{}) error{
-// 	players, ok := field.([]UserCard)
-
-// 	if !ok{
-// 		return fmt.Errorf("could not parse %T into object", field)
-// 	}
-
-// 	getLocationByName()
-// }
-
 //Check to see if the location name is a valid location name based on a pre-defined set I have in mongoDB.
 func (l *Location) findAndSetLocation(field interface{}) error{
 	locationName, ok := field.(string)

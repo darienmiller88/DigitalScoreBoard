@@ -20,7 +20,7 @@ func (t *Team) Validate() error{
 	return validation.ValidateStruct(
 		t,
 		validation.Field(&t.TeamName, validation.By(t.checkTeamNameInLocations)),
-		validation.Field(&t.Players, validation.Required, validation.Length(2, 0), validation.By(t.checkDuplicateTeamPlayers), validation.By(t.checkTeamPlayers)),
+		validation.Field(&t.Players, validation.Required, validation.Length(2, 0), validation.By(t.checkDuplicateTeamPlayers), validation.By(t.checkForValidTeamPlayers)),
 	)
 }
 
@@ -54,7 +54,7 @@ func (t *Team) checkDuplicateTeamPlayers (field interface{}) error{
 }
 
 //Check to see if any of the players the client sent are invalid people at the specific ADAPT location. 
-func (t *Team) checkTeamPlayers(field interface{}) error {
+func (t *Team) checkForValidTeamPlayers(field interface{}) error {
 	players, ok := field.([]string)
 
 	if !ok{
