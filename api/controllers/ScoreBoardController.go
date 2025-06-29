@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"slices"
-	"strings"
 
 	// "DigitalScoreBoard/api/database"
 	"DigitalScoreBoard/api/models"
@@ -108,11 +107,13 @@ func GetAllSavedGames(res http.ResponseWriter, req *http.Request){
 func SaveGame(res http.ResponseWriter, req *http.Request){
 	savedGame := models.SavedGame{}
 
+	//Decode the body into a SavedGame object
 	if err := json.NewDecoder(req.Body).Decode(&savedGame); err != nil {
 		http.Error(res, err.Error(), http.StatusBadRequest)
 		return
 	}
 
+	// Try to validate the saved game
 	if err := savedGame.Validate(); err != nil{
 		utilities.SendJSON(http.StatusBadRequest, res, err)
 		return
@@ -154,7 +155,7 @@ func AddLocation(res http.ResponseWriter, req *http.Request){
 }
 
 func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
-	location := chi.URLParam(req, "location-name")
+	locationName := chi.URLParam(req, "location-name")
 	playerNames := struct{
 		NewPlayerName string `json:"new_player_name"`
 		OldPlayerName string `json:"old_player_name"`		
@@ -166,17 +167,20 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
-	validation.ValidateStruct(&playerNames,
-		validation.Field(&playerNames.NewPlayerName, validation.Required, validation.Length(3, 30)),
+	//Validate the above struct to ensure both fields are included, and that the new name is between 3 and 30 chars.
+	err := validation.ValidateStruct(&playerNames,
+		validation.Field(&playerNames.NewPlayerName, validation.Required, validation.Length(3, 31)),
 		validation.Field(&playerNames.OldPlayerName, validation.Required),
 	)
 
-	if playerNames.NewPlayerName == "" || playerNames.OldPlayerName == "" {
-		
+	//If the first round of validation does not pass, return the following error.
+	if err != nil{
+		http.Error(res, err.Error(), http.StatusBadRequest)
+		return
 	}
 
-	//First, get the location to ensure the client sent one that actually exists. 
-	locationResult := services.GetLocation(req, location)
+	//Afterwards, get the location to ensure the client sent one that actually exists. 
+	var locationResult models.Result[models.Location] = services.GetLocation(req, locationName)
 
 	// If not, return an appropriate error.
 	if locationResult.Err != nil {
@@ -184,23 +188,19 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
-	//validate to ensure the old name exists, the new name trimmed is at most 30 characters, and that the new name is
-	//not taken
-
-	//
-	if result := slices.Index(locationResult.ResultData.Users, models.UserCard{ Name: playerNames.OldPlayerName }); result == -1 {
-		http.Error(res, fmt.Sprintf("Player \"%s\" at location %s does not exist", playerNames.OldPlayerName, location), http.StatusNotFound)
+	//Validate the old name to check to see if it actually exists the ADAPT location
+	if slices.Contains(locationResult.ResultData.Users, models.UserCard{ Name: playerNames.OldPlayerName }) {
+		http.Error(res, fmt.Sprintf("Player '%s' at location '%s' does not exist", playerNames.OldPlayerName, locationName), http.StatusNotFound)
 		return
 	}
 
-	newNameLen := len(strings.Trim(playerNames.NewPlayerName, " "))
-	maxLen, minLen := 30, 3
-	if newNameLen > maxLen || newNameLen < minLen {
-		http.Error(res, fmt.Sprintf("New name must be between %d and%d characters long", minLen, maxLen), http.StatusBadRequest)
+	//Check to see if the new name the client is trying to send is already taken.
+	if slices.Contains(locationResult.ResultData.Users, models.UserCard{ Name: playerNames.NewPlayerName }) {
+		http.Error(res, fmt.Sprintf("player name '%s is taken! Pick another one'", playerNames.OldPlayerName), http.StatusConflict)
 		return
 	}
 
-	utilities.SendJSON(http.StatusOK, res, utilities.M{"message": "validaiton success"})
+	utilities.SendJSON(http.StatusOK, res, utilities.M{"message": "validation success"})
 
 	//After validating both the old player name, and the new player name, using both the location and new playername,
 	// call the following service and provide both to it.

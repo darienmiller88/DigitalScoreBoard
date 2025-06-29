@@ -91,6 +91,7 @@ func UpdatePlayerName(req *http.Request, locationName string, oldPlayerName stri
 	filter := bson.M{ "location_name": locationName, "users.name": oldPlayerName }
 	update := bson.M{ "$set": bson.M{ "users.$.name": newPlayerName } }
 
+	//Using the above filters, find the specific user in the array at the specific location, and change their name.
 	updateOneResult, err := database.GetLocationsCollection().UpdateOne(req.Context(), filter, update)
 
 	if err != nil{
