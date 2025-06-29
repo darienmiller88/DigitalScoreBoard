@@ -200,21 +200,21 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
-	utilities.SendJSON(http.StatusOK, res, utilities.M{"message": "validation success"})
+	//After validating both the old player name, and the new player name, using the location call the following 
+	//service and provide both names to it.
+	updateResult := services.UpdatePlayerName(req, locationName, playerNames.OldPlayerName, playerNames.NewPlayerName)
 
-	//After validating both the old player name, and the new player name, using both the location and new playername,
-	// call the following service and provide both to it.
-	// updateResult := services.UpdatePlayerName(req, location, playerNames.OldPlayerName, playerNames.NewPlayerName)
+	//Return the update result if an error occurred.
+	if updateResult.Err != nil {
+		http.Error(res, updateResult.Err.Error(), updateResult.StatusCode)
+		return
+	}
 
-	// if updateResult.Err != nil {
-	// 	http.Error(res, updateResult.Err.Error(), updateResult.StatusCode)
-	// 	return
-	// }
-
-	// utilities.SendJSON(updateResult.StatusCode, res, utilities.M{
-	// 	"message": fmt.Sprintf("player name updated to \"%s\"", playerNames.NewPlayerName),
-	// 	"update_result": updateResult,
-	// })
+	//FINALLY, after all of that validating, and after the name has been updated in the database, return a success message
+	utilities.SendJSON(updateResult.StatusCode, res, utilities.M{
+		"message": fmt.Sprintf("player name updated from '%s' to '%s'", playerNames.OldPlayerName, playerNames.NewPlayerName),
+		"update_result": updateResult,
+	})
 }
 
 func AddUserToLocation(res http.ResponseWriter, req *http.Request){
