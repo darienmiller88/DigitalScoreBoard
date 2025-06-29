@@ -16,116 +16,7 @@
     let showPeopleWhoPlayed = ref<boolean>(false)
     let showTeamsWhoPlayed = ref<boolean>(false)
 
-    let games: SavedGame[] = [
-        {
-            id: "1",
-            created_at: new Date().toLocaleString(),
-            average_points: 90,
-            total_points: 5000,
-            winner: {
-                username: "darien",
-                score: 1000
-            },
-            players: [
-                {
-                    username: "Reina",
-                    score: 300
-                },
-                {
-                    username: "Marth",
-                    score: 400
-                },
-                    {
-                    username: "Ricky",
-                    score: 3000
-                },
-                {
-                    username: "Garth",
-                    score: 400
-                }
-            ],
-            location_name: "Pelham Bay"
-        },
-        {
-            id: "3",
-            created_at: new Date().toLocaleString(),
-            average_points: 90,
-            total_points: 5000,
-            winner: {
-                username: "Michelle",
-                score: 400
-            },
-            location_name: "Lawrence",
-            players: [
-                {
-                    username: "Nijmah",
-                    score: 300
-                },
-                {
-                    username: "Michelle",
-                    score: 400
-                },
-            ],
-        },
-        {
-            id: "4",
-            created_at: new Date().toLocaleString(),
-            average_points: 90,
-            total_points: 5000,
-            winner: {
-                username: "Lawrence",
-                score: 4000
-            },
-            players: [
-                {
-                    username: "Nijmah",
-                    score: 300
-                },
-                {
-                    username: "Michelle",
-                    score: 400
-                },
-                {
-                    username: "Betty",
-                    score: 700
-                },
-                {
-                    username: "Denise",
-                    score: 400
-                },
-                {
-                    username: "Shaniqua",
-                    score: 700
-                },
-                {
-                    username: "Micki",
-                    score: 400
-                },
-                {
-                    username: "Luis",
-                    score: 700
-                },
-                {
-                    username: "William",
-                    score: 400
-                },
-            ],
-            // teams: [
-            //     {
-            //         team_name: "Lawrence",
-            //         score: 5000,
-            //         players: ["Michelle", "Nijmah", "Betty", "Denise"]
-            //     },
-            //     {
-            //         team_name: "Elmwood",
-            //         score: 4000,
-            //         players: ["Shaniqua", "Micki", "William", "Luis"]
-            //     }
-            // ],
-            location_name: "Elmwood"
-        }
-    ]
-
+    let games: SavedGame[] = []
     let playersInSavedGame = ref<PlayerCard[]>([])
     let teamsInSavedGame = ref<Team[]>([])
 
@@ -154,15 +45,11 @@
             const savedGameResult = await scoreBoardApi.get<SavedGame[]>("/get-saved-games")
 
             //Convert each date to a more readable format
-            savedGameResult.data.forEach(game => {
-                console.log("is a team game?", game.teams !== undefined)
-                
+            savedGameResult.data.forEach(game => {                
                 game.created_at = new Date(game.created_at).toLocaleString()
             })
 
             games = [...games, ...savedGameResult.data]
-            
-            console.log("games:", games);
         } catch (error) {
             console.log("error:", error);
         }
