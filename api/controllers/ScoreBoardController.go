@@ -154,6 +154,7 @@ func AddLocation(res http.ResponseWriter, req *http.Request){
 	utilities.SendJSON(http.StatusOK, res, location)
 }
 
+//Function to allow for the editting of a players name
 func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 	locationName := chi.URLParam(req, "location-name")
 	playerNames := struct{
