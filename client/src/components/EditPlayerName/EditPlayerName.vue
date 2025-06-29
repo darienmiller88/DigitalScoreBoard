@@ -11,7 +11,8 @@
     let editLastName = ref<string>("")
 
     const onSubmit = () => {
-        console.log("name:", editFirstName.value, editLastName.value)
+        console.log("old name:", props.playerName)
+        console.log("new name:", editFirstName.value + " " + editLastName.value)
         console.log("players:", props.players);
         
         //Close modal after submitting

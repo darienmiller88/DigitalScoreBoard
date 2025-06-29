@@ -3,7 +3,15 @@
     import UserCardsContainer from '../../container/UserCardsContainer/UserCardsContainer.vue';
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
 
-    import { setLocation, currentLocation, setPlayers, players, removePlayerFromArray, addNewPlayerToArray } from "./composables"
+    import { 
+        setLocation, 
+        currentLocation, 
+        setPlayers, 
+        players, 
+        removePlayerFromArray, 
+        addNewPlayerToArray,
+        editPlayerName
+    } from "./composables"
 </script>
 
 <template>
@@ -21,5 +29,6 @@
         :setPlayers="setPlayers" 
         :removePlayerFromArray="removePlayerFromArray" 
         :currentLocation="currentLocation"
+        :editPlayerName="editPlayerName"
     />
 </template>

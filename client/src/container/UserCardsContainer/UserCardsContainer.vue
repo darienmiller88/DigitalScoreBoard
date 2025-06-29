@@ -23,6 +23,7 @@
         players: string[]
         removePlayerFromArray: (playerIndex: number) => void
         setPlayers: (newPlayers: string[]) => void
+        editPlayerName: (playerIndex: number, newName: string) => void
     }>()
 
     //Function for UserCard child to use edit the name currently on the card i.e. from mary rose to mary gold
@@ -97,7 +98,7 @@
                 :key="index"
                 :playerIndex="index"
                 :playerName="player"
-                :showModal="addPlayerNameToEdit"
+                :showModalAndSetCurrentPlayer="addPlayerNameToEdit"
                 :removePlayer="removePlayerFromDB"
             />
         </div> 
