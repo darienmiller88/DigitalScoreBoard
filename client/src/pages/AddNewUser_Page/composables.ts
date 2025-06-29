@@ -1,7 +1,7 @@
 import { ref } from "vue"
 
 export const currentLocation = ref<string>("")
-export const players = ref<string[]>([])
+export let players = ref<string[]>([])
 
 export const setLocation = (location: string) => {
     currentLocation.value = location
@@ -22,9 +22,7 @@ export const addNewPlayerToArray = (playerName: string) => {
 }
 
 export const editPlayerName = (playerIndex: number, newName: string) => {
-    players.value[playerIndex] = newName
-    players.value = players.value
-    
-    // console.log("index to change:", playerIndex, "new name:", newName)
-    console.log("players:", players.value);
+    players.value = players.value.map((player, i) =>
+        i === playerIndex ? newName : player
+    )
 }

@@ -13,16 +13,10 @@
     let editFirstName = ref<string>("")
     let editLastName = ref<string>("")
 
-    const onSubmit = () => {
-        console.log("old name:", props.playerName)
-        console.log("player index", props.playerIndex)
-        console.log("new name:", editFirstName.value + " " + editLastName.value)
-       
-        props.editPlayerName(props.playerIndex, props.playerName)
-        
-        // console.log("players:", props.players)
-
-        
+    const onSubmit = async () => {
+        //I'M RETARDED LMAOO. I'M SENDING IN THE OLD NAME, AND NOT THE NEW NAME!!!
+        props.editPlayerName(props.playerIndex, editFirstName.value + " " + editLastName.value)
+    
         //Close modal after submitting
         props.hideModal()
     }
