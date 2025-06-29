@@ -21,9 +21,9 @@
 </script>
 
 <template>
-    <!-- <div class="content-title">
-        Editing player "{{ username }}"...
-    </div> -->
+    <div class="content-title">
+        Currently Editing player "{{ playerName }}"...
+    </div>
     <form @submit.prevent="onSubmit">
         <label>First Name</label><br />
         <input 
@@ -56,8 +56,9 @@
 <style scoped lang="scss">
     .content-title{
         text-align: center;
+        font-weight: 600;
         font-size: 24px;
-        margin-bottom: 20px;
+        margin: 20px;
     }
 
     form{
