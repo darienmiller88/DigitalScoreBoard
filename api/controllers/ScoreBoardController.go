@@ -189,7 +189,7 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 	}
 
 	//Validate the old name to check to see if it actually exists the ADAPT location
-	if slices.Contains(locationResult.ResultData.Users, models.UserCard{ Name: playerNames.OldPlayerName }) {
+	if !slices.Contains(locationResult.ResultData.Users, models.UserCard{ Name: playerNames.OldPlayerName }) {
 		http.Error(res, fmt.Sprintf("Player '%s' at location '%s' does not exist", playerNames.OldPlayerName, locationName), http.StatusNotFound)
 		return
 	}
