@@ -18,7 +18,8 @@ export type Location = {
 export type SavedGame = {
     id:             string
     winner:         PlayerCard
-    location?:      Location
+    location_name:  string
+    players?:       PlayerCard[]
     teams?:         Team[]
     created_at:     string
     total_points:   number

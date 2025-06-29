@@ -41,8 +41,8 @@
         <!--  -->
         <div class="location-date-wrapper">
             <div class="location">Location: 
-                <span v-if="props.game.location">
-                    {{ props.game.location.location_name }}
+                <span >
+                    {{ props.game.location_name }}
                 </span>
             </div>
             <div class="date-played">Date played: {{ props.game.created_at }}</div>
@@ -57,7 +57,7 @@
             <div class="average-points">
                 <span>{{ props.game.average_points }}</span><br>
                 <span v-if="width < 768">Avg. Points</span>
-                <span v-else>Avgerage Points</span>
+                <span v-else>Average Points</span>
             </div>
         </div>
     </div>

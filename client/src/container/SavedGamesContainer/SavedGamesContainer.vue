@@ -26,28 +26,25 @@
                 username: "darien",
                 score: 1000
             },
-            location: {
-                id: "1",
-                users: [
+            players: [
+                {
+                    username: "Reina",
+                    score: 300
+                },
+                {
+                    username: "Marth",
+                    score: 400
+                },
                     {
-                        username: "Reina",
-                        score: 300
-                    },
-                    {
-                        username: "Marth",
-                        score: 400
-                    },
-                     {
-                        username: "Ricky",
-                        score: 3000
-                    },
-                    {
-                        username: "Garth",
-                        score: 400
-                    }
-                ],
-                location_name: "Pelham"
-            }
+                    username: "Ricky",
+                    score: 3000
+                },
+                {
+                    username: "Garth",
+                    score: 400
+                }
+            ],
+            location_name: "Pelham Bay"
         },
         {
             id: "3",
@@ -58,20 +55,17 @@
                 username: "Michelle",
                 score: 400
             },
-            location: {
-                id: "3",
-                users: [
-                    {
-                        username: "Nijmah",
-                        score: 300
-                    },
-                    {
-                        username: "Michelle",
-                        score: 400
-                    },
-                ],
-                location_name: "Lawrence"
-            }
+            location_name: "Lawrence",
+            players: [
+                {
+                    username: "Nijmah",
+                    score: 300
+                },
+                {
+                    username: "Michelle",
+                    score: 400
+                },
+            ],
         },
         {
             id: "4",
@@ -82,56 +76,53 @@
                 username: "Lawrence",
                 score: 4000
             },
-            teams: [
+            players: [
                 {
-                    team_name: "Lawrence",
-                    score: 5000,
-                    players: ["Michelle", "Nijmah", "Betty", "Denise"]
+                    username: "Nijmah",
+                    score: 300
                 },
                 {
-                    team_name: "Elmwood",
-                    score: 4000,
-                    players: ["Shaniqua", "Micki", "William", "Luis"]
-                }
+                    username: "Michelle",
+                    score: 400
+                },
+                {
+                    username: "Betty",
+                    score: 700
+                },
+                {
+                    username: "Denise",
+                    score: 400
+                },
+                {
+                    username: "Shaniqua",
+                    score: 700
+                },
+                {
+                    username: "Micki",
+                    score: 400
+                },
+                {
+                    username: "Luis",
+                    score: 700
+                },
+                {
+                    username: "William",
+                    score: 400
+                },
             ],
-            location: {
-                id: "3",
-                users: [
-                    {
-                        username: "Nijmah",
-                        score: 300
-                    },
-                    {
-                        username: "Michelle",
-                        score: 400
-                    },
-                    {
-                        username: "Betty",
-                        score: 700
-                    },
-                    {
-                        username: "Denise",
-                        score: 400
-                    },
-                    {
-                        username: "Shaniqua",
-                        score: 700
-                    },
-                    {
-                        username: "Micki",
-                        score: 400
-                    },
-                    {
-                        username: "Luis",
-                        score: 700
-                    },
-                    {
-                        username: "William",
-                        score: 400
-                    },
-                ],
-                location_name: "Elmwood"
-            }
+            // teams: [
+            //     {
+            //         team_name: "Lawrence",
+            //         score: 5000,
+            //         players: ["Michelle", "Nijmah", "Betty", "Denise"]
+            //     },
+            //     {
+            //         team_name: "Elmwood",
+            //         score: 4000,
+            //         players: ["Shaniqua", "Micki", "William", "Luis"]
+            //     }
+            // ],
+            location_name: "Elmwood"
         }
     ]
 
@@ -139,10 +130,10 @@
     let teamsInSavedGame = ref<Team[]>([])
 
     const openViewSavedGamesPlayers = (game: SavedGame) => {
-        let location = game.location
+        let players: PlayerCard[] | undefined = game.players
 
-        if (location) {
-            playersInSavedGame.value = location.users
+        if (players) {
+            playersInSavedGame.value = players
         }
 
         showPeopleWhoPlayed.value = true
@@ -161,6 +152,12 @@
     onMounted(async () => {
         try {
             const savedGameResult = await scoreBoardApi.get<SavedGame[]>("/get-saved-games")
+
+            //Convert each date to a more readable format
+            savedGameResult.data.forEach(game => {
+                game.created_at = new Date(game.created_at).toLocaleString()
+            })
+
             games = [...games, ...savedGameResult.data]
             
             console.log("games:", games);
