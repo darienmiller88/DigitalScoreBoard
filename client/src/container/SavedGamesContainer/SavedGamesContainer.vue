@@ -155,6 +155,8 @@
 
             //Convert each date to a more readable format
             savedGameResult.data.forEach(game => {
+                console.log("is a team game?", game.teams !== undefined)
+                
                 game.created_at = new Date(game.created_at).toLocaleString()
             })
 
