@@ -118,14 +118,14 @@ func SaveGame(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
-	// result := services.AddSavedGame(req, savedGame)
+	var result models.Result[models.SavedGame] = services.AddSavedGame(req, savedGame)
 
-	// if result.Err != nil {
-	// 	http.Error(res, result.Err.Error(), result.StatusCode)
-	// 	return
-	// }
+	if result.Err != nil {
+		http.Error(res, result.Err.Error(), result.StatusCode)
+		return
+	}
 
-	utilities.SendJSON(200, res, utilities.M{"message": "passed validation"})
+	utilities.SendJSON(result.StatusCode, res, result)
 }
 
 func AddLocation(res http.ResponseWriter, req *http.Request){
