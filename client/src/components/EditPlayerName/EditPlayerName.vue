@@ -29,15 +29,16 @@
 
             console.log("name change successful!", editNameResult.data);
             
+            //Edit the player name on the front end so the user can see it after it's been changed in the backend
+            props.editPlayerName(props.playerIndex, editFirstName.value + " " + editLastName.value)
+            
+            //After changing the player name, close the modal!
+            props.hideModal()
         } catch (error) {
             console.log("err:", error)               
-        }
+        }    
 
-        //I'M RETARDED LMAOO. I'M SENDING IN THE OLD NAME, AND NOT THE NEW NAME!!!
-        props.editPlayerName(props.playerIndex, editFirstName.value + " " + editLastName.value)
-    
-        //Close modal after submitting
-        props.hideModal()
+        isLoading.value = false
     }
 </script>
 
