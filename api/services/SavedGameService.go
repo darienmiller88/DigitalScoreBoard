@@ -44,20 +44,26 @@ func GetAllSavedGames(req *http.Request) models.Result[[]models.SavedGame] {
 func GetAllSavedGamesFromLocation(req *http.Request, locationName string) models.Result[[]models.SavedGame] {
 	savedGames           := []models.SavedGame{}
 	savedGamesCollection := database.GetSavedGamesCollections()
-	err                  := savedGamesCollection.FindOne(req.Context(), bson.D{
+	findResult, err      := savedGamesCollection.Find(req.Context(), bson.D{
 		{ Key: "location_name", Value: locationName },
-	}).Decode(&savedGames)
+	})
 	
-	savedGamesResult := models.Result[[]models.SavedGame]{}
+	savedGamesResult := models.Result[[]models.SavedGame]{
+		StatusCode: http.StatusInternalServerError,
+	}
 		
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
 			savedGamesResult.StatusCode = http.StatusNotFound
-		} else {
-			savedGamesResult.StatusCode = http.StatusInternalServerError
-		}
+		} 
 
 		savedGamesResult.Err = err
+		return savedGamesResult
+	}
+
+	if err := findResult.All(req.Context(), &savedGames); err != nil{
+		savedGamesResult.Err = err
+
 		return savedGamesResult
 	}
 
