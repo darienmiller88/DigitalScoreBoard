@@ -25,5 +25,6 @@ export const editPlayerName = (playerIndex: number, newName: string) => {
     players.value[playerIndex] = newName
     players.value = players.value
     
-    
+    // console.log("index to change:", playerIndex, "new name:", newName)
+    console.log("players:", players.value);
 }

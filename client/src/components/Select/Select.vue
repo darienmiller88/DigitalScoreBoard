@@ -1,15 +1,9 @@
-<script setup lang="ts">   
-    import { onMounted } from 'vue';
-    
+<script setup lang="ts">       
     const props = defineProps<{
         onChange: (event: Event) => void
         selectModel: string
         options: string[]
     }>()
-
-    onMounted(() => {
-        console.log("options:", props.options);
-    })
 </script>
 
 <template>    

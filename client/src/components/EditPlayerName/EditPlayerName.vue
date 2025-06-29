@@ -17,9 +17,11 @@
         console.log("old name:", props.playerName)
         console.log("player index", props.playerIndex)
         console.log("new name:", editFirstName.value + " " + editLastName.value)
-        console.log("players:", props.players)
-
+       
         props.editPlayerName(props.playerIndex, props.playerName)
+        
+        // console.log("players:", props.players)
+
         
         //Close modal after submitting
         props.hideModal()
