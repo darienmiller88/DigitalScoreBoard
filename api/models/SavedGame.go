@@ -126,6 +126,7 @@ func (s *SavedGame) validatePlayersAndTeams(field interface{}) error{
 	return nil
 }
 
+//Validate each player in the array of players to gurauntee they all exist for the location
 func (s *SavedGame) validatePlayers(field interface{}) error{
 	if s.Players != nil {
 		location, err := getLocationByName(s.LocationName)

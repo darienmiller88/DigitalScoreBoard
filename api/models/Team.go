@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-ozzo/ozzo-validation"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Team struct{
@@ -160,7 +161,11 @@ func getLocationByName(locationName string) (Location, error){
 	err := locationsCollection.FindOne(context.Background(),  bson.D{{Key: "location_name", Value: locationName}}).Decode(&location)
 
 	if err != nil {
-		return Location{}, err
+		if err == mongo.ErrNoDocuments{
+			return Location{}, fmt.Errorf("Location '%s' not a valid location", locationName)
+		}else{
+			return Location{}, err
+		}
 	}
 
 	return location, nil
