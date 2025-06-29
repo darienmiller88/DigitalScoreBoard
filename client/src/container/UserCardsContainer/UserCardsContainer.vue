@@ -114,7 +114,8 @@
             playerIndex: indexOfPlayerBeingEditted,
             hideModal: () => showEditPlayerNameModal = false,
             editPlayerName: editPlayerName,
-            players: props.players
+            players: props.players,
+            currentLocation: currentLocation
         }"
         :show="showEditPlayerNameModal"
         :onHide="() => showEditPlayerNameModal = false"

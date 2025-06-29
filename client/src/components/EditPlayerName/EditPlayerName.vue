@@ -1,8 +1,11 @@
 <script setup lang="ts">
+    import Loading from '../Loading/Loading.vue';
+
     import { ref } from 'vue';
-    // import { scoreBoardApi } from '../../api/api';
+    import { scoreBoardApi } from '../../api/api';
 
     const props = defineProps<{
+        currentLocation: string
         playerName: string
         playerIndex: number
         players: string[]
@@ -12,8 +15,24 @@
 
     let editFirstName = ref<string>("")
     let editLastName = ref<string>("")
+    let isLoading = ref<boolean>(false)
 
-    const onSubmit = async () => {
+    const onSubmit = async () => {        
+        try {
+            isLoading.value = false
+
+            //Call the following route, and send in the following body.
+            const editNameResult = await scoreBoardApi.put(`/change-player-name/${props.currentLocation}`, {
+                new_player_name: editFirstName.value + " " + editLastName.value,
+                old_player_name: props.playerName
+            })
+
+            console.log("name change successful!", editNameResult.data);
+            
+        } catch (error) {
+            console.log("err:", error)               
+        }
+
         //I'M RETARDED LMAOO. I'M SENDING IN THE OLD NAME, AND NOT THE NEW NAME!!!
         props.editPlayerName(props.playerIndex, editFirstName.value + " " + editLastName.value)
     
@@ -50,7 +69,10 @@
             required
         /><br />
         <div class="button-wrapper">
-            <button>Submit Name Change</button>
+            <button>
+                <Loading v-if="isLoading" :height="20" :usePrimary="true"/>
+                <span v-else> Submit Name Change</span>  
+            </button>
         </div>
     </form>
 </template>
