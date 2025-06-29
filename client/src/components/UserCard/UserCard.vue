@@ -2,7 +2,7 @@
     defineProps<{
         playerName: string
         playerIndex: number
-        showModalAndSetCurrentPlayer: (username: string) => void
+        showModalAndSetCurrentPlayer: (username: string, playerIndex: number) => void
         removePlayer: (playerIndex: number) => void
     }>()
 </script>
@@ -15,7 +15,7 @@
             <button @click="() => removePlayer(playerIndex)">Remove Player</button>
         </div>
         <div class="edit-wrapper">
-            <button @click="() => showModalAndSetCurrentPlayer(playerName)">Edit Name</button>
+            <button @click="() => showModalAndSetCurrentPlayer(playerName, playerIndex)">Edit Name</button>
         </div>
     </div>
 </template>

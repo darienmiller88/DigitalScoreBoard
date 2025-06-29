@@ -22,5 +22,8 @@ export const addNewPlayerToArray = (playerName: string) => {
 }
 
 export const editPlayerName = (playerIndex: number, newName: string) => {
-    players.value.splice(playerIndex, 1, newName)
+    players.value[playerIndex] = newName
+    players.value = players.value
+    
+    
 }

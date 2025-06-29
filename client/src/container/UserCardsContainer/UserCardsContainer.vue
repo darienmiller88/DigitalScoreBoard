@@ -14,6 +14,7 @@
 
     let showEditPlayerNameModal = ref<boolean>(false)
     let playerNameToEdit = ref<string>("")
+    let indexOfPlayerBeingEditted = ref<number>(0)
     let isLoading = ref<boolean>(true)
     
     const { allLocationOptions } = optionsStore()
@@ -27,8 +28,9 @@
     }>()
 
     //Function for UserCard child to use edit the name currently on the card i.e. from mary rose to mary gold
-    const addPlayerNameToEdit = (username: string) => {
-        playerNameToEdit.value = username
+    const addPlayerNameToEdit = (playerName: string, playerIndex: number) => {
+        playerNameToEdit.value = playerName
+        indexOfPlayerBeingEditted.value = playerIndex
         showEditPlayerNameModal.value = true
     }
 
@@ -109,7 +111,9 @@
         :modalContent="EditPlayerName"
         :modalProps="{ 
             playerName: playerNameToEdit,
+            playerIndex: indexOfPlayerBeingEditted,
             hideModal: () => showEditPlayerNameModal = false,
+            editPlayerName: editPlayerName,
             players: props.players
         }"
         :show="showEditPlayerNameModal"

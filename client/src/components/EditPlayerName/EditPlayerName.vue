@@ -1,10 +1,13 @@
 <script setup lang="ts">
     import { ref } from 'vue';
+    // import { scoreBoardApi } from '../../api/api';
 
     const props = defineProps<{
         playerName: string
-        hideModal: () => void
+        playerIndex: number
         players: string[]
+        hideModal: () => void
+        editPlayerName: (playerIndex: number, newName: string) => void
     }>()
 
     let editFirstName = ref<string>("")
@@ -12,8 +15,11 @@
 
     const onSubmit = () => {
         console.log("old name:", props.playerName)
+        console.log("player index", props.playerIndex)
         console.log("new name:", editFirstName.value + " " + editLastName.value)
-        console.log("players:", props.players);
+        console.log("players:", props.players)
+
+        props.editPlayerName(props.playerIndex, props.playerName)
         
         //Close modal after submitting
         props.hideModal()
