@@ -13,9 +13,7 @@ type SavedGame struct {
 	CreatedAt     time.Time          `bson:"created_at"`
 	UpdatedAt     time.Time          `bson:"updated_at"`
 	LocationName  string			 `bson:"location_name"  json:"location_name"`
-
 	Players       *[]UserCard        `bson:",omitempty"     json:"players"`
-
 	Teams         *[]Team            `bson:",omitempty"     json:"teams"`
 	TotalPoints   int 			     `bson:"total_points"   json:"total_points"`
 	AveragePoints float64            `bson:"average_points" json:"average_points"`
