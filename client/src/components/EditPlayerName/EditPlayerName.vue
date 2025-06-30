@@ -94,8 +94,18 @@
 
 <style scoped lang="scss">
     .error-message{
-        text-align: center;
+        // text-align: center;
+        border: 2px solid black;
         color: red;
+        max-width: 65%;
+        
+        margin: auto;
+        padding: 10px;
+        font-size: 18px;
+
+        @media (min-width: 768px) {
+            font-size: 20px;
+        }
     }
 
     .content-title{
@@ -107,6 +117,7 @@
 
     form{
         width: fit-content;
+        border: 2px solid red;
         margin: auto;
 
         label{
@@ -116,9 +127,13 @@
         input{
             padding: 10px;
             font-size: 20px;
-            width: 75vw;
+            width: 85vw;
 
             @media (min-width: 768px) {
+                width: 60vw;
+            }
+
+            @media (min-width: 1024px) {
                 width: 25vw;
             }
         }
