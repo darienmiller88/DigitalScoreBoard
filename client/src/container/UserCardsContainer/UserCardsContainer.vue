@@ -140,7 +140,7 @@
         margin-top: 20px;
         font-size: 20px;
         
-        @media (min-width: 768) {
+        @media (min-width: 768px) {
             font-size: 30px;
         }
     }

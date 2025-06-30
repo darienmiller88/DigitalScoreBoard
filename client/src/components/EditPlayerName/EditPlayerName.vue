@@ -25,12 +25,10 @@
             isLoading.value = false
 
             //Call the following route, and send in the following body.
-            const editNameResult = await scoreBoardApi.put(`/change-player-name/${props.currentLocation}`, {
+            await scoreBoardApi.put(`/change-player-name/${props.currentLocation}`, {
                 new_player_name: editFirstName.value.trim() + " " + editLastName.value.trim(),
                 old_player_name: props.playerName
             })
-
-            console.log("name change successful!", editNameResult.data);
             
             //Edit the player name on the front end so the user can see it after it's been changed in the backend
             props.editPlayerName(props.playerIndex, editFirstName.value + " " + editLastName.value)
@@ -52,6 +50,8 @@
         }    
 
         isLoading.value = false
+        editFirstName.value = ""
+        editLastName.value = ""
     }
 </script>
 
@@ -95,7 +95,7 @@
 <style scoped lang="scss">
     .error-message{
         // text-align: center;
-        border: 2px solid black;
+        // border: 2px solid black;
         color: red;
         max-width: 75%;
         
@@ -105,6 +105,10 @@
 
         @media (min-width: 768px) {
             font-size: 20px;
+        }
+
+        @media (min-width: 1024px) {
+            max-width: 25vw;
         }
     }
 
@@ -117,7 +121,7 @@
 
     form{
         width: fit-content;
-        border: 2px solid red;
+        // border: 2px solid red;
         margin: auto;
 
         label{
