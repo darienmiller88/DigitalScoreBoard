@@ -3,6 +3,7 @@
 
     import { ref } from 'vue';
     import { scoreBoardApi } from '../../api/api';
+    import { AxiosError } from 'axios';
 
     const props = defineProps<{
         currentLocation: string
@@ -16,6 +17,8 @@
     let editFirstName = ref<string>("")
     let editLastName = ref<string>("")
     let isLoading = ref<boolean>(false)
+    let errorMessage = ref<string>("")
+    let isErrorMessage = ref<boolean>(false)
 
     const onSubmit = async () => {        
         try {
@@ -23,7 +26,7 @@
 
             //Call the following route, and send in the following body.
             const editNameResult = await scoreBoardApi.put(`/change-player-name/${props.currentLocation}`, {
-                new_player_name: editFirstName.value + " " + editLastName.value,
+                new_player_name: editFirstName.value.trim() + " " + editLastName.value.trim(),
                 old_player_name: props.playerName
             })
 
@@ -35,7 +38,17 @@
             //After changing the player name, close the modal!
             props.hideModal()
         } catch (error) {
-            console.log("err:", error)               
+            if (error instanceof AxiosError) {
+                console.log("Error message:", error);
+                errorMessage.value = error.response?.data
+                isErrorMessage.value = true
+
+                setTimeout(() => {
+                   isErrorMessage.value = false 
+                }, 3000)
+            } else {
+                console.log("Unknown error:", error);
+            }
         }    
 
         isLoading.value = false
@@ -69,6 +82,7 @@
             placeholder="Edit Last Name"
             required
         /><br />
+        <div class="error-message" v-if="isErrorMessage">{{ errorMessage }}</div>
         <div class="button-wrapper">
             <button>
                 <Loading v-if="isLoading" :height="20" :usePrimary="true"/>
@@ -79,6 +93,11 @@
 </template>
 
 <style scoped lang="scss">
+    .error-message{
+        text-align: center;
+        color: red;
+    }
+
     .content-title{
         text-align: center;
         font-weight: 600;
