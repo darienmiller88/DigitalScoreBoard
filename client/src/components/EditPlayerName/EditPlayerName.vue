@@ -97,7 +97,7 @@
         // text-align: center;
         border: 2px solid black;
         color: red;
-        max-width: 65%;
+        max-width: 75%;
         
         margin: auto;
         padding: 10px;
