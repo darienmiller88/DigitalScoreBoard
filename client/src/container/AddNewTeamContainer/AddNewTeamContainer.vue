@@ -23,6 +23,7 @@
     
     const isLoading = ref<boolean>(true)
 
+    //On click to load in the current selected team based on the name from the options.
     const optionClicked = async (event: Event) => {
         const selectedValue = (event.target as HTMLSelectElement).value;
 
@@ -40,6 +41,7 @@
     }
 
     const addTeam = () => {        
+        
         //Create a new anonymous Team card with the following data:
         //The location for which team is playing, a score of 0, and no players (yet).
         addTeamCard({
@@ -52,7 +54,7 @@
         setRemainingLocationOptions(teamCards.value)
         
         //Set the current visible option for the all of the 
-        selectedTeam.value.team_name = remainingLocationOptions.value[0]
+        selectedTeam.value.team_name = remainingLocationOptions.value[0]    
     }
 
     onMounted(async () => {
@@ -67,7 +69,7 @@
 <template>
     <div>
         <Loading :height="50" :usePrimary="true" v-if="isLoading"/>
-        <div class="team-game-location" v-if="!isLoading && remainingLocationOptions.length">
+        <div class="team-game-location" v-if="!isLoading && teamCards.length < 2">
             <Select 
                 :options="remainingLocationOptions"
                 :onChange="optionClicked"
