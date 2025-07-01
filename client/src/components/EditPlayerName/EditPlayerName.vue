@@ -22,7 +22,7 @@
 
     const onSubmit = async () => {        
         try {
-            isLoading.value = false
+            isLoading.value = true
 
             //Call the following route, and send in the following body.
             await scoreBoardApi.put(`/change-player-name/${props.currentLocation}`, {

@@ -197,7 +197,7 @@ func UpdatePlayerName(res http.ResponseWriter, req *http.Request){
 
 	//Check to see if the new name the client is trying to send is already taken.
 	if slices.Contains(locationResult.ResultData.Users, models.UserCard{ Name: playerNames.NewPlayerName }) {
-		http.Error(res, fmt.Sprintf("Player name '%s is taken! Pick another one.", playerNames.OldPlayerName), http.StatusConflict)
+		http.Error(res, fmt.Sprintf("Player name '%s' is taken! Pick another one.", playerNames.OldPlayerName), http.StatusConflict)
 		return
 	}
 
