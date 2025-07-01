@@ -238,7 +238,7 @@ func modifyUserInLocation(res http.ResponseWriter, req *http.Request, operation 
 		return
 	}
 
-	result := services.UpdateUsersForLocation(req, operation, location, playerName.PlayerName)
+	result := services.UpdatePlayersForLocation(req, operation, location, playerName.PlayerName)
 
 	if result.Err != nil {
 		http.Error(res, result.Err.Error(), result.StatusCode)

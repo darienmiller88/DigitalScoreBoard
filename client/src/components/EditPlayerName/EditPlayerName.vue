@@ -43,7 +43,7 @@
 
                 setTimeout(() => {
                    isErrorMessage.value = false 
-                }, 3000)
+                }, 5000)
             } else {
                 console.log("Unknown error:", error);
             }
@@ -60,29 +60,33 @@
         Currently Editing player "{{ playerName }}"...
     </div>
     <form @submit.prevent="onSubmit">
-        <label>First Name</label><br />
-        <input 
-            class="form-element"
-            id="edit-first-name"
-            v-model="editFirstName"
-            name="edit-first-name"
-            :maxlength="15"
-            type="text" 
-            placeholder="Edit First Name"
-            required
-        /><br /><br/>
-        <label>Last Name</label><br />
-        <input 
-            class="form-element"
-            id="edit-last-name"
-            v-model="editLastName"
-            name="edit-last-name"
-            :maxlength="15"
-            type="text" 
-            placeholder="Edit Last Name"
-            required
-        /><br />
-        <div class="error-message" v-if="isErrorMessage">{{ errorMessage }}</div>
+        <div class="input-wrapper">
+            <label>First Name</label><br />
+            <input 
+                class="form-element"
+                id="edit-first-name"
+                v-model="editFirstName"
+                name="edit-first-name"
+                :maxlength="15"
+                type="text" 
+                placeholder="Edit First Name"
+                required
+            />
+        </div>
+
+        <div class="input-wrapper">
+            <label>Last Name</label><br />
+            <input 
+                class="form-element"
+                id="edit-last-name"
+                v-model="editLastName"
+                name="edit-last-name"
+                :maxlength="15"
+                type="text" 
+                placeholder="Edit Last Name"
+                required
+            />
+        </div>
         <div class="button-wrapper">
             <button>
                 <Loading v-if="isLoading" :height="20" :usePrimary="true"/>
@@ -90,14 +94,15 @@
             </button>
         </div>
     </form>
+    <div class="error-message" v-if="isErrorMessage">{{ errorMessage }}</div>
 </template>
 
 <style scoped lang="scss">
     .error-message{
-        // text-align: center;
+        text-align: center;
         // border: 2px solid black;
         color: red;
-        max-width: 75%;
+        // max-width: 75%;
         
         margin: auto;
         padding: 10px;
@@ -108,7 +113,7 @@
         }
 
         @media (min-width: 1024px) {
-            max-width: 25vw;
+            // max-width: 25vw;
         }
     }
 
@@ -120,25 +125,31 @@
     }
 
     form{
+        display: flex;
+        flex-direction: column;
         width: fit-content;
-        // border: 2px solid red;
         margin: auto;
+        
+        .input-wrapper{
+            border: 2px solid red;
+            margin: 5px;
 
-        label{
-            font-size: 20px;
-        }
-
-        input{
-            padding: 10px;
-            font-size: 20px;
-            width: 85vw;
-
-            @media (min-width: 768px) {
-                width: 60vw;
+            label{
+                font-size: 20px;
             }
-
-            @media (min-width: 1024px) {
-                width: 25vw;
+    
+            input{
+                padding: 10px;
+                font-size: 20px;
+                width: 85vw;
+    
+                @media (min-width: 768px) {
+                    width: 60vw;
+                }
+    
+                @media (min-width: 1024px) {
+                    width: 25vw;
+                }
             }
         }
 
