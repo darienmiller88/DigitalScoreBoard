@@ -37,13 +37,12 @@
             props.hideModal()
         } catch (error) {
             if (error instanceof AxiosError) {
-                console.log("Error message:", error);
                 errorMessage.value = error.response?.data
                 isErrorMessage.value = true
 
                 setTimeout(() => {
                    isErrorMessage.value = false 
-                }, 5000)
+                }, 4000)
             } else {
                 console.log("Unknown error:", error);
             }
@@ -100,20 +99,13 @@
 <style scoped lang="scss">
     .error-message{
         text-align: center;
-        // border: 2px solid black;
-        color: red;
-        // max-width: 75%;
-        
+        color: red;        
         margin: auto;
         padding: 10px;
         font-size: 18px;
 
         @media (min-width: 768px) {
             font-size: 20px;
-        }
-
-        @media (min-width: 1024px) {
-            // max-width: 25vw;
         }
     }
 
@@ -131,7 +123,6 @@
         margin: auto;
         
         .input-wrapper{
-            border: 2px solid red;
             margin: 5px;
 
             label{
