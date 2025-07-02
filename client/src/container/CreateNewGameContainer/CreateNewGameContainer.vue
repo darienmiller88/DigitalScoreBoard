@@ -14,12 +14,24 @@
 </script>
 
 <template>
-    <div>
-        CreateNewGameContainer
+    <div class="choose-site-wrapper">
+        <span>Choose site:</span>
         <Select :options="allLocationOptions" :selectModel="currentLocation" :onChange="onChangeSelect" />
     </div>
 </template>
 
 <style scoped lang="scss">
+    .choose-site-wrapper{
+        text-align: center;
+        margin: 20px;
 
+        span{
+            font-size: 24px;
+            margin-right: 10px;
+
+            @media (min-width: 768px) {
+                font-size: 30px;
+            }
+        }
+    }
 </style>
