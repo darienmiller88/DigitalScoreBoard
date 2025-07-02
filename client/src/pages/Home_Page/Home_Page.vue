@@ -10,14 +10,6 @@
     const { resetAllPoints, totalPoints } = scoreCardsStore()
   
     onMounted(async () => {
-        // if (locationsFromLocalStorage.value.length) {
-        //     locations = locationsFromLocalStorage.value
-        //     options.value = locations.map(location => {
-        //         return location.location_name
-        //     })   
-        // } else {
-        // }
-
         try {
            
         } catch (error) {
@@ -36,8 +28,7 @@
     </div>
 
     <!-- Shows all users when "Add new users" is clicked -->
-    <ScoreCards />
-
+    <ScoreCards /
     <!-- Saves a game to the server -->
     <SaveGame />
 </template>
