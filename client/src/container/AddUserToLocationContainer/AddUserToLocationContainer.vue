@@ -33,13 +33,13 @@
         
         isLoading.value = true
         if (props.players.some(player => player.toLowerCase() === newPlayer.toLowerCase())) {
-            duplicateErrorMessage.value = `${newPlayer} already exists! Please select another name.`
+            duplicateErrorMessage.value = `"${newPlayer}" already exists! Please select another name.`
             isDuplicatePlayer.value = true
 
             setTimeout(() => {
                 duplicateErrorMessage.value = ""
                 isDuplicatePlayer.value = false
-            }, 3000);
+            }, 3000)
         }else{
             props.addNewPlayerToArray(newPlayer)
 
@@ -109,17 +109,25 @@
                 placeholder="Player's Last Name" 
                 required
             >
-            <div class="error" v-if="isDuplicatePlayer">{{ duplicateErrorMessage }}</div>
         </div>
-
+        
         <button class="form-element" type="submit" >
             <Loading :height="35" :usePrimary="false" v-if="isLoading" />
             <div v-else> Add Player To Location </div>
         </button>
+        <div class="error" v-if="isDuplicatePlayer">{{ duplicateErrorMessage }}</div>
     </form>
 </template>
 
 <style scoped lang="scss">
+    .error{
+        text-align: center;
+        color: red;
+        font-size: 25px;
+        font-weight: 600;
+        margin: 20px;
+    }
+
     .select-wrapper{
         text-align: center;
         
@@ -169,14 +177,6 @@
                     border: 2px solid var(--primary-color);
                     outline: none;
                 }
-            }
-
-            .error{
-                text-align: center;
-                color: red;
-                font-size: 25px;
-                font-weight: 600;
-                margin: 15px;
             }
         }
 

@@ -28,7 +28,8 @@
     </div>
 
     <!-- Shows all users when "Add new users" is clicked -->
-    <ScoreCards /
+    <ScoreCards />
+
     <!-- Saves a game to the server -->
     <SaveGame />
 </template>
