@@ -3,6 +3,8 @@
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
+    import CreateNewGameContainer from '../../container/CreateNewGameContainer/CreateNewGameContainer.vue';
+
     import { onMounted } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
 
@@ -20,6 +22,8 @@
 
 <template>
     <PageTitle :titleName="'Create New Game'"/>
+
+    <CreateNewGameContainer />
 
     <ResetPoints :resetAllPoints="resetAllPoints"/>
 
