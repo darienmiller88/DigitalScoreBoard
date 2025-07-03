@@ -30,21 +30,45 @@
         .available-player{
             display: grid;
             grid-template-columns: 75% auto;
-            border: 2px salmon solid;
+            // border: 2px salmon solid;
             width: 75vw;
+            margin: 5px;
             
             span{
-                border: 2px solid red;
+                border: 2px solid var(--primary-color);
+                border-right: none;
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+
+                color: var(--primary-color);
                 // margin-right: 10px;
-                padding: 8px;
+                padding: 10px;
                 white-space: nowrap;
                 font-size: 24px;
                 overflow-x: scroll;
+
+                &::-webkit-scrollbar {
+                    height: 4px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: var(--primary-color); 
+                    border-radius: 3px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: transparent;
+                }
             }
 
             button{
-                border: 2px solid green;
-                font-size: 24px;   
+                border: none;
+                font-size: 24px; 
+                font-weight: 600;  
+                background-color: var(--primary-color);
+                color: var(--bg-color);
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
             }
         }
     }
