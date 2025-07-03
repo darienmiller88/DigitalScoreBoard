@@ -4,6 +4,7 @@
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import CreateNewGameContainer from '../../container/CreateNewGameContainer/CreateNewGameContainer.vue';
+    import AvailablePlayersContainers from '../../container/AvailablePlayersContainers/AvailablePlayersContainers.vue';
 
     import { onMounted } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
@@ -25,6 +26,8 @@
 
     <CreateNewGameContainer />
 
+    <AvailablePlayersContainers />
+
     <ResetPoints :resetAllPoints="resetAllPoints"/>
 
     <div class="total-points">
@@ -32,10 +35,10 @@
     </div>
 
     <!-- Shows all users when "Add new users" is clicked -->
-    <ScoreCards />
+    <!-- <ScoreCards /> -->
 
     <!-- Saves a game to the server -->
-    <SaveGame />
+    <!-- <SaveGame /> -->
 </template>
 
 <style scoped lang="scss">

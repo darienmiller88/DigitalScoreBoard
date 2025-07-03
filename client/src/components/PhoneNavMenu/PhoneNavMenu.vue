@@ -35,7 +35,7 @@
         display: grid;
         grid-template-rows: 10% auto;
 
-        background-color: aliceblue;
+        background-color: var(--bg-color);
         width: 100vw;
         height: 100vh;
         z-index: 1000;
@@ -49,6 +49,7 @@
             display: flex;
             justify-content: end;
             padding: 20px;
+            color: var(--primary-color);
         }
 
         .links{
@@ -70,7 +71,7 @@
                 font-style: normal;
 
                 text-align: center;
-                color: rgb(0, 31, 81);
+                color: var(--primary-color);
                 font-size: 25px;
                 padding: 25px;
                 transition: 0.2s;
