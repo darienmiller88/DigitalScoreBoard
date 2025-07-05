@@ -14,6 +14,8 @@
     let isGameCreated = ref<boolean>(false)  
   
     onMounted(async () => {
+        console.log(isGameCreated);
+        
         try {
            
         } catch (error) {

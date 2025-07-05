@@ -9,7 +9,7 @@
     <div class="available-players">
         <div v-for="player in availablePlayers" class="available-player">
             <span>{{ player }}</span>
-            <button v-if="width > 768">Add To Game</button>
+            <button v-if="width >= 768">Add To Game</button>
             <button v-else>Add</button>
         </div>
     </div>
@@ -27,12 +27,28 @@
         max-height: 20vh;
         overflow-y: scroll;
 
+        @media (min-width: 768px) {
+            max-height: 30vh;
+        }
+
         .available-player{
             display: grid;
             grid-template-columns: 75% auto;
             // border: 2px salmon solid;
             width: 75vw;
             margin: 5px;
+
+            //tablets
+            @media (min-width: 768px) {
+                grid-template-columns: 65% auto;
+                width: 65vw;
+            }
+
+            // laptops
+            @media (min-width: 1025px) {
+                grid-template-columns: 75% auto;
+                width: 55vw;
+            }
             
             span{
                 border: 2px solid var(--primary-color);
