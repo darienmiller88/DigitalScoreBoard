@@ -20,15 +20,25 @@
         display: grid;
         // flex-direction: column;
         // align-items: center;
-        // border: 2px solid black;
+        border: 2px solid var(--primary-color);
         width: fit-content;
         margin: auto;
         margin-bottom: 20px;
         max-height: 20vh;
         overflow-y: scroll;
+        transition: 0.3s;
 
         @media (min-width: 768px) {
+            border: none;
             max-height: 30vh;
+        }
+
+        @media (min-width: 1025px) {
+            border: none;
+            
+            &:hover{
+               box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
+            }
         }
 
         .available-player{
