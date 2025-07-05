@@ -69,6 +69,18 @@
                 color: var(--bg-color);
                 border-top-right-radius: 8px;
                 border-bottom-right-radius: 8px;
+                transition: 0.2s;
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: var(--primary-color-transparent);
+                }
+
+                &:active{
+                    // box-shadow: 6px 6px 6px var(--primary-color-transparent);
+                    transform: translateY(-2px);
+                    // transform: scale(0.98);
+                }
             }
         }
     }
