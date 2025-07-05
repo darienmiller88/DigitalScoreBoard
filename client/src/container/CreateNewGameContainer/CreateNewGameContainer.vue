@@ -28,6 +28,7 @@
         span{
             font-size: 24px;
             margin-right: 10px;
+            color: var(--primary-color);
 
             @media (min-width: 768px) {
                 font-size: 30px;

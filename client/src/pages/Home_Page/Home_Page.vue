@@ -6,11 +6,12 @@
     import CreateNewGameContainer from '../../container/CreateNewGameContainer/CreateNewGameContainer.vue';
     import AvailablePlayersContainers from '../../container/AvailablePlayersContainers/AvailablePlayersContainers.vue';
 
-    import { onMounted } from 'vue';
+    import { onMounted, ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
 
     //Stateful methods
     const { resetAllPoints, totalPoints } = scoreCardsStore()
+    let isGameCreated = ref<boolean>(false)  
   
     onMounted(async () => {
         try {
