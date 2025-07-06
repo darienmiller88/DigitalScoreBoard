@@ -4,7 +4,6 @@
     import { SavedGame } from '../../types/types';
     import { teamCardsStore } from '../../stores/teamCardsStore';
     import { scoreBoardApi } from '../../api/api';
-    import { buttonActiveStore, ButtonState } from '../../stores/buttonActiveStore';
     import Loading from '../Loading/Loading.vue';
 
     //Stateful methods
@@ -12,7 +11,6 @@
 
     //Stateful variables
     const { teamCards } = storeToRefs(teamCardsStore())
-    const { currentButtonGroupState } = storeToRefs(buttonActiveStore())
 
     let isLoading = ref<boolean>(false)
 
@@ -20,23 +18,20 @@
         isLoading.value = false
 
         try {
-            if (currentButtonGroupState.value === ButtonState.CREATE_NEW_TEAM_GAME) {
-                const savedGame: SavedGame = {
-                    id: "",
-                    winner: getWinningTeam(),
-                    teams: teamCards.value,
-                    location_name: "Lawrence",
-                    total_points: totalPoints(),
-                    average_points: getAveragePoints(),
-                    created_at: new Date().toLocaleDateString()
-                }
-                
-                console.log("game:", savedGame);
-                
-                const res = await scoreBoardApi.post("/save-game", savedGame)
-                console.log("res: ", res.data)
+            const savedGame: SavedGame = {
+                id: "",
+                winner: getWinningTeam(),
+                teams: teamCards.value,
+                location_name: "Lawrence",
+                total_points: totalPoints(),
+                average_points: getAveragePoints(),
+                created_at: new Date().toLocaleDateString()
             }
-
+            
+            console.log("game:", savedGame);
+            
+            const res = await scoreBoardApi.post("/save-game", savedGame)
+            console.log("res: ", res.data)
         } catch (error) {
             console.log("err:", error);
         }
