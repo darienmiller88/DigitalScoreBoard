@@ -10,7 +10,7 @@
 </script>
 
 <template>
-    <div>Players </div>
+    <div class="players-indicator">Players available to add: </div>
     <div class="available-players" v-if="availablePlayersToAdd.length">
         <div v-for="player in availablePlayersToAdd" class="available-player">
             <span>{{ player }}</span>
@@ -24,6 +24,17 @@
 </template>
 
 <style scoped lang="scss">
+    .players-indicator{
+        text-align: center;
+        color: var(--primary-color);
+        margin: 10px;
+        font-size: 20px;
+
+        @media (min-width: 768px) {
+            font-size: 28px;
+        }
+    }
+
     .no-players{
         text-align: center;
         margin-bottom: 20px;
@@ -56,7 +67,7 @@
 
         @media (min-width: 1025px) {
             border: none;
-            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;            
+            box-shadow: var(--primary-color-transparent) 1.95px 1.95px 2.6px;            
 
             &:hover{
                 box-shadow: var(--primary-color-transparent) 0px 30px 60px -10px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
