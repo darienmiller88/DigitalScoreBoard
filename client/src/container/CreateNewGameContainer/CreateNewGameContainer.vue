@@ -1,16 +1,26 @@
 <script setup lang="ts">
     import Select from '../../components/Select/Select.vue';
     
-    import { ref } from 'vue';
     import { optionsStore } from '../../stores/optionsStore';
+    import { HomePageStore } from '../../stores/HomePageStore';
+    import { storeToRefs } from 'pinia';
+    import { onMounted } from 'vue';
 
+    const { currentLocation } = storeToRefs(HomePageStore())
+    const { setCurrentLocation } = HomePageStore()
     const { allLocationOptions } = optionsStore()
 
-    let currentLocation = ref<string>(allLocationOptions[0])
 
-    const onChangeSelect = (event: Event) => {
-        currentLocation.value = (event.target as HTMLSelectElement).value;
+    const onChangeSelect = async (event: Event) => {
+        setCurrentLocation((event.target as HTMLSelectElement).value);
     }
+    
+    onMounted(() => {
+        //Load the first location in if there is no current location saved in local storage
+        if (!currentLocation.value.length) {
+            currentLocation.value = allLocationOptions[0]
+        }
+    })
 </script>
 
 <template>
