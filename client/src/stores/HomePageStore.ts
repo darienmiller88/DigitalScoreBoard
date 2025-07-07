@@ -4,17 +4,29 @@ import { PlayerCard } from '../types/types';
 
 export const HomePageStore = defineStore("HomePageStore", () => {
     const availablePlayersToAdd = ref<string[]>([])
-    const currentPlayers = ref<PlayerCard[]>([])
+    const currentPlayersInGame = ref<PlayerCard[]>([])
+    const currentLocation = ref<string>("")
 
     const setAvailablePlayers = (newPlayers: string[]) => {
         availablePlayersToAdd.value = newPlayers
     }
 
     const setCurrentPlayers = (newPlayers: PlayerCard[]) => {
-        currentPlayers.value = newPlayers
+        currentPlayersInGame.value = newPlayers
+    }
+
+    const setCurrentLocation = (newLocation: string) => {
+        currentLocation.value = newLocation
     }
     
-    return { availablePlayersToAdd, currentPlayers, setAvailablePlayers, setCurrentPlayers }
+    return { 
+        availablePlayersToAdd, 
+        currentPlayersInGame, 
+        setAvailablePlayers, 
+        setCurrentPlayers, 
+        currentLocation, 
+        setCurrentLocation
+    }
 }, {
     persist: true
 })
