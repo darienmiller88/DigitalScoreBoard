@@ -8,12 +8,14 @@
 </script>
 
 <template>
-    <div class="players-indicator">Players available to add: </div>
-    <div class="available-players" v-if="availablePlayersToAdd.length">
-        <div v-for="player in availablePlayersToAdd" class="available-player">
-            <span>{{ player }}</span>
-            <button v-if="width >= 768">Add To Game</button>
-            <button v-else>Add</button>
+    <div v-if="availablePlayersToAdd.length">
+        <div class="players-indicator" >Players available to add: </div>
+        <div class="available-players" >
+            <div v-for="player in availablePlayersToAdd" class="available-player">
+                <span>{{ player }}</span>
+                <button v-if="width >= 768">Add To Game</button>
+                <button v-else>Add</button>
+            </div>
         </div>
     </div>
     <div class="no-players" v-else>
@@ -36,6 +38,7 @@
     .no-players{
         text-align: center;
         margin-bottom: 20px;
+        color: var(--primary-color);
 
         @media (min-width: 768px) {
             font-size: 30px;

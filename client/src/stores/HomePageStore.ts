@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { PlayerCard } from '../types/types';
 
 export const HomePageStore = defineStore("HomePageStore", () => {
-    const availablePlayersToAdd = ref<string[]>(["darien miller niller nuiller", "vicky", "sean", "kash", "darien", "vicky", "sean", "kash"])
+    const availablePlayersToAdd = ref<string[]>([])
     const currentPlayers = ref<PlayerCard[]>([])
 
     const setAvailablePlayers = (newPlayers: string[]) => {
