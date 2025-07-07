@@ -25,6 +25,11 @@
 <style scoped lang="scss">
     .no-players{
         text-align: center;
+        margin-bottom: 20px;
+
+        @media (min-width: 768px) {
+            font-size: 30px;
+        }
     }
 
     .available-players{
