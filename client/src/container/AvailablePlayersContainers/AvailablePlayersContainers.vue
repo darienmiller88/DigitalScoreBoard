@@ -6,10 +6,11 @@
     const { availablePlayersToAdd } = storeToRefs(HomePageStore())
     // const { setAvailablePlayers } = HomePageStore()
     const { width } = useWindowSize();
-    // const availablePlayers = ["darien miller niller nuiller", "vicky", "sean", "kash", "darien", "vicky", "sean", "kash"]
+    // const availablePlayers = []
 </script>
 
 <template>
+    <div>Players </div>
     <div class="available-players" v-if="availablePlayersToAdd.length">
         <div v-for="player in availablePlayersToAdd" class="available-player">
             <span>{{ player }}</span>
@@ -37,9 +38,13 @@
         // flex-direction: column;
         // align-items: center;
         border: 2px solid var(--primary-color);
+        border-radius: 5px;
+
         width: fit-content;
         margin: auto;
         margin-bottom: 20px;
+        padding: 8px;
+        
         max-height: 20vh;
         overflow-y: scroll;
         transition: 0.3s;
@@ -54,7 +59,7 @@
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;            
 
             &:hover{
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                box-shadow: var(--primary-color-transparent) 0px 30px 60px -10px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
             }
         }
 
