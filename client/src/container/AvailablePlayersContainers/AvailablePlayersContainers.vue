@@ -4,9 +4,7 @@
     import { useWindowSize } from "@vueuse/core"
 
     const { availablePlayersToAdd } = storeToRefs(HomePageStore())
-    // const { setAvailablePlayers } = HomePageStore()
     const { width } = useWindowSize();
-    // const availablePlayers = []
 </script>
 
 <template>
