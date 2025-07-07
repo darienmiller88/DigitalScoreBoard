@@ -1,21 +1,32 @@
 <script setup lang="ts">
+    import { storeToRefs } from "pinia";
+    import { HomePageStore } from "../../stores/HomePageStore";
     import { useWindowSize } from "@vueuse/core"
 
+    const { availablePlayersToAdd } = storeToRefs(HomePageStore())
+    // const { setAvailablePlayers } = HomePageStore()
     const { width } = useWindowSize();
-    const availablePlayers = ["darien miller niller nuiller", "vicky", "sean", "kash", "darien", "vicky", "sean", "kash"]
+    // const availablePlayers = ["darien miller niller nuiller", "vicky", "sean", "kash", "darien", "vicky", "sean", "kash"]
 </script>
 
 <template>
-    <div class="available-players">
-        <div v-for="player in availablePlayers" class="available-player">
+    <div class="available-players" v-if="availablePlayersToAdd.length">
+        <div v-for="player in availablePlayersToAdd" class="available-player">
             <span>{{ player }}</span>
             <button v-if="width >= 768">Add To Game</button>
             <button v-else>Add</button>
         </div>
     </div>
+    <div class="no-players" v-else>
+        No players available for selected location.
+    </div>
 </template>
 
 <style scoped lang="scss">
+    .no-players{
+        text-align: center;
+    }
+
     .available-players{
         display: grid;
         // flex-direction: column;
@@ -36,7 +47,7 @@
         @media (min-width: 1025px) {
             border: none;
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;            
-            
+
             &:hover{
                 box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
             }
