@@ -4,22 +4,42 @@
     import { optionsStore } from '../../stores/optionsStore';
     import { HomePageStore } from '../../stores/HomePageStore';
     import { storeToRefs } from 'pinia';
+    import { scoreBoardApi } from '../../api/api';
     import { onMounted } from 'vue';
+    import { PlayerCard } from '../../types/types';
 
     const { currentLocation } = storeToRefs(HomePageStore())
-    const { setCurrentLocation } = HomePageStore()
+    const { setCurrentLocation, setAvailablePlayers } = HomePageStore()
     const { allLocationOptions } = optionsStore()
 
 
     const onChangeSelect = async (event: Event) => {
-        setCurrentLocation((event.target as HTMLSelectElement).value);
+        const locationName = (event.target as HTMLSelectElement).value
+        
+        setCurrentLocation(locationName)
+        loadPlayersFromLocation(locationName)
+    }
+
+    const loadPlayersFromLocation = async (locationName: string) => {
+        try {
+            const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`)
+
+            console.log("players:", playersResult.data);
+            setAvailablePlayers(playersResult.data.map(player => player.username))
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
     
     onMounted(() => {
-        //Load the first location in if there is no current location saved in local storage
+        //Load the first location in IF there is no current location saved in local storage
         if (!currentLocation.value.length) {
             currentLocation.value = allLocationOptions[0]
         }
+
+        loadPlayersFromLocation(currentLocation.value)
     })
 </script>
 
