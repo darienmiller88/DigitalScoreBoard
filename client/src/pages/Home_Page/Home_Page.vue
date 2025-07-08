@@ -16,7 +16,7 @@
     onMounted(async () => {
         console.log(isGameCreated);
         
-        try {
+        try {0
            
         } catch (error) {
             console.log("err:", error);

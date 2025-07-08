@@ -132,7 +132,7 @@
             input{
                 padding: 10px;
                 font-size: 20px;
-                width: 85vw;
+                width: 75vw;
     
                 @media (min-width: 768px) {
                     width: 60vw;
