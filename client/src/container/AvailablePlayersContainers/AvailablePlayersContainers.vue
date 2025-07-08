@@ -103,6 +103,7 @@
                 color: var(--primary-color);
                 // margin-right: 10px;
                 padding: 10px;
+                transition: 0.3s;
                 white-space: nowrap;
                 font-size: 24px;
                 overflow-x: scroll;
@@ -118,6 +119,14 @@
 
                 &::-webkit-scrollbar-track {
                     background: transparent;
+                }
+
+                @media (min-width: 1025px) {
+                    font-size: 30px;
+
+                    &:hover{
+                        color: white;
+                    }
                 }
             }
 
