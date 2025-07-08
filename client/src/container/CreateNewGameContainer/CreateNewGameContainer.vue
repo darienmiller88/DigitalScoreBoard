@@ -24,12 +24,9 @@
         try {
             const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`)
 
-            console.log("players:", playersResult.data);
-            setAvailablePlayers(playersResult.data.map(player => player.username))
-            
+            setAvailablePlayers(playersResult.data.map(player => player.username))            
         } catch (error) {
             console.log(error);
-            
         }
     }
     
