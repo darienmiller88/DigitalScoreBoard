@@ -70,6 +70,12 @@
             color: var(--bg-color);
             font-size: 22px;
             font-weight: 600;
+            transition: 0.3s;
+
+            &:hover{
+                cursor: pointer;
+                background-color: var(--primary-color-transparent);
+            }
         }
     }
 </style>
