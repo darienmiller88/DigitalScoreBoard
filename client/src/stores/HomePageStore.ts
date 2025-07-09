@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { PlayerCard } from '../types/types';
+import { PlayerCard, AvailablePlayer } from '../types/types';
 
 export const HomePageStore = defineStore("HomePageStore", () => {
-    const availablePlayersToAdd = ref<string[]>([])
+    const availablePlayersToAdd = ref<AvailablePlayer[]>([])
     const currentPlayersInGame = ref<PlayerCard[]>([])
     const currentLocation = ref<string>("")
 
-    const setAvailablePlayers = (newPlayers: string[]) => {
+    const setAvailablePlayers = (newPlayers: AvailablePlayer[]) => {
         availablePlayersToAdd.value = newPlayers
     }
 

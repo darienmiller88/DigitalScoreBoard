@@ -9,8 +9,8 @@
 
 <template>
     <div v-if="availablePlayersToAdd.length">
-        <div class="players-indicator" >Number of Players added: {{ currentPlayersInGame.length }} </div>
-        <div class="available-players" >
+        <div class="players-indicator">Number of Players added: {{ currentPlayersInGame.length }} </div>
+        <div class="available-players">
             <div v-for="player in availablePlayersToAdd" class="available-player">
                 <span>{{ player }}</span>
                 <button v-if="width >= 768">Add To Game</button>
