@@ -15,7 +15,7 @@
                 <div class="player-name">{{ player.player_name }}</div>
                 <div class="buttons-wrapper">
                     <div class="remove-player-wrapper" v-if="player.isAddedToGame">
-                        <button class="base-btn">Remove From Game</button>
+                        <button class="base-btn">Remove</button>
                     </div>
                     <div class="add-player-wrapper" v-else>
                         <button class="base-btn">
@@ -142,8 +142,11 @@
 
             .buttons-wrapper{
                 .remove-player-wrapper{
-                    // background-color: green;
                     height: 100%;
+
+                    button{
+                        background-color: rgb(241, 50, 10);
+                    }
                 }
                 
                 .add-player-wrapper{
@@ -151,27 +154,25 @@
                 }
 
                 .base-btn{
-                    // border: none;
-                    // font-size: 24px; 
-                    // font-weight: 600;  
-                    // background-color: var(--primary-color);
-                    // color: var(--bg-color);
+                    border: none;
+                    font-size: 24px; 
+                    font-weight: 600;  
+                    background-color: var(--primary-color);
+                    color: var(--bg-color);
                     border-top-right-radius: 8px;
                     border-bottom-right-radius: 8px;
                     height: 100%;
                     width: 100%;
-                    // transition: 0.2s;
+                    transition: 0.2s;
         
-                    // &:hover{
-                    //     cursor: pointer;
-                    //     background-color: var(--primary-color-transparent);
-                    // }
+                    &:hover{
+                        cursor: pointer;
+                        background-color: var(--primary-color-transparent);
+                    }
         
-                    // &:active{
-                    //     // box-shadow: 6px 6px 6px var(--primary-color-transparent);
-                    //     transform: translateY(-2px);
-                    //     // transform: scale(0.98);
-                    // }
+                    &:active{
+                        transform: translateY(-2px);
+                    }
                 }
                 
             }
