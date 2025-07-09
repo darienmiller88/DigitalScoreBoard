@@ -18,6 +18,15 @@ export const HomePageStore = defineStore("HomePageStore", () => {
     const setCurrentLocation = (newLocation: string) => {
         currentLocation.value = newLocation
     }
+
+    const addAvailalePlayerToGame = (playerIndex: number, playerName: string) => {
+        currentPlayersInGame.value = [...currentPlayersInGame.value, {
+            username: playerName,
+            score: 0
+        }]
+
+        availablePlayersToAdd.value[playerIndex].isAddedToGame = !availablePlayersToAdd.value[playerIndex].isAddedToGame
+    }
     
     return { 
         availablePlayersToAdd, 
@@ -25,7 +34,8 @@ export const HomePageStore = defineStore("HomePageStore", () => {
         setAvailablePlayers, 
         setCurrentPlayers, 
         currentLocation, 
-        setCurrentLocation
+        setCurrentLocation,
+        addAvailalePlayerToGame
     }
 }, {
     persist: true
