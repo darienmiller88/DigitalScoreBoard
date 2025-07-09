@@ -16,7 +16,7 @@
     onMounted(async () => {
         console.log(isGameCreated);
         
-        try {0
+        try {
            
         } catch (error) {
             console.log("err:", error);
@@ -27,34 +27,49 @@
 <template>
     <PageTitle :titleName="'Create New Game'"/>
 
-    <CreateNewGameContainer />
+    <div v-if="!isGameCreated">
+        <CreateNewGameContainer />
+    
+        <AvailablePlayersContainers />
 
-    <AvailablePlayersContainers />
-
-    <ResetPoints :resetAllPoints="resetAllPoints"/>
-
-    <div class="total-points">
-        Total Points: {{ totalPoints() }} 
+        <div class="button-wrapper">
+            <button>Create Game!</button>
+        </div>
     </div>
-
-    <!-- Shows all users when "Add new users" is clicked -->
-    <ScoreCards />
-
-    <!-- Saves a game to the server -->
-    <SaveGame />
+    <div v-else>
+        <ResetPoints :resetAllPoints="resetAllPoints"/>
+    
+        <div class="total-points">
+            Total Points: {{ totalPoints() }} 
+        </div>
+    
+        <!-- Shows all users when "Add new users" is clicked -->
+        <ScoreCards />
+    
+        <!-- Saves a game to the server -->
+        <SaveGame />
+    </div>
 </template>
 
 <style scoped lang="scss">
-    .error{
-        text-align: center;
-        color: red;
-        font-size: 25px;
-    }
-
     .total-points{
         text-align: center;
         font-size: 30px;
         color: var(--primary-color);
         padding: 20px;
     }  
+
+    .button-wrapper{
+        text-align: center;
+
+        button{
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            font-size: 22px;
+            font-weight: 600;
+        }
+    }
 </style>
