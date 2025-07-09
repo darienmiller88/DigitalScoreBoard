@@ -4,7 +4,7 @@
     import { useWindowSize } from "@vueuse/core"
 
     const { availablePlayersToAdd, currentPlayersInGame } = storeToRefs(HomePageStore())
-    const { addAvailalePlayerToGame } = HomePageStore()
+    const { addAvailalePlayerToGame, removeAvailablePlayerFromGame } = HomePageStore()
     const { width } = useWindowSize();
 </script>
 
@@ -16,7 +16,7 @@
                 <div class="player-name">{{ player.player_name }}</div>
                 <div class="buttons-wrapper">
                     <div class="remove-player-wrapper" v-if="player.isAddedToGame">
-                        <button class="base-btn">Remove</button>
+                        <button class="base-btn" @click="() => removeAvailablePlayerFromGame(i, player.player_name)">Remove</button>
                     </div>
                     <div class="add-player-wrapper" v-else>
                         <button class="base-btn" @click="() => addAvailalePlayerToGame(i, player.player_name)">
