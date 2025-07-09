@@ -125,7 +125,7 @@
                     font-size: 30px;
 
                     &:hover{
-                        color: white;
+                        color: var(--toggle-background);
                     }
                 }
             }
