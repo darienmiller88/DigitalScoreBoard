@@ -4,7 +4,7 @@ export type PlayerCard = {
 }
 
 export type AvailablePlayer = {
-    username: string
+    player_name: string
     isAddedToGame: boolean
 }
 

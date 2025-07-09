@@ -12,9 +12,18 @@
         <div class="players-indicator">Number of Players added: {{ currentPlayersInGame.length }} </div>
         <div class="available-players">
             <div v-for="player in availablePlayersToAdd" class="available-player">
-                <span>{{ player }}</span>
-                <button v-if="width >= 768">Add To Game</button>
-                <button v-else>Add</button>
+                <div class="player-name">{{ player.player_name }}</div>
+                <div class="buttons-wrapper">
+                    <div class="remove-player-wrapper" v-if="player.isAddedToGame">
+                        <button class="base-btn">Remove From Game</button>
+                    </div>
+                    <div class="add-player-wrapper" v-else>
+                        <button class="base-btn">
+                            <span v-if="width >= 768">Add To Game</span> 
+                            <span v-else>Add</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -68,7 +77,8 @@
 
         @media (min-width: 1025px) {
             border: none;
-            box-shadow: var(--primary-color-transparent) 1.95px 1.95px 2.6px;            
+            box-shadow: var(--primary-color-transparent) 1.95px 1.95px 2.6px; 
+            max-height: 40vh;           
 
             &:hover{
                 box-shadow: var(--primary-color-transparent) 0px 30px 60px -10px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
@@ -94,7 +104,7 @@
                 width: 55vw;
             }
             
-            span{
+            .player-name{
                 border: 2px solid var(--primary-color);
                 border-right: none;
                 border-top-left-radius: 8px;
@@ -130,26 +140,40 @@
                 }
             }
 
-            button{
-                border: none;
-                font-size: 24px; 
-                font-weight: 600;  
-                background-color: var(--primary-color);
-                color: var(--bg-color);
-                border-top-right-radius: 8px;
-                border-bottom-right-radius: 8px;
-                transition: 0.2s;
-
-                &:hover{
-                    cursor: pointer;
-                    background-color: var(--primary-color-transparent);
+            .buttons-wrapper{
+                .remove-player-wrapper{
+                    // background-color: green;
+                    height: 100%;
+                }
+                
+                .add-player-wrapper{
+                    height: 100%;
                 }
 
-                &:active{
-                    // box-shadow: 6px 6px 6px var(--primary-color-transparent);
-                    transform: translateY(-2px);
-                    // transform: scale(0.98);
+                .base-btn{
+                    // border: none;
+                    // font-size: 24px; 
+                    // font-weight: 600;  
+                    // background-color: var(--primary-color);
+                    // color: var(--bg-color);
+                    border-top-right-radius: 8px;
+                    border-bottom-right-radius: 8px;
+                    height: 100%;
+                    width: 100%;
+                    // transition: 0.2s;
+        
+                    // &:hover{
+                    //     cursor: pointer;
+                    //     background-color: var(--primary-color-transparent);
+                    // }
+        
+                    // &:active{
+                    //     // box-shadow: 6px 6px 6px var(--primary-color-transparent);
+                    //     transform: translateY(-2px);
+                    //     // transform: scale(0.98);
+                    // }
                 }
+                
             }
         }
     }

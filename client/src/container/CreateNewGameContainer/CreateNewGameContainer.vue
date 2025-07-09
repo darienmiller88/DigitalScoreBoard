@@ -25,7 +25,7 @@
             const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`)
 
             setAvailablePlayers(playersResult.data.map(player => ({
-                username: player.username,
+                player_name: player.username,
                 isAddedToGame: false
             })))            
         } catch (error) {
