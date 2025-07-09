@@ -3,6 +3,11 @@ export type PlayerCard = {
     score: number
 }
 
+export type AvailablePlayer = {
+    username: string
+    isAddedToGame: boolean
+}
+
 export type Team = {
     team_name: string
     players: string[]

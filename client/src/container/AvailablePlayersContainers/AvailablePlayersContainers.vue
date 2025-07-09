@@ -3,13 +3,13 @@
     import { HomePageStore } from "../../stores/HomePageStore";
     import { useWindowSize } from "@vueuse/core"
 
-    const { availablePlayersToAdd } = storeToRefs(HomePageStore())
+    const { availablePlayersToAdd, currentPlayersInGame } = storeToRefs(HomePageStore())
     const { width } = useWindowSize();
 </script>
 
 <template>
     <div v-if="availablePlayersToAdd.length">
-        <div class="players-indicator" >Players available to add: </div>
+        <div class="players-indicator" >Number of Players added: {{ currentPlayersInGame.length }} </div>
         <div class="available-players" >
             <div v-for="player in availablePlayersToAdd" class="available-player">
                 <span>{{ player }}</span>
