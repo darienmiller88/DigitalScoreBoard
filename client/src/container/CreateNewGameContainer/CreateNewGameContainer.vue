@@ -9,7 +9,7 @@
     import { PlayerCard } from '../../types/types';
 
     const { currentLocation } = storeToRefs(HomePageStore())
-    const { setCurrentLocation, setAvailablePlayers } = HomePageStore()
+    const { setCurrentLocation, setAvailablePlayers, setCurrentPlayers } = HomePageStore()
     const { allLocationOptions } = optionsStore()
 
 
@@ -24,6 +24,10 @@
         try {
             const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`)
 
+            //Set the current players to an empty array whenever new players are loaded from a location.
+            setCurrentPlayers([])
+
+            //And then set the available list of players to the ones we just retrieved
             setAvailablePlayers(playersResult.data.map(player => ({
                 player_name: player.username,
                 isAddedToGame: false

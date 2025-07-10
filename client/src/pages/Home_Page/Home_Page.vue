@@ -32,6 +32,7 @@
     
         <AvailablePlayersContainers />
 
+        <!-- When this is created, add the current players to the score cards store -->
         <div class="button-wrapper">
             <button>Create Game!</button>
         </div>

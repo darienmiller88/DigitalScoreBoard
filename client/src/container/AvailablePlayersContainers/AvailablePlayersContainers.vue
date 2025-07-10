@@ -147,11 +147,23 @@
 
                     button{
                         background-color: rgb(241, 50, 10);
+
+                        &:hover{
+                            cursor: pointer;
+                            background-color: rgba(241, 50, 10, 0.7);
+                        }
                     }
                 }
                 
                 .add-player-wrapper{
                     height: 100%;
+
+                    button{
+                        &:hover{
+                            cursor: pointer;
+                            background-color: var(--primary-color-transparent);
+                        }
+                    }
                 }
 
                 .base-btn{
@@ -165,11 +177,6 @@
                     height: 100%;
                     width: 100%;
                     transition: 0.2s;
-        
-                    &:hover{
-                        cursor: pointer;
-                        background-color: var(--primary-color-transparent);
-                    }
         
                     &:active{
                         transform: translateY(-2px);
