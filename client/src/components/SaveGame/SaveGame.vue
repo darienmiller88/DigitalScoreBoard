@@ -10,7 +10,7 @@
     const props = defineProps<SavedGame>()
 
     const addSavedGame = async () => {
-        isLoading.value = false
+        isLoading.value = true
 
         try {
             const savedGame: SavedGame = props
@@ -23,7 +23,7 @@
             console.log("err:", error);
         }
 
-        isLoading.value = true
+        isLoading.value = false
     }
 </script>
 

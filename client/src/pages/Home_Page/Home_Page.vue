@@ -10,7 +10,7 @@
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { HomePageStore } from '../../stores/HomePageStore';
     import { storeToRefs } from 'pinia';
-import { SavedGame } from '../../types/types';
+    import { SavedGame } from '../../types/types';
 
     //ref variable
     const { currentPlayersInGame } = storeToRefs(HomePageStore())
