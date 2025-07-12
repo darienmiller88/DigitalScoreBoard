@@ -1,37 +1,24 @@
 <script setup lang="ts">
     import { ref } from 'vue';
-    import { storeToRefs } from 'pinia';
     import { SavedGame } from '../../types/types';
-    import { teamCardsStore } from '../../stores/teamCardsStore';
-    import { scoreBoardApi } from '../../api/api';
+    // import { scoreBoardApi } from '../../api/api';
     import Loading from '../Loading/Loading.vue';
 
-    //Stateful methods
-    const { getWinningTeam, totalPoints, getAveragePoints } = teamCardsStore()
-
     //Stateful variables
-    const { teamCards } = storeToRefs(teamCardsStore())
-
     let isLoading = ref<boolean>(false)
+
+    const props = defineProps<SavedGame>()
 
     const addSavedGame = async () => {
         isLoading.value = false
 
         try {
-            const savedGame: SavedGame = {
-                id: "",
-                winner: getWinningTeam(),
-                teams: teamCards.value,
-                location_name: "Lawrence",
-                total_points: totalPoints(),
-                average_points: getAveragePoints(),
-                created_at: new Date().toLocaleDateString()
-            }
+            const savedGame: SavedGame = props
             
             console.log("game:", savedGame);
             
-            const res = await scoreBoardApi.post("/save-game", savedGame)
-            console.log("res: ", res.data)
+            // const res = await scoreBoardApi.post("/save-game", savedGame)
+            // console.log("res: ", res.data)
         } catch (error) {
             console.log("err:", error);
         }
@@ -42,7 +29,7 @@
 
 <template>
    <div class="save-wrapper">
-        <button type="button" @click="addSavedGame" disabled>
+        <button type="button" @click="addSavedGame" >
             <Loading :height="30" :usePrimary="false" v-if="isLoading"/>
             <div v-else> Save Game </div>
         </button>

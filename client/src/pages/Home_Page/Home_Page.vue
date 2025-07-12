@@ -8,11 +8,35 @@
 
     import { onMounted, ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
+    import { HomePageStore } from '../../stores/HomePageStore';
+    import { storeToRefs } from 'pinia';
+import { SavedGame } from '../../types/types';
+
+    //ref variable
+    const { currentPlayersInGame } = storeToRefs(HomePageStore())
+    const { scoreCards } = storeToRefs(scoreCardsStore())
 
     //Stateful methods
     const { resetAllPoints, totalPoints } = scoreCardsStore()
     let isGameCreated = ref<boolean>(false)  
+    let savedGame = ref<SavedGame>({
+        id: '',
+        winner: {
+            username: '',
+            score: 0
+        },
+        location_name: '',
+        created_at: '',
+        total_points: 0,
+        average_points: 0
+    })
   
+    const createGame = () => {
+        console.log("players to add:", currentPlayersInGame.value.length);
+        scoreCards.value = currentPlayersInGame.value
+        isGameCreated.value = true
+    }
+
     onMounted(async () => {
         console.log(isGameCreated);
         
@@ -34,7 +58,7 @@
 
         <!-- When this is created, add the current players to the score cards store -->
         <div class="button-wrapper">
-            <button>Create Game!</button>
+            <button @click="createGame">Create Game!</button>
         </div>
     </div>
     <div v-else>
@@ -48,7 +72,7 @@
         <ScoreCards />
     
         <!-- Saves a game to the server -->
-        <SaveGame />
+        <SaveGame v-bind="savedGame" />
     </div>
 </template>
 
