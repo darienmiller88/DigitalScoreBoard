@@ -1,17 +1,17 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { PlayerCard, AvailablePlayer } from '../types/types';
+import { AvailablePlayer } from '../types/types';
 
 export const HomePageStore = defineStore("HomePageStore", () => {
     const availablePlayersToAdd = ref<AvailablePlayer[]>([])
-    const currentPlayersInGame = ref<PlayerCard[]>([])
+    const currentPlayersInGame = ref<string[]>([])
     const currentLocation = ref<string>("")
 
     const setAvailablePlayers = (newPlayers: AvailablePlayer[]) => {
         availablePlayersToAdd.value = newPlayers
     }
 
-    const setCurrentPlayers = (newPlayers: PlayerCard[]) => {
+    const setCurrentPlayers = (newPlayers: string[]) => {
         currentPlayersInGame.value = newPlayers
     }
 
@@ -21,18 +21,15 @@ export const HomePageStore = defineStore("HomePageStore", () => {
 
     //Add the player to the game, and set their availibility to false.
     const addAvailalePlayerToGame = (playerIndex: number, playerName: string) => {
-        currentPlayersInGame.value = [...currentPlayersInGame.value, {
-            username: playerName,
-            score: 0
-        }]
+        currentPlayersInGame.value = [...currentPlayersInGame.value, playerName]
 
         availablePlayersToAdd.value[playerIndex].isAddedToGame = !availablePlayersToAdd.value[playerIndex].isAddedToGame
     }
 
     //Remove the player from the game, and set their availibility to true.
     const removeAvailablePlayerFromGame = (playerIndex: number, playerName: string) => {
-        currentPlayersInGame.value = currentPlayersInGame.value.filter(player => {
-            return player.username != playerName
+        currentPlayersInGame.value = currentPlayersInGame.value.filter(_playerName => {
+            return _playerName != playerName
         })
 
         availablePlayersToAdd.value[playerIndex].isAddedToGame = !availablePlayersToAdd.value[playerIndex].isAddedToGame

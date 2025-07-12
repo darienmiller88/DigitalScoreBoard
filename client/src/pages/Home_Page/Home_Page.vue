@@ -31,9 +31,13 @@
         average_points: 0
     })
   
-    const createGame = () => {
-        console.log("players to add:", currentPlayersInGame.value.length);
-        scoreCards.value = currentPlayersInGame.value
+    const createGame = () => {  
+
+        //Take the players the client added, and turn them into scorecards
+        scoreCards.value = currentPlayersInGame.value.map(playerName => ({
+            username: playerName,
+            score: 0
+        }))
         isGameCreated.value = true
     }
 
