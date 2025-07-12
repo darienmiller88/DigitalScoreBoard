@@ -13,12 +13,13 @@
     import { SavedGame } from '../../types/types';
 
     //ref variable
-    const { currentPlayersInGame } = storeToRefs(HomePageStore())
+    const { currentPlayersInGame, isGameCreated } = storeToRefs(HomePageStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
 
     //Stateful methods
     const { resetAllPoints, totalPoints } = scoreCardsStore()
-    let isGameCreated = ref<boolean>(false)  
+    const { toggleGameCreatedStatus } = HomePageStore()
+
     let savedGame = ref<SavedGame>({
         id: '',
         winner: {
@@ -38,7 +39,9 @@
             username: playerName,
             score: 0
         }))
-        isGameCreated.value = true
+
+        //set the game status to true to show the scorecards
+        toggleGameCreatedStatus(true)
     }
 
     onMounted(async () => {
