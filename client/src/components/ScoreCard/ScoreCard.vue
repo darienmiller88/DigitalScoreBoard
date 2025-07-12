@@ -58,17 +58,17 @@
         transition: 0.3s;
         text-align: center;
 
-        @media screen and (min-width: 768px) {
+        @media (min-width: 768px) {
             width: 40vw;
             margin: 20px 0px; 
         }
 
-        @media screen and (min-width: 992px) {
+        @media (min-width: 992px) {
             width: 25vw;
             margin: 20px 0px; 
         }
 
-        @media screen and (min-width: 1400px) {
+        @media (min-width: 1400px) {
             width: 15vw;
             margin: 20px 0px; 
         }
@@ -136,8 +136,8 @@
                 grid-template-columns: auto 170px auto;
             }
 
-            @media screen and (min-width: 1300px) {
-                grid-template-columns: auto 120px auto;
+            @media screen and (min-width: 1025px) {
+                grid-template-columns: auto 150px auto;
             }
 
             .score{

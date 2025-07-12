@@ -19,8 +19,6 @@
     const { resetAllPoints, totalPoints } = scoreCardsStore()
     const { toggleGameCreatedStatus } = HomePageStore()
 
-    
-  
     const createGame = () => {  
 
         //Take the players the client added, and turn them into scorecards
@@ -34,12 +32,10 @@
     }
 
     const endAndSaveGame = () => {
-
+        toggleGameCreatedStatus(false)
     }
 
-    onMounted(async () => {
-        console.log(isGameCreated);
-        
+    onMounted(async () => {        
         try {
            
         } catch (error) {
