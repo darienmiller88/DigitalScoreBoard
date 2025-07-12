@@ -1,35 +1,36 @@
 <script setup lang="ts">
     import { ref } from 'vue';
-    import { SavedGame } from '../../types/types';
     // import { scoreBoardApi } from '../../api/api';
     import Loading from '../Loading/Loading.vue';
 
     //Stateful variables
     let isLoading = ref<boolean>(false)
 
-    const props = defineProps<SavedGame>()
+    defineProps<{
+        endAndSaveGame: () => void
+    }>()
 
-    const addSavedGame = async () => {
-        isLoading.value = true
+    // const addSavedGame = async () => {
+    //     isLoading.value = true
 
-        try {
-            const savedGame: SavedGame = props
+    //     try {
+    //         const savedGame: SavedGame = props
             
-            console.log("game:", savedGame);
+    //         console.log("game:", savedGame);
             
-            // const res = await scoreBoardApi.post("/save-game", savedGame)
-            // console.log("res: ", res.data)
-        } catch (error) {
-            console.log("err:", error);
-        }
+    //         // const res = await scoreBoardApi.post("/save-game", savedGame)
+    //         // console.log("res: ", res.data)
+    //     } catch (error) {
+    //         console.log("err:", error);
+    //     }
 
-        isLoading.value = false
-    }
+    //     isLoading.value = false
+    // }
 </script>
 
 <template>
    <div class="save-wrapper">
-        <button type="button" @click="addSavedGame" >
+        <button type="button" @click="endAndSaveGame" >
             <Loading :height="30" :usePrimary="false" v-if="isLoading"/>
             <div v-else> Save Game </div>
         </button>

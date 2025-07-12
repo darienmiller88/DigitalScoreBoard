@@ -6,11 +6,10 @@
     import CreateNewGameContainer from '../../container/CreateNewGameContainer/CreateNewGameContainer.vue';
     import AvailablePlayersContainers from '../../container/AvailablePlayersContainers/AvailablePlayersContainers.vue';
 
-    import { onMounted, ref } from 'vue';
+    import { onMounted } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { HomePageStore } from '../../stores/HomePageStore';
     import { storeToRefs } from 'pinia';
-    import { SavedGame } from '../../types/types';
 
     //ref variable
     const { currentPlayersInGame, isGameCreated } = storeToRefs(HomePageStore())
@@ -20,17 +19,7 @@
     const { resetAllPoints, totalPoints } = scoreCardsStore()
     const { toggleGameCreatedStatus } = HomePageStore()
 
-    let savedGame = ref<SavedGame>({
-        id: '',
-        winner: {
-            username: '',
-            score: 0
-        },
-        location_name: '',
-        created_at: '',
-        total_points: 0,
-        average_points: 0
-    })
+    
   
     const createGame = () => {  
 
@@ -42,6 +31,10 @@
 
         //set the game status to true to show the scorecards
         toggleGameCreatedStatus(true)
+    }
+
+    const endAndSaveGame = () => {
+
     }
 
     onMounted(async () => {
@@ -79,7 +72,7 @@
         <ScoreCards />
     
         <!-- Saves a game to the server -->
-        <SaveGame v-bind="savedGame" />
+        <SaveGame :endAndSaveGame="endAndSaveGame" />
     </div>
 </template>
 
