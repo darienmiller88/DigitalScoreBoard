@@ -128,15 +128,15 @@
             display: grid;
             grid-template-columns: auto 160px auto;
 
-            @media screen and (min-width: 768px) {
+            @media (min-width: 768px) {
                 grid-template-columns: auto 150px auto;
             }
 
-            @media screen and (min-width: 992px) {
+            @media (min-width: 992px) {
                 grid-template-columns: auto 170px auto;
             }
 
-            @media screen and (min-width: 1025px) {
+            @media (min-width: 1025px) {
                 grid-template-columns: auto 150px auto;
             }
 
@@ -159,7 +159,7 @@
 
                 transition: 0.5s;
 
-                @media screen and (min-width: 768px) {
+                @media (min-width: 768px) {
                     padding: 10px 30px;
                     font-size: 20px;
                 }
