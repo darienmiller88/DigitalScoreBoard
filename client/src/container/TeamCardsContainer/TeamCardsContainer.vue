@@ -10,7 +10,7 @@
     //components
     import TeamCard from '../../components/TeamCard/TeamCard.vue'
     import Modal from "../../components/Modal/Modal.vue"
-    import AddNewPlayer from "../../components/AddNewPlayer/AddNewPlayer.vue"
+    import AddNewPlayerToTeam from "../../components/AddNewPlayerToTeam/AddNewPlayerToTeam.vue";
     import ViewPlayers from '../../components/ViewPlayers/ViewPlayers.vue';
     
     //Ref variable to get access to all teams playing
@@ -117,7 +117,7 @@
     <Modal 
       :modalHeader="'Add team member'"
       :show="showAddTeamPlayerModal"
-      :modalContent="AddNewPlayer"
+      :modalContent="AddNewPlayerToTeam"
       :onHide="() => showAddTeamPlayerModal = false"
       :modalProps="addTeamNewPlayerData"
     />

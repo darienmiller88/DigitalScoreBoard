@@ -68,10 +68,10 @@
             margin: 20px 0px; 
         }
 
-        @media (min-width: 1400px) {
-            width: 15vw;
-            margin: 20px 0px; 
-        }
+        // @media (min-width: 1400px) {
+        //     width: 15vw;
+        //     margin: 20px 0px; 
+        // }
 
         &:hover{
             box-shadow: 10px 10px 15px var(--primary-color-color);
@@ -137,7 +137,7 @@
             }
 
             @media (min-width: 1025px) {
-                grid-template-columns: auto 150px auto;
+                grid-template-columns: auto 160px auto;
             }
 
             .score{

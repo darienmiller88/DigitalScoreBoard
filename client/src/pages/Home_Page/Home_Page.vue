@@ -10,6 +10,7 @@
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { HomePageStore } from '../../stores/HomePageStore';
     import { storeToRefs } from 'pinia';
+    import { useToast } from "vue-toastification";
 
     //ref variable
     const { currentPlayersInGame, isGameCreated } = storeToRefs(HomePageStore())
@@ -18,7 +19,7 @@
     //Stateful methods
     const { resetAllPoints, totalPoints } = scoreCardsStore()
     const { toggleGameCreatedStatus } = HomePageStore()
-
+    const toast = useToast()
 
     let isLoading = ref<boolean>(false)
 
@@ -36,13 +37,12 @@
 
     const endAndSaveGame = () => {
         isLoading.value = true
+        toast.success("Game saved!", {timeout: 2500})
 
         setTimeout(() => {
             isLoading.value = false
             toggleGameCreatedStatus(false)
-            
         }, 3000);
-
     }
 
     onMounted(async () => {        
