@@ -6,7 +6,7 @@
     import CreateNewGameContainer from '../../container/CreateNewGameContainer/CreateNewGameContainer.vue';
     import AvailablePlayersContainers from '../../container/AvailablePlayersContainers/AvailablePlayersContainers.vue';
 
-    import { onMounted } from 'vue';
+    import { onMounted, ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { HomePageStore } from '../../stores/HomePageStore';
     import { storeToRefs } from 'pinia';
@@ -18,6 +18,9 @@
     //Stateful methods
     const { resetAllPoints, totalPoints } = scoreCardsStore()
     const { toggleGameCreatedStatus } = HomePageStore()
+
+
+    let isLoading = ref<boolean>(false)
 
     const createGame = () => {  
 
@@ -45,9 +48,10 @@
 </script>
 
 <template>
-    <PageTitle :titleName="'Create New Game'"/>
+    
+    <div v-if="!isGameCreated && scoreCards.length">
+        <PageTitle :titleName="'Create New Game'"/>
 
-    <div v-if="!isGameCreated">
         <CreateNewGameContainer />
     
         <AvailablePlayersContainers />
@@ -58,6 +62,8 @@
         </div>
     </div>
     <div v-else>
+        <PageTitle :titleName="'Game in session'"/>
+
         <ResetPoints :resetAllPoints="resetAllPoints"/>
     
         <div class="total-points">
@@ -68,7 +74,7 @@
         <ScoreCards />
     
         <!-- Saves a game to the server -->
-        <SaveGame :endAndSaveGame="endAndSaveGame" />
+        <SaveGame :endAndSaveGame="endAndSaveGame" :isLoading="isLoading"/>
     </div>
 </template>
 

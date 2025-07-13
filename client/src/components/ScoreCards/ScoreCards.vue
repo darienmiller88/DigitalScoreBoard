@@ -35,21 +35,21 @@
         margin: auto;
         padding: 0px 10px;
 
-        @media only screen and (min-width: 768px){
+        @media (min-width: 768px){
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             max-height: 75vh;
         }
 
-        @media only screen and (min-width: 992px){
+        @media (min-width: 1025px){
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             max-height: 75vh;
         }
 
-        @media only screen and (min-width: 1400px){
+        @media (min-width: 2560px){
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 25px;

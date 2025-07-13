@@ -1,13 +1,13 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
     // import { scoreBoardApi } from '../../api/api';
     import Loading from '../Loading/Loading.vue';
 
     //Stateful variables
-    let isLoading = ref<boolean>(false)
+    // let isLoading = ref<boolean>(false)
 
     defineProps<{
         endAndSaveGame: () => void
+        isLoading: boolean
     }>()
 
     // const addSavedGame = async () => {
