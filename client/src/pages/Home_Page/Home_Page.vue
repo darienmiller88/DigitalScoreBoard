@@ -35,7 +35,14 @@
     }
 
     const endAndSaveGame = () => {
-        toggleGameCreatedStatus(false)
+        isLoading.value = true
+
+        setTimeout(() => {
+            isLoading.value = false
+            toggleGameCreatedStatus(false)
+            
+        }, 3000);
+
     }
 
     onMounted(async () => {        
