@@ -13,7 +13,7 @@
     import { useToast } from "vue-toastification";
 
     //ref variable
-    const { currentPlayersInGame, isGameCreated } = storeToRefs(HomePageStore())
+    const { currentPlayersInGame } = storeToRefs(HomePageStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
 
     //Stateful methods
@@ -37,11 +37,11 @@
 
     const endAndSaveGame = () => {
         isLoading.value = true
-        toast.success("Game saved!", {timeout: 2500})
+        toast.success("Game saved!", { timeout: 2500 })
 
         setTimeout(() => {
             isLoading.value = false
-            toggleGameCreatedStatus(false)
+            scoreCards.value = []
         }, 3000);
     }
 
@@ -56,7 +56,7 @@
 
 <template>
     
-    <div v-if="!isGameCreated && scoreCards.length">
+    <div v-if="!scoreCards.length">
         <PageTitle :titleName="'Create New Game'"/>
 
         <CreateNewGameContainer />
