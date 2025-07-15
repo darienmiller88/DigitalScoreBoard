@@ -73,8 +73,10 @@
     
         <AvailablePlayersContainers />
 
-        <!-- if the -->
-        <div class="error" v-if="isMinimumNumberOfPlayerErrorShown">Please add at least one player to the game</div>
+        <!-- if the client did not add any players, flash this error -->
+        <div class="error" v-if="isMinimumNumberOfPlayerErrorShown">Please add at least one player to the game.</div>
+       
+        <!-- Otherwise, show the create game button -->
         <div class="button-wrapper" v-else>
             <button @click="createGame">Create Game!</button>
         </div>
