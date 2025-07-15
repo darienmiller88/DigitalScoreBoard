@@ -7,7 +7,7 @@
     import AddNewTeamContainer from "../../container/AddNewTeamContainer/AddNewTeamContainer.vue";
     
     //Components
-    import SaveGame from '../../components/SaveGame/SaveGame.vue';
+    // import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
 
@@ -30,7 +30,7 @@
     <TeamCardsContainer />
 
     <!-- Saves a game to the server -->
-    <SaveGame />
+    <!-- <SaveGame /> -->
 </template>
 
 <style lang="scss">
