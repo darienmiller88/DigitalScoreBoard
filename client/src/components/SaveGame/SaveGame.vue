@@ -38,32 +38,27 @@
 </template>
 
 <style scoped lang="scss">
-     .save-wrapper{
-        text-align: center;
-        margin: 40px;
+    button{
+        border-radius: 10px;
+        border: none;
+        padding: 15px 35px;
+        background-color: var(--primary-color);
+        color: aliceblue;
 
-        button{
-            border-radius: 10px;
-            border: none;
-            padding: 15px 35px;
-            background-color: var(--primary-color);
-            color: aliceblue;
-    
-            transition: 0.5s;
-            font-size: 25px;
+        transition: 0.5s;
+        font-size: 25px;
 
-            &:hover{
-                cursor: pointer;
-                background-color: var(--primary-color-transparent);
-            }
+        &:hover{
+            cursor: pointer;
+            background-color: var(--primary-color-transparent);
+        }
 
-            &:active {
-                transform: translateY(-5px);
-            }
+        &:active {
+            transform: translateY(-5px);
         }
     }
 
-    .save-wrapper button:active {
-        transform: translateY(-5px);
-    }
+    // .save-wrapper button:active {
+    //     transform: translateY(-5px);
+    // }
 </style>

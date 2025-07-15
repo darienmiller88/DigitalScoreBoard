@@ -77,7 +77,7 @@
         <div class="error" v-if="isMinimumNumberOfPlayerErrorShown">Please add at least one player to the game.</div>
        
         <!-- Otherwise, show the create game button -->
-        <div class="button-wrapper" v-else>
+        <div class="create-game-button-wrapper" v-else>
             <button @click="createGame">Create Game!</button>
         </div>
     </div>
@@ -92,9 +92,18 @@
     
         <!-- Shows all users when "Add new users" is clicked -->
         <ScoreCards />
-    
-        <!-- Saves a game to the server -->
-        <SaveGame :endAndSaveGame="endAndSaveGame" :isLoading="isLoading"/>
+        
+        <div class="buttons-wrapper">
+
+            <button class="close-game">Close game</button>
+
+            <div class="line"></div>
+
+            <!-- Saves a game to the server -->
+            <div class="save-game-wrapper">
+                <SaveGame :endAndSaveGame="endAndSaveGame" :isLoading="isLoading"/>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -112,7 +121,34 @@
         font-size: 25px;
     }
 
-    .button-wrapper{
+    .buttons-wrapper{
+        display: flex;
+        width: fit-content;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        // border: 2px solid red;
+
+        .close-game{
+            background-color: red;
+            border-radius: 8px;
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 10px 20px;
+            margin: 0px 10px;
+        }
+
+        .line{
+            border: solid 2px white;
+        }
+
+        .save-game-wrapper{
+            margin: 0px 10px;
+        }
+    }
+
+    .create-game-button-wrapper{
         text-align: center;
 
         button{
