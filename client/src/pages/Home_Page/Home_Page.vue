@@ -22,17 +22,27 @@
     const toast = useToast()
 
     let isLoading = ref<boolean>(false)
+    let isMinimumNumberOfPlayerErrorShown = ref<boolean>(false)
 
-    const createGame = () => {  
+    const createGame = () => {
+        
+        //If the client added no players, prevent the game from being created and flash an error.
+        if (currentPlayersInGame.value.length == 0) {
+            isMinimumNumberOfPlayerErrorShown.value = true
 
-        //Take the players the client added, and turn them into scorecards
-        scoreCards.value = currentPlayersInGame.value.map(playerName => ({
-            username: playerName,
-            score: 0
-        }))
-
-        //set the game status to true to show the scorecards
-        toggleGameCreatedStatus(true)
+            setTimeout(() => {
+                isMinimumNumberOfPlayerErrorShown.value = false
+            }, 2000);
+        } else {
+            //Take the players the client added, and turn them into scorecards
+            scoreCards.value = currentPlayersInGame.value.map(playerName => ({
+                username: playerName,
+                score: 0
+            }))
+    
+            //set the game status to true to show the scorecards
+            toggleGameCreatedStatus(true)
+        }
     }
 
     const endAndSaveGame = () => {
@@ -63,8 +73,9 @@
     
         <AvailablePlayersContainers />
 
-        <!-- When this is created, add the current players to the score cards store -->
-        <div class="button-wrapper">
+        <!-- if the -->
+        <div class="error" v-if="isMinimumNumberOfPlayerErrorShown">Please add at least one player to the game</div>
+        <div class="button-wrapper" v-else>
             <button @click="createGame">Create Game!</button>
         </div>
     </div>
@@ -92,6 +103,12 @@
         color: var(--primary-color);
         padding: 20px;
     }  
+
+    .error{
+        color: red;
+        text-align: center;
+        font-size: 25px;
+    }
 
     .button-wrapper{
         text-align: center;
