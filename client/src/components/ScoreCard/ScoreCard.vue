@@ -59,7 +59,6 @@
         text-align: center;
 
         @media (min-width: 768px) {
-            // width: 40vw;
             margin: 20px 0px; 
         }
 
@@ -68,14 +67,8 @@
             margin: 20px 0px; 
         }
 
-        // @media (min-width: 1400px) {
-        //     width: 15vw;
-        //     margin: 20px 0px; 
-        // }
-
         &:hover{
             box-shadow: 8px 8px 5px var(--primary-color);
-            // box-shadow: 10px 10px 15px var(--primary-color-color);
             transform: translateY(-5px);
         }
 
