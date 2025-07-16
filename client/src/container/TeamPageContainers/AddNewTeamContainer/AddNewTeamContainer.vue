@@ -1,15 +1,15 @@
 <script setup lang="ts">
     import { onMounted, ref } from 'vue';
-    import { selectedTeamStore } from '../../stores/selectedLocationStore';
-    import { optionsStore } from "../../stores/optionsStore"
-    import { teamCardsStore } from "../../stores/teamCardsStore";
+    import { selectedTeamStore } from '../../../stores/selectedLocationStore';
+    import { optionsStore } from "../../../stores/optionsStore"
+    import { teamCardsStore } from "../../../stores/teamCardsStore";
     import { storeToRefs } from 'pinia';
-    import { Location } from "../../types/types"
-    import { scoreBoardApi } from '../../api/api';
+    import { Location } from "../../../types/types"
+    import { scoreBoardApi } from '../../../api/api';
     
     //Components
-    import Select from '../../components/Select/Select.vue';
-    import Loading from '../../components/Loading/Loading.vue';
+    import Select from '../../../components/Select/Select.vue';
+    import Loading from '../../../components/Loading/Loading.vue';
 
     //ref variables
     const { teamCards } = storeToRefs(teamCardsStore())

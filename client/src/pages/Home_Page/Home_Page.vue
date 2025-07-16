@@ -3,8 +3,8 @@
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
-    import CreateNewGameContainer from '../../container/CreateNewGameContainer/CreateNewGameContainer.vue';
-    import AvailablePlayersContainers from '../../container/AvailablePlayersContainers/AvailablePlayersContainers.vue';
+    import CreateNewGameContainer from '../../container/HomePageContainers/CreateNewGameContainer/CreateNewGameContainer.vue';
+    import AvailablePlayersContainers from '../../container/HomePageContainers/AvailablePlayersContainers/AvailablePlayersContainers.vue';
 
     import { ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"

@@ -1,17 +1,17 @@
 <script setup lang="ts">
     //variables and stores
-    import { PlayerCard } from "../../types/types"
-    import { scoreBoardApi } from "../../api/api"
-    import { Team } from "../../types/types"
+    import { PlayerCard } from "../../../types/types"
+    import { scoreBoardApi } from "../../../api/api"
+    import { Team } from "../../../types/types"
     import { ref } from "vue"; 
     import { storeToRefs } from 'pinia'
-    import { teamCardsStore } from "../../stores/teamCardsStore"
+    import { teamCardsStore } from "../../../stores/teamCardsStore"
     
     //components
-    import TeamCard from '../../components/TeamCard/TeamCard.vue'
-    import Modal from "../../components/Modal/Modal.vue"
-    import AddNewPlayerToTeam from "../../components/AddNewPlayerToTeam/AddNewPlayerToTeam.vue";
-    import ViewPlayers from '../../components/ViewPlayers/ViewPlayers.vue';
+    import TeamCard from '../../../components/TeamCard/TeamCard.vue'
+    import Modal from "../../../components/Modal/Modal.vue"
+    import AddNewPlayerToTeam from "../../../components/AddNewPlayerToTeam/AddNewPlayerToTeam.vue";
+    import ViewPlayers from '../../../components/ViewPlayers/ViewPlayers.vue';
     
     //Ref variable to get access to all teams playing
     const { teamCards } = storeToRefs(teamCardsStore())

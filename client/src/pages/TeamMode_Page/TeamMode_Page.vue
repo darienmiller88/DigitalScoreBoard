@@ -3,8 +3,8 @@
     import { teamCardsStore } from "../../stores/teamCardsStore"
 
     //Containers
-    import TeamCardsContainer from "../../container/TeamCardsContainer/TeamCardsContainer.vue";
-    import AddNewTeamContainer from "../../container/AddNewTeamContainer/AddNewTeamContainer.vue";
+    import TeamCardsContainer from "../../container/TeamPageContainers/TeamCardsContainer/TeamCardsContainer.vue";
+    import AddNewTeamContainer from "../../container/TeamPageContainers/AddNewTeamContainer/AddNewTeamContainer.vue";
     
     //Components
     // import SaveGame from '../../components/SaveGame/SaveGame.vue';

@@ -2,13 +2,13 @@
     //libraries
     import { ref, onMounted } from 'vue'
     import { storeToRefs } from 'pinia';
-    import { scoreBoardApi } from "../../api/api"
+    import { scoreBoardApi } from "../../../api/api"
     import { useToast } from "vue-toastification";
-    import { optionsStore } from "../../stores/optionsStore"
+    import { optionsStore } from "../../../stores/optionsStore"
 
     //Components
-    import Loading from '../../components/Loading/Loading.vue';
-    import Select from '../../components/Select/Select.vue'
+    import Loading from '../../../components/Loading/Loading.vue';
+    import Select from '../../../components/Select/Select.vue'
 
     //Stateful variables
     const { allLocationOptions } = storeToRefs(optionsStore())

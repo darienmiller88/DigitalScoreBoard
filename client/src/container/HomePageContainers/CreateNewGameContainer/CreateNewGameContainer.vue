@@ -1,12 +1,12 @@
 <script setup lang="ts">
-    import Select from '../../components/Select/Select.vue';
+    import Select from '../../../components/Select/Select.vue';
     
-    import { optionsStore } from '../../stores/optionsStore';
-    import { HomePageStore } from '../../stores/HomePageStore';
+    import { optionsStore } from '../../../stores/optionsStore';
+    import { HomePageStore } from '../../../stores/HomePageStore';
     import { storeToRefs } from 'pinia';
-    import { scoreBoardApi } from '../../api/api';
+    import { scoreBoardApi } from '../../../api/api';
     import { onMounted } from 'vue';
-    import { PlayerCard } from '../../types/types';
+    import { PlayerCard } from '../../../types/types';
 
     const { currentLocation } = storeToRefs(HomePageStore())
     const { setCurrentLocation, setAvailablePlayers, setCurrentPlayers } = HomePageStore()

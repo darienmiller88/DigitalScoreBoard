@@ -1,15 +1,15 @@
 <script setup lang="ts">
     //Components
-    import UserCard from '../../components/UserCard/UserCard.vue';
-    import Modal from '../../components/Modal/Modal.vue';
-    import EditPlayerName from '../../components/EditPlayerName/EditPlayerName.vue';
-    import Loading from '../../components/Loading/Loading.vue';
+    import UserCard from '../../../components/UserCard/UserCard.vue';
+    import Modal from '../../../components/Modal/Modal.vue';
+    import EditPlayerName from '../../../components/EditPlayerName/EditPlayerName.vue';
+    import Loading from '../../../components/Loading/Loading.vue';
     
     //Data/Data manipulation
     import { onMounted, ref, watch } from 'vue';
-    import { scoreBoardApi } from "../../api/api"
-    import { PlayerCard } from "../../types/types"
-    import { optionsStore } from "../../stores/optionsStore"
+    import { scoreBoardApi } from "../../../api/api"
+    import { PlayerCard } from "../../../types/types"
+    import { optionsStore } from "../../../stores/optionsStore"
     import { useToast } from "vue-toastification";
 
     let showEditPlayerNameModal = ref<boolean>(false)
