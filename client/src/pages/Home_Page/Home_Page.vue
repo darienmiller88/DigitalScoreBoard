@@ -1,8 +1,8 @@
 <script setup lang="ts">
-    import ScoreCards from '../../components/ScoreCards/ScoreCards.vue';
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
+    import ScoreCards from '../../container/HomePageContainers/ScoreCardsContainer/ScoreCardsContainer.vue';
     import CreateNewGameContainer from '../../container/HomePageContainers/CreateNewGameContainer/CreateNewGameContainer.vue';
     import AvailablePlayersContainers from '../../container/HomePageContainers/AvailablePlayersContainers/AvailablePlayersContainers.vue';
 
@@ -12,7 +12,7 @@
     import { storeToRefs } from 'pinia';
     import { useToast } from "vue-toastification";
     import { SavedGame } from '../../types/types';
-import { scoreBoardApi } from '../../api/api';
+    import { scoreBoardApi } from '../../api/api';
 
     //ref variable
     const { currentPlayersInGame, currentLocation } = storeToRefs(HomePageStore())
