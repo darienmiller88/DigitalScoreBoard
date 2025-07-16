@@ -63,9 +63,7 @@ import { scoreBoardApi } from '../../api/api';
         
         isLoading.value = true
         try {
-            const res = await scoreBoardApi.post<SavedGame>("/save-game", savedGame)
-
-            console.log("res:", res.data);
+            await scoreBoardApi.post<SavedGame>("/save-game", savedGame)
             
             toast.success("Game saved!", { timeout: 2500 })
             scoreCards.value = []
