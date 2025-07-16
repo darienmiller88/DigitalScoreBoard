@@ -45,6 +45,10 @@
         }
     }
 
+    const closeGame = () => {
+        scoreCards.value = []
+    }
+
     const endAndSaveGame = () => {
         isLoading.value = true
         toast.success("Game saved!", { timeout: 2500 })
@@ -95,7 +99,7 @@
         
         <div class="buttons-wrapper">
 
-            <button class="close-game">Close game</button>
+            <button class="close-game" @="closeGame">Close game</button>
 
             <div class="line"></div>
 

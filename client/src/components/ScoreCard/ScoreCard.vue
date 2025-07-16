@@ -59,12 +59,16 @@
         text-align: center;
 
         @media (min-width: 768px) {
+            width: 40vw;
             margin: 20px 0px; 
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 1000px) {
+            width: 40vw;
+        }
+
+        @media (min-width: 1025px) {
             width: 25vw;
-            margin: 20px 0px; 
         }
 
         &:hover{
@@ -123,12 +127,12 @@
             grid-template-columns: auto 160px auto;
 
             @media (min-width: 768px) {
-                grid-template-columns: auto 150px auto;
+                grid-template-columns: auto 50% auto;
             }
 
-            @media (min-width: 992px) {
-                grid-template-columns: auto 170px auto;
-            }
+            // @media (min-width: 992px) {
+            //     grid-template-columns: auto 170px auto;
+            // }
 
             @media (min-width: 1025px) {
                 grid-template-columns: auto 160px auto;
