@@ -170,7 +170,7 @@
                     border: none;
                     font-size: 24px; 
                     font-weight: 600;  
-                    background-color: var(--primary-color);
+                    background-color: var(--toggle-background);
                     color: var(--bg-color);
                     border-top-right-radius: 8px;
                     border-bottom-right-radius: 8px;
