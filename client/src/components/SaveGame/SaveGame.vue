@@ -47,6 +47,7 @@
 
         transition: 0.5s;
         font-size: 25px;
+        font-weight: 600;
 
         &:hover{
             cursor: pointer;

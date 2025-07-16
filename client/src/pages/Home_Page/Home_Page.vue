@@ -134,13 +134,22 @@
             border-radius: 8px;
             border: none;
             color: white;
+
             font-size: 24px;
+            font-weight: 600;
+
             padding: 10px 20px;
             margin: 0px 10px;
+            transition: 0.3s;
+
+            &:hover{
+                background-color: rgba(255, 0, 0, 0.5);
+                cursor: pointer;
+            }
         }
 
         .line{
-            border: solid 2px white;
+            border: solid 2px var(--toggle-background);
         }
 
         .save-game-wrapper{
