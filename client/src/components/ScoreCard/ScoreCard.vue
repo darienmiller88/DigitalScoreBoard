@@ -52,14 +52,14 @@
         border-radius: 10px;
 
         width: 90vw;
-        box-shadow: 8px 8px 5px rgba(173, 216, 230, 0.548);
+        box-shadow: 8px 8px 5px var(--primary-color-transparent);
         margin: 20px 0px; 
 
         transition: 0.3s;
         text-align: center;
 
         @media (min-width: 768px) {
-            width: 40vw;
+            // width: 40vw;
             margin: 20px 0px; 
         }
 
@@ -74,7 +74,8 @@
         // }
 
         &:hover{
-            box-shadow: 10px 10px 15px var(--primary-color-color);
+            box-shadow: 8px 8px 5px var(--primary-color);
+            // box-shadow: 10px 10px 15px var(--primary-color-color);
             transform: translateY(-5px);
         }
 
