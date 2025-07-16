@@ -6,19 +6,20 @@
     import CreateNewGameContainer from '../../container/CreateNewGameContainer/CreateNewGameContainer.vue';
     import AvailablePlayersContainers from '../../container/AvailablePlayersContainers/AvailablePlayersContainers.vue';
 
-    import { onMounted, ref } from 'vue';
+    import { ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { HomePageStore } from '../../stores/HomePageStore';
     import { storeToRefs } from 'pinia';
     import { useToast } from "vue-toastification";
+    import { SavedGame } from '../../types/types';
+import { scoreBoardApi } from '../../api/api';
 
     //ref variable
-    const { currentPlayersInGame } = storeToRefs(HomePageStore())
+    const { currentPlayersInGame, currentLocation } = storeToRefs(HomePageStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
 
     //Stateful methods
     const { resetAllPoints, totalPoints } = scoreCardsStore()
-    const { toggleGameCreatedStatus } = HomePageStore()
     const toast = useToast()
 
     let isLoading = ref<boolean>(false)
@@ -39,9 +40,6 @@
                 username: playerName,
                 score: 0
             }))
-    
-            //set the game status to true to show the scorecards
-            toggleGameCreatedStatus(true)
         }
     }
 
@@ -49,23 +47,34 @@
         scoreCards.value = []
     }
 
-    const endAndSaveGame = () => {
-        isLoading.value = true
-        toast.success("Game saved!", { timeout: 2500 })
-
-        setTimeout(() => {
-            isLoading.value = false
-            scoreCards.value = []
-        }, 3000);
-    }
-
-    onMounted(async () => {        
-        try {
-           
-        } catch (error) {
-            console.log("err:", error);
+    const endAndSaveGame = async () => {
+        let savedGame: SavedGame = {
+            id: '',
+            winner: {
+                username: '',
+                score: 0
+            },
+            location_name: currentLocation.value,
+            created_at: new Date().toISOString(),
+            total_points: 0,
+            average_points: 0, 
+            players: scoreCards.value
         }
-    })
+        
+        isLoading.value = true
+        try {
+            const res = await scoreBoardApi.post<SavedGame>("/save-game", savedGame)
+
+            console.log("res:", res.data);
+            
+            toast.success("Game saved!", { timeout: 2500 })
+            scoreCards.value = []
+        } catch (error) {
+            console.log(error);
+        }
+        
+        isLoading.value = false
+    }
 </script>
 
 <template>
