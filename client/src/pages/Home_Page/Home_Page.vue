@@ -99,7 +99,7 @@
         
         <div class="buttons-wrapper">
 
-            <button class="close-game" @="closeGame">Close game</button>
+            <button class="close-game" @click="closeGame">Close game</button>
 
             <div class="line"></div>
 
