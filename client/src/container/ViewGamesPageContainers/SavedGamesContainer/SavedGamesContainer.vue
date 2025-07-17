@@ -49,7 +49,7 @@
                 game.created_at = new Date(game.created_at).toLocaleString()
             })
 
-            games = [...games, ...savedGameResult.data]
+            games = [...games, ...savedGameResult.data].reverse()
         } catch (error) {
             console.log("error:", error);
         }

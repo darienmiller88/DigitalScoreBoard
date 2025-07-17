@@ -106,7 +106,7 @@
         
         <div class="buttons-wrapper">
 
-            <button class="close-game" @click="closeGame">Close game</button>
+            <button class="close-game base-btn" @click="closeGame">Close game</button>
 
             <div class="line"></div>
 
@@ -114,6 +114,10 @@
             <div class="save-game-wrapper">
                 <SaveGame :endAndSaveGame="endAndSaveGame" :isLoading="isLoading"/>
             </div>
+
+            <div class="line"></div>
+
+            <button class="add-more base-btn">Add more players</button>
         </div>
     </div>
 </template>
@@ -138,20 +142,22 @@
         margin: auto;
         margin-top: 20px;
         margin-bottom: 20px;
-        // border: 2px solid red;
 
-        .close-game{
-            background-color: red;
-            border-radius: 8px;
+        .base-btn{
+            border-radius: 12px;
             border: none;
             color: white;
-
+    
             font-size: 24px;
             font-weight: 600;
-
+    
             padding: 10px 20px;
             margin: 0px 10px;
             transition: 0.3s;
+        }
+
+        .close-game{
+            background-color: red;
 
             &:hover{
                 background-color: rgba(255, 0, 0, 0.5);
@@ -161,6 +167,15 @@
 
         .line{
             border: solid 2px var(--toggle-background);
+        }
+
+        .add-more{
+            background-color: green;
+
+            &:hover{
+                background-color: rgba(0, 100, 0, 0.5);
+                cursor: pointer;
+            }
         }
 
         .save-game-wrapper{
