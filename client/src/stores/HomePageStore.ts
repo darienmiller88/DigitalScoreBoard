@@ -6,6 +6,11 @@ export const HomePageStore = defineStore("HomePageStore", () => {
     const availablePlayersToAdd = ref<AvailablePlayer[]>([])
     const currentPlayersInGame = ref<string[]>([])
     const currentLocation = ref<string>("")
+    const isGameCreated = ref<boolean>(false)  
+
+    const toggleGameCreatedStatus = (gameCreatedStatus: boolean) =>{
+        isGameCreated.value = gameCreatedStatus
+    }
 
     const setAvailablePlayers = (newPlayers: AvailablePlayer[]) => {
         availablePlayersToAdd.value = newPlayers
@@ -37,11 +42,13 @@ export const HomePageStore = defineStore("HomePageStore", () => {
     
     return { 
         availablePlayersToAdd, 
+        isGameCreated,
         currentPlayersInGame, 
         setAvailablePlayers, 
         setCurrentPlayers, 
         currentLocation, 
         setCurrentLocation,
+        toggleGameCreatedStatus,
         addAvailalePlayerToGame,
         removeAvailablePlayerFromGame
     }

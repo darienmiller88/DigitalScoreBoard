@@ -15,11 +15,12 @@
     import { scoreBoardApi } from '../../api/api';
 
     //ref variable
-    const { currentPlayersInGame, currentLocation } = storeToRefs(HomePageStore())
+    const { currentPlayersInGame, currentLocation, isGameCreated } = storeToRefs(HomePageStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
 
     //Stateful methods
     const { resetAllPoints, totalPoints } = scoreCardsStore()
+    const { toggleGameCreatedStatus } = HomePageStore()
     const toast = useToast()
 
     let isLoading = ref<boolean>(false)
@@ -35,6 +36,8 @@
                 isMinimumNumberOfPlayerErrorShown.value = false
             }, 2000);
         } else {
+            toggleGameCreatedStatus(true)
+
             //Take the players the client added, and turn them into scorecards
             scoreCards.value = currentPlayersInGame.value.map(playerName => ({
                 username: playerName,
@@ -43,8 +46,13 @@
         }
     }
 
+    const addMorePlayers = () => {
+        toggleGameCreatedStatus(false)
+    }
+
     const closeGame = () => {
         scoreCards.value = []
+        // toggleGameCreatedStatus(false)
     }
 
     const endAndSaveGame = async () => {
@@ -77,7 +85,7 @@
 
 <template>
     
-    <div v-if="!scoreCards.length">
+    <div v-if="!scoreCards.length || !isGameCreated">
         <PageTitle :titleName="'Create New Game'"/>
 
         <CreateNewGameContainer />
@@ -117,7 +125,7 @@
 
             <div class="line"></div>
 
-            <button class="add-more base-btn">Add more players</button>
+            <button class="add-more base-btn" @click="addMorePlayers">Add more players</button>
         </div>
     </div>
 </template>
