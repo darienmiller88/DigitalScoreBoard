@@ -3,8 +3,15 @@ import { ref } from 'vue';
 import { AvailablePlayer } from '../types/types';
 
 export const HomePageStore = defineStore("HomePageStore", () => {
+
+    //EVERY player from the ADAPT site that wad chosen.
     const availablePlayersToAdd = ref<AvailablePlayer[]>([])
+
+    //The players that has been added to a game by the client. It's basically a checkout line.
     const currentPlayersInGame = ref<string[]>([])
+
+    //The players that have not been added to a game yet.
+    const remainingPlayersInGame = ref<string[]>([])
     const currentLocation = ref<string>("")
     const isGameCreated = ref<boolean>(false)  
 
@@ -14,10 +21,18 @@ export const HomePageStore = defineStore("HomePageStore", () => {
 
     const setAvailablePlayers = (newPlayers: AvailablePlayer[]) => {
         availablePlayersToAdd.value = newPlayers
+
+        
+
+        //all: alice , joe, bob, randal
+        //current: alice, joe
+        //remaining expected: bob, randal
+    
+        console.log("remaining players:", remainingPlayersInGame.value);
     }
 
     const setCurrentPlayers = (newPlayers: string[]) => {
-        currentPlayersInGame.value = newPlayers
+        currentPlayersInGame.value = newPlayers                                            
     }
 
     const setCurrentLocation = (newLocation: string) => {
@@ -29,6 +44,7 @@ export const HomePageStore = defineStore("HomePageStore", () => {
         currentPlayersInGame.value = [...currentPlayersInGame.value, playerName]
 
         availablePlayersToAdd.value[playerIndex].isAddedToGame = !availablePlayersToAdd.value[playerIndex].isAddedToGame
+        setRemainingPlayers()
     }
 
     //Remove the player from the game, and set their availibility to true.
@@ -38,6 +54,15 @@ export const HomePageStore = defineStore("HomePageStore", () => {
         })
 
         availablePlayersToAdd.value[playerIndex].isAddedToGame = !availablePlayersToAdd.value[playerIndex].isAddedToGame
+        setRemainingPlayers()
+    }
+
+    const setRemainingPlayers = () => {
+        remainingPlayersInGame.value = availablePlayersToAdd.value
+        .map(player => player.player_name)
+        .filter(playerName =>
+            !currentPlayersInGame.value.includes(playerName)
+        )
     }
     
     return { 
@@ -46,6 +71,7 @@ export const HomePageStore = defineStore("HomePageStore", () => {
         currentPlayersInGame, 
         setAvailablePlayers, 
         setCurrentPlayers, 
+        remainingPlayersInGame,
         currentLocation, 
         setCurrentLocation,
         toggleGameCreatedStatus,

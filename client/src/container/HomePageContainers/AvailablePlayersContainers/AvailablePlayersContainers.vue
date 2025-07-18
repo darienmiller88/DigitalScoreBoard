@@ -3,7 +3,7 @@
     import { HomePageStore } from "../../../stores/HomePageStore";
     import { useWindowSize } from "@vueuse/core"
 
-    const { availablePlayersToAdd, currentPlayersInGame } = storeToRefs(HomePageStore())
+    const { availablePlayersToAdd, currentPlayersInGame, isGameCreated, remainingPlayersInGame } = storeToRefs(HomePageStore())
     const { addAvailalePlayerToGame, removeAvailablePlayerFromGame } = HomePageStore()
     const { width } = useWindowSize();
 </script>
