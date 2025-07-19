@@ -15,7 +15,7 @@
     import { scoreBoardApi } from '../../api/api';
 
     //ref variable
-    const { currentPlayersInGame, currentLocation, isGameCreated, remainingPlayersInGame } = storeToRefs(HomePageStore())
+    const { currentPlayersInGame, currentLocation, isGameCreated } = storeToRefs(HomePageStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
 
     //Stateful methods
@@ -37,10 +37,7 @@
             }, 2000);
         } else {
             toggleGameCreatedStatus(true)
-
-            console.log("remaining players:", remainingPlayersInGame.value);
             
-            //Take the players the client added, and turn them into scorecards
             scoreCards.value = currentPlayersInGame.value.map(playerName => ({
                 username: playerName,
                 score: 0
@@ -52,10 +49,13 @@
         toggleGameCreatedStatus(false)
     }
 
+    const returnToGame = () => {
+        toggleGameCreatedStatus(true)
+    }
+
     const closeGame = () => {
         scoreCards.value = []
         currentPlayersInGame.value = []
-        // toggleGameCreatedStatus(false)
     }
 
     const endAndSaveGame = async () => {
@@ -100,7 +100,13 @@
        
         <!-- Otherwise, show the create game button -->
         <div class="create-game-button-wrapper" v-else>
-            <button @click="createGame">Create Game!</button>
+            <button @click="createGame" v-if="!scoreCards.length">
+                Create Game!
+            </button>
+
+            <button @click="returnToGame" v-else>
+                Return to Game
+            </button>
         </div>
     </div>
     <div v-else>

@@ -1,18 +1,22 @@
 <script setup lang="ts">
     import { storeToRefs } from "pinia";
     import { HomePageStore } from "../../../stores/HomePageStore";
+    import { scoreCardsStore } from "../../../stores/scoreCardsStore";
     import { useWindowSize } from "@vueuse/core"
 
-    const { availablePlayersToAdd, currentPlayersInGame, isGameCreated, remainingPlayersInGame } = storeToRefs(HomePageStore())
+    const { scoreCards } = storeToRefs(scoreCardsStore())
+    const { availablePlayersToAdd, currentPlayersInGame, remainingPlayersInGame } = storeToRefs(HomePageStore())
     const { addAvailalePlayerToGame, removeAvailablePlayerFromGame } = HomePageStore()
     const { width } = useWindowSize();
+
+    let players = scoreCards.value.length ? remainingPlayersInGame : availablePlayersToAdd
 </script>
 
 <template>
     <div v-if="availablePlayersToAdd.length">
         <div class="players-indicator">Number of Players added: {{ currentPlayersInGame.length }} </div>
         <div class="available-players">
-            <div v-for="(player, i) in availablePlayersToAdd" class="available-player">
+            <div v-for="(player, i) in players" class="available-player">
                 <div class="player-name">{{ player.player_name }}</div>
                 <div class="buttons-wrapper">
                     <div class="remove-player-wrapper" v-if="player.isAddedToGame">

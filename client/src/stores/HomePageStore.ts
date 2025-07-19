@@ -11,7 +11,7 @@ export const HomePageStore = defineStore("HomePageStore", () => {
     const currentPlayersInGame = ref<string[]>([])
 
     //The players that have not been added to a game yet.
-    const remainingPlayersInGame = ref<string[]>([])
+    const remainingPlayersInGame = ref<AvailablePlayer[]>([])
     const currentLocation = ref<string>("")
     const isGameCreated = ref<boolean>(false)  
 
@@ -58,10 +58,8 @@ export const HomePageStore = defineStore("HomePageStore", () => {
     }
 
     const setRemainingPlayers = () => {
-        remainingPlayersInGame.value = availablePlayersToAdd.value
-        .map(player => player.player_name)
-        .filter(playerName =>
-            !currentPlayersInGame.value.includes(playerName)
+        remainingPlayersInGame.value = availablePlayersToAdd.value.filter(playerName =>
+            !currentPlayersInGame.value.includes(playerName.player_name)
         )
     }
     
