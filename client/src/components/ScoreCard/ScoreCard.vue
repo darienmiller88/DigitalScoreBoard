@@ -1,18 +1,24 @@
 <script setup lang="ts">
     // import { storeToRefs } from 'pinia';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
+    import { HomePageStore } from "../../stores/HomePageStore";
     // import { selectedLocationStore } from '../../stores/selectedLocationStore';
     // import { scoreBoardApi } from '../../api/api';
 
     const { removeCard, addPoints, minusPoints, resetPoints } = scoreCardsStore()
+    const { removeAvailablePlayerFromGame } = HomePageStore()
     // const { selectedLocation } = storeToRefs(selectedLocationStore())
-    defineProps<{ 
+    const props = defineProps<{ 
         cardIndex: number
         pointValue: number
         score: number
         username: string 
     }>()
 
+    const removeCardFromPlayerList = () => {
+        removeAvailablePlayerFromGame(props.cardIndex, props.username)
+        removeCard(props.cardIndex)
+    }
 
     //testing
     // const removeCardFromLocation = async () => {
@@ -31,7 +37,7 @@
      <div class="score-card">
         <div class="username">{{ username }}</div>
         <div class="divider"></div>
-        <button class="remove" @click="() => removeCard(cardIndex)" >
+        <button class="remove" @click="() => removeCardFromPlayerList()" >
             Remove User
         </button>
         <br>

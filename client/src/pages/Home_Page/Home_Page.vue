@@ -3,7 +3,7 @@
     import SaveGame from '../../components/SaveGame/SaveGame.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import ScoreCards from '../../container/HomePageContainers/ScoreCardsContainer/ScoreCardsContainer.vue';
-    import CreateNewGameContainer from '../../container/HomePageContainers/CreateNewGameContainer/CreateNewGameContainer.vue';
+    import SelectLocationContainer from '../../container/HomePageContainers/SelectLocationContainer/SelectLocationContainer.vue';
     import AvailablePlayersContainers from '../../container/HomePageContainers/AvailablePlayersContainers/AvailablePlayersContainers.vue';
 
     import { ref } from 'vue';
@@ -37,7 +37,7 @@
             }, 2000);
         } else {
             toggleGameCreatedStatus(true)
-            
+
             scoreCards.value = currentPlayersInGame.value.map(playerName => ({
                 username: playerName,
                 score: 0
@@ -56,6 +56,7 @@
     const closeGame = () => {
         scoreCards.value = []
         currentPlayersInGame.value = []
+        isGameCreated.value = false
     }
 
     const endAndSaveGame = async () => {
@@ -91,7 +92,7 @@
     <div v-if="!scoreCards.length || !isGameCreated">
         <PageTitle :titleName="'Create New Game'"/>
 
-        <CreateNewGameContainer />
+        <SelectLocationContainer v-if="!scoreCards.length"/>
     
         <AvailablePlayersContainers />
 

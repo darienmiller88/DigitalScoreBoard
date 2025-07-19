@@ -21,12 +21,6 @@ export const HomePageStore = defineStore("HomePageStore", () => {
 
     const setAvailablePlayers = (newPlayers: AvailablePlayer[]) => {
         availablePlayersToAdd.value = newPlayers
-
-        
-
-        //all: alice , joe, bob, randal
-        //current: alice, joe
-        //remaining expected: bob, randal
     
         console.log("remaining players:", remainingPlayersInGame.value);
     }
