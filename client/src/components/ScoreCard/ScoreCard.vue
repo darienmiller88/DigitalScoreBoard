@@ -1,13 +1,10 @@
 <script setup lang="ts">
-    // import { storeToRefs } from 'pinia';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { HomePageStore } from "../../stores/HomePageStore";
-    // import { selectedLocationStore } from '../../stores/selectedLocationStore';
-    // import { scoreBoardApi } from '../../api/api';
 
     const { removeCard, addPoints, minusPoints, resetPoints } = scoreCardsStore()
     const { removeAvailablePlayerFromGame } = HomePageStore()
-    // const { selectedLocation } = storeToRefs(selectedLocationStore())
+
     const props = defineProps<{ 
         cardIndex: number
         pointValue: number
