@@ -88,6 +88,7 @@
         }
         
         isLoading.value = false
+        closeGame()
     }
 </script>
 
