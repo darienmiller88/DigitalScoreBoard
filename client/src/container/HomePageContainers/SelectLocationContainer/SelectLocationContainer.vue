@@ -39,7 +39,7 @@
     
     onMounted(() => {
         //Load the first location in IF there is no current location saved in local storage
-        if (!currentLocation.value.length) {
+        if (!currentLocation.value) {
             currentLocation.value = allLocationOptions[0]
         }
 
