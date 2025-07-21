@@ -43,10 +43,7 @@
             currentLocation.value = allLocationOptions[0]
         }
 
-        loadPlayersFromLocation(currentLocation.value)
-
-        console.log("avail players:", );
-        
+        loadPlayersFromLocation(currentLocation.value)        
     })
 </script>
 
