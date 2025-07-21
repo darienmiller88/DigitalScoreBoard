@@ -13,6 +13,9 @@
     import { useToast } from "vue-toastification";
     import { SavedGame } from '../../types/types';
     import { scoreBoardApi } from '../../api/api';
+    import {useWindowSize } from "@vueuse/core"
+
+    const { width } = useWindowSize()
 
     //ref variable
     const { currentPlayersInGame, currentLocation, isGameCreated } = storeToRefs(HomePageStore())
@@ -106,6 +109,7 @@
                 Create Game!
             </button>
 
+            <!-- SHow this when the user is trying to add more players to a game already started -->
             <button @click="returnToGame" v-else>
                 Return to Game
             </button>
@@ -127,14 +131,14 @@
 
             <button class="close-game base-btn" @click="closeGame">Close game</button>
 
-            <div class="line"></div>
+            <div class="line" v-if="width >= 768"></div>
 
             <!-- Saves a game to the server -->
             <div class="save-game-wrapper">
                 <SaveGame :endAndSaveGame="endAndSaveGame" :isLoading="isLoading"/>
             </div>
 
-            <div class="line"></div>
+            <div class="line" v-if="width >= 768"></div>
 
             <button class="add-more base-btn" @click="addMorePlayers">Add more players</button>
         </div>
@@ -158,9 +162,16 @@
     .buttons-wrapper{
         display: flex;
         width: fit-content;
+        flex-direction: column;
+        align-items: center;
+
         margin: auto;
         margin-top: 20px;
         margin-bottom: 20px;
+
+        @media (min-width: 768px) {
+            flex-direction: row;
+        }
 
         .base-btn{
             border-radius: 12px;
@@ -170,9 +181,14 @@
             font-size: 24px;
             font-weight: 600;
     
-            padding: 10px 20px;
-            margin: 0px 10px;
+            padding: 15px 20px;
+            width: 65vw;
+            margin: 15px 10px;
             transition: 0.3s;
+
+            @media (min-width: 768px) {
+                width: unset;
+            }
         }
 
         .close-game{
@@ -186,6 +202,12 @@
 
         .line{
             border: solid 2px var(--toggle-background);
+            height: 5vh;
+            margin: 5px 0px;
+
+            @media (min-width: 1025px) {
+                height: 10vh;
+            }
         }
 
         .add-more{

@@ -48,6 +48,11 @@
         transition: 0.5s;
         font-size: 25px;
         font-weight: 600;
+        width: 65vw;
+
+        @media (min-width: 768px) {
+            width: unset;
+        }
 
         &:hover{
             cursor: pointer;
