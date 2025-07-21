@@ -29,7 +29,7 @@
     }>()
 
     const addUser = async () => {
-        const newPlayer: string = firstName.value + " " + lastName.value
+        const newPlayer: string = firstName.value.trim() + " " + lastName.value.trim()
         
         isLoading.value = true
         if (props.players.some(player => player.toLowerCase() === newPlayer.toLowerCase())) {
