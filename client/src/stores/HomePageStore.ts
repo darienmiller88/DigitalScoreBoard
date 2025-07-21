@@ -20,9 +20,7 @@ export const HomePageStore = defineStore("HomePageStore", () => {
     }
 
     const setAvailablePlayers = (newPlayers: AvailablePlayer[]) => {
-        availablePlayersToAdd.value = newPlayers
-    
-        console.log("remaining players:", remainingPlayersInGame.value);
+        availablePlayersToAdd.value = newPlayers    
     }
 
     const setCurrentPlayers = (newPlayers: string[]) => {
@@ -37,7 +35,7 @@ export const HomePageStore = defineStore("HomePageStore", () => {
     const addAvailalePlayerToGame = (playerIndex: number, playerName: string) => {
         currentPlayersInGame.value = [...currentPlayersInGame.value, playerName]
 
-        availablePlayersToAdd.value[playerIndex].isAddedToGame = !availablePlayersToAdd.value[playerIndex].isAddedToGame
+        availablePlayersToAdd.value[playerIndex].isAddedToGame = true
         setRemainingPlayers()
     }
 
@@ -47,7 +45,7 @@ export const HomePageStore = defineStore("HomePageStore", () => {
             return _playerName != playerName
         })
 
-        availablePlayersToAdd.value[playerIndex].isAddedToGame = !availablePlayersToAdd.value[playerIndex].isAddedToGame
+        availablePlayersToAdd.value[playerIndex].isAddedToGame = false
         setRemainingPlayers()
     }
 

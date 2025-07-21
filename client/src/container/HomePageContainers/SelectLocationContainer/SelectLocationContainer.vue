@@ -9,13 +9,14 @@
     import { PlayerCard } from '../../../types/types';
 
     const { currentLocation } = storeToRefs(HomePageStore())
-    const { setCurrentLocation, setAvailablePlayers } = HomePageStore()
+    const { setCurrentLocation, setAvailablePlayers, setCurrentPlayers } = HomePageStore()
     const { allLocationOptions } = optionsStore()
 
 
     const onChangeSelect = async (event: Event) => {
         const locationName = (event.target as HTMLSelectElement).value
         
+        setCurrentPlayers([])
         setCurrentLocation(locationName)
         loadPlayersFromLocation(locationName)
     }
@@ -43,6 +44,9 @@
         }
 
         loadPlayersFromLocation(currentLocation.value)
+
+        console.log("avail players:", );
+        
     })
 </script>
 

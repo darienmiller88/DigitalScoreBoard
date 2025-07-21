@@ -3,13 +3,34 @@
     import { HomePageStore } from "../../../stores/HomePageStore";
     import { scoreCardsStore } from "../../../stores/scoreCardsStore";
     import { useWindowSize } from "@vueuse/core"
+import { onMounted } from "vue";
 
     const { scoreCards } = storeToRefs(scoreCardsStore())
+    const { addScoreCard } = scoreCardsStore()
     const { availablePlayersToAdd, currentPlayersInGame, remainingPlayersInGame } = storeToRefs(HomePageStore())
     const { addAvailalePlayerToGame, removeAvailablePlayerFromGame } = HomePageStore()
     const { width } = useWindowSize();
 
+    //IF there are scorecards added, that meana a game has started, show the players who have not been added yet. 
+    //OTherwise, show all available players to can be added.
     let players = scoreCards.value.length ? remainingPlayersInGame : availablePlayersToAdd
+
+    const addPlayerToScoreCardList = (playerIndex: number, playerName: string) => {
+        addAvailalePlayerToGame(playerIndex, playerName)
+
+        //if the player has a game in session, add them to the list of score cards
+        if (scoreCards.value.length) {
+            addScoreCard({
+                username: playerName,
+                score: 0
+            })
+        }
+    }
+
+    onMounted(() => {
+        console.log("remaining len and avail len: ", !availablePlayersToAdd.value.length || !remainingPlayersInGame.value.length);
+        
+    })
 </script>
 
 <template>
@@ -23,7 +44,7 @@
                         <button class="base-btn" @click="() => removeAvailablePlayerFromGame(i, player.player_name)">Remove</button>
                     </div>
                     <div class="add-player-wrapper" v-else>
-                        <button class="base-btn" @click="() => addAvailalePlayerToGame(i, player.player_name)">
+                        <button class="base-btn" @click="() => addPlayerToScoreCardList(i, player.player_name)">
                             <span v-if="width >= 768">Add To Game</span> 
                             <span v-else>Add</span>
                         </button>
@@ -32,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="no-players" v-else>
+    <div class="no-players" v-else-if="!availablePlayersToAdd.length || !remainingPlayersInGame.length">
         No players available for selected location.
     </div>
 </template>

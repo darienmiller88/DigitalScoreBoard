@@ -56,6 +56,7 @@
     const closeGame = () => {
         scoreCards.value = []
         currentPlayersInGame.value = []
+        // remainingPlayersInGame.value = []
         isGameCreated.value = false
     }
 
