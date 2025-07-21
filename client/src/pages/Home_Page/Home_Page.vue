@@ -18,7 +18,7 @@
     const { width } = useWindowSize()
 
     //ref variable
-    const { currentPlayersInGame, currentLocation, isGameCreated } = storeToRefs(HomePageStore())
+    const { currentPlayersInGame, currentLocation, isGameCreated, remainingPlayersInGame } = storeToRefs(HomePageStore())
     const { scoreCards } = storeToRefs(scoreCardsStore())
 
     //Stateful methods
@@ -138,9 +138,9 @@
                 <SaveGame :endAndSaveGame="endAndSaveGame" :isLoading="isLoading"/>
             </div>
 
-            <div class="line" v-if="width >= 768"></div>
-
-            <button class="add-more base-btn" @click="addMorePlayers">Add more players</button>
+            <!-- Only show this line and the below button if there are no more players to be added to the game. -->
+            <div class="line" v-if="width >= 768 && remainingPlayersInGame.length"></div>
+            <button class="add-more base-btn" @click="addMorePlayers" v-if="remainingPlayersInGame.length">Add more players</button>
         </div>
     </div>
 </template>
