@@ -173,7 +173,7 @@
         }
 
         //Show three columns for laptops less than 2K
-        @media only screen and (min-width: 1025px){
+        @media (min-width: 1025px){
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px 50px;
@@ -182,7 +182,7 @@
         }
 
         // 2k monitors
-        @media only screen and (min-width: 2560px){
+        @media (min-width: 2560px){
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
