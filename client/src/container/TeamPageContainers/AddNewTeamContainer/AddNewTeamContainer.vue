@@ -61,6 +61,9 @@
         
         //On pade load, load the remaining teams left to the total remaining teams
         setRemainingLocationOptions(teamCards.value)
+
+        //initialize the current visible option for the team select
+        selectedTeam.value.team_name = remainingLocationOptions.value[0]
         
         isLoading.value = false
     })
