@@ -230,6 +230,7 @@
 
         button{
             padding: 10px 20px;
+            margin: 15px;
             border-radius: 8px;
             border: none;
             background-color: var(--primary-color);
@@ -237,6 +238,7 @@
             font-size: 22px;
             font-weight: 600;
             transition: 0.3s;
+        
 
             &:hover{
                 cursor: pointer;
