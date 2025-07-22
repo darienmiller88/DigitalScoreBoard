@@ -25,7 +25,11 @@
         <button class="remove" @click="() => removeCardFromPlayerList()" >
             Remove User
         </button>
-        <br>
+        <div class="input-wrapper">
+            <span>-</span>
+            <input type="text" placeholder="score value">
+            <span>+</span>
+        </div>
         <button class="reset" @click="() => resetPoints(cardIndex)" >
             Reset points
         </button>
@@ -95,8 +99,12 @@
             }
         }
 
+        .input-wrapper{
+            border: 2px solid black;
+        }
+
         .reset{
-            margin: 10px 0px;
+            // margin: 10px 0px;
             padding: 7px 12px;
 
             background-color: var(--primary-color);
