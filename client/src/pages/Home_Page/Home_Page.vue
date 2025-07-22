@@ -59,7 +59,6 @@
     const closeGame = () => {
         scoreCards.value = []
         currentPlayersInGame.value = []
-        // remainingPlayersInGame.value = []
         isGameCreated.value = false
     }
 
@@ -94,6 +93,7 @@
 
 <template>
     
+    <!--  -->
     <div v-if="!scoreCards.length || !isGameCreated">
         <PageTitle :titleName="'Create New Game'"/>
 

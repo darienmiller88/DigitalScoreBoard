@@ -3,7 +3,6 @@
     import { HomePageStore } from "../../../stores/HomePageStore";
     import { scoreCardsStore } from "../../../stores/scoreCardsStore";
     import { useWindowSize } from "@vueuse/core"
-import { onMounted } from "vue";
 
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { addScoreCard } = scoreCardsStore()
@@ -26,11 +25,6 @@ import { onMounted } from "vue";
             })
         }
     }
-
-    onMounted(() => {
-        console.log("remaining len and avail len: ", !availablePlayersToAdd.value.length || !remainingPlayersInGame.value.length);
-        
-    })
 </script>
 
 <template>

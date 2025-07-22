@@ -53,8 +53,6 @@ export const HomePageStore = defineStore("HomePageStore", () => {
         remainingPlayersInGame.value = availablePlayersToAdd.value.filter(playerName =>
             !currentPlayersInGame.value.includes(playerName.player_name)
         )
-
-        console.log("remaiing players:", remainingPlayersInGame.value);
         
         remainingPlayersInGame.value.forEach(player => player.isAddedToGame = false)
         remainingPlayersInGame.value.forEach(player => console.log("player added", player.isAddedToGame))
