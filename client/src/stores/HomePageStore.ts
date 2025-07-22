@@ -55,7 +55,6 @@ export const HomePageStore = defineStore("HomePageStore", () => {
         )
         
         remainingPlayersInGame.value.forEach(player => player.isAddedToGame = false)
-        remainingPlayersInGame.value.forEach(player => console.log("player added", player.isAddedToGame))
     }
     
     return { 

@@ -1,10 +1,33 @@
 <script setup lang="ts">
-    defineProps<{
+    import { storeToRefs } from 'pinia';
+    import { HomePageStore } from '../../stores/HomePageStore'
+    import { useToast } from 'vue-toastification';
+    import { ref } from 'vue';
+
+    const { isGameCreated } = storeToRefs(HomePageStore())
+    const toast = useToast()
+    let isEditDisabled = ref<boolean>(false)
+
+    const props = defineProps<{
         playerName: string
         playerIndex: number
         showModalAndSetCurrentPlayer: (username: string, playerIndex: number) => void
         removePlayer: (playerIndex: number) => void
     }>()
+
+    // Prevents users from editing a players name when a game has already started.
+    const preventEditWhenGameStarted = () => {
+        if (isGameCreated.value) {
+            isEditDisabled.value = true
+            toast.error("Cannot edit name while game in session!", { timeout: 2000 })
+
+            setTimeout(() => {
+               isEditDisabled.value = false 
+            }, 2000)
+        } else {
+            props.showModalAndSetCurrentPlayer(props.playerName, props.playerIndex)
+        }
+    }
 </script>
 
 <template>
@@ -15,7 +38,7 @@
             <button @click="() => removePlayer(playerIndex)">Remove Player</button>
         </div>
         <div class="edit-wrapper">
-            <button @click="() => showModalAndSetCurrentPlayer(playerName, playerIndex)">Edit Name</button>
+            <button @click="preventEditWhenGameStarted" :disabled="isEditDisabled">Edit Name</button>
         </div>
     </div>
 </template>
