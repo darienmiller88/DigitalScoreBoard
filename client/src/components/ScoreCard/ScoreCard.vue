@@ -107,6 +107,11 @@
             span{
                 font-size: 26px;
                 margin: 0px 10px;
+                color: var(--toggle-background);
+
+                &:hover{
+                    cursor: pointer;
+                }
             }
 
             input{
@@ -115,8 +120,8 @@
                 // color: var(--primary-color);
 
                 background-color: #f8f9fa;
-border: 2px solid #003366;
-color: #003366;
+                border: 2px solid #003366;
+                color: #003366;
 
                 width: 40%;
                 padding: 10px;

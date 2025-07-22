@@ -9,6 +9,10 @@
     --primary-color: #61dafb;
     --primary-color-transparent: #61dafbe1;
     --toggle-background: #f2e0c5;
+
+    --input-background-color: #d0f0ff;
+    --input-border: #0077cc;
+    --input-text-color: #003366;
 }
 
 [data-theme="light"] {
