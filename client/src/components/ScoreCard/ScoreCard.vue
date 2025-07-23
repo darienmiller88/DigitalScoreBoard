@@ -1,10 +1,12 @@
 <script setup lang="ts">
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
     import { HomePageStore } from "../../stores/HomePageStore";
+    import { ref } from "vue";
 
     const { removeCard, addPoints, minusPoints, resetPoints } = scoreCardsStore()
     const { removeAvailablePlayerFromGame } = HomePageStore()
-
+    let pointsToAdd = ref<number>(0)
+    
     const props = defineProps<{ 
         cardIndex: number
         pointValue: number
@@ -16,6 +18,14 @@
         removeAvailablePlayerFromGame(props.cardIndex, props.username)
         removeCard(props.cardIndex)
     }
+
+    const addPointsToTotal = () => {
+        console.log("points to add:", pointsToAdd.value)
+    }
+
+    const subtractPointsFromTotal = () => {
+        console.log("points to add:", pointsToAdd.value)
+    }
 </script>
 
 <template>
@@ -26,9 +36,9 @@
             Remove Player
         </button>
         <div class="input-wrapper">
-            <span>-</span>
-            <input type="number" placeholder="points" min="1" max="9999">
-            <span>+</span>
+            <span @click="subtractPointsFromTotal">-</span>
+            <input type="number" v-model.number="pointsToAdd" placeholder="points" min="1" max="9999">
+            <span @click="addPointsToTotal">+</span>
         </div>
         <div></div>
         <button class="reset" @click="() => resetPoints(cardIndex)" >
