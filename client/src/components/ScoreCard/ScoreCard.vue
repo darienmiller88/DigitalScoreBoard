@@ -27,9 +27,10 @@
         </button>
         <div class="input-wrapper">
             <span>-</span>
-            <input type="number" placeholder="score value" min="1" max="9999">
+            <input type="number" placeholder="points" min="1" max="9999">
             <span>+</span>
         </div>
+        <div></div>
         <button class="reset" @click="() => resetPoints(cardIndex)" >
             Reset points
         </button>
@@ -115,13 +116,14 @@
             }
 
             input{
-                background-color: #f8f9fa;
+                background-color: rgba(248, 249, 250, 0.8);
                 border: 2px solid #003366;
                 color: #003366;
 
                 width: 40%;
                 padding: 10px;
                 border-radius: 10px;
+                font-size: 16px;
             }
         }
 
