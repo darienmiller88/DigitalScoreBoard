@@ -25,10 +25,14 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         if (scoreCards.value[index].score > 99999) {
             scoreCards.value[index].score = 99999
         }
+
+        scoreCards.value.sort((a, b) => b.score - a.score)
     }
 
     const minusPoints = (index: number, amountToAdd: number) => {
         scoreCards.value[index].score -= amountToAdd
+
+        scoreCards.value.sort((a, b) => b.score - a.score)
     }
 
     const resetPoints = (index: number) => {

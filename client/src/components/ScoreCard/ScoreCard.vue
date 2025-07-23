@@ -5,7 +5,9 @@
 
     const { removeCard, addPoints, minusPoints, resetPoints } = scoreCardsStore()
     const { removeAvailablePlayerFromGame } = HomePageStore()
+    const maxPoints: number = 99999
     let pointsToAdd = ref<number>(0)
+    let isExceedMaxPointsError = ref<boolean>(false)
     
     const props = defineProps<{ 
         cardIndex: number
@@ -20,6 +22,12 @@
     }
 
     const addPointsToTotal = () => {
+        if (pointsToAdd.value + props.score > maxPoints) {
+            
+        } else {
+            
+        }
+
         addPoints(props.cardIndex, pointsToAdd.value)
         pointsToAdd.value = 0
     }
@@ -42,7 +50,8 @@
             <input type="number" v-model.number="pointsToAdd" placeholder="points" min="1" >
             <span @click="addPointsToTotal">+</span>
         </div>
-        <div></div> 
+        <!-- <div class="error">Points must be {{ maxPoints }} or less</div>  -->
+        <div class="error">Total must be {{ maxPoints }} or lower</div> 
         <button class="reset" @click="() => resetPoints(cardIndex)" >
             Reset points
         </button>
@@ -138,6 +147,10 @@
                 border-radius: 10px;
                 font-size: 16px;
             }
+        }
+
+        .error{
+            color: red;
         }
 
         .reset{
