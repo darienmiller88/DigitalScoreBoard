@@ -20,11 +20,13 @@
     }
 
     const addPointsToTotal = () => {
-        console.log("points to add:", pointsToAdd.value)
+        addPoints(props.cardIndex, pointsToAdd.value)
+        pointsToAdd.value = 0
     }
 
     const subtractPointsFromTotal = () => {
-        console.log("points to add:", pointsToAdd.value)
+        minusPoints(props.cardIndex, pointsToAdd.value)
+        pointsToAdd.value = 0
     }
 </script>
 
@@ -37,10 +39,10 @@
         </button>
         <div class="input-wrapper">
             <span @click="subtractPointsFromTotal">-</span>
-            <input type="number" v-model.number="pointsToAdd" placeholder="points" min="1" max="9999">
+            <input type="number" v-model.number="pointsToAdd" placeholder="points" min="1" >
             <span @click="addPointsToTotal">+</span>
         </div>
-        <div></div>
+        <div></div> 
         <button class="reset" @click="() => resetPoints(cardIndex)" >
             Reset points
         </button>
