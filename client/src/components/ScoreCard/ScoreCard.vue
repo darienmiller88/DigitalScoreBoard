@@ -128,10 +128,11 @@
             }
 
             input{
-                background-color: rgba(248, 249, 250, 0.8);
-                border: 2px solid #003366;
-                color: #003366;
+                background-color: var(--input-background-color);
+                border: 1px solid var(--input-border);  /* sky/cyan blue */
+                color: var(--input-color);
 
+                transition: 0.3s;
                 width: 40%;
                 padding: 10px;
                 border-radius: 10px;
