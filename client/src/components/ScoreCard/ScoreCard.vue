@@ -129,7 +129,7 @@
 
             input{
                 background-color: var(--input-background-color);
-                border: 1px solid var(--input-border);  /* sky/cyan blue */
+                border: 2px solid var(--input-border);
                 color: var(--input-color);
 
                 transition: 0.3s;
