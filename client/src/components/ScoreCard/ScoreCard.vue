@@ -23,18 +23,28 @@
 
     const addPointsToTotal = () => {
         if (pointsToAdd.value + props.score > maxPoints) {
-            
-        } else {
-            
-        }
+            isExceedMaxPointsError.value = true
 
-        addPoints(props.cardIndex, pointsToAdd.value)
-        pointsToAdd.value = 0
+            setTimeout(() => {
+                isExceedMaxPointsError.value = false
+            }, 2000);
+        } else {
+            addPoints(props.cardIndex, pointsToAdd.value)
+            pointsToAdd.value = 0
+        }
     }
 
     const subtractPointsFromTotal = () => {
-        minusPoints(props.cardIndex, pointsToAdd.value)
-        pointsToAdd.value = 0
+        if (pointsToAdd.value + props.score > maxPoints) {
+            isExceedMaxPointsError.value = true
+
+            setTimeout(() => {
+                isExceedMaxPointsError.value = false
+            }, 2000);
+        } else {
+            minusPoints(props.cardIndex, pointsToAdd.value)
+            pointsToAdd.value = 0
+        }
     }
 </script>
 
@@ -50,8 +60,7 @@
             <input type="number" v-model.number="pointsToAdd" placeholder="points" min="1" >
             <span @click="addPointsToTotal">+</span>
         </div>
-        <!-- <div class="error">Points must be {{ maxPoints }} or less</div>  -->
-        <div class="error">Total must be {{ maxPoints }} or lower</div> 
+        <div class="error" v-if="isExceedMaxPointsError">Total must be {{ maxPoints }} or lower</div> 
         <button class="reset" @click="() => resetPoints(cardIndex)" >
             Reset points
         </button>
@@ -151,6 +160,7 @@
 
         .error{
             color: red;
+            margin: 10px;
         }
 
         .reset{
