@@ -160,7 +160,7 @@
 
         .error{
             color: red;
-            margin: 10px;
+            margin: 10px
         }
 
         .reset{

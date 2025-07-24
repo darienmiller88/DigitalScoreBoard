@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	"math"
 	"time"
 
 	"github.com/go-ozzo/ozzo-validation/v4"
@@ -66,9 +67,9 @@ func (s *SavedGame) CalcAveragePoints(){
 	//If the user is playing a team game, calculate the average points using the number of teams, otherwise calculate it
 	//using the total number of people at each ADAPT location.
 	if s.Teams != nil {
-		s.AveragePoints = float64(s.TotalPoints) / float64(len(*s.Teams))
+		s.AveragePoints = math.Round(float64(s.TotalPoints) / float64(len(*s.Teams)))
 	}else{
-		s.AveragePoints = float64(s.TotalPoints) / float64(len(*s.Players))
+		s.AveragePoints = math.Round(float64(s.TotalPoints) / float64(len(*s.Players)))
 	}
 }
 

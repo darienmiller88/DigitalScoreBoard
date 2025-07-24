@@ -55,7 +55,7 @@
                 Total points 
             </div>
             <div class="average-points">
-                <span>{{ props.game.average_points }}</span><br>
+                <span>{{ props.game.average_points.toFixed(2) }}</span><br>
                 <span v-if="width < 768">Avg. Points</span>
                 <span v-else>Average Points</span>
             </div>
