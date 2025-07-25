@@ -47,6 +47,10 @@
             //Convert each date to a more readable format
             savedGameResult.data.forEach(game => {                
                 game.created_at = new Date(game.created_at).toLocaleString()
+                 
+                if (game.players) {
+                    game.players.sort((a, b) => b.score - a.score)
+                }
             })
 
             games = [...games, ...savedGameResult.data].reverse()
