@@ -26,6 +26,7 @@
 
         addAvailalePlayerToGame(playerIndex, playerName)
 
+        //When there are no remaining players left, return to the game screen.
         if (!remainingPlayersInGame.value.length) {
             toggleGameCreatedStatus(true)
         }
