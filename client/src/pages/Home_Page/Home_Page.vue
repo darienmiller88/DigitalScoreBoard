@@ -93,7 +93,7 @@
 
 <template>
     
-    <!--  -->
+    <!-- If there are no cards, or the flag for when a game has been made has not been set to true, render this block  -->
     <div v-if="!scoreCards.length || !isGameCreated">
         <PageTitle :titleName="'Create New Game'"/>
 
