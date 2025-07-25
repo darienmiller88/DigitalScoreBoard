@@ -53,7 +53,7 @@
                 }
             })
 
-            games = [...games, ...savedGameResult.data].reverse()
+            games = [...savedGameResult.data].reverse()
         } catch (error) {
             console.log("error:", error);
         }
