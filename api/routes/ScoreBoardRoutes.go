@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/go-chi/chi/v5"
+	// "github.com/go-chi/httprate"
 
 	"DigitalScoreBoard/api/controllers"
 )
@@ -22,14 +23,20 @@ func (s *ScoreBoardRoutes) Init(){
 	s.Router.Get("/get-saved-games",  controllers.GetAllSavedGames)
 	s.Router.Get("/get-all-users", controllers.GetAllUsers)
 	
-	//POST routes
-	s.Router.Post("/save-game", controllers.SaveGame)
-	s.Router.Post("/add-user-to-location/{location-name}", controllers.AddUserToLocation)
-	// s.Router.Post("/add-location", controllers.AddLocation)
+	//In order to rate limit POST, PUT, and DELETE routes, group them together away from the get routes, which allows
+	//to attach a rate limiter middleware
+	s.Router.Group(func(r chi.Router) {
 
-	//PUT route(s)
-	s.Router.Put("/change-player-name/{location-name}", controllers.UpdatePlayerName)
-	
-	//DELETE route(s)
-	s.Router.Delete("/remove-user-from-location/{location-name}", controllers.RemoveUserFromLocation)
+		//POST routes
+		r.Post("/save-game", controllers.SaveGame)
+		r.Post("/add-user-to-location/{location-name}", controllers.AddUserToLocation)
+		// s.Router.Post("/add-location", controllers.AddLocation)
+
+		//PUT route(s)
+		r.Put("/change-player-name/{location-name}", controllers.UpdatePlayerName)
+		
+		//DELETE route(s)
+		r.Delete("/remove-user-from-location/{location-name}", controllers.RemoveUserFromLocation)
+	})
+
 }
