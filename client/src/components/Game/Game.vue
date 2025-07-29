@@ -134,7 +134,7 @@
             margin: 8px;
 
             button{
-                padding: 10px 28px;
+                padding: 15px 28px;
                 
                 background-color: var(--primary-color);
                 color: aliceblue;
@@ -146,7 +146,7 @@
 
                 &:hover{
                     cursor: pointer;
-                    padding: 10px 40px;
+                    padding: 15px 40px;
                 }
             }
         }
@@ -159,7 +159,7 @@
                 align-items: center;
 
                 margin: auto;
-                padding: 8px 15px;
+                padding: 8px 10px;
                 border: none;
                 border-radius: 50px;
                 background-color: red;
@@ -168,7 +168,7 @@
 
                 &:hover{
                     cursor: pointer;
-                    padding: 8px 25px;
+                    transform: scale(1.1);
                 }
 
                 .icon{
