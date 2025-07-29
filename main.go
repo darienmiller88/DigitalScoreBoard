@@ -6,15 +6,14 @@ import (
 	"os"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
-	"github.com/go-chi/chi/v5/middleware"
 
 	"DigitalScoreBoard/api/database"
 	"DigitalScoreBoard/api/routes"
 )
 
-//Added from new laptop!! :)
 func main(){
 	godotenv.Load()
 

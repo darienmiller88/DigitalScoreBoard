@@ -33,6 +33,7 @@ func (s *ScoreBoardRoutes) Init(){
 	//In order to rate limit POST, PUT, and DELETE routes, group them together away from the get routes, which allows
 	//to attach a rate limiter middleware
 	s.Router.Group(func(r chi.Router) {
+		r.Use(httprate.LimitByIP(15, 1 * time.Minute))
 
 		//POST routes
 		r.Post("/save-game", controllers.SaveGame)
@@ -45,5 +46,4 @@ func (s *ScoreBoardRoutes) Init(){
 		//DELETE route(s)
 		r.Delete("/remove-user-from-location/{location-name}", controllers.RemoveUserFromLocation)
 	})
-
 }
