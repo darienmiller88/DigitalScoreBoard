@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { Icon } from "@iconify/vue"
 
-    const props = defineProps<{
+    defineProps<{
         height: number
         usePrimary: boolean
     }>()
@@ -9,7 +9,7 @@
 
 <template>
     <div :class="`icon-wrapper ${usePrimary ? 'primary' : 'bg'}`">
-        <Icon icon="svg-spinners:180-ring"  :height="props.height" :width="props.height"/>
+        <Icon icon="svg-spinners:180-ring" :height="height" :width="height"/>
     </div>
 </template>
 

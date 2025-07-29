@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { SavedGame } from '../../types/types';
+    import { Icon } from "@iconify/vue"
     import { useWindowSize } from "@vueuse/core"
     import star from "../../assets/star.png"
 
@@ -38,10 +39,17 @@
             </button>
         </div>
 
+        <div class="delete-game-wrapper">
+            <button>
+                <Icon class="icon" icon="material-symbols:delete-outline-sharp" :height="20" :width="20"/>
+                <span> Delete Game </span>
+            </button>
+        </div>
+
         <!--  -->
         <div class="location-date-wrapper">
             <div class="location">Location: 
-                <span >
+                <span>
                     {{ props.game.location_name }}
                 </span>
             </div>
@@ -123,7 +131,7 @@
         }        
 
         .view-players-wrapper{
-            margin: 15px;
+            margin: 8px;
 
             button{
                 padding: 10px 28px;
@@ -139,6 +147,33 @@
                 &:hover{
                     cursor: pointer;
                     padding: 10px 40px;
+                }
+            }
+        }
+
+        .delete-game-wrapper{
+            text-align: center;
+
+            button{
+                display: flex;
+                align-items: center;
+
+                margin: auto;
+                padding: 12px 15px;
+                border: none;
+                border-radius: 20px;
+                background-color: red;
+                color: white;
+                font-size: 18px;
+                transition: 0.3s;
+
+                &:hover{
+                    cursor: pointer;
+                    padding: 12px 25px;
+                }
+
+                span{
+                    margin-left: 5px;
                 }
             }
         }
