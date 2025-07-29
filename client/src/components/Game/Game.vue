@@ -41,7 +41,7 @@
 
         <div class="delete-game-wrapper">
             <button>
-                <Icon class="icon" icon="material-symbols:delete-outline-sharp" :height="20" :width="20"/>
+                <Icon class="icon" icon="material-symbols:delete-outline-sharp" />
                 <span> Delete Game </span>
             </button>
         </div>
@@ -159,27 +159,37 @@
                 align-items: center;
 
                 margin: auto;
-                padding: 12px 15px;
+                padding: 8px 15px;
                 border: none;
-                border-radius: 20px;
+                border-radius: 50px;
                 background-color: red;
-                color: white;
                 font-size: 18px;
                 transition: 0.3s;
 
                 &:hover{
                     cursor: pointer;
-                    padding: 12px 25px;
+                    padding: 8px 25px;
+                }
+
+                .icon{
+                    border: 2px solid white;
+                    background-color: white;
+                    font-size: 25px;
+                    color: red;
+                    border-radius: 50%;
+                    padding: 7px;
                 }
 
                 span{
-                    margin-left: 5px;
+                    margin-left: 8px;
+                    color: white;
                 }
             }
         }
 
         .location-date-wrapper{
             color: grey;
+            margin: 10px;
         }
 
         .points-wrapper{
