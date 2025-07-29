@@ -1,8 +1,10 @@
 package routes
 
 import (
+	"time"
+
 	"github.com/go-chi/chi/v5"
-	// "github.com/go-chi/httprate"
+	"github.com/go-chi/httprate"
 
 	"DigitalScoreBoard/api/controllers"
 )
@@ -14,14 +16,19 @@ type ScoreBoardRoutes struct{
 func (s *ScoreBoardRoutes) Init(){
 	s.Router = chi.NewRouter()
 
-	//GET routes
-	s.Router.Get("/get-location/{location-name}", controllers.GetLocation)
-	s.Router.Get("/get-all-users/{location-name}", controllers.GetAllUsersByLocation)
-	s.Router.Get("/get-saved-games/{location-name}", controllers.GetAllSavedGamesFromLocation)
-	s.Router.Get("/get-current-team-games", controllers.GetAllSavedGames)
-	s.Router.Get("/get-all-locations", controllers.GetAllLocations)
-	s.Router.Get("/get-saved-games",  controllers.GetAllSavedGames)
-	s.Router.Get("/get-all-users", controllers.GetAllUsers)
+	//Group together GET routes to apply more lenient rate limiting to prevent server overload.
+	s.Router.Group(func(r chi.Router) {
+		r.Use(httprate.LimitByIP(100, 1 * time.Minute))
+
+		//GET routes
+		r.Get("/get-location/{location-name}", controllers.GetLocation)
+		r.Get("/get-all-users/{location-name}", controllers.GetAllUsersByLocation)
+		r.Get("/get-saved-games/{location-name}", controllers.GetAllSavedGamesFromLocation)
+		r.Get("/get-current-team-games", controllers.GetAllSavedGames)
+		r.Get("/get-all-locations", controllers.GetAllLocations)
+		r.Get("/get-saved-games",  controllers.GetAllSavedGames)
+		r.Get("/get-all-users", controllers.GetAllUsers)
+	})
 	
 	//In order to rate limit POST, PUT, and DELETE routes, group them together away from the get routes, which allows
 	//to attach a rate limiter middleware
