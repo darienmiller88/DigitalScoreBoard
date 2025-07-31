@@ -25,16 +25,12 @@ Here is a brief summary of the impact this app had:
 <img width="955" alt="image" src="https://github.com/user-attachments/assets/087d5c21-9542-4d82-9650-750a84741d5c" />
 
 ## Home Page, Add new user
-<img width="955" alt="image" src="https://github.com/user-attachments/assets/72e1446c-1c56-42c2-9062-8ee77d5050f1" />
 
 ## Add player to team
-<img width="956" alt="image" src="https://github.com/user-attachments/assets/3d6c8a6b-9052-4542-8830-6a027da0d0e7" />
 
 ## View team
-<img width="959" alt="image" src="https://github.com/user-attachments/assets/d1d37f6c-38e8-427e-a8a8-591eb49053f1" />
 
 ## Saved games
-<img width="959" alt="image" src="https://github.com/user-attachments/assets/f28c5dae-dcfb-493c-befd-532216690329" />
 
 ## Features
 So far, this application has the following features:
