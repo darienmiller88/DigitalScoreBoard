@@ -15,6 +15,7 @@
     const isLoading = ref<boolean>(true)
     let showPeopleWhoPlayed = ref<boolean>(false)
     let showTeamsWhoPlayed = ref<boolean>(false)
+    let showDeleteGameModal= ref<boolean>(false)
 
     let games: SavedGame[] = []
     let playersInSavedGame = ref<PlayerCard[]>([])
@@ -75,7 +76,7 @@
         />
     </div>
 
-    <!-- Modal to show the teams that played if the client submitted a team game -->
+    <!-- Modal to show the people that played if the client submitted a single player game -->
     <Modal 
         :modalHeader="'View People who played'"
         :show="showPeopleWhoPlayed"
@@ -89,6 +90,15 @@
     <Modal 
         :modalHeader="'View Teams who played'"
         :show="showTeamsWhoPlayed"
+        :modalContent="ViewSavedGameTeams"
+        :onHide="() => showTeamsWhoPlayed = false"
+        :modalProps="{ teamsInSavedGame: teamsInSavedGame }"
+    />
+
+    <!-- Modal to show the teams that played if the client submitted a team game -->
+    <Modal 
+        :modalHeader="'Delete Saved Game'"
+        :show="showDeleteGameModal"
         :modalContent="ViewSavedGameTeams"
         :onHide="() => showTeamsWhoPlayed = false"
         :modalProps="{ teamsInSavedGame: teamsInSavedGame }"
