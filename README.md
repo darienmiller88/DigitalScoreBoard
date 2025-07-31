@@ -19,12 +19,13 @@ Here is a brief summary of the impact this app had:
 * [Netlify](https://www.netlify.com/)
 
 ## Home Page Dark Mode, team mode
-<img width="959" alt="image" src="https://github.com/user-attachments/assets/4e030cc6-a890-4872-b207-5043f5a33748" />
+<img width="1360" height="607" alt="teams-to-add-dark" src="https://github.com/user-attachments/assets 268c70a4-0d9d-47fc-8781-6a3f87d0366f" />
 
 ## Home Page Light Mode, team mode
-<img width="955" alt="image" src="https://github.com/user-attachments/assets/087d5c21-9542-4d82-9650-750a84741d5c" />
+<img width="1360" height="607" alt="teams-to-add" src="https://github.com/user-attachments/assets/6cba43db-a125-4eaf-b03d-48180451f27c" />
 
 ## Home Page, Add new user
+<img width="1360" height="611" alt="add-player" src="https://github.com/user-attachments/assets/c93d83d9-429e-4ca5-bd70-44045796d1da" />
 
 ## Add player to team
 
