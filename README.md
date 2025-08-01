@@ -19,7 +19,7 @@ Here is a brief summary of the impact this app had:
 * [Netlify](https://www.netlify.com/)
 
 ## Home Page Dark Mode, team mode
-<img width="1360" height="607" alt="teams-to-add-dark" src="https://github.com/user-attachments/assets 268c70a4-0d9d-47fc-8781-6a3f87d0366f" />
+<img width="1360" height="607" alt="teams-to-add-dark" src="https://github.com/user-attachments/assets/cd6989d6-db59-4c15-9261-c8842b53bb7b" />
 
 ## Home Page Light Mode, team mode
 <img width="1360" height="607" alt="teams-to-add" src="https://github.com/user-attachments/assets/6cba43db-a125-4eaf-b03d-48180451f27c" />
@@ -28,10 +28,13 @@ Here is a brief summary of the impact this app had:
 <img width="1360" height="611" alt="add-player" src="https://github.com/user-attachments/assets/c93d83d9-429e-4ca5-bd70-44045796d1da" />
 
 ## Add player to team
+<img width="1360" height="607" alt="add-player-to-team" src="https://github.com/user-attachments/assets/e1180328-9535-46e7-be4e-f5dff7c6cde8" />
 
 ## View team
+<img width="1360" height="604" alt="view-team-players" src="https://github.com/user-attachments/assets/d6cc6be9-597d-47dd-abbe-0819aa002aaa" />
 
 ## Saved games
+<img width="1360" height="607" alt="saved games" src="https://github.com/user-attachments/assets/cb1ba1b1-da41-4ba0-89d4-c5ee85d93a6a" />
 
 ## Features
 So far, this application has the following features:
