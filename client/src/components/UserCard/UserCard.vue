@@ -7,6 +7,7 @@
     const { isGameCreated } = storeToRefs(HomePageStore())
     const toast = useToast()
     let isEditDisabled = ref<boolean>(false)
+    let isRemoveDisabled = ref<boolean>(false)
 
     const props = defineProps<{
         playerName: string
@@ -28,6 +29,20 @@
             props.showModalAndSetCurrentPlayer(props.playerName, props.playerIndex)
         }
     }
+
+    // Prevents users from editing a players name when a game has already started.
+    const preventRemoveWhenGameStarted = (playerIndex: number) => {
+        if (isGameCreated.value) {
+            isEditDisabled.value = true
+            toast.error("Cannot remove player while game in session!", { timeout: 2000 })
+
+            setTimeout(() => {
+               isRemoveDisabled.value = false 
+            }, 2000)
+        } else {
+            props.removePlayer(playerIndex)
+        }
+    }
 </script>
 
 <template>
@@ -35,7 +50,7 @@
         <div class="player">{{ playerName }}</div>
         <div class="divider"></div>
         <div class="remove-wrapper">
-            <button @click="() => removePlayer(playerIndex)">Remove Player</button>
+            <button @click="() => preventRemoveWhenGameStarted(playerIndex)">Remove Player</button>
         </div>
         <div class="edit-wrapper">
             <button @click="preventEditWhenGameStarted" :disabled="isEditDisabled">Edit Name</button>
