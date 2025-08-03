@@ -8,7 +8,7 @@
 
     import { ref } from 'vue';
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-    import { HomePageStore } from '../../stores/HomePageStore';
+    import { HomePageStore } from '../../stores/PageStores/HomePageStore';
     import { storeToRefs } from 'pinia';
     import { useToast } from "vue-toastification";
     import { SavedGame } from '../../types/types';

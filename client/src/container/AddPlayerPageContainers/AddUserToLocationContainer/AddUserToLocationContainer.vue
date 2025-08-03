@@ -5,6 +5,7 @@
     import { scoreBoardApi } from "../../../api/api"
     import { useToast } from "vue-toastification";
     import { optionsStore } from "../../../stores/optionsStore"
+    import { AddPlayerPageStore } from '../../../stores/PageStores/AddPlayerPageStore';
 
     //Components
     import Loading from '../../../components/Loading/Loading.vue';
@@ -12,6 +13,7 @@
 
     //Stateful variables
     const { allLocationOptions } = storeToRefs(optionsStore())
+    const {  } = storeToRefs(AddPlayerPageStore())
 
     let isLoading = ref<boolean>(false)    
     let isDuplicatePlayer = ref<boolean>(false)

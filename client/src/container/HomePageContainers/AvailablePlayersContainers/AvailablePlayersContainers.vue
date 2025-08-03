@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { storeToRefs } from "pinia";
-    import { HomePageStore } from "../../../stores/HomePageStore";
+    import { HomePageStore } from "../../../stores/PageStores/HomePageStore";
     import { scoreCardsStore } from "../../../stores/scoreCardsStore";
     import { useWindowSize } from "@vueuse/core"
 

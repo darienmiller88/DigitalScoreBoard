@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { scoreCardsStore } from "../../stores/scoreCardsStore"
-    import { HomePageStore } from "../../stores/HomePageStore";
+    import { HomePageStore } from "../../stores/PageStores/HomePageStore";
     import { ref } from "vue";
 
     const { removeCard, addPoints, minusPoints, resetPoints } = scoreCardsStore()

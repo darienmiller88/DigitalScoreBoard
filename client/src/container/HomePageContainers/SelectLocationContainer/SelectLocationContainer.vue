@@ -2,7 +2,7 @@
     import Select from '../../../components/Select/Select.vue';
     
     import { optionsStore } from '../../../stores/optionsStore';
-    import { HomePageStore } from '../../../stores/HomePageStore';
+    import { HomePageStore } from '../../../stores/PageStores/HomePageStore';
     import { storeToRefs } from 'pinia';
     import { scoreBoardApi } from '../../../api/api';
     import { onMounted } from 'vue';
