@@ -129,7 +129,6 @@
         <ScoreCards />
         
         <div class="buttons-wrapper">
-
             <button class="close-game base-btn" @click="closeGame">Close game</button>
 
             <div class="line" v-if="width >= 768"></div>

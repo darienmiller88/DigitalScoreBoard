@@ -13,7 +13,7 @@
 
     //Stateful variables
     const { allLocationOptions } = storeToRefs(optionsStore())
-    const {  } = storeToRefs(AddPlayerPageStore())
+    const { currentLocation, players } = storeToRefs(AddPlayerPageStore())
 
     let isLoading = ref<boolean>(false)    
     let isDuplicatePlayer = ref<boolean>(false)
@@ -24,9 +24,7 @@
 
     //Props
     const props = defineProps<{
-        currentLocation: string
         changeLocation: (location: string) => void
-        players: string[]
         addNewPlayerToArray: (playerName: string) => void
     }>()
 
@@ -34,7 +32,7 @@
         const newPlayer: string = firstName.value.trim() + " " + lastName.value.trim()
         
         isLoading.value = true
-        if (props.players.some(player => player.toLowerCase() === newPlayer.toLowerCase())) {
+        if (players.value.some(player => player.toLowerCase() === newPlayer.toLowerCase())) {
             duplicateErrorMessage.value = `"${newPlayer}" already exists! Please select another name.`
             isDuplicatePlayer.value = true
 
@@ -46,7 +44,7 @@
             props.addNewPlayerToArray(newPlayer)
 
             try {
-                const res = await scoreBoardApi.post(`/add-user-to-location/${props.currentLocation}`, { player_name: newPlayer })
+                const res = await scoreBoardApi.post(`/add-user-to-location/${currentLocation.value}`, { player_name: newPlayer })
                 
                 toast.success(`${newPlayer} successfully added!`, {
                     timeout: 2000
