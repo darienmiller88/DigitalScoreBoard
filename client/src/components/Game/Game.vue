@@ -4,7 +4,6 @@
     import { useWindowSize } from "@vueuse/core"
     import star from "../../assets/star.png"
 
-    // const props = defineProps<SavedGame>()
     const { width } = useWindowSize();
 
     const props = defineProps<{
@@ -12,6 +11,7 @@
         game: SavedGame,
         viewPlayersInSavedGame: (game: SavedGame) => void
         viewTeamsInSavedGame: (game: SavedGame) => void
+        openDeletePlayerModal: () => void
     }>()
 
     const openModal = () => {
@@ -40,7 +40,7 @@
         </div>
 
         <div class="delete-game-wrapper">
-            <button>
+            <button @click="openDeletePlayerModal">
                 <Icon class="icon" icon="material-symbols:delete-outline-sharp" />
                 <span> Delete Game </span>
             </button>

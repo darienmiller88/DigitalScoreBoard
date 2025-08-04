@@ -4,10 +4,10 @@
 
 <template>
     <div>
-
+        delete saved game
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

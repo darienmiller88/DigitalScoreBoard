@@ -11,8 +11,7 @@
     import Modal from '../../../components/Modal/Modal.vue';
     import ViewSavedGamePlayers from '../../../components/ModalComponents/SavedGamesPageModalComponents/ViewSavedGamePlayers/ViewSavedGamePlayers.vue';
     import ViewSavedGameTeams from '../../../components/ModalComponents/SavedGamesPageModalComponents/ViewSavedGameTeams/ViewSavedGameTeams.vue';
-    // import ViewSavedGamePlayers from '../../../components/ModalCompoents/ViewSavedGamePlayers/ViewSavedGamePlayers.vue';
-    // import ViewSavedGameTeams from '../../../components/ViewSavedGameTeams/ViewSavedGameTeams.vue';
+    import DeleteSavedGame from '../../../components/ModalComponents/SavedGamesPageModalComponents/DeleteSavedGame/DeleteSavedGame.vue';
 
     const isLoading = ref<boolean>(true)
     let showPeopleWhoPlayed = ref<boolean>(false)
@@ -41,6 +40,10 @@
         }
         
         showTeamsWhoPlayed.value = true
+    }
+
+    const openDeleteSavedGameModal = () => {
+        showDeleteGameModal.value = true
     }
 
     onMounted(async () => {
@@ -75,6 +78,7 @@
           :isSavedGameATeamGame="game.teams !== undefined"
           :viewTeamsInSavedGame="openViewSavedGamesTeams"
           :viewPlayersInSavedGame = "openViewSavedGamesPlayers"
+          :openDeletePlayerModal="openDeleteSavedGameModal"
         />
     </div>
 
@@ -97,11 +101,11 @@
         :modalProps="{ teamsInSavedGame: teamsInSavedGame }"
     />
 
-    <!-- Modal to show the teams that played if the client submitted a team game -->
+    <!-- Modal to give the client a chance to review if they want to delete a saced game -->
     <Modal 
         :modalHeader="'Delete Saved Game'"
         :show="showDeleteGameModal"
-        :modalContent="ViewSavedGameTeams"
+        :modalContent="DeleteSavedGame"
         :onHide="() => showDeleteGameModal = false"
         :modalProps="{}"
     />
