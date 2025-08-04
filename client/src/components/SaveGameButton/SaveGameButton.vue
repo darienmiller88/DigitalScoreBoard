@@ -1,31 +1,10 @@
 <script setup lang="ts">
-    // import { scoreBoardApi } from '../../api/api';
     import Loading from '../Loading/Loading.vue';
-
-    //Stateful variables
-    // let isLoading = ref<boolean>(false)
 
     defineProps<{
         endAndSaveGame: () => void
         isLoading: boolean
     }>()
-
-    // const addSavedGame = async () => {
-    //     isLoading.value = true
-
-    //     try {
-    //         const savedGame: SavedGame = props
-            
-    //         console.log("game:", savedGame);
-            
-    //         // const res = await scoreBoardApi.post("/save-game", savedGame)
-    //         // console.log("res: ", res.data)
-    //     } catch (error) {
-    //         console.log("err:", error);
-    //     }
-
-    //     isLoading.value = false
-    // }
 </script>
 
 <template>

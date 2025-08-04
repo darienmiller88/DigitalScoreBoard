@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import PageTitle from '../../components/PageTitle/PageTitle.vue';
-    import SaveGame from '../../components/SaveGame/SaveGame.vue';
+    import SaveGameButton from '../../components/SaveGameButton/SaveGameButton.vue';
     import ResetPoints from '../../components/ResetPoints/ResetPoints.vue';
     import ScoreCards from '../../container/HomePageContainers/ScoreCardsContainer/ScoreCardsContainer.vue';
     import SelectLocationContainer from '../../container/HomePageContainers/SelectLocationContainer/SelectLocationContainer.vue';
@@ -135,7 +135,7 @@
 
             <!-- Saves a game to the server -->
             <div class="save-game-wrapper">
-                <SaveGame :endAndSaveGame="endAndSaveGame" :isLoading="isLoading"/>
+                <SaveGameButton :endAndSaveGame="endAndSaveGame" :isLoading="isLoading"/>
             </div>
 
             <!-- Only show this line and the below button if there are no more players to be added to the game. -->
