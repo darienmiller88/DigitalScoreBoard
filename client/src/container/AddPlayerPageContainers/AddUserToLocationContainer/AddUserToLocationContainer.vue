@@ -15,18 +15,15 @@
     const { allLocationOptions } = storeToRefs(optionsStore())
     const { currentLocation, players } = storeToRefs(AddPlayerPageStore())
 
+    //stateful methods
+    const { addNewPlayerToArray, setLocation } = AddPlayerPageStore()
+
     let isLoading = ref<boolean>(false)    
     let isDuplicatePlayer = ref<boolean>(false)
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")
     const lastName = ref<string>("")
     const toast = useToast()
-
-    //Props
-    const props = defineProps<{
-        changeLocation: (location: string) => void
-        addNewPlayerToArray: (playerName: string) => void
-    }>()
 
     const addUser = async () => {
         const newPlayer: string = firstName.value.trim() + " " + lastName.value.trim()
@@ -41,7 +38,7 @@
                 isDuplicatePlayer.value = false
             }, 3000)
         }else{
-            props.addNewPlayerToArray(newPlayer)
+            addNewPlayerToArray(newPlayer)
 
             try {
                 const res = await scoreBoardApi.post(`/add-user-to-location/${currentLocation.value}`, { player_name: newPlayer })
@@ -65,12 +62,12 @@
     }
 
     const onChangeSelect = (event: Event) => {
-        props.changeLocation((event.target as HTMLSelectElement).value)
+        setLocation((event.target as HTMLSelectElement).value)
     }
 
     // when this component is mounted, load the current location with the first location so the select tag isn't blank
     onMounted(() => {
-        props.changeLocation(allLocationOptions.value[0])
+        setLocation(allLocationOptions.value[0])
     })
 </script>
 

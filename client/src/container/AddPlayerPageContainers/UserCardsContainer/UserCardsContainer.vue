@@ -10,7 +10,12 @@
     import { scoreBoardApi } from "../../../api/api"
     import { PlayerCard } from "../../../types/types"
     import { optionsStore } from "../../../stores/optionsStore"
+    import { AddPlayerPageStore } from '../../../stores/PageStores/AddPlayerPageStore';
     import { useToast } from "vue-toastification";
+    import { storeToRefs } from 'pinia';
+
+    const { currentLocation, players } = storeToRefs(AddPlayerPageStore())
+    const { removePlayerFromArray, editPlayerName, setPlayers } = AddPlayerPageStore()
 
     let showEditPlayerNameModal = ref<boolean>(false)
     let playerNameToEdit = ref<string>("")
@@ -19,13 +24,6 @@
     
     const { allLocationOptions } = optionsStore()
     const toast = useToast()
-    const props = defineProps<{
-        currentLocation: string
-        players: string[]
-        removePlayerFromArray: (playerIndex: number) => void
-        setPlayers: (newPlayers: string[]) => void
-        editPlayerName: (playerIndex: number, newName: string) => void
-    }>()
 
     //Function for UserCard child to use edit the name currently on the card i.e. from mary rose to mary gold
     const addPlayerNameToEdit = (playerName: string, playerIndex: number) => {
@@ -36,14 +34,14 @@
 
     //Remove a player from a given ADAPT location.
     const removePlayerFromDB = async (playerIndex: number) => {
-        const playerToRemove: string = props.players[playerIndex]
+        const playerToRemove: string = players.value[playerIndex]
 
         //First, remove the player from the front end.
-        props.removePlayerFromArray(playerIndex)
+        removePlayerFromArray(playerIndex)
 
         try {
             //Afterwards, remove them from the back end
-            await scoreBoardApi.delete(`/remove-user-from-location/${props.currentLocation}`, { data: { player_name: playerToRemove } })
+            await scoreBoardApi.delete(`/remove-user-from-location/${ currentLocation.value }`, { data: { player_name: playerToRemove } })
             
             toast.success(`${playerToRemove} removed!`, {
                 timeout: 2000
@@ -61,16 +59,16 @@
         try {            
             const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`) 
             
-            props.setPlayers(playersResult.data.map(player => player.username))
+            setPlayers(playersResult.data.map(player => player.username))
         } catch (error) {
             console.log("err:", error);
         }
     }
  
     //When the location is changed, retrieve the new list of players from that location.
-    watch(() => props.currentLocation, async (newLocation) => {
+    watch(() => currentLocation.value, async (newLocation) => {
         //When getting the new list of users, first display the loading spinner
-        isLoading.value = true
+        isLoading.value = true        
 
         //Get all of the players
         await getPlayers(newLocation)
@@ -114,7 +112,7 @@
             playerIndex: indexOfPlayerBeingEditted,
             hideModal: () => showEditPlayerNameModal = false,
             editPlayerName: editPlayerName,
-            players: props.players,
+            players: players,
             currentLocation: currentLocation
         }"
         :show="showEditPlayerNameModal"
