@@ -1,8 +1,8 @@
 <script setup lang="ts">
-    import Loading from '../Loading/Loading.vue';
+    import Loading from '../../../Loading/Loading.vue';
 
     import { ref } from 'vue';
-    import { scoreBoardApi } from '../../api/api';
+    import { scoreBoardApi } from '../../../../api/api';
     import { AxiosError } from 'axios';
 
     const props = defineProps<{

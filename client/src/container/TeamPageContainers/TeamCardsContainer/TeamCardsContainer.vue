@@ -10,8 +10,8 @@
     //components
     import TeamCard from '../../../components/TeamCard/TeamCard.vue'
     import Modal from "../../../components/Modal/Modal.vue"
-    import AddNewPlayerToTeam from "../../../components/AddNewPlayerToTeam/AddNewPlayerToTeam.vue";
-    import ViewPlayers from '../../../components/ViewPlayers/ViewPlayers.vue';
+    import AddNewPlayerToTeam from "../../../components/ModalComponents/TeamPageModalComponents/AddNewPlayerToTeam/AddNewPlayerToTeam.vue";
+    import ViewPlayers from '../../../components/ModalComponents/TeamPageModalComponents/ViewPlayers/ViewPlayers.vue';
     
     //Ref variable to get access to all teams playing
     const { teamCards } = storeToRefs(teamCardsStore())

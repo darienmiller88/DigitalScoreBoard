@@ -9,8 +9,8 @@
     import Loading from '../../../components/Loading/Loading.vue';
     import Game from '../../../components/Game/Game.vue';
     import Modal from '../../../components/Modal/Modal.vue';
-    import ViewSavedGamePlayers from '../../../components/ModalComponents/ViewSavedGamePlayers/ViewSavedGamePlayers.vue';
-    import ViewSavedGameTeams from '../../../components/ModalComponents/ViewSavedGameTeams/ViewSavedGameTeams.vue';
+    import ViewSavedGamePlayers from '../../../components/ModalComponents/SavedGamesPageModalComponents/ViewSavedGamePlayers/ViewSavedGamePlayers.vue';
+    import ViewSavedGameTeams from '../../../components/ModalComponents/SavedGamesPageModalComponents/ViewSavedGameTeams/ViewSavedGameTeams.vue';
     // import ViewSavedGamePlayers from '../../../components/ModalCompoents/ViewSavedGamePlayers/ViewSavedGamePlayers.vue';
     // import ViewSavedGameTeams from '../../../components/ViewSavedGameTeams/ViewSavedGameTeams.vue';
 

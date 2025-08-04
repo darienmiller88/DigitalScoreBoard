@@ -2,7 +2,7 @@
     //Components
     import UserCard from '../../../components/UserCard/UserCard.vue';
     import Modal from '../../../components/Modal/Modal.vue';
-    import EditPlayerName from '../../../components/EditPlayerName/EditPlayerName.vue';
+    import EditPlayerName from '../../../components/ModalComponents/AddPlayerPageModalComponents/EditPlayerName/EditPlayerName.vue';
     import Loading from '../../../components/Loading/Loading.vue';
     
     //Data/Data manipulation
