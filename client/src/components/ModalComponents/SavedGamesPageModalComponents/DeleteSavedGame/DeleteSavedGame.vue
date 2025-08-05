@@ -2,11 +2,13 @@
     import { ref } from 'vue';
     import Loading from '../../../Loading/Loading.vue';
     import { useToast } from 'vue-toastification';
+    import { SavedGame } from '../../../../types/types';
 
     let isLoading = ref<boolean>(false)
     const toast = useToast()
     const props = defineProps<{
         gameIndex: number
+        game: SavedGame
         hideModal: () => void
         removeGameFromArray: (gameIndex: number) => void
     }>()

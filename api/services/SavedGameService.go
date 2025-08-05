@@ -73,6 +73,10 @@ func GetAllSavedGamesFromLocation(req *http.Request, locationName string) models
 	return savedGamesResult	
 }
 
+func DeleteSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[models.SavedGame]{
+	return models.Result[models.SavedGame]{}
+}
+
 func AddSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[models.SavedGame]{
 	//Initialize the saved game's created and updated fields.
 	savedGame.InitCreatedAtAndUpdatedAt()

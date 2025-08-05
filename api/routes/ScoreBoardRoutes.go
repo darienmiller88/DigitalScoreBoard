@@ -38,12 +38,12 @@ func (s *ScoreBoardRoutes) Init(){
 		//POST routes
 		r.Post("/save-game", controllers.SaveGame)
 		r.Post("/add-user-to-location/{location-name}", controllers.AddUserToLocation)
-		// s.Router.Post("/add-location", controllers.AddLocation)
 
 		//PUT route(s)
 		r.Put("/change-player-name/{location-name}", controllers.UpdatePlayerName)
 		
 		//DELETE route(s)
 		r.Delete("/remove-user-from-location/{location-name}", controllers.RemoveUserFromLocation)
+		r.Delete("/delete-save-game/{id}", controllers.DeleteSavedGame)
 	})
 }

@@ -22,6 +22,17 @@
     let playersInSavedGame = ref<PlayerCard[]>([])
     let teamsInSavedGame = ref<Team[]>([])
     let gameIndexToDelete = ref<number>(0)
+    let gameToDelete = ref<SavedGame>({
+        id: '',
+        winner: {
+            username: '',
+            score: 0
+        },
+        location_name: '',
+        created_at: '',
+        total_points: 0,
+        average_points: 0
+    })
 
     const openViewSavedGamesPlayers = (game: SavedGame) => {
         let players: PlayerCard[] | undefined = game.players
@@ -120,7 +131,8 @@
         :modalProps="{ 
             gameIndex: gameIndexToDelete,
             hideModal: () => showDeleteGameModal = false,
-            removeGameFromArray: removeGameFromArray
+            removeGameFromArray: removeGameFromArray,
+            game: gameToDelete
         }"
     />
 </template>

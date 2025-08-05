@@ -103,6 +103,12 @@ func GetAllSavedGames(res http.ResponseWriter, req *http.Request){
 	utilities.SendJSON(http.StatusOK, res, savedGamesResult.ResultData)
 }
 
+func DeleteSavedGame(res http.ResponseWriter, req *http.Request){
+	id := chi.URLParam(req, "id")
+
+	utilities.SendJSON(http.StatusOK, res, id)
+}
+
 //Save a game to the database.
 func SaveGame(res http.ResponseWriter, req *http.Request){
 	savedGame := models.SavedGame{}
