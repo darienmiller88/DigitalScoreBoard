@@ -15,17 +15,12 @@
     }>()
 
     const deleteGame = async () => {
-        console.log("game id:", props.game.id)
-        
-
         try {
             props.removeGameFromArray(props.gameIndex)
 
             const res = await scoreBoardApi.delete(`/delete-save-game/${props.game.id}`)
 
             console.log("res:", res.data);
-            
-
             props.hideModal()
             toast.success("Game successfully deleted!", { timeout: 2000 })
         } catch (error) {
