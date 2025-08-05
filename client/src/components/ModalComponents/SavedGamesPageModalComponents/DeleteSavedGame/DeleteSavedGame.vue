@@ -18,11 +18,11 @@
         try {
             props.removeGameFromArray(props.gameIndex)
 
-            const res = await scoreBoardApi.delete(`/delete-save-game/${props.game.id}`)
+            //This route returns a string from the controller, so assert it here for clarity.
+            const res = await scoreBoardApi.delete<string>(`/delete-save-game/${props.game.id}`)
 
-            console.log("res:", res.data);
             props.hideModal()
-            toast.success("Game successfully deleted!", { timeout: 2000 })
+            toast.success(res.data, { timeout: 2000 })
         } catch (error) {
             console.log(error)
         }

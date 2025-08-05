@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { Team } from "../../types/types"
+    import { Team } from "../../../../types/types"
 
     const props = defineProps<{
         teamsInSavedGame: Team[]

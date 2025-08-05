@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { PlayerCard } from "../../types/types"
+    import { PlayerCard } from '../../../../types/types';
 
     const props = defineProps<{
         playersInSavedGame: PlayerCard[]
