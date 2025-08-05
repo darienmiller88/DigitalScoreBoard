@@ -41,6 +41,9 @@
         //Load the first location in IF there is no current location saved in local storage
         if (!currentLocation.value) {
             currentLocation.value = allLocationOptions[0]
+            console.log("initial: current locaiton:", currentLocation.value)
+        }else{
+            console.log("not initial: current locaiton:", currentLocation.value)
         }
 
         loadPlayersFromLocation(currentLocation.value)        
