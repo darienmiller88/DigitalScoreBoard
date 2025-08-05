@@ -54,10 +54,11 @@
         showTeamsWhoPlayed.value = true
     }
 
-    const openDeleteSavedGameModal = (gameIndex: number) => {
+    const openDeleteSavedGameModal = (gameIndex: number, game: SavedGame) => {
         showDeleteGameModal.value = true
 
         gameIndexToDelete.value = gameIndex
+        gameToDelete.value = game
         // removeGameFromArray(gameIndex)
     }
 

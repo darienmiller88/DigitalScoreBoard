@@ -12,7 +12,7 @@
         gameIndex: number,
         viewPlayersInSavedGame: (game: SavedGame) => void
         viewTeamsInSavedGame: (game: SavedGame) => void
-        openDeletePlayerModal: (gameIndex: number) => void
+        openDeletePlayerModal: (gameIndex: number, game: SavedGame) => void
     }>()
 
     const openModal = () => {
@@ -41,7 +41,7 @@
         </div>
 
         <div class="delete-game-wrapper">
-            <button @click="() => openDeletePlayerModal(gameIndex)">
+            <button @click="() => openDeletePlayerModal(gameIndex, game)">
                 <Icon class="icon" icon="material-symbols:delete-outline-sharp" />
                 <span> Delete Game </span>
             </button>

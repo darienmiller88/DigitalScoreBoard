@@ -1,8 +1,9 @@
 <script setup lang="ts">
     import { ref } from 'vue';
-    import Loading from '../../../Loading/Loading.vue';
     import { useToast } from 'vue-toastification';
     import { SavedGame } from '../../../../types/types';
+    import { scoreBoardApi } from '../../../../api/api';    
+    import Loading from '../../../Loading/Loading.vue';
 
     let isLoading = ref<boolean>(false)
     const toast = useToast()
@@ -16,6 +17,12 @@
     const deleteGame = async () => {
         try {
             props.removeGameFromArray(props.gameIndex)
+
+            const res = await scoreBoardApi.delete(`/delete-save-game/${props.game.id}`)
+
+            console.log("res:", res.data);
+            
+
             props.hideModal()
             toast.success("Game successfully deleted!", { timeout: 2000 })
         } catch (error) {
