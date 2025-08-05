@@ -21,6 +21,7 @@
     let games: SavedGame[] = []
     let playersInSavedGame = ref<PlayerCard[]>([])
     let teamsInSavedGame = ref<Team[]>([])
+    let gameIndexToDelete = ref<number>(0)
 
     const openViewSavedGamesPlayers = (game: SavedGame) => {
         let players: PlayerCard[] | undefined = game.players
@@ -42,8 +43,17 @@
         showTeamsWhoPlayed.value = true
     }
 
-    const openDeleteSavedGameModal = () => {
+    const openDeleteSavedGameModal = (gameIndex: number) => {
         showDeleteGameModal.value = true
+
+        gameIndexToDelete.value = gameIndex
+        // removeGameFromArray(gameIndex)
+    }
+
+    const removeGameFromArray = async (gameIndex: number) => {
+        games = games.filter((_, index) => {
+            return index != gameIndex
+        })
     }
 
     onMounted(async () => {
@@ -74,6 +84,7 @@
        <Game 
           v-for="(game, index) in games"
           :game="game"
+          :gameIndex="index"
           :key="index"
           :isSavedGameATeamGame="game.teams !== undefined"
           :viewTeamsInSavedGame="openViewSavedGamesTeams"
@@ -91,7 +102,6 @@
         :modalProps="{ playersInSavedGame: playersInSavedGame }"
     />
 
-
     <!-- Modal to show the teams that played if the client submitted a team game -->
     <Modal 
         :modalHeader="'View Teams who played'"
@@ -107,7 +117,11 @@
         :show="showDeleteGameModal"
         :modalContent="DeleteSavedGame"
         :onHide="() => showDeleteGameModal = false"
-        :modalProps="{}"
+        :modalProps="{ 
+            gameIndex: gameIndexToDelete,
+            hideModal: () => showDeleteGameModal = false,
+            removeGameFromArray: removeGameFromArray
+        }"
     />
 </template>
 

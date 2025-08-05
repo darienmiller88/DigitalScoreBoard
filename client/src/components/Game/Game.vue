@@ -9,9 +9,10 @@
     const props = defineProps<{
         isSavedGameATeamGame: boolean
         game: SavedGame,
+        gameIndex: number,
         viewPlayersInSavedGame: (game: SavedGame) => void
         viewTeamsInSavedGame: (game: SavedGame) => void
-        openDeletePlayerModal: () => void
+        openDeletePlayerModal: (gameIndex: number) => void
     }>()
 
     const openModal = () => {
@@ -40,7 +41,7 @@
         </div>
 
         <div class="delete-game-wrapper">
-            <button @click="openDeletePlayerModal">
+            <button @click="() => openDeletePlayerModal(gameIndex)">
                 <Icon class="icon" icon="material-symbols:delete-outline-sharp" />
                 <span> Delete Game </span>
             </button>
