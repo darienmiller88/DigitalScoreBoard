@@ -106,8 +106,6 @@ func GetAllSavedGames(res http.ResponseWriter, req *http.Request){
 func DeleteSavedGame(res http.ResponseWriter, req *http.Request){
 	id := chi.URLParam(req, "id")
 
-	fmt.Println("id:", id)
-
 	utilities.SendJSON(http.StatusOK, res, id)
 }
 

@@ -10,7 +10,7 @@ import (
 )
 
 type SavedGame struct {
-	ID            primitive.ObjectID `bson:"_id,omitempty"` // The MongoDB document ID
+	ID            primitive.ObjectID `bson:"_id,omitempty"  json:"id"` // The MongoDB document ID
 	CreatedAt     time.Time          `bson:"created_at"     json:"created_at"`
 	UpdatedAt     time.Time          `bson:"updated_at"     json:"updated_at"`
 	LocationName  string			 `bson:"location_name"  json:"location_name"`

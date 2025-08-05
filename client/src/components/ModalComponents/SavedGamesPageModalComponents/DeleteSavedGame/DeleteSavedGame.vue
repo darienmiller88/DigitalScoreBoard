@@ -15,6 +15,9 @@
     }>()
 
     const deleteGame = async () => {
+        console.log("game id:", props.game.id)
+        
+
         try {
             props.removeGameFromArray(props.gameIndex)
 

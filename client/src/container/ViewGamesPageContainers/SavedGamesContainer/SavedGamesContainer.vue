@@ -59,7 +59,6 @@
 
         gameIndexToDelete.value = gameIndex
         gameToDelete.value = game
-        // removeGameFromArray(gameIndex)
     }
 
     const removeGameFromArray = async (gameIndex: number) => {
