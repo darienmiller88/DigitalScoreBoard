@@ -13,6 +13,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-ozzo/ozzo-validation"
+	"go.mongodb.org/mongo-driver/mongo"
 	// "go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -105,8 +106,14 @@ func GetAllSavedGames(res http.ResponseWriter, req *http.Request){
 
 func DeleteSavedGame(res http.ResponseWriter, req *http.Request){
 	id := chi.URLParam(req, "id")
+	var deleteResult models.Result[*mongo.DeleteResult] = services.DeleteSavedGame(req, id)
 
-	utilities.SendJSON(http.StatusOK, res, id)
+	if deleteResult.Err != nil{
+		http.Error(res, deleteResult.Err.Error(), deleteResult.StatusCode)
+		return
+	}
+
+	utilities.SendJSON(http.StatusOK, res, deleteResult.ResultData)
 }
 
 //Save a game to the database.

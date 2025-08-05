@@ -25,7 +25,7 @@
     //Index of the game to be deleted, which is sent to the delete game modal
     let gameIndexToDelete = ref<number>(0)
 
-    //Data to sent to the delete player modal.
+    //Saved Game Data to sent to the delete player modal.
     let gameToDelete = ref<SavedGame>({
         id: '',
         winner: {

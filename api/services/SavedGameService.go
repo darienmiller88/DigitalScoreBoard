@@ -73,8 +73,23 @@ func GetAllSavedGamesFromLocation(req *http.Request, locationName string) models
 	return savedGamesResult	
 }
 
-func DeleteSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[models.SavedGame]{
-	return models.Result[models.SavedGame]{}
+func DeleteSavedGame(req *http.Request, savedGameId string) models.Result[*mongo.DeleteResult]{
+	deleteSavedGameResult := models.Result[*mongo.DeleteResult]{}
+	result, err := database.GetSavedGamesCollections().DeleteOne(req.Context(), bson.M{
+		"_id": savedGameId,
+	})
+
+	if err != nil {
+		deleteSavedGameResult.Err = err
+		deleteSavedGameResult.StatusCode = http.StatusBadRequest
+
+		return deleteSavedGameResult
+	}
+
+	deleteSavedGameResult.ResultData = result
+	deleteSavedGameResult.StatusCode = http.StatusOK
+
+	return deleteSavedGameResult
 }
 
 func AddSavedGame(req *http.Request, savedGame models.SavedGame) models.Result[models.SavedGame]{
