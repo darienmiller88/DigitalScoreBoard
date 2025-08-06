@@ -15,9 +15,15 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
 app.use(Toast);
-app.use(pinia)
-app.use(router)
+app.use(pinia);
+app.use(router);
 
-await getAllLocations()
+// await getAllLocations()
 
-app.mount('#app')
+// app.mount('#app')
+
+(async () => {
+  await getAllLocations();
+})();
+
+app.mount("#app");
