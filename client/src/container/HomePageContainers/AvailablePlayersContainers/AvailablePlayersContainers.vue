@@ -92,7 +92,7 @@
         margin-bottom: 20px;
         padding: 8px;
         
-        max-height: 20vh;
+        max-height: 35vh;
         overflow-y: scroll;
         transition: 0.3s;
 

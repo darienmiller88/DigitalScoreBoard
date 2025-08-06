@@ -18,10 +18,6 @@ app.use(Toast);
 app.use(pinia);
 app.use(router);
 
-// await getAllLocations()
-
-// app.mount('#app')
-
 (async () => {
   await getAllLocations();
 })();
