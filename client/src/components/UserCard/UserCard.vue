@@ -30,10 +30,10 @@
         }
     }
 
-    // Prevents users from editing a players name when a game has already started.
+    // Prevents users from removing a player when a game has already started.
     const preventRemoveWhenGameStarted = (playerIndex: number) => {
         if (isGameCreated.value) {
-            isEditDisabled.value = true
+            isRemoveDisabled.value = true
             toast.error("Cannot remove player while game in session!", { timeout: 2000 })
 
             setTimeout(() => {
