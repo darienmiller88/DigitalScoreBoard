@@ -20,6 +20,5 @@ app.use(router);
 
 (async () => {
   await getAllLocations();
+  app.mount("#app");
 })();
-
-app.mount("#app");
