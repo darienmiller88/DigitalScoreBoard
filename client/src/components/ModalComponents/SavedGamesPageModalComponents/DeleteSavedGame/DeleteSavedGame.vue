@@ -15,6 +15,8 @@
     }>()
 
     const deleteGame = async () => {
+        isLoading.value = true
+
         try {
             props.removeGameFromArray(props.gameIndex)
 
@@ -26,6 +28,8 @@
         } catch (error) {
             console.log(error)
         }
+
+        isLoading.value = false
     }
 </script>
 
