@@ -124,7 +124,11 @@
         <div class="total-points">
             Total Points: {{ totalPoints() }} 
         </div>
-    
+
+        <div class="sort-players-wrapper">
+            <button>Sort Players</button>
+        </div>
+
         <!-- Shows all users when "Add new users" is clicked -->
         <ScoreCards />
         
@@ -157,6 +161,19 @@
         color: red;
         text-align: center;
         font-size: 25px;
+    }
+
+    .sort-players-wrapper{
+        text-align: center;
+        margin-bottom: 20px;
+        
+        button{
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            border: none;
+            font-size: 18px;
+        }
     }
 
     .buttons-wrapper{
