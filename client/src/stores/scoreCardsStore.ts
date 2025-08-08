@@ -29,10 +29,13 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         // scoreCards.value.sort((a, b) => b.score - a.score)
     }
 
+    const sortPlayersByScore = () => {
+        scoreCards.value.sort((a, b) => b.score - a.score)
+    }
+
     const minusPoints = (index: number, amountToAdd: number) => {
         scoreCards.value[index].score -= amountToAdd
 
-        // scoreCards.value.sort((a, b) => b.score - a.score)
     }
 
     const resetPoints = (index: number) => {
@@ -71,7 +74,8 @@ export const scoreCardsStore = defineStore("scoreCards", () => {
         resetAllPoints, 
         setUserCards,
         getWinner, 
-        totalPoints
+        totalPoints,
+        sortPlayersByScore
     }
 }, {
     persist: true

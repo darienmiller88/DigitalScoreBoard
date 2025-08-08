@@ -22,7 +22,7 @@
     const { scoreCards } = storeToRefs(scoreCardsStore())
 
     //Stateful methods
-    const { resetAllPoints, totalPoints } = scoreCardsStore()
+    const { resetAllPoints, totalPoints, sortPlayersByScore } = scoreCardsStore()
     const { toggleGameCreatedStatus } = HomePageStore()
     const toast = useToast()
 
@@ -126,7 +126,7 @@
         </div>
 
         <div class="sort-players-wrapper">
-            <button>Sort Players</button>
+            <button @click="sortPlayersByScore">Sort Players by score</button>
         </div>
 
         <!-- Shows all users when "Add new users" is clicked -->
@@ -172,7 +172,14 @@
             background-color: var(--primary-color);
             color: var(--bg-color);
             border: none;
+            border-radius: 10px;
             font-size: 18px;
+            transition: 0.3s;
+
+            &:hover{
+                cursor: pointer;
+                background-color: var(--primary-color-transparent);
+            }
         }
     }
 
