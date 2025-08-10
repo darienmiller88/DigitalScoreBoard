@@ -2,15 +2,11 @@
     import { useWindowSize } from "@vueuse/core"
     import { Icon } from "@iconify/vue"
     import { ref } from "vue";
-    import { storeToRefs } from "pinia";
-    import { NavBarStore, NavBarItem } from "../../stores/NavBarStore";
 
     import PhoneNavMenu from "../PhoneNavMenu/PhoneNavMenu.vue";
     import DarkModeToggle from "../DarkModeToggle/DarkModeToggle.vue";
 
     const { width } = useWindowSize();
-    const { activeNavBarItem } = storeToRefs(NavBarStore())
-    const { setActiveNavBarItem } = NavBarStore()
     const isPhoneMenuActive = ref<boolean>(false)
 </script>
 
@@ -29,32 +25,16 @@
             <DarkModeToggle />
 
             <!-- Route to "/" -->
-            <RouterLink 
-                to="/" 
-                :class="activeNavBarItem === NavBarItem.CREATE_NEW_GAME ? 'active link-item' : 'link-item'"
-                @click="() => setActiveNavBarItem(NavBarItem.CREATE_NEW_GAME)"
-            >Create Game</RouterLink>
+            <RouterLink to="/" activeClass="active link-item" class="link-item">Create Game</RouterLink>
 
             <!-- Route to "/add-new-players" -->
-            <RouterLink 
-                to="/add-new-players" 
-                :class="activeNavBarItem === NavBarItem.ADD_PLAYER ? 'active link-item' : 'link-item'"
-                @click="() => setActiveNavBarItem(NavBarItem.ADD_PLAYER)"    
-            >Add Player</RouterLink>  
+            <RouterLink to="/add-new-players" activeClass="active link-item" class="link-item">Add Player</RouterLink>  
             
             <!-- Route to "/team-mode" -->
-            <RouterLink 
-                to="/team-mode" 
-                :class="activeNavBarItem === NavBarItem.TEAM_MODE ? 'active link-item' : 'link-item'"
-                @click="() => setActiveNavBarItem(NavBarItem.TEAM_MODE)"
-            >Team Mode</RouterLink>
+            <RouterLink to="/team-mode" activeClass="active link-item" class="link-item">Team Mode</RouterLink>
 
             <!-- Route to /view games -->
-            <RouterLink 
-                to="/view-games" 
-                :class="activeNavBarItem === NavBarItem.VIEW_GAMES ? 'active link-item' : 'link-item'"
-                @click="() => setActiveNavBarItem(NavBarItem.VIEW_GAMES)"
-            >View Games</RouterLink>
+            <RouterLink to="/view-games" activeClass="active link-item" class="link-item">View Games</RouterLink>
             <!-- <RouterLink class="link-item">Sign out</RouterLink> -->
         </div>
     </nav>
