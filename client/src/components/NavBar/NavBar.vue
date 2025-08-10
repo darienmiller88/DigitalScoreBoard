@@ -7,11 +7,6 @@
 
     const { width } = useWindowSize();
     const isPhoneMenuActive = ref<boolean>(false)
-    // const isActive: boolean[] = [true, false, false, false]
-
-    const menuClick = () => {
-        isPhoneMenuActive.value = !isPhoneMenuActive.value
-    }
 </script>
 
 <template>
@@ -23,7 +18,7 @@
         
         <div v-if="width <= 1024" class="icon-wrapper">
             <DarkModeToggle />
-            <Icon icon="mdi-light:menu" color="#f8f9fa" width="50" @click="menuClick"/>
+            <Icon icon="mdi-light:menu" color="#f8f9fa" width="50" @click="() => isPhoneMenuActive = !isPhoneMenuActive"/>
         </div>
         <div class="links" v-else>
             <DarkModeToggle />
@@ -34,7 +29,7 @@
             <!-- <RouterLink class="link-item">Sign out</RouterLink> -->
         </div>
     </nav>
-    <PhoneNavMenu :isPhoneMenuActive="isPhoneMenuActive" :menuClick="menuClick"/>
+    <PhoneNavMenu :isPhoneMenuActive="isPhoneMenuActive" :menuClick="() => isPhoneMenuActive = !isPhoneMenuActive"/>
 </template>
 
 <style scoped lang="scss">
