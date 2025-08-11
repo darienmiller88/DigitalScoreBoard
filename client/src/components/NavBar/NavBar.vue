@@ -35,6 +35,7 @@
 
             <!-- Route to /view games -->
             <RouterLink to="/view-games" activeClass="active link-item" class="link-item">View Games</RouterLink>
+            
             <!-- <RouterLink class="link-item">Sign out</RouterLink> -->
         </div>
     </nav>
