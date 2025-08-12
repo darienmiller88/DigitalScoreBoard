@@ -16,12 +16,14 @@
             <div>Sign up form</div>
 
             <button @click="() => isSignUpForm = false">log in</button>
+            <button @click="() => $router.push('/')"> continue to home</button>
         </form>
         <form v-else class="login-form" @submit.prevent="handleSubmit">
             <img :src="adaptLogo" alt="">
             <div>Login form</div>
 
             <button @click="() => isSignUpForm = true">log in</button>
+            <button @click="() => $router.push('/')">continue to home</button>
         </form>
     </div>
     
@@ -41,9 +43,11 @@
 
     form{
         background-color: #344966;
+        padding-left: 30px;
+        padding-right: 100px;
 
         img{
-            width: 300px;
+            width: 200px;
             height: auto;
         }
     }

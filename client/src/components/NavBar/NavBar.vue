@@ -36,7 +36,7 @@
             <!-- Route to /view games -->
             <RouterLink to="/view-games" activeClass="active link-item" class="link-item">View Games</RouterLink>
             
-            <!-- <RouterLink class="link-item">Sign out</RouterLink> -->
+            <RouterLink to="/signup" class="link-item">Sign out</RouterLink>
         </div>
     </nav>
     <PhoneNavMenu :isPhoneMenuActive="isPhoneMenuActive" :menuClick="() => isPhoneMenuActive = !isPhoneMenuActive"/>
