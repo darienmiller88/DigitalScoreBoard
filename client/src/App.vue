@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <NavBar />
+  <NavBar v-if="$route.path !== '/signup'"/>
   <main>
     <RouterView />
   </main>
