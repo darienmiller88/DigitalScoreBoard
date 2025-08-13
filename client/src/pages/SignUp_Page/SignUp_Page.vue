@@ -3,6 +3,7 @@
     import adaptLogo from "../../assets/adapt_logo-nobg.png"
 
     const isSignUpForm = ref<boolean>(true)
+    // const isActive = ref<boolean>(true)
 
     const handleSubmit = () => {
 
@@ -11,22 +12,22 @@
 
 <template>
     <div class="signup">
-        <form v-if="isSignUpForm" class="signup-form" @submit.prevent="handleSubmit">
+        <form @submit.prevent="handleSubmit">
             <img :src="adaptLogo" alt="">
-            <div class="header">Sign up form</div>
+            <div class="header">
+                <span v-if="isSignUpForm">Sign up Form</span>
+                <span v-else>Login Form</span>
+            </div>
 
-            <button @click="() => isSignUpForm = false">log in</button>
+            <div class="button-wrapper">
+                <div :class="isSignUpForm ? 'highlight move-left' : 'highlight move-right'"></div>
+                <button @click="() => isSignUpForm = true">Sign up</button>
+                <button @click="() => isSignUpForm = false">Log in</button>
+            </div>
+
             <button @click="() => $router.push('/')"> continue to home</button>
         </form>
-        <form v-else class="login-form" @submit.prevent="handleSubmit">
-            <img :src="adaptLogo" alt="">
-            <div class="header">Login form</div>
-
-            <button @click="() => isSignUpForm = true">log in</button>
-            <button @click="() => $router.push('/')">continue to home</button>
-        </form>
     </div>
-    
 </template>
 
 <style scoped lang="scss">
@@ -52,6 +53,44 @@
 
             .header{
                 font-size: 25px;
+            }
+
+            .button-wrapper{
+                display: flex;
+                border: 2px solid black;
+                width: fit-content;
+                position: relative;
+                z-index: 0;
+
+                .highlight{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background-color: blue;
+                    width: 50%;
+                    height: 100%;
+                    z-index: 1;
+                    transition: transform 0.3s ease; // optional smooth slide
+                }
+
+                .move-left{
+                    transform: translateX(0);
+                }
+
+                .move-right{
+                    transform: translateX(100%);
+                }
+
+                button{
+                    border: none;
+                    background-color: transparent;
+                    padding: 10px 20px;
+                    z-index: 2;
+
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }
