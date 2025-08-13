@@ -21,8 +21,8 @@
 
             <div class="button-wrapper">
                 <div :class="isSignUpForm ? 'highlight move-left' : 'highlight move-right'"></div>
-                <button @click="() => isSignUpForm = true">Sign up</button>
-                <button @click="() => isSignUpForm = false">Log in</button>
+                <button :class="isSignUpForm ? 'active' : ''" @click="() => isSignUpForm = true">Sign up</button>
+                <button :class="!isSignUpForm ? 'active' : ''" @click="() => isSignUpForm = false">Log in</button>
             </div>
 
             <button @click="() => $router.push('/')"> continue to home</button>
@@ -42,9 +42,12 @@
         background-color: #003366;
     
         form{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
             background-color: #344966;
-            padding-left: 30px;
-            padding-right: 100px;
+            padding: 30px;
     
             img{
                 width: 200px;
@@ -57,7 +60,8 @@
 
             .button-wrapper{
                 display: flex;
-                border: 2px solid black;
+                border: 1px solid rgb(200, 200, 200);
+                border-radius: 10px;
                 width: fit-content;
                 position: relative;
                 z-index: 0;
@@ -66,11 +70,13 @@
                     position: absolute;
                     top: 0;
                     left: 0;
-                    background-color: blue;
                     width: 50%;
                     height: 100%;
                     z-index: 1;
-                    transition: transform 0.3s ease; // optional smooth slide
+                    transition: transform 0.3s ease; 
+                    border-radius: 10px;
+                     
+                    background: linear-gradient(to right,#003366, #0073e6);
                 }
 
                 .move-left{
@@ -79,6 +85,10 @@
 
                 .move-right{
                     transform: translateX(100%);
+                }
+
+                .active{
+                    color: white;
                 }
 
                 button{
