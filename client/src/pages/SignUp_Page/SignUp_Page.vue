@@ -3,6 +3,9 @@
     import adaptLogo from "../../assets/adapt_logo-nobg.png"
 
     const isSignUpForm = ref<boolean>(true)
+    const emailAddress = ref<string>("")
+    const password = ref<string>("")
+    const confirmPassword = ref<string>("")
     // const isActive = ref<boolean>(true)
 
     const handleSubmit = () => {
@@ -19,13 +22,21 @@
                 <span v-else>Login Form</span>
             </div>
 
-            <div class="button-wrapper">
+            <div class="button-wrapper form-item">
                 <div :class="isSignUpForm ? 'highlight move-left' : 'highlight move-right'"></div>
                 <button :class="isSignUpForm ? 'active' : ''" @click="() => isSignUpForm = true">Sign up</button>
                 <button :class="!isSignUpForm ? 'active' : ''" @click="() => isSignUpForm = false">Log in</button>
             </div>
 
-            <button @click="() => $router.push('/')"> continue to home</button>
+            <input class="form-item" type="text" placeholder="Email Address" v-model="emailAddress">
+            <input class="form-item" type="password" placeholder="Password" v-model="password">
+            <input v-if="isSignUpForm" class="form-item" type="password" placeholder="Confirm Password" v-model="confirmPassword">
+
+            <!-- <button @click="() => $router.push('/')"> continue to home</button> -->
+            <button class="submit form-item" type="submit">
+                <span v-if="isSignUpForm">Sign Up</span>
+                <span v-else>Log in</span>
+            </button>
         </form>
     </div>
 </template>
@@ -48,6 +59,10 @@
             flex-direction: column;
             background-color: #344966;
             padding: 30px;
+
+            .form-item{
+                width: 20vw;
+            }
     
             img{
                 width: 200px;
@@ -56,6 +71,15 @@
 
             .header{
                 font-size: 25px;
+                margin: 20px;
+            }
+
+            input{
+                margin: 8px;
+                padding: 10px;
+                font-size: 18px;
+                border-radius: 10px;
+                border: 1px solid rgb(200, 200, 200);
             }
 
             .button-wrapper{
@@ -64,6 +88,7 @@
                 border-radius: 10px;
                 width: fit-content;
                 position: relative;
+                // marg
                 z-index: 0;
 
                 .highlight{
@@ -88,20 +113,40 @@
                 }
 
                 .active{
+                    transition: 0.3s;
                     color: white;
                 }
 
                 button{
                     border: none;
                     background-color: transparent;
-                    padding: 10px 20px;
+                    padding: 10px 40px;
                     z-index: 2;
+                    font-size: 18px;
+                    transition: 0.3s;
 
                     &:hover{
                         cursor: pointer;
                     }
                 }
             }
+
+            .submit{
+                border: none;
+                border-radius: 10px;
+                background: linear-gradient(to right,#003366, #0073e6);
+                color: white;
+                font-weight: 600;
+                padding: 10px;
+                font-size: 18px;
+                transition: 0.5s;
+
+                &:hover{
+                    cursor: pointer;
+                    background: linear-gradient(to right,#0073e6, #003366);
+                }
+            }
+            
         }
     }
 </style>
