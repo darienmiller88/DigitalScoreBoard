@@ -28,9 +28,12 @@
                 <button :class="!isSignUpForm ? 'active' : ''" @click="() => isSignUpForm = false">Log in</button>
             </div>
 
-            <input class="form-item" type="text" placeholder="Email Address" v-model="emailAddress">
-            <input class="form-item" type="password" placeholder="Password" v-model="password">
-            <input v-if="isSignUpForm" class="form-item" type="password" placeholder="Confirm Password" v-model="confirmPassword">
+            <div class="input-wrapper">
+                <input class="form-item" type="text" placeholder="Email Address" v-model="emailAddress">
+                <input class="form-item" type="password" placeholder="Password" v-model="password">
+                <input v-if="isSignUpForm" class="form-item" type="password" placeholder="Confirm Password" v-model="confirmPassword">
+            </div>
+
 
             <!-- <button @click="() => $router.push('/')"> continue to home</button> -->
             <button class="submit form-item" type="submit">
@@ -74,13 +77,20 @@
                 margin: 20px;
             }
 
-            input{
-                margin: 8px;
-                padding: 10px;
-                font-size: 18px;
-                border-radius: 10px;
-                border: 1px solid rgb(200, 200, 200);
+            .input-wrapper{
+                display: flex;
+                flex-direction: column;
+                margin: 10px;
+
+                input{
+                    margin: 8px;
+                    padding: 10px;
+                    font-size: 18px;
+                    border-radius: 10px;
+                    border: 1px solid rgb(200, 200, 200);
+                }
             }
+
 
             .button-wrapper{
                 display: flex;
@@ -123,6 +133,7 @@
                     padding: 10px 40px;
                     z-index: 2;
                     font-size: 18px;
+                    font-weight: 600;
                     transition: 0.3s;
 
                     &:hover{
