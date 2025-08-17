@@ -43,6 +43,8 @@
                 <span v-if="isSignUpForm">Sign Up</span>
                 <span v-else>Log in</span>
             </button>
+
+            <div v-if="!isSignUpForm" class="not-a-member">Not a member? <span @click="() => isSignUpForm = true">Sign up now</span></div>
         </form>
     </div>
 </template>
@@ -194,6 +196,21 @@
                 &:hover{
                     cursor: pointer;
                     background: linear-gradient(to right,#0073e6, #003366);
+                }
+            }
+
+            .not-a-member{
+                font-size: 16px;
+                margin: 12px;
+                transition: 0.3s;
+
+                span{
+                    color: #0073e6;
+                }
+
+                &:hover{
+                    cursor: pointer;
+                    color: aliceblue;
                 }
             }
             
