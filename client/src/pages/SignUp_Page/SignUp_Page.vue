@@ -30,7 +30,10 @@
 
             <div class="input-wrapper">
                 <input class="form-item" type="text" placeholder="Email Address" v-model="emailAddress">
-                <input class="form-item" type="password" placeholder="Password" v-model="password">
+                <div class="password-wrapper">
+                    <input class="form-item" type="password" placeholder="Password" v-model="password">
+                    <div v-if="!isSignUpForm" class="forgot-password">Forgot password?</div>
+                </div>
                 <input v-if="isSignUpForm" class="form-item" type="password" placeholder="Confirm Password" v-model="confirmPassword">
             </div>
 
@@ -61,15 +64,40 @@
             justify-content: center;
             flex-direction: column;
             background-color: #344966;
-            padding: 30px;
+            padding: 20px 0px;
+            
+
+            @media (min-width: 768px) {
+                padding: 40px;
+            }
+
+            @media (min-width: 1025px) {
+                height: 60vh;
+            }
 
             .form-item{
-                width: 20vw;
+                width: 80vw;
+
+                @media (min-width: 768px) {
+                    width: 60vw;
+                }
+
+                @media (min-width: 1025px) {
+                    width: 20vw;
+                }
             }
     
             img{
                 width: 200px;
                 height: auto;
+
+                @media (min-width: 768px) {
+                    width: 400px;
+                }
+
+                @media (min-width: 1025px) {
+                    width: 300px;
+                }
             }
 
             .header{
@@ -89,6 +117,18 @@
                     border-radius: 10px;
                     border: 1px solid rgb(200, 200, 200);
                 }
+
+                .forgot-password{
+                    font-size: 17px;
+                    margin: 5px 8px;
+                    color: aliceblue;
+                    transition: 0.3s;
+
+                    &:hover{
+                        color: rgb(140, 140, 140);
+                        cursor: pointer;
+                    }
+                }
             }
 
 
@@ -98,7 +138,6 @@
                 border-radius: 10px;
                 width: fit-content;
                 position: relative;
-                // marg
                 z-index: 0;
 
                 .highlight{
