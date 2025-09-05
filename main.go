@@ -17,6 +17,7 @@ import (
 func main(){
 	godotenv.Load()
 
+	//Push from Dell laptop
 	router := chi.NewRouter()
 	index := routes.Index{}
 	newCors := cors.New(cors.Options{
