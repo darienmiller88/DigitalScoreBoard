@@ -22,15 +22,13 @@ func Init() {
 	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
 	opts := options.Client().ApplyURI(os.Getenv("MONGO_URI")).SetServerAPIOptions(serverAPI)
 	client, err := mongo.Connect(context.TODO(), opts)
-
-	fmt.Println("mongo:", os.Getenv("MONGO_URI"))
 	
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 	
 	if err := client.Ping(context.TODO(), readpref.Primary()); err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 	
 	fmt.Println("Pinged your deployment. You successfully connected to MongoDB!")

@@ -8,7 +8,7 @@ COPY go.mod go.sum ./
 # Afterwards, download the dependencies from the go.mod file
 RUN go mod download
 
-# Copy the main.go file which starts the project, and the api folder
+# Copy the entire directory into the build folder
 COPY . .
 
 RUN go build -o digital-scoreboard .
