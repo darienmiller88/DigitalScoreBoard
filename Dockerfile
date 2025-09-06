@@ -9,8 +9,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # Copy the main.go file which starts the project, and the api folder
-COPY main.go ./
-COPY /api ./
+COPY . .
 
 RUN go build -o digital-scoreboard .
 
@@ -29,4 +28,4 @@ COPY --from=build-stage /app/digital-scoreboard .
 EXPOSE 8080
 
 # Finally, runthe go binary!
-CMD [ "/digital-scoreboard" ]
+CMD [ "./digital-scoreboard" ]
