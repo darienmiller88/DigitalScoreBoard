@@ -15,7 +15,7 @@ Here is a brief summary of the impact this app had:
 * [Vue](https://vuejs.org/)
 * [Go](https://github.com/go-chi/chi)
 * [MongoDB-Atlas](https://www.mongodb.com/cloud/atlas)
-* [Railwai](https://railway.com)
+* [Railway](https://railway.com)
 * [Netlify](https://www.netlify.com/)
 
 ## Home Page Dark Mode, team mode
@@ -47,7 +47,7 @@ So far, this application has the following features:
 ## View api here:
 https://digitalscoreboard.up.railway.app/
 
-I made the choice to migrate the backend from fly.io to Google cloud due to cost overruns with the former, and the latter providing a free tier. Thankfully, deploying to Google Cloud was not hard at all! The features provided for the free tier seem to be reasonable too.
+After deploying to Google Cloud Services, my free tier dried up unfortunately, and I was forced to find an alternative as the payment method seem to follow a pay as you go scheme, which I do not feel comfortable doing. For now, I am doing the hobbyist plan for Railway, as it is predicatable and offers more than enough performance. 
 
 ### Requirements:
 
