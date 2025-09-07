@@ -15,7 +15,7 @@ Here is a brief summary of the impact this app had:
 * [Vue](https://vuejs.org/)
 * [Go](https://github.com/go-chi/chi)
 * [MongoDB-Atlas](https://www.mongodb.com/cloud/atlas)
-* [Google Cloud Services](https://cloud.google.com/)
+* [Railwai](https://railway.com)
 * [Netlify](https://www.netlify.com/)
 
 ## Home Page Dark Mode, team mode
@@ -45,7 +45,7 @@ So far, this application has the following features:
 * Viewing games, which will include the winner of the game, and the total and average amount of points earned during the game.
 
 ## View api here:
-https://adaptscoreboard-678166011633.us-east4.run.app/
+https://digitalscoreboard.up.railway.app/
 
 I made the choice to migrate the backend from fly.io to Google cloud due to cost overruns with the former, and the latter providing a free tier. Thankfully, deploying to Google Cloud was not hard at all! The features provided for the free tier seem to be reasonable too.
 
