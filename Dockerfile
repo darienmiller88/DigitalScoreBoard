@@ -24,7 +24,7 @@ WORKDIR /app
 # Copy the binary create during the build stage into the run time image
 COPY --from=build-stage /app/digital-scoreboard .
 
-# expose port 8080 to run the image on
+# expose port 8080 for the local machine
 EXPOSE 8080
 
 # Finally, runthe go binary!
