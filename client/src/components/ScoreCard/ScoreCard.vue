@@ -175,6 +175,17 @@
             border: none;
             transition: 0.3s; 
 
+            @media (min-width: 768px) {
+                padding: 10px 30px;
+                margin: 20px 0px;
+                font-size: 20px;
+            }
+
+            @media (min-width: 3840px) {
+                padding: 20px 50px;
+                font-size: 55px;
+            }
+
             &:hover{
                 cursor: pointer;
                 background-color: var(--primary-color-transparent);
