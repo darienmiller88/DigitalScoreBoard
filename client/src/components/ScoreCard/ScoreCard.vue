@@ -143,6 +143,11 @@
                 &:hover{
                     cursor: pointer;
                 }
+
+                @media (min-width: 3840px){
+                    font-size: 65px;
+                    margin: 0px 30px;
+                }
             }
 
             input{
@@ -155,6 +160,10 @@
                 padding: 10px;
                 border-radius: 10px;
                 font-size: 16px;
+
+                @media (min-width: 3840px){
+                    font-size: 55px;
+                }
             }
         }
 
@@ -177,11 +186,11 @@
 
             @media (min-width: 768px) {
                 padding: 10px 30px;
-                margin: 20px 0px;
                 font-size: 20px;
             }
-
+            
             @media (min-width: 3840px) {
+                margin: 20px 0px;
                 padding: 20px 50px;
                 font-size: 55px;
             }
