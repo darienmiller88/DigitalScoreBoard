@@ -205,6 +205,10 @@
 
                 font-size: 25px;
                 padding: 0px 20px;
+
+                @media (min-width: 3840px){
+                    font-size: 75px;
+                }
             }
 
             button{
@@ -243,6 +247,10 @@
             overflow-x: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+
+           @media (min-width: 3840px){
+                font-size: 80px;
+            }
         } 
     }
 </style>

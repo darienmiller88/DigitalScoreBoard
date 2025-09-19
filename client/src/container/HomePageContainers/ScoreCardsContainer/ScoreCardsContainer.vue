@@ -54,12 +54,23 @@
             max-height: 75vh;
         }
 
+        //2k resolution
         @media (min-width: 2560px){
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 25px;
             max-height: 75vh;
             max-width: 95vw;
+        }
+
+        //4k resolution
+        @media (min-width: 3840px){
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+            max-height: 75vh;
+            max-width: 85vw;
+            border: 2px solid black;
         }
     }
 </style>
