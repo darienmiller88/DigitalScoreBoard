@@ -197,6 +197,10 @@
                 grid-template-columns: auto 160px auto;
             }
 
+            @media (min-width: 3840px) {
+                grid-template-columns: auto 480px auto;
+            }
+
             .score{
                 display: flex;
                 align-items: center;
@@ -223,6 +227,11 @@
                 @media (min-width: 768px) {
                     padding: 10px 30px;
                     font-size: 20px;
+                }
+
+                @media (min-width: 3840px) {
+                    padding: 10px 30px;
+                    font-size: 80px;
                 }
 
                 &:hover{
