@@ -33,6 +33,10 @@
             width: unset;
         }
 
+        @media (min-width: 3840px) {
+            font-size: 60px;
+        }
+
         &:hover{
             cursor: pointer;
             background-color: var(--primary-color-transparent);

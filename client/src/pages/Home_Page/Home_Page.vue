@@ -188,6 +188,7 @@
         width: fit-content;
         flex-direction: column;
         align-items: center;
+        border: 2px solid black;
 
         margin: auto;
         margin-top: 20px;
@@ -195,6 +196,10 @@
 
         @media (min-width: 768px) {
             flex-direction: row;
+        }
+
+        @media (min-width: 3840px) {
+            margin-top: 60px;
         }
 
         .base-btn{
@@ -212,6 +217,12 @@
 
             @media (min-width: 768px) {
                 width: unset;
+            }
+
+            @media (min-width: 3840px) {
+                width: unset;
+                font-size: 60px;
+                padding: 30px 40px;
             }
         }
 
@@ -231,6 +242,11 @@
 
             @media (min-width: 1025px) {
                 height: 10vh;
+            }
+
+            @media (min-width: 3840px) {
+                border: solid 4px var(--toggle-background);
+                height: 5vh
             }
         }
 
