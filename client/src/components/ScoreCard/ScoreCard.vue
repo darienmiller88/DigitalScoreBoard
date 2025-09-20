@@ -132,7 +132,7 @@
             @media (min-width: 3840px) {
                 font-size: 50px;
                 padding: 15px 25px;
-                margin: 10px;
+                margin: 25px;
             }
         }
 
