@@ -116,17 +116,21 @@
             </button>
         </div>
     </div>
+
+    <!-- This section will be rendered if the client has already created a game yet. -->
     <div v-else>
         <PageTitle :titleName="'Game in session'"/>
 
-        <ResetPoints :resetAllPoints="resetAllPoints"/>
-    
         <div class="total-points">
             Total Points: {{ totalPoints() }} 
         </div>
 
-        <div class="sort-players-wrapper">
-            <button @click="sortPlayersByScore">Sort Players by score</button>
+        <div class="reset-sort-wrapper">
+            <ResetPoints :resetAllPoints="resetAllPoints"/>
+    
+            <div class="sort-players-wrapper">
+                <button @click="sortPlayersByScore">Sort Players by score</button>
+            </div>
         </div>
 
         <!-- Shows all users when "Add new users" is clicked -->
@@ -161,6 +165,13 @@
         color: red;
         text-align: center;
         font-size: 25px;
+    }
+
+    .reset-sort-wrapper{
+        display: flex;
+        width: fit-content;
+        margin: auto;
+        border: 2px solid black;
     }
 
     .sort-players-wrapper{

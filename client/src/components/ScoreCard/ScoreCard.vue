@@ -3,7 +3,7 @@
     import { HomePageStore } from "../../stores/PageStores/HomePageStore";
     import { ref } from "vue";
 
-    const { removeCard, addPoints, minusPoints, resetPoints } = scoreCardsStore()
+    const { removeCard, addPoints, minusPoints } = scoreCardsStore()
     const { removeAvailablePlayerFromGame } = HomePageStore()
     const maxPoints: number = 99999
     let pointsToAdd = ref<number>(0)
@@ -61,9 +61,9 @@
             <span @click="addPointsToTotal">+</span>
         </div>
         <div class="error" v-if="isExceedMaxPointsError">Total must be {{ maxPoints }} or lower</div> 
-        <button class="reset" @click="() => resetPoints(cardIndex)" >
+        <!-- <button class="reset" @click="() => resetPoints(cardIndex)" >
             Reset points
-        </button>
+        </button> -->
         <div class="score-wrapper">
             <button class="minus-points" @click="() => minusPoints(cardIndex, pointValue)">-</button>
             <div class="score">{{ score }}</div>
@@ -140,6 +140,10 @@
             display: flex;
             justify-content: center;
             margin: 10px 0px;
+
+            @media (min-width: 3840px) {
+                margin: 60px 0px;
+            }
             
             span{
                 font-size: 26px;
@@ -152,7 +156,6 @@
 
                 @media (min-width: 3840px){
                     font-size: 65px;
-                    margin: 0px 30px;
                 }
             }
 

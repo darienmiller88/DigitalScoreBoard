@@ -19,5 +19,10 @@
             font-size: 60px;
             margin: 10px 0px;
         }
+
+        @media screen and (min-width: 3840px) {
+            font-size: 120px;
+            margin: 20px 0px;
+        }
     }
 </style>
