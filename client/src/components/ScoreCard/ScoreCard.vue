@@ -128,6 +128,12 @@
                 cursor: pointer;
                 background-color: var(--primary-color-transparent);
             }
+
+            @media (min-width: 3840px) {
+                font-size: 50px;
+                padding: 15px 25px;
+                margin: 10px;
+            }
         }
 
         .input-wrapper{
