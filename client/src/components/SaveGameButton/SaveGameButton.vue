@@ -35,6 +35,7 @@
 
         @media (min-width: 3840px) {
             font-size: 60px;
+            padding: 30px 40px;
         }
 
         &:hover{

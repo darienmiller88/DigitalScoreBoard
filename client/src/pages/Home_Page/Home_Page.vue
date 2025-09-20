@@ -188,7 +188,6 @@
         width: fit-content;
         flex-direction: column;
         align-items: center;
-        border: 2px solid black;
 
         margin: auto;
         margin-top: 20px;
