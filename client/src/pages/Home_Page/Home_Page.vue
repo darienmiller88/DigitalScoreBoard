@@ -159,6 +159,10 @@
         font-size: 30px;
         color: var(--primary-color);
         padding: 20px;
+
+        @media (min-width: 3840px) {
+            font-size: 90px;
+        }
     }  
 
     .error{
