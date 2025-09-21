@@ -72,10 +72,19 @@
         font-size: 25px;
         text-decoration: none;
 
+        @media (min-width: 3840px) {
+            font-size: 75px;
+        }
+
         img{
             height: 30px;
             width: auto;
             margin-right: 8px;
+
+            @media (min-width: 3840px) {
+                height: 70px;
+                margin-right: 20px;
+            }
         }
 
         .logo-item{
@@ -109,6 +118,12 @@
 
             transition: 0.5s;
             height: 100%;
+
+            @media (min-width: 3840px) {
+                font-size: 70px;
+                padding: 40px 50px;
+                height: unset;
+            }
 
             &:hover{
                 background-color: rgb(50, 50, 219);
