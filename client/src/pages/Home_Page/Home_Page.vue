@@ -173,7 +173,6 @@
             display: flex;
             width: fit-content;
             margin: auto;
-            border: 2px solid black;
         }
     }
 
@@ -189,6 +188,11 @@
             border-radius: 10px;
             font-size: 18px;
             transition: 0.3s;
+
+            @media (min-width: 3840px) {
+                font-size: 60px;
+                padding: 20px 36px;
+            }
 
             &:hover{
                 cursor: pointer;

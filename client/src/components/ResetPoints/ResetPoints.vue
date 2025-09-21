@@ -28,6 +28,11 @@
             background-color: red;
             color: aliceblue;
 
+            @media (min-width: 3840px) {
+                font-size: 60px;
+                padding: 20px 36px;
+            }
+
             &:hover{
                 cursor: pointer;
                 background-color: rgba($color: #e30909, $alpha: .8);
