@@ -173,6 +173,8 @@
             display: flex;
             width: fit-content;
             margin: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
     }
 
