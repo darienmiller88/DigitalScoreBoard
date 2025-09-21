@@ -83,7 +83,7 @@
 
             @media (min-width: 3840px) {
                 height: 70px;
-                margin-right: 20px;
+                margin: 20px;
             }
         }
 
