@@ -168,10 +168,13 @@
     }
 
     .reset-sort-wrapper{
-        display: flex;
-        width: fit-content;
-        margin: auto;
-        border: 2px solid black;
+
+        @media (min-width: 768px) {
+            display: flex;
+            width: fit-content;
+            margin: auto;
+            border: 2px solid black;
+        }
     }
 
     .sort-players-wrapper{
