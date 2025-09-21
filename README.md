@@ -45,7 +45,6 @@ So far, this application has the following features:
 * Viewing games, which will include the winner of the game, and the total and average amount of points earned during the game.
 
 ## View api here:
-https://digitalscoreboard.up.railway.app/
 
 After deploying to Google Cloud Services, my free tier dried up unfortunately, and I was forced to find an alternative as the payment method seem to follow a pay as you go scheme, which I do not feel comfortable doing. For now, I am doing the hobbyist plan for Railway, as it is predicatable and offers more than enough performance. 
 
