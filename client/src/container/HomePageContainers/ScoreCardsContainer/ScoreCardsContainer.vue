@@ -57,7 +57,6 @@
         //2k resolution
         @media (min-width: 2560px){
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             max-height: 75vh;
             max-width: 95vw;
@@ -68,7 +67,8 @@
             display: grid;
             gap: 50px;
             max-height: 75vh;
-            max-width: 85vw;
+            max-width: 90vw;
+            padding: 0px 30px;
             border: 2px solid black;
         }
     }

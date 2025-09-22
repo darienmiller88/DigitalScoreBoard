@@ -40,6 +40,10 @@
     $padding:      5px;
     $slider-width: 15px;
 
+    $toggle-width-large: $toggle-width * 3.5;
+    $padding-large:      $padding * 4.5;
+    $slider-width-large: $slider-width * 2.5;
+
     .mode-toggle{  
         display: flex;
 
@@ -52,6 +56,13 @@
         padding: $padding $padding;
         margin-right: 10px;
 
+        @media (min-width: 3840px) {
+            width: $toggle-width-large;
+            padding: ($padding-large) ($padding-large);
+            margin-right: 30px;
+            border-radius: 40px;
+        }
+
         .slider{
             background-color: var(--bg-color);
             width: $slider-width;
@@ -60,6 +71,11 @@
             
             transition: 0.5s;
             position: relative;
+
+            @media (min-width: 3840px) {
+                width: $slider-width-large;
+                height: $slider-width-large;
+            }
         }
 
         &:hover{
@@ -70,6 +86,10 @@
     .toggle-right{
         .slider{
             transform: translateX(calc($toggle-width - $slider-width - ($padding * 2)));
+
+            @media (min-width: 3840px) {
+                transform: translateX(calc($toggle-width-large - $slider-width-large - ($padding-large * 2)));
+            }
         }
     }
 </style>
