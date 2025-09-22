@@ -41,7 +41,7 @@
     $slider-width: 15px;
 
     $toggle-width-large: $toggle-width * 3.5;
-    $padding-large:      $padding * 4.5;
+    $padding-large:      $padding      * 4.5;
     $slider-width-large: $slider-width * 2.5;
 
     .mode-toggle{  
