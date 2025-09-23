@@ -127,7 +127,6 @@
                 @media (min-width: 3840px) {
                     height: 90px;
                 }
-
             }
 
             @media (min-width: 768px) {
@@ -138,6 +137,10 @@
         .score{
             color: rgb(37, 199, 130);
             font-size: 35px;
+
+            @media (min-width: 3840px) {
+                font-size: 75px;
+            }
         }        
 
         .view-players-wrapper{
