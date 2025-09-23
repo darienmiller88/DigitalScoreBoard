@@ -38,7 +38,11 @@
                 const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users`)
 
                 console.log("all players:", playersResult.data);
-                
+                playersResult.data.sort((a, b) => a.username.localeCompare(b.username))
+                setAvailablePlayers(playersResult.data.map(player => ({
+                    player_name: player.username,
+                    isAddedToGame: false
+                })))  
             }
         } catch (error) {
             console.log(error);
