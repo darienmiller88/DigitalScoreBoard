@@ -105,6 +105,10 @@
             font-size: 30px;
             font-style: italic;
 
+            @media (min-width: 3840px) {
+                font-size: 90px;
+            }
+
             .winner{
                 @media screen and (min-width: 768px) {
                     margin: 0px 20px;
@@ -116,12 +120,17 @@
                 width: auto;
                 margin: 0px 10px;
 
-                @media screen and (min-width: 768px) {
+                @media (min-width: 768px) {
                     height: 60px;
                 }
+
+                @media (min-width: 3840px) {
+                    height: 90px;
+                }
+
             }
 
-            @media screen and (min-width: 768px) {
+            @media (min-width: 768px) {
                 margin: 0px 40px;
             }
         }
