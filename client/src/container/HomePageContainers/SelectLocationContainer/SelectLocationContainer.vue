@@ -67,6 +67,10 @@
             @media (min-width: 768px) {
                 font-size: 30px;
             }
+
+            @media (min-width: 3840px) {
+                font-size: 55px;
+            }
         }
     }
 </style>
