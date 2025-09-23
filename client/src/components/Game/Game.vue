@@ -185,6 +185,11 @@
                 font-size: 18px;
                 transition: 0.3s;
 
+                @media (min-width: 3840px) {
+                    font-size: 45px;
+                    padding: 20px 35px;
+                }
+
                 &:hover{
                     cursor: pointer;
                     transform: scale(1.1);
