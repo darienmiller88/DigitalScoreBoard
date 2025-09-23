@@ -202,6 +202,10 @@
                     color: red;
                     border-radius: 50%;
                     padding: 7px;
+
+                    @media (min-width: 3840px) {
+                        font-size: 45px;
+                    }
                 }
 
                 span{
@@ -214,6 +218,11 @@
         .location-date-wrapper{
             color: grey;
             margin: 10px;
+
+            @media (min-width: 3840px) {
+                font-size: 55px;
+                margin: 40px;
+            }
         }
 
         .points-wrapper{
@@ -221,6 +230,10 @@
             justify-content: space-between;
             margin-top: 15px;
             color: black;
+
+            @media (min-width: 3840px) {
+                font-size: 55px;
+            }
         }
     }
 </style>
