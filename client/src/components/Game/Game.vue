@@ -157,6 +157,12 @@
                 border-radius: 8px;
                 transition: 0.3s;
 
+                @media (min-width: 3840px) {
+                    font-size: 55px;
+                    padding: 30px 45px;
+                    margin: 20px;
+                }
+
                 &:hover{
                     cursor: pointer;
                     padding: 15px 40px;
