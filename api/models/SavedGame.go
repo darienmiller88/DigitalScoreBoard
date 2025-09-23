@@ -1,11 +1,14 @@
 package models
 
 import (
+	"DigitalScoreBoard/api/database"
+	"context"
 	"fmt"
 	"math"
 	"time"
 
 	"github.com/go-ozzo/ozzo-validation/v4"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -128,21 +131,31 @@ func (s *SavedGame) validatePlayersAndTeams(field interface{}) error{
 //Validate each player in the array of players to gurauntee they all exist for the location
 func (s *SavedGame) validatePlayers(field interface{}) error{
 	if s.Players != nil {
-		location, err := getLocationByName(s.LocationName)
+		locations, err := getLocations()
 
 		if err != nil {
 			return err
 		}
 
+		players := []UserCard{}
+
+		for _, location := range locations {
+			players = append(players, location.Users...)
+		}
+
+		// if err != nil {
+		// 	return err
+		// }
+
 		uniquePlayerNames := make(map[string]int)
 
-		for _, player := range location.Users{
+		for _, player := range players{
 			uniquePlayerNames[player.Name] = 0
 		}
 
 		for _, player := range *s.Players{
 			if _, exists := uniquePlayerNames[player.Name]; !exists {
-				return fmt.Errorf("player '%s' does not exist for ADAPT location %s", player.Name, location.LocationName)
+				return fmt.Errorf("player '%s' does not exist", player.Name)
 			}
 		}
 	}	
@@ -199,3 +212,19 @@ func (s *SavedGame) validateTeams(field interface{}) error{
 	return nil
 }
 
+func getAllPlayers() ([]Location, error){
+	locationsCollection := database.GetLocationsCollection()
+	result, err := locationsCollection.Find(context.Background(), bson.D{})
+
+	if err != nil {
+		return []Location{}, err
+	}
+
+	locations := []Location{}
+
+	if err := result.All(context.Background(), &locations); err != nil {
+		return []Location{}, err
+	}
+
+	return locations, nil
+}
