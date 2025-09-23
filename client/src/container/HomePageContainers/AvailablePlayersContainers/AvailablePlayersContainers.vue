@@ -132,7 +132,7 @@
             @media (min-width: 1025px) {
                 grid-template-columns: 75% auto;
                 width: 55vw;
-            }
+            }            
             
             .player-name{
                 border: 2px solid var(--primary-color);
@@ -167,6 +167,11 @@
                     &:hover{
                         color: var(--toggle-background);
                     }
+                }
+
+                @media (min-width: 3840px) {
+                    font-size: 85px;
+                    padding: 30px;
                 }
             }
 
@@ -207,6 +212,10 @@
                     width: 100%;
                     transition: 0.2s;
         
+                    @media (min-width: 3840px) {
+                        font-size: 65px;
+                    }
+
                     &:active{
                         transform: translateY(-2px);
                     }
