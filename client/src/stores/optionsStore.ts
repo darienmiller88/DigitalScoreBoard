@@ -3,12 +3,14 @@ import { ref } from 'vue';
 import { Team } from "../types/types"
 
 export const optionsStore = defineStore("optionsStore", () => {
-    const allLocationOptions = ref<string[]>([])
+    const allLocationOptions = ref<string[]>(["Select from all sites"])
     const remainingLocationOptions = ref<string[]>([])
 
     //Overides the Location allLocationOptions with a set of new ones.
     const setAllLocationOptions = (newOptions: string[]) => {
-        allLocationOptions.value = newOptions
+        if (allLocationOptions.value.length <= 8) {
+            allLocationOptions.value = [...allLocationOptions.value, ...newOptions]
+        }
     }
 
     //Removes a number of teams (Locations really) from the list of all locations, returning the remaining teams.

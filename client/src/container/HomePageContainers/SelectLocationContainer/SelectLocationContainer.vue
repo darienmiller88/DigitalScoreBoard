@@ -23,15 +23,23 @@
 
     const loadPlayersFromLocation = async (locationName: string) => {
         try {
-            const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`)
 
-            //Set the current players to an empty array whenever new players are loaded from a location.
+            if (locationName !== "Select from all sites") {
+                const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`)
+    
+                //Set the current players to an empty array whenever new players are loaded from a location.
+    
+                //And then set the available list of players to the ones we just retrieved
+                setAvailablePlayers(playersResult.data.map(player => ({
+                    player_name: player.username,
+                    isAddedToGame: false
+                })))            
+            } else {
+                const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users`)
 
-            //And then set the available list of players to the ones we just retrieved
-            setAvailablePlayers(playersResult.data.map(player => ({
-                player_name: player.username,
-                isAddedToGame: false
-            })))            
+                console.log("all players:", playersResult.data);
+                
+            }
         } catch (error) {
             console.log(error);
         }
