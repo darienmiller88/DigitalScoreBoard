@@ -301,6 +301,10 @@
             font-weight: 600;
             transition: 0.3s;
         
+            @media (min-width: 3840px) {
+                font-size: 75px;
+                padding: 30px 50px;
+            }
 
             &:hover{
                 cursor: pointer;
