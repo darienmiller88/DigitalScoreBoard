@@ -58,7 +58,7 @@
 
         @media (min-width: 3840px) {
             width: $toggle-width-large;
-            padding: ($padding-large) ($padding-large);
+            padding: $padding-large $padding-large;
             margin-right: 30px;
             border-radius: 40px;
         }
