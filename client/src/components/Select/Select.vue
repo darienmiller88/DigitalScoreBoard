@@ -29,8 +29,12 @@
         background-color: var(--primary-color);
         color: var(--bg-color);
 
-        @media screen and (min-width: 768px) {
+        @media (min-width: 768px) {
             font-size: 28px;
+        }
+
+        @media (min-width: 3840px) {
+            font-size: 55px;
         }
     }
 </style>
