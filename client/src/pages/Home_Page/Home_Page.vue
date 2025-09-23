@@ -63,6 +63,10 @@
     }
 
     const endAndSaveGame = async () => {
+        if (currentLocation.value === "Select from all sites") {
+            currentLocation.value = "Lawrence"
+        }
+
         let savedGame: SavedGame = {
             id: '',
             winner: {
