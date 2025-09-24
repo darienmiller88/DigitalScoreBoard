@@ -1,14 +1,11 @@
 package models
 
 import (
-	"DigitalScoreBoard/api/database"
-	"context"
 	"fmt"
 	"math"
 	"time"
 
 	"github.com/go-ozzo/ozzo-validation/v4"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -128,7 +125,7 @@ func (s *SavedGame) validatePlayersAndTeams(field interface{}) error{
 	return nil
 }
 
-//Validate each player in the array of players to gurauntee they all exist for the location
+//Validate each player in the array of players to gurauntee they all exist as real players in the database.
 func (s *SavedGame) validatePlayers(field interface{}) error{
 	if s.Players != nil {
 		locations, err := getLocations()
@@ -209,21 +206,4 @@ func (s *SavedGame) validateTeams(field interface{}) error{
 	} 
 
 	return nil
-}
-
-func getAllPlayers() ([]Location, error){
-	locationsCollection := database.GetLocationsCollection()
-	result, err := locationsCollection.Find(context.Background(), bson.D{})
-
-	if err != nil {
-		return []Location{}, err
-	}
-
-	locations := []Location{}
-
-	if err := result.All(context.Background(), &locations); err != nil {
-		return []Location{}, err
-	}
-
-	return locations, nil
 }
