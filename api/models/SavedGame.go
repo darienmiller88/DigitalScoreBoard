@@ -139,20 +139,19 @@ func (s *SavedGame) validatePlayers(field interface{}) error{
 
 		players := []UserCard{}
 
+		//Extract all of the players from all of the locations
 		for _, location := range locations {
 			players = append(players, location.Users...)
 		}
 
-		// if err != nil {
-		// 	return err
-		// }
-
 		uniquePlayerNames := make(map[string]int)
 
+		//Add each player to a map for easier indexing when comparing the list players sent here by the client.
 		for _, player := range players{
 			uniquePlayerNames[player.Name] = 0
 		}
 
+		//Check to see if any player in the list of players sent by the client exists.
 		for _, player := range *s.Players{
 			if _, exists := uniquePlayerNames[player.Name]; !exists {
 				return fmt.Errorf("player '%s' does not exist", player.Name)
