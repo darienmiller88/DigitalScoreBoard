@@ -48,8 +48,8 @@ func UpdatePlayersForLocation(req *http.Request, mongoUpdateOperator string, loc
 		return updateUserResult
 	}
 
-	filter := bson.M{"location_name": locationName}
-	update := bson.M{mongoUpdateOperator: bson.M{"users": bson.M{"name": username}}}
+	filter := bson.M{ "location_name": locationName }
+	update := bson.M{ mongoUpdateOperator: bson.M{ "users": bson.M{"name": username} } }
  	updateOneResult, err := database.GetLocationsCollection().UpdateOne(req.Context(), filter, update)
 
 	if err != nil{
