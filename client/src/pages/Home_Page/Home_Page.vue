@@ -41,6 +41,7 @@
         } else {
             toggleGameCreatedStatus(true)
 
+            //Make score cards by taking the names the user added.
             scoreCards.value = currentPlayersInGame.value.map(playerName => ({
                 username: playerName,
                 score: 0
@@ -63,6 +64,7 @@
     }
 
     const endAndSaveGame = async () => {
+        //Temporary hack for tournament lol
         if (currentLocation.value === "Select from all sites") {
             currentLocation.value = "Lawrence"
         }
@@ -84,7 +86,7 @@
         try {
             await scoreBoardApi.post<SavedGame>("/save-game", savedGame)
             
-            toast.success("Game saved!", { timeout: 2500 })
+            toast.success("Game saved!", { timeout: 1500 })
             scoreCards.value = []
         } catch (error) {
             console.log(error);
