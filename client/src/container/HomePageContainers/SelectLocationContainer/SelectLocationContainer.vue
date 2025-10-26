@@ -41,7 +41,7 @@
                 //sort the current players from the location.
                 playersResult.data.sort((a, b) => a.username.localeCompare(b.username))
                 
-                //
+                //And then set the available list of players to the ones we just retrieved
                 setAvailablePlayers(playersResult.data.map(player => ({
                     player_name: player.username,
                     isAddedToGame: false
