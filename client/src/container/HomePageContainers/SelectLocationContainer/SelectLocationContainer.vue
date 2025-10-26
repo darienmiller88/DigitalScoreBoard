@@ -27,8 +27,9 @@
             if (locationName !== "Select from all sites") {
                 const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`)
     
-                //Set the current players to an empty array whenever new players are loaded from a location.
-    
+                //sort the current players from the location.
+                playersResult.data.sort((a, b) => a.username.localeCompare(b.username))
+
                 //And then set the available list of players to the ones we just retrieved
                 setAvailablePlayers(playersResult.data.map(player => ({
                     player_name: player.username,
@@ -36,9 +37,11 @@
                 })))            
             } else {
                 const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users`)
-
-                console.log("all players:", playersResult.data);
+                
+                //sort the current players from the location.
                 playersResult.data.sort((a, b) => a.username.localeCompare(b.username))
+                
+                //
                 setAvailablePlayers(playersResult.data.map(player => ({
                     player_name: player.username,
                     isAddedToGame: false
