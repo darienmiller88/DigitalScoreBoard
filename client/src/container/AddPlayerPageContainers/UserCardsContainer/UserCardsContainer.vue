@@ -44,7 +44,7 @@
             await scoreBoardApi.delete(`/remove-user-from-location/${ currentLocation.value }`, { data: { player_name: playerToRemove } })
             
             toast.success(`${playerToRemove} removed!`, {
-                timeout: 2000
+                timeout: 1000
             })
         } catch (error) {
             console.log("err:", error)

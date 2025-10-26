@@ -7,7 +7,7 @@
     const { scoreCards } = storeToRefs(scoreCardsStore())
     const { addScoreCard } = scoreCardsStore()
     const { availablePlayersToAdd, currentPlayersInGame, remainingPlayersInGame } = storeToRefs(HomePageStore())
-    const { addAvailalePlayerToGame, removeAvailablePlayerFromGame, toggleGameCreatedStatus } = HomePageStore()
+    const { addAvailablePlayerToGame, removeAvailablePlayerFromGame, toggleGameCreatedStatus } = HomePageStore()
     const { width } = useWindowSize();
 
     //IF there are scorecards added, that means a game has started, show the players who have not been added yet. 
@@ -24,7 +24,7 @@
             })
         }
 
-        addAvailalePlayerToGame(playerIndex, playerName)
+        addAvailablePlayerToGame(playerIndex, playerName)
 
         //When there are no remaining players left, return to the game screen.
         if (!remainingPlayersInGame.value.length) {

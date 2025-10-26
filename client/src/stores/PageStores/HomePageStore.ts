@@ -32,7 +32,7 @@ export const HomePageStore = defineStore("HomePageStore", () => {
     }
 
     //Add the player to the game, and set their availibility to false.
-    const addAvailalePlayerToGame = (playerIndex: number, playerName: string) => {
+    const addAvailablePlayerToGame = (playerIndex: number, playerName: string) => {
         currentPlayersInGame.value = [...currentPlayersInGame.value, playerName]
 
         availablePlayersToAdd.value[playerIndex].isAddedToGame = true
@@ -67,7 +67,7 @@ export const HomePageStore = defineStore("HomePageStore", () => {
         currentLocation, 
         setCurrentLocation,
         toggleGameCreatedStatus,
-        addAvailalePlayerToGame,
+        addAvailablePlayerToGame,
         removeAvailablePlayerFromGame
     }
 }, {
