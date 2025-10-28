@@ -31,7 +31,19 @@ export const HomePageStore = defineStore("HomePageStore", () => {
         currentLocation.value = newLocation
     }
 
-    //Add the player to the game, and set their availibility to false.
+    //When a new player is added by the client, add it to the list of remaining players that can be added
+    //to a game in progress.
+    const addPlayerToRemainingListOfPlayers = (playerName: string) => {
+        remainingPlayersInGame.value = [...remainingPlayersInGame.value, { player_name: playerName, isAddedToGame: false} ]
+    }
+
+    //When a player name is editted, reflect this change in either the list of players currently in a game,
+    //or the list of players yet to be added to a game.
+    const editPlayerInActiveGame = () => {
+
+    }
+
+    //Add the player to the game, and set their availibility to true.
     const addAvailablePlayerToGame = (playerIndex: number, playerName: string) => {
         currentPlayersInGame.value = [...currentPlayersInGame.value, playerName]
 
