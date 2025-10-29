@@ -3,7 +3,8 @@ import { ref } from 'vue';
 import { Team } from "../types/types"
 
 export const optionsStore = defineStore("optionsStore", () => {
-    const allLocationOptions = ref<string[]>(["Select from all sites"])
+    const selectAllSites = "Select from all site"
+    const allLocationOptions = ref<string[]>([selectAllSites])
     const remainingLocationOptions = ref<string[]>([])
 
     //Overides the Location allLocationOptions with a set of new ones.

@@ -6,6 +6,7 @@
     import { useToast } from "vue-toastification";
     import { optionsStore } from "../../../stores/optionsStore"
     import { AddPlayerPageStore } from '../../../stores/PageStores/AddPlayerPageStore';
+    import { HomePageStore } from '../../../stores/PageStores/HomePageStore';
 
     //Components
     import Loading from '../../../components/Loading/Loading.vue';
@@ -17,9 +18,11 @@
 
     //stateful methods
     const { addNewPlayerToArray, setLocation } = AddPlayerPageStore()
+    const { addPlayerToRemainingListOfPlayers } = HomePageStore()
 
     let isLoading = ref<boolean>(false)    
     let isDuplicatePlayer = ref<boolean>(false)
+    // let filteredLocations = allLocationOptions.value.filter(location => )
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")
     const lastName = ref<string>("")
@@ -39,12 +42,13 @@
             }, 3000)
         }else{
             addNewPlayerToArray(newPlayer)
+            addPlayerToRemainingListOfPlayers(newPlayer)
 
             try {
                 const res = await scoreBoardApi.post(`/add-user-to-location/${currentLocation.value}`, { player_name: newPlayer })
                 
                 toast.success(`${newPlayer} successfully added!`, {
-                    timeout: 2000
+                    timeout: 1000
                 })
                 console.log("res", res.data)
             } catch (error) {

@@ -39,9 +39,9 @@ export const HomePageStore = defineStore("HomePageStore", () => {
 
     //When a player name is editted, reflect this change in either the list of players currently in a game,
     //or the list of players yet to be added to a game.
-    const editPlayerInActiveGame = () => {
+    // const editPlayerInActiveGame = () => {
 
-    }
+    // }
 
     //Add the player to the game, and set their availibility to true.
     const addAvailablePlayerToGame = (playerIndex: number, playerName: string) => {
@@ -71,6 +71,7 @@ export const HomePageStore = defineStore("HomePageStore", () => {
     
     return { 
         availablePlayersToAdd, 
+        addPlayerToRemainingListOfPlayers,
         isGameCreated,
         currentPlayersInGame, 
         setAvailablePlayers, 
