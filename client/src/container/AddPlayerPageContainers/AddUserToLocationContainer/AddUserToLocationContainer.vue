@@ -12,9 +12,10 @@
     import Loading from '../../../components/Loading/Loading.vue';
     import Select from '../../../components/Select/Select.vue'
 
-    //Stateful variables
-    const { allLocationOptions, selectAllSites } = storeToRefs(optionsStore())
+    //Stateful variables + non-stateful variable
+    const { allLocationOptions } = storeToRefs(optionsStore())
     const { currentLocation, players } = storeToRefs(AddPlayerPageStore())
+    const { selectAllSites } = optionsStore()
 
     //stateful methods
     const { addNewPlayerToArray, setLocation } = AddPlayerPageStore()
@@ -71,8 +72,8 @@
 
     // when this component is mounted, load the current location with the first location so the select tag isn't blank
     onMounted(() => {
-        // filteredLocations.value = allLocationOptions.value.filter(location => location != selectAllSites.value)
-        console.log("filtered:", filteredLocations);
+         filteredLocations.value = allLocationOptions.value.filter(location => location != selectAllSites)
+        console.log("filtered:", filteredLocations.value);
         
         setLocation(allLocationOptions.value[0])
     })
