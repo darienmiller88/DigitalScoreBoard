@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { Team } from "../types/types"
 
 export const optionsStore = defineStore("optionsStore", () => {
+    //When a tournament is being held, client can choose this option.
     const selectAllSites = "Select from all site"
     const allLocationOptions = ref<string[]>([selectAllSites])
     const remainingLocationOptions = ref<string[]>([])
@@ -28,6 +29,7 @@ export const optionsStore = defineStore("optionsStore", () => {
    
     return { 
         allLocationOptions, 
+        selectAllSites,
         remainingLocationOptions, 
         setAllLocationOptions, 
         setRemainingLocationOptions,

@@ -13,7 +13,7 @@
     import Select from '../../../components/Select/Select.vue'
 
     //Stateful variables
-    const { allLocationOptions } = storeToRefs(optionsStore())
+    const { allLocationOptions, selectAllSites } = storeToRefs(optionsStore())
     const { currentLocation, players } = storeToRefs(AddPlayerPageStore())
 
     //stateful methods
@@ -22,7 +22,7 @@
 
     let isLoading = ref<boolean>(false)    
     let isDuplicatePlayer = ref<boolean>(false)
-    // let filteredLocations = allLocationOptions.value.filter(location => )
+    let filteredLocations = ref<string[]>([])
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")
     const lastName = ref<string>("")
@@ -71,6 +71,9 @@
 
     // when this component is mounted, load the current location with the first location so the select tag isn't blank
     onMounted(() => {
+        // filteredLocations.value = allLocationOptions.value.filter(location => location != selectAllSites.value)
+        console.log("filtered:", filteredLocations);
+        
         setLocation(allLocationOptions.value[0])
     })
 </script>
