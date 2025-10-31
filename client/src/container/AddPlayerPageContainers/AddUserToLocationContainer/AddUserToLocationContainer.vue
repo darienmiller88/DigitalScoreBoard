@@ -23,7 +23,8 @@
 
     let isLoading = ref<boolean>(false)    
     let isDuplicatePlayer = ref<boolean>(false)
-    let filteredLocations = ref<string[]>([])
+    let filteredLocations = allLocationOptions.value.filter(location => location != selectAllSites)
+
     const duplicateErrorMessage = ref<string>("")
     const firstName = ref<string>("")
     const lastName = ref<string>("")
@@ -72,17 +73,14 @@
 
     // when this component is mounted, load the current location with the first location so the select tag isn't blank
     onMounted(() => {
-         filteredLocations.value = allLocationOptions.value.filter(location => location != selectAllSites)
-        console.log("filtered:", filteredLocations.value);
-        
-        setLocation(allLocationOptions.value[0])
+        setLocation(filteredLocations[0])
     })
 </script>
 
 <template>
     <div class="select-wrapper">
         <Select 
-            :options="allLocationOptions"
+            :options="filteredLocations"
             :selectModel="currentLocation"
             :onChange="onChangeSelect"
         />

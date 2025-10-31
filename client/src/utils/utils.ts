@@ -5,10 +5,16 @@ import { Location } from "../types/types"
 
 export const getAllLocations = async () => {
     const { setAllLocationOptions } = optionsStore()
-    const { allLocationOptions } = storeToRefs(optionsStore())
+    const { allLocationOptions, allLocationOptionsForTournament } = storeToRefs(optionsStore())
 
     //Only load the all the location names if they're NOT in location storage. As a result, this function will be called
     //most one time. This is done to reduce database calls.
+    if (!allLocationOptions.value.length) {
+    
+    
+    }
+    
+    
     try {
         const locationsResponse = await scoreBoardApi.get<Location[]>("/get-all-locations")
             
@@ -16,8 +22,7 @@ export const getAllLocations = async () => {
         setAllLocationOptions(locationsResponse.data.map(location => {          
             return location.location_name
         }))
-        if (!allLocationOptions.value.length) {
-        }
+        
     } catch (error) {
         console.log("err:", error);
     }

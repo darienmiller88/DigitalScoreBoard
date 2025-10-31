@@ -5,14 +5,21 @@ import { Team } from "../types/types"
 export const optionsStore = defineStore("optionsStore", () => {
     //When a tournament is being held, client can choose this option.
     const selectAllSites = "Select from all sites"
-    const allLocationOptions = ref<string[]>([selectAllSites])
+
+    //This one only contains
+    const allLocationOptions = ref<string[]>([])
+
+    const allLocationOptionsForTournament =  ref<string[]>([])
+
     const remainingLocationOptions = ref<string[]>([])
 
     //Overides the Location allLocationOptions with a set of new ones.
     const setAllLocationOptions = (newOptions: string[]) => {
-        if (allLocationOptions.value.length <= 8) {
-            allLocationOptions.value = [...allLocationOptions.value, ...newOptions]
-        }
+        allLocationOptions.value = newOptions
+        allLocationOptionsForTournament.value = [selectAllSites, ...newOptions]
+        // if (allLocationOptions.value.length <= 8) {
+        //     allLocationOptions.value = [...allLocationOptions.value, ...newOptions]
+        // }
     }
 
     //Removes a number of teams (Locations really) from the list of all locations, returning the remaining teams.
@@ -29,6 +36,7 @@ export const optionsStore = defineStore("optionsStore", () => {
    
     return { 
         allLocationOptions, 
+        allLocationOptionsForTournament,
         selectAllSites,
         remainingLocationOptions, 
         setAllLocationOptions, 
