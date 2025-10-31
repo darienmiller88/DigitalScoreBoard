@@ -17,9 +17,6 @@ export const optionsStore = defineStore("optionsStore", () => {
     const setAllLocationOptions = (newOptions: string[]) => {
         allLocationOptions.value = newOptions
         allLocationOptionsForTournament.value = [selectAllSites, ...newOptions]
-        // if (allLocationOptions.value.length <= 8) {
-        //     allLocationOptions.value = [...allLocationOptions.value, ...newOptions]
-        // }
     }
 
     //Removes a number of teams (Locations really) from the list of all locations, returning the remaining teams.

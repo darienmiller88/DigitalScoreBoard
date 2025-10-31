@@ -10,7 +10,7 @@
 
     const { currentLocation } = storeToRefs(HomePageStore())
     const { setCurrentLocation, setAvailablePlayers, setCurrentPlayers } = HomePageStore()
-    const { allLocationOptions } = optionsStore()
+    const { allLocationOptionsForTournament, selectAllSites } = optionsStore()
 
 
     const onChangeSelect = async (event: Event) => {
@@ -24,7 +24,7 @@
     const loadPlayersFromLocation = async (locationName: string) => {
         try {
 
-            if (locationName !== "Select from all sites") {
+            if (locationName !== selectAllSites) {
                 const playersResult = await scoreBoardApi.get<PlayerCard[]>(`/get-all-users/${locationName}`)
     
                 //sort the current players from the location.
@@ -55,7 +55,7 @@
     onMounted(() => {
         //Load the first location in IF there is no current location saved in local storage
         if (!currentLocation.value) {            
-            currentLocation.value = allLocationOptions[0]
+            currentLocation.value = allLocationOptionsForTournament[0]
         }
 
         loadPlayersFromLocation(currentLocation.value)        
@@ -65,7 +65,7 @@
 <template>
     <div class="choose-site-wrapper">
         <span>Choose site:</span>
-        <Select :options="allLocationOptions" :selectModel="currentLocation" :onChange="onChangeSelect" />
+        <Select :options="allLocationOptionsForTournament" :selectModel="currentLocation" :onChange="onChangeSelect" />
     </div>
 </template>
 
