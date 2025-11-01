@@ -6,11 +6,14 @@ export const optionsStore = defineStore("optionsStore", () => {
     //When a tournament is being held, client can choose this option.
     const selectAllSites = "Select from all sites"
 
-    //This one only contains
+    //This one only contains the 9 ADAPT sites to choose from
     const allLocationOptions = ref<string[]>([])
 
+    //This one contains the 9 ADAPT sites, plus the constant above so the client can choose players
+    //from all sites, not just one.
     const allLocationOptionsForTournament =  ref<string[]>([])
 
+    //This will hold the players who have not yet been chosen for a game.
     const remainingLocationOptions = ref<string[]>([])
 
     //Overides the Location allLocationOptions with a set of new ones.
