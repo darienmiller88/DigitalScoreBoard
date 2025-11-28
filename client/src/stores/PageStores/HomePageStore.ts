@@ -35,11 +35,13 @@ export const HomePageStore = defineStore("HomePageStore", () => {
     //to a game in progress.
     const addPlayerToRemainingListOfPlayers = (playerName: string) => {
         remainingPlayersInGame.value = [...remainingPlayersInGame.value, { player_name: playerName, isAddedToGame: false} ]
+
+        remainingPlayersInGame.value.sort()
     }
 
     //When a player name is editted, reflect this change in either the list of players currently in a game,
     //or the list of players yet to be added to a game.
-    // const editPlayerInActiveGame = () => {
+    // const editPlayerInActiveGame = (playerName: string) => {
 
     // }
 
