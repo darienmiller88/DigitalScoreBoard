@@ -21,5 +21,8 @@ export const getAllLocations = async () => {
         } catch (error) {
             console.log("err:", error);
         }
+    }else{
+        console.log("all location options not called...");
+        
     }
 }
